@@ -1,0 +1,674 @@
+{
+  "id": "1.6",
+  "title": "Replace the consumables used in computing and office equipment",
+  "weight": "7%",
+  "hours": "36 hours",
+  "glossary": [
+    ["Cartridge", "A replaceable container with toner or ink, used in printers and copiers for forming an image on paper."],
+    ["Consumable", "A material that is used up in the course of the operation of equipment and is subject to periodic replacement (toner, ink, paper, batteries, rollers)."],
+    ["Drum (photoconductor)", "A photosensitive cylinder of a laser printer onto which the image is formed by a laser before being transferred to paper."],
+    ["Fuser", "The unit of a laser printer that fixes the toner on the paper by heating and pressure (thermal film, rollers, thermal head)."],
+    ["Ink", "A liquid colouring material used in inkjet printers."],
+    ["Thermal head", "A printing element of a thermal printer that forms an image by heating the points of a thermal-sensitive material."],
+    ["Toner", "A fine powder used in laser printers and copiers for forming an image."],
+    ["UPS (Uninterruptible Power Supply)", "A device that provides the power supply of equipment from batteries during a power outage and protects against voltage surges."],
+    ["Roller (platen/pickup)", "A rubber or polymer cylinder of a printing device that feeds and moves the paper."],
+    ["Consumables inventory", "The stock of consumables of an enterprise and the system of its accounting and replenishment for the uninterrupted operation of the equipment."]
+  ],
+  "lessons": [
+    {
+      "code": "6.1",
+      "title": "The system unit. The hard disk drive and its characteristics. Memory modules. Processors and their types",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The composition of the system unit.",
+        "The hard disk drive and its characteristics.",
+        "The memory modules and their types.",
+        "The processors and their types."
+      ],
+      "body": [
+        "The system unit unites the main components of a computer. The understanding of its composition and the characteristics of the components is necessary for the assembly, the maintenance, the modernization and the replacement of the consumables and the wearing elements of the computing equipment.",
+        "The hard disk drive (HDD) stores the data on the rotating magnetic plates. Its main characteristics are the capacity (the volume of the stored data), the rotation speed of the plates (which affects the speed of the access), the volume of the cache memory, and the interface of the connection (SATA).",
+        "The capacity of modern hard disk drives reaches several terabytes, which makes them suitable for storing large volumes of data. The rotation speed (5400 or 7200 revolutions per minute) affects the performance: the higher the speed, the faster the access to the data.",
+        "Along with the HDD, the solid-state drives (SSD) are widely used; they have no moving parts and provide a much higher speed. In modern computers, the SSD is used for the system and the programs, and the HDD for the storage of large volumes of data.",
+        "The memory modules (RAM) store the data and the code of the running programs. Their characteristics are the type (DDR4, DDR5), the volume, the frequency and the timings. The volume and the frequency of the memory affect the performance of the computer.",
+        "The memory modules are made in the form of the DIMM (for the desktop computers) and the SO-DIMM (for the laptops). The number and the volume of the modules determine the total volume of the random-access memory. The modules must be compatible with the motherboard and the processor.",
+        "The processor is the main computing component. Its characteristics are the number of cores and threads, the clock frequency, the volume of the cache memory and the heat-release power. The more cores and the higher the frequency, the higher the performance of the processor.",
+        "The processors differ by the manufacturers and the product lines, oriented to the various tasks: from the economical ones for the office computers to the powerful ones for the workstations and the gaming computers. The processor must correspond to the socket of the motherboard.",
+        "When choosing and replacing the components, their compatibility is taken into account: the processor must correspond to the socket, the memory to the supported standard, the drives to the available interfaces. The incompatibility of the components leads to the inoperability of the system.",
+        "The understanding of the characteristics of the components allows one to competently select them for the assembly and the modernization of a computer, to assess the performance and to determine the components that need to be replaced or upgraded.",
+        "The maintenance of the components includes the cleaning of the dust, the replacement of the thermal paste, the check of the state and the timely replacement of the wearing elements. This maintains the operability and prolongs the service life of the equipment.",
+        "Thus, the knowledge of the composition of the system unit and the characteristics of the hard disk drive, the memory modules and the processors is the basis for the assembly, the maintenance, the modernization and the replacement of the components of the computing equipment."
+      ],
+      "questions": [
+        "What components are included in the system unit?",
+        "What are the main characteristics of a hard disk drive?",
+        "What characteristics do the memory modules have?",
+        "What are the main characteristics of a processor?",
+        "Why is the compatibility of the components important when replacing them?"
+      ]
+    },
+    {
+      "code": "6.2",
+      "title": "Maintenance and replacement of the batteries in uninterruptible power supplies (UPS)",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The purpose and the operating principle of a UPS.",
+        "The types of UPS.",
+        "The batteries of a UPS and their service life.",
+        "The maintenance and the replacement of the batteries."
+      ],
+      "body": [
+        "An uninterruptible power supply (UPS) provides the power supply of the equipment from the batteries during a power outage and protects against the voltage surges. The UPS is critically important for the servers, the workstations and the network equipment, since it prevents the loss of data and the damage of the equipment.",
+        "The operating principle of a UPS consists in the constant charging of the batteries from the mains and the switching to the power supply from the batteries when the mains voltage disappears or goes beyond the permissible limits. This provides the equipment with the time for the correct shutdown.",
+        "There are several types of UPS. The off-line (standby) UPS switches to the batteries only when the mains disappears. The line-interactive UPS additionally stabilizes the voltage. The on-line (double-conversion) UPS constantly powers the equipment from the converted voltage, providing the best protection.",
+        "The choice of the type of UPS depends on the requirements for the protection and the budget. For the office computers, the line-interactive UPS is sufficient; for the servers and the critical equipment, the on-line UPS is used, which provides the constant clean voltage.",
+        "The batteries are the heart of a UPS and its most wearing element. In most UPS, the sealed lead-acid batteries are used. Their service life is limited (usually 3-5 years) and depends on the operating conditions, especially the temperature.",
+        "The signs of the wear of the batteries are the reduction of the operating time from the batteries, the frequent indication of the need for the replacement, and the failure of the self-test. The worn batteries cannot provide the equipment with the energy for the necessary time.",
+        "The high temperature accelerates the degradation of the batteries, so the UPS must be installed in a cool, ventilated place. The deep discharges and the long storage without the charging also reduce the service life of the batteries.",
+        "The maintenance of a UPS includes the periodic check of the state of the batteries, the test of the operation from the batteries, the cleaning of the dust and the check of the connections. The modern UPS have the means of the self-diagnostics and notify of the need for the replacement of the batteries.",
+        "The replacement of the batteries is performed when they are worn out. Before the replacement, the UPS is turned off and de-energized (where possible), and the safety measures are observed, since the batteries store a charge. The new batteries must correspond to the original ones in their parameters.",
+        "After the replacement of the batteries, the UPS is tested: the charging of the new batteries and the check of the operation from them. The correct replacement restores the protective functions of the UPS and ensures the reliable operation of the equipment.",
+        "The utilization of the old lead-acid batteries is performed in accordance with the ecological requirements, since they contain harmful substances. The batteries are handed over to the specialized points of the reception and the recycling.",
+        "Thus, the maintenance and the replacement of the batteries of a UPS ensure the reliable protection of the equipment against the power outages and the voltage surges, which prevents the loss of data and the damage of the equipment."
+      ],
+      "questions": [
+        "What is a UPS for, and how does it work?",
+        "What types of UPS exist, and what is the difference between them?",
+        "What batteries are used in a UPS, and what is their service life?",
+        "What are the signs of the wear of the batteries of a UPS?",
+        "How is the replacement of the batteries of a UPS performed?"
+      ]
+    },
+    {
+      "code": "6.3",
+      "title": "The role of consumables in computing and office equipment",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "industrial",
+      "objective": "To form practical skills in determining the types of consumables of computing and office equipment, their purpose and the rules of handling them.",
+      "theory": [
+        "Consumables are the materials that are used up in the course of the operation of the equipment and are subject to the periodic replacement: the toner, the ink, the paper, the cartridges, the ribbons, the batteries, the rollers and the thermal films. The timely replacement of the consumables ensures the quality of the work of the equipment.",
+        "Each type of the equipment uses its own consumables. The laser printers use the toner and the drums; the inkjet printers use the ink; the matrix printers use the ribbons; the UPS use the batteries. The correct choice of the consumables is important for the quality and the reliability."
+      ],
+      "materials": [
+        "A set of consumables of various types.",
+        "Office equipment (printers, copiers, scanners).",
+        "Documentation on the consumables.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the proposed consumables and determine the type and the purpose of each of them.",
+        "Determine for which equipment each consumable is intended.",
+        "Study the rules of the storage and the handling of the consumables.",
+        "Determine the signs of the need for the replacement of the consumables.",
+        "Compile a table of the consumables with an indication of their purpose and the equipment.",
+        "Make a conclusion about the role of the consumables in the operation of the equipment."
+      ],
+      "tasks": [
+        "Compile a table of the consumables indicating their type, purpose and the equipment.",
+        "Determine the signs of the need for the replacement of each consumable.",
+        "Describe the rules of the storage and the handling of the consumables."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of determining the types of consumables of computing and office equipment, their purpose and the rules of handling them.",
+      "questions": [
+        "What are consumables?",
+        "What types of consumables are used in office equipment?",
+        "What consumables does a laser printer use?",
+        "What are the signs of the need for the replacement of the consumables?",
+        "What rules of the storage of the consumables must be observed?"
+      ]
+    },
+    {
+      "code": "6.4",
+      "title": "Replacement and care of the cartridges and the toner in printers and copiers",
+      "type_en": "Skills-improvement lesson",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for the cartridges and the toner in laser printers and copiers.",
+      "theory": [
+        "The cartridge of a laser printer contains the toner and, in many models, the photoconductor drum and the developing unit. The replacement of the cartridge is the most frequent operation of the maintenance of laser printers. The toner is a fine powder that is dangerous to inhale.",
+        "The care of the cartridges includes the correct storage, the careful handling, the shaking for the even distribution of the toner, and the timely replacement. The refilling of the cartridges is possible but requires the observance of the technology."
+      ],
+      "materials": [
+        "A laser printer (or a copier).",
+        "Cartridges for the replacement.",
+        "Means of protection (gloves, a mask).",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the design of the cartridge of a laser printer and its elements.",
+        "Determine the signs of the need for the replacement of the cartridge (the pale printing, the messages of the printer).",
+        "Extract the old cartridge from the printer, observing the safety measures.",
+        "Prepare and install the new cartridge (remove the protective elements, shake it).",
+        "Check the quality of the printing after the replacement of the cartridge.",
+        "Make a conclusion about the replacement and the care of the cartridges."
+      ],
+      "tasks": [
+        "Perform the replacement of the cartridge of a laser printer.",
+        "Describe the signs of the need for the replacement of a cartridge.",
+        "Compile a memo on the care of the cartridges and the toner."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for the cartridges and the toner in laser printers and copiers.",
+      "questions": [
+        "What does the cartridge of a laser printer contain?",
+        "What are the signs of the need for the replacement of a cartridge?",
+        "What safety measures must be observed when working with the toner?",
+        "How is the new cartridge prepared for the installation?",
+        "How is the care of the cartridges performed?"
+      ]
+    },
+    {
+      "code": "6.5",
+      "title": "Replacement and care of the print heads, thermal films, thermal ribbons and thermal heads in printers",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The printing elements of various types of printers.",
+        "The print heads of inkjet printers.",
+        "The thermal films and the fuser of laser printers.",
+        "The thermal heads and the thermal ribbons of thermal printers."
+      ],
+      "body": [
+        "Various types of printers use various printing elements that form the image on the paper. The understanding of their design, the operating principle and the methods of the replacement and the care is necessary for the maintenance of the printing equipment.",
+        "The print head of an inkjet printer forms the image by spraying the microscopic drops of the ink onto the paper. The head contains the nozzles through which the ink is supplied. The clogging of the nozzles is the main problem of the inkjet printers.",
+        "The print heads are of two types: built into the cartridge (replaced together with it) and permanent (installed in the printer). The permanent heads require the careful care, since their replacement is expensive.",
+        "The care of the print heads includes the regular printing (to prevent the drying of the ink), the cleaning of the nozzles by the means of the printer, and the deep cleaning when clogged. The timely care prevents the clogging of the nozzles.",
+        "The fuser of a laser printer fixes the toner on the paper by the heating and the pressure. It includes the thermal film or the thermal roller and the pressure roller. The thermal film is a consumable that wears out over time.",
+        "The thermal film of the fuser is a thin heat-resistant film that transfers the heat to the toner. Its wear or damage leads to the deterioration of the fixing of the toner (the printing is smeared) and requires the replacement.",
+        "The thermal printers form the image by the heating of the points of the thermal-sensitive material. They are used in the cash registers, the label printers and the fax machines. The printing element of a thermal printer is the thermal head.",
+        "The thermal head of a thermal printer contains the heating elements that form the image. Its care includes the regular cleaning of the deposits, since the contamination worsens the quality of the printing. The thermal head wears out and requires the replacement over time.",
+        "The thermal-transfer printers use the thermal ribbon — a film with a colouring layer that is transferred to the paper by the heating. The thermal ribbon is a consumable that is replaced as it is used up.",
+        "The replacement of the printing elements requires the observance of the technology and the safety measures (the fuser is heated to a high temperature). The replacement is performed with the suitable elements, observing the correct installation.",
+        "The care of the printing elements prolongs their service life and maintains the quality of the printing. The regular cleaning, the correct operation and the timely replacement of the worn elements are the basis of the maintenance of the printing equipment.",
+        "Thus, the various types of printers use various printing elements — the print heads, the thermal films, the thermal heads and the thermal ribbons — the replacement and the care of which require the knowledge of their design and the technology of the maintenance."
+      ],
+      "questions": [
+        "What printing elements do various types of printers use?",
+        "How does the print head of an inkjet printer work, and what is its main problem?",
+        "What is the fuser of a laser printer for, and what does it include?",
+        "How do thermal printers form the image?",
+        "What does the care of the printing elements include?"
+      ]
+    },
+    {
+      "code": "6.6",
+      "title": "Assembly of a computer system",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The preparation for the assembly of a computer.",
+        "The sequence of the assembly.",
+        "The connection of the components and the cables.",
+        "The check of the assembled system."
+      ],
+      "body": [
+        "The assembly of a computer system is the process of installing and connecting the components into a single working device. The correct assembly ensures the operability, the reliability and the convenience of the maintenance of the computer.",
+        "The preparation for the assembly includes the selection of the compatible components, the preparation of the tools and the workplace, and the observance of the anti-static measures. The components must be compatible with each other in their interfaces and parameters.",
+        "The anti-static measures are mandatory when assembling a computer, since the static electricity can damage the electronic components. An anti-static wrist strap, a mat and the discharge of the static from oneself before the work are used.",
+        "The sequence of the assembly is usually as follows: the installation of the processor into the socket of the motherboard, the installation of the cooling system, the installation of the memory modules, the installation of the motherboard into the case, the installation of the drives, the power supply and the expansion cards.",
+        "The installation of the processor requires caution: the processor is installed into the socket by the key, without the application of force, after which it is fixed by the lever. The contacts of the processor and the socket must not be touched, in order not to damage them.",
+        "After the installation of the processor, the cooling system is installed: the thermal paste is applied to the processor, and the radiator with the fan is fixed. The quality of the thermal contact is critically important for the heat removal and the reliable operation of the processor.",
+        "The memory modules are installed into the slots until the latches click, observing the correct orientation by the key. The drives are installed into the bays of the case and are connected to the motherboard and the power supply by the cables.",
+        "The connection of the cables requires attentiveness: the power cables of the motherboard, the processor and the components; the data cables of the drives; the cables of the front panel of the case (the power button, the indicators, the USB). The incorrect connection may lead to the inoperability.",
+        "The management of the cables (the neat laying and the fixing) improves the air circulation inside the case, simplifies the maintenance and improves the appearance. The neat assembly is a sign of the professional approach.",
+        "After the assembly, the check is performed: the correctness of all the connections, the absence of the foreign objects, the reliability of the fixing of the components. Only after this the computer is connected to the mains and is turned on for the first time.",
+        "The first start checks the operability of the assembled system: the passage of the POST, the appearance of the image, the recognition of the components. After the successful start, the operating system and the drivers are installed, and the testing of the stability is performed.",
+        "Thus, the assembly of a computer system requires the selection of the compatible components, the observance of the anti-static measures and the sequence of the assembly, the correct connection of the components and the cables, and the check of the operability of the assembled system."
+      ],
+      "questions": [
+        "What does the preparation for the assembly of a computer include?",
+        "Why are the anti-static measures necessary when assembling a computer?",
+        "What is the sequence of the assembly of a computer?",
+        "Why is the quality of the thermal contact of the processor important?",
+        "What is checked after the assembly before the first start?"
+      ]
+    },
+    {
+      "code": "6.7",
+      "title": "Replacement and care of keyboards, mice, batteries and accumulators of laptops and mobile devices",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for keyboards, mice, batteries and accumulators of laptops and mobile devices.",
+      "theory": [
+        "Keyboards and mice are the most used input devices, subject to the contamination and the wear. The batteries and the accumulators of laptops and mobile devices have a limited service life and require the replacement as they are depleted.",
+        "The care of the keyboards and the mice includes the regular cleaning of the dust and the dirt; the care of the accumulators includes the observance of the rules of the charging and the operation, which prolongs their service life."
+      ],
+      "materials": [
+        "Keyboards, mice, laptop accumulators.",
+        "Means for the cleaning.",
+        "Tools for the disassembly.",
+        "A report form."
+      ],
+      "procedure": [
+        "Perform the cleaning of the keyboard from the dust and the dirt, observing the technology.",
+        "Perform the cleaning and the maintenance of the mouse.",
+        "Determine the signs of the wear of the accumulator of a laptop (the reduction of the operating time).",
+        "Study the procedure for the replacement of the accumulator of a laptop or a mobile device.",
+        "Describe the rules of the operation of the accumulators for the prolongation of their service life.",
+        "Make a conclusion about the replacement and the care of the input devices and the accumulators."
+      ],
+      "tasks": [
+        "Perform the cleaning and the maintenance of a keyboard and a mouse.",
+        "Describe the signs of the wear and the procedure for the replacement of an accumulator.",
+        "Compile a memo on the operation of the accumulators."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for keyboards, mice, batteries and accumulators of laptops and mobile devices.",
+      "questions": [
+        "What does the care of the keyboards and the mice include?",
+        "What are the signs of the wear of an accumulator of a laptop?",
+        "How is the replacement of an accumulator performed?",
+        "What rules of the operation prolong the service life of an accumulator?",
+        "Why do the accumulators require the replacement over time?"
+      ]
+    },
+    {
+      "code": "6.8",
+      "title": "Replacement and care of monitors: cleaning and adjustment",
+      "type_en": "Skills-improvement lesson",
+      "kind": "industrial",
+      "objective": "To form practical skills in caring for, cleaning and adjusting monitors.",
+      "theory": [
+        "Monitors require the regular care: the cleaning of the screen from the dust and the prints, and the correct adjustment of the parameters of the image (the brightness, the contrast, the colour rendering). The correct care prolongs the service life and maintains the quality of the image.",
+        "The cleaning of the screen is performed with the soft means that do not damage the coating. The adjustment of the parameters ensures the comfortable and the correct display of the image."
+      ],
+      "materials": [
+        "Monitors of various types.",
+        "Means for the cleaning of the screens.",
+        "Tools for the adjustment.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the rules of the cleaning of the screens of various types of monitors.",
+        "Perform the cleaning of the screen of the monitor with the suitable means.",
+        "Adjust the parameters of the image: the brightness, the contrast, the colour temperature.",
+        "Check the absence of the defects of the image (the dead pixels, the spots, the stripes).",
+        "Describe the rules of the operation of the monitors for the prolongation of their service life.",
+        "Make a conclusion about the care and the adjustment of the monitors."
+      ],
+      "tasks": [
+        "Perform the cleaning and the adjustment of a monitor.",
+        "Check the monitor for the defects of the image.",
+        "Compile a memo on the care of the monitors."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of caring for, cleaning and adjusting monitors.",
+      "questions": [
+        "How is the cleaning of the screen of a monitor performed correctly?",
+        "What parameters of the image are adjusted in a monitor?",
+        "What defects of the image can a monitor have?",
+        "Why must one not use aggressive means for the cleaning of the screen?",
+        "What rules of the operation prolong the service life of a monitor?"
+      ]
+    },
+    {
+      "code": "6.9",
+      "title": "Replacement and care of the filters and the fans in computers",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The role of the filters and the fans in the cooling system.",
+        "The contamination of the filters and the fans.",
+        "The cleaning and the replacement of the filters.",
+        "The maintenance and the replacement of the fans."
+      ],
+      "body": [
+        "The filters and the fans are the important elements of the cooling system of a computer. The fans provide the air circulation that removes the heat, and the dust filters protect the internal components from the contamination. Their maintenance is necessary for the efficient cooling.",
+        "The fans create the air flow that removes the heat from the components. In a computer, the fans of the case (for the through ventilation), the processor (on the radiator), the video card and the power supply are used. The malfunction of a fan leads to the overheating.",
+        "The dust filters are installed on the air intakes of the case and trap the dust, preventing its penetration inside. This reduces the contamination of the components but requires the regular cleaning of the filters themselves, since the clogged filter worsens the ventilation.",
+        "The contamination of the filters and the fans with the dust is the main problem of the cooling system. The dust accumulates on the blades of the fans, the radiators and the filters, worsening the air flow and the heat removal, which leads to the overheating of the components.",
+        "The signs of the contamination of the cooling system are the increase of the temperature of the components, the increased noise of the fans (which spin faster), and the dust visible inside the case. The regular check allows one to detect the contamination in a timely manner.",
+        "The cleaning of the dust filters is performed regularly: the filters are removed, cleaned of the dust (washed or blown out) and installed back. The regularity of the cleaning depends on the conditions: in the dusty premises, the filters are cleaned more often.",
+        "The cleaning of the fans is performed with compressed air, a brush and a vacuum cleaner. The dust is removed from the blades and the radiators. When cleaning, the blades of the fan are held to prevent its spinning, which may damage the bearing.",
+        "The fans wear out over time: the bearing wears out, which leads to the increase of the noise, the reduction of the rotation speed and, eventually, the stop of the fan. The worn fans are replaced to ensure the efficient cooling.",
+        "The signs of the wear of a fan are the extraneous noise (the rattling, the humming), the reduction of the rotation speed and the periodic stops. The worn fan is replaced with a new one of the corresponding size and parameters.",
+        "The replacement of a fan is performed with the observance of the correct orientation of the air flow (the direction of the blowing) and the connection to the corresponding connector of the motherboard. After the replacement, the operation of the fan and the temperature of the components are checked.",
+        "The regular maintenance of the filters and the fans (the cleaning and the timely replacement) ensures the efficient cooling, prevents the overheating and prolongs the service life of the components of the computer. This is an important part of the preventive maintenance.",
+        "Thus, the filters and the fans are the important elements of the cooling system, the maintenance of which — the regular cleaning and the timely replacement — ensures the efficient cooling and prevents the overheating of the components."
+      ],
+      "questions": [
+        "What role do the filters and the fans play in the cooling system?",
+        "What is the main problem of the cooling system connected with the contamination?",
+        "How is the cleaning of the dust filters performed?",
+        "What are the signs of the wear of a fan?",
+        "What is taken into account when replacing a fan?"
+      ]
+    },
+    {
+      "code": "6.10",
+      "title": "Replacement and care of the battery elements in office equipment, buffer batteries in servers and network devices",
+      "type_en": "Skills-improvement lesson",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for the battery elements in office equipment, the buffer batteries in servers and network devices.",
+      "theory": [
+        "The battery elements are used in various equipment: the CMOS batteries of motherboards, the buffer batteries of the RAID controllers of servers, the batteries of the UPS, and the elements of the backup power of network devices. They have a limited service life and require the replacement.",
+        "The CMOS battery of a motherboard maintains the settings of the BIOS and the clock when the power is off. Its discharge leads to the loss of the settings and the time. The buffer batteries of the RAID controllers protect the data in the cache during a power outage."
+      ],
+      "materials": [
+        "A motherboard, a server (or its components), network devices.",
+        "Battery elements for the replacement.",
+        "A multimeter for the check.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the location and the type of the battery elements in the equipment.",
+        "Check the voltage of the CMOS battery of the motherboard with a multimeter.",
+        "Perform the replacement of the CMOS battery, observing the polarity.",
+        "Study the buffer batteries of the RAID controllers and the procedure for their replacement.",
+        "Describe the signs of the discharge of the battery elements and the consequences.",
+        "Make a conclusion about the replacement and the care of the battery elements."
+      ],
+      "tasks": [
+        "Perform the replacement of the CMOS battery of a motherboard.",
+        "Describe the signs of the discharge of the battery elements.",
+        "Compile a list of the equipment that uses the battery elements."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for the battery elements in office equipment, the buffer batteries in servers and network devices.",
+      "questions": [
+        "What battery elements are used in the equipment?",
+        "What is the CMOS battery of a motherboard for?",
+        "What does the discharge of the CMOS battery lead to?",
+        "How is the replacement of the CMOS battery performed?",
+        "What are the buffer batteries of the RAID controllers for?"
+      ]
+    },
+    {
+      "code": "6.11",
+      "title": "Replacement and care of the lamps and the LEDs in scanners and printers",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for the lamps and the LEDs in scanners and printers.",
+      "theory": [
+        "The lamps and the LEDs are used in scanners (for the illumination of the originals during the scanning) and in some printing devices. Their wear or failure worsens the quality of the scanning or the operation of the device.",
+        "The modern scanners use the LED illumination, which is durable and economical. The older models use the fluorescent lamps. The care includes the cleaning and the timely replacement of the failed elements."
+      ],
+      "materials": [
+        "A scanner (or a multifunction device).",
+        "Lamps or LEDs for the replacement (if available).",
+        "Tools for the disassembly.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the design of the illumination system of a scanner.",
+        "Determine the type of the illumination (a lamp or LEDs) and its state.",
+        "Determine the signs of the wear of the illumination (the deterioration of the quality of the scanning).",
+        "Study the procedure for the replacement of the illumination element.",
+        "Perform the cleaning of the optical system and the glass of the scanner.",
+        "Make a conclusion about the replacement and the care of the lamps and the LEDs."
+      ],
+      "tasks": [
+        "Determine the type and the state of the illumination of a scanner.",
+        "Describe the signs of the wear of the illumination.",
+        "Perform the cleaning of the optical system of a scanner."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for the lamps and the LEDs in scanners and printers.",
+      "questions": [
+        "What are the lamps and the LEDs used for in scanners?",
+        "What types of illumination are used in scanners?",
+        "What are the signs of the wear of the illumination?",
+        "How is the cleaning of the optical system of a scanner performed?",
+        "What are the advantages of the LED illumination?"
+      ]
+    },
+    {
+      "code": "6.12",
+      "title": "Replacement and care of the rubber rollers, the rollers and the thermal sensors in printing devices",
+      "type_en": "Skills-improvement lesson",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for the rubber rollers, the rollers and the thermal sensors in printing devices.",
+      "theory": [
+        "The rubber rollers and the rollers feed and move the paper in the printing devices. They wear out over time, which leads to the problems of the feeding of the paper (the jamming, the skewing, the multi-feeding). The thermal sensors control the temperature of the fuser.",
+        "The care of the rollers includes the cleaning of the dust and the paper deposits, and the timely replacement of the worn ones. The contamination of the rollers worsens the grip with the paper and causes the problems of the feeding."
+      ],
+      "materials": [
+        "A printer (or a copier).",
+        "Rollers and rubber elements for the replacement.",
+        "Means for the cleaning.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the design of the paper-feeding mechanism of a printer.",
+        "Determine the signs of the wear of the rollers (the problems of the feeding of the paper).",
+        "Perform the cleaning of the rollers from the dust and the deposits.",
+        "Study the procedure for the replacement of the worn rollers.",
+        "Study the role of the thermal sensors in the control of the temperature of the fuser.",
+        "Make a conclusion about the replacement and the care of the rollers and the thermal sensors."
+      ],
+      "tasks": [
+        "Perform the cleaning of the rollers of the paper-feeding mechanism.",
+        "Describe the signs of the wear of the rollers and the procedure for their replacement.",
+        "Describe the role of the thermal sensors in a printer."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for the rubber rollers, the rollers and the thermal sensors in printing devices.",
+      "questions": [
+        "What do the rubber rollers and the rollers do in a printer?",
+        "What are the signs of the wear of the rollers?",
+        "How is the cleaning of the rollers performed?",
+        "What do the problems of the feeding of the paper lead to?",
+        "What is the role of the thermal sensors in a printer?"
+      ]
+    },
+    {
+      "code": "6.13",
+      "title": "Replacement and care of the cleaning blades and elements in plotters",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The purpose and the types of plotters.",
+        "The consumables and the wearing elements of plotters.",
+        "The cleaning blades and the maintenance elements.",
+        "The maintenance of plotters."
+      ],
+      "body": [
+        "A plotter is a device for the printing of the large-format images (the drawings, the posters, the diagrams). The plotters are used in the design, the engineering and the advertising. Their maintenance has its own features connected with the large format and the special consumables.",
+        "There are several types of plotters. The inkjet plotters print by the spraying of the ink and are the most widespread. The cutting plotters cut the material along the contour. The pen plotters (the older type) draw with the pens. Each type has its own consumables.",
+        "The consumables of the inkjet plotters are the ink and the print heads, similar to the inkjet printers, but of the larger volume. In addition, the large-format paper or the other materials are used. The replacement of these consumables is performed as they are used up.",
+        "The cleaning blades and the cleaning elements maintain the cleanliness of the print heads and the other working elements of the plotter. They remove the excess ink and the deposits, ensuring the quality of the printing. Over time, they wear out and require the replacement.",
+        "The cleaning system of the inkjet plotters includes the cleaning blades, the absorbers and the parking stations of the heads. These elements prevent the drying of the ink in the nozzles and maintain the cleanliness of the heads, which is critical for the quality of the printing.",
+        "The wear of the cleaning blades leads to the deterioration of the cleaning of the heads and, as a consequence, to the deterioration of the quality of the printing (the stripes, the gaps). The timely replacement of the cleaning elements maintains the quality of the printing.",
+        "The maintenance of the plotters includes the regular cleaning of the print heads, the replacement of the cleaning elements, the cleaning of the mechanism of the movement, and the check of the feeding of the material. The regularity of the maintenance ensures the reliable operation.",
+        "The cleaning of the print heads of a plotter is performed by the means of the device (the automatic cleaning) and, when necessary, manually. The regular cleaning prevents the clogging of the nozzles, which is the main problem of the inkjet devices.",
+        "The maintenance of the mechanism of the movement of the carriage and the feeding of the material includes the cleaning of the guides, the lubrication (where required) and the check of the tension of the belts. The smooth movement of the carriage ensures the quality of the printing.",
+        "The replacement of the wearing elements (the cleaning blades, the absorbers, the rollers) is performed according to the regulations of the manufacturer or as they wear out. The use of the suitable elements maintains the quality and the reliability of the operation of the plotter.",
+        "The observance of the regulations of the maintenance, the use of the suitable consumables and the timely replacement of the wearing elements ensure the long and the reliable operation of the plotter and the high quality of the printing.",
+        "Thus, the maintenance of the plotters includes the replacement and the care of the consumables and the wearing elements, including the cleaning blades, which ensures the quality of the printing and the reliable operation of the device."
+      ],
+      "questions": [
+        "What is a plotter for, and what types of plotters exist?",
+        "What consumables do the inkjet plotters use?",
+        "What are the cleaning blades and the cleaning elements for?",
+        "What does the wear of the cleaning blades lead to?",
+        "What does the maintenance of the plotters include?"
+      ]
+    },
+    {
+      "code": "6.14",
+      "title": "Replacement and care of the toner drums, the filters and the separators in laser printers",
+      "type_en": "Skills-improvement lesson",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for the toner drums, the filters and the separators in laser printers.",
+      "theory": [
+        "The photoconductor drum is a photosensitive cylinder onto which the image is formed by the laser before the transfer to the paper. The drum wears out and requires the replacement. The filters trap the toner dust, and the separators separate the paper from the drum.",
+        "The care of the drum requires the careful handling (the protection from the light and the touches of the surface), since the damage of the photosensitive layer worsens the quality of the printing."
+      ],
+      "materials": [
+        "A laser printer.",
+        "A photoconductor drum and the filters for the replacement.",
+        "Means of protection.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the design of a laser printer and the location of the drum, the filters and the separators.",
+        "Determine the signs of the wear of the drum (the defects of the printing, the repeating marks).",
+        "Study the procedure for the replacement of the photoconductor drum, observing the careful handling.",
+        "Perform the cleaning or the replacement of the toner filters.",
+        "Study the role of the separators in the separation of the paper from the drum.",
+        "Make a conclusion about the replacement and the care of the drums, the filters and the separators."
+      ],
+      "tasks": [
+        "Describe the signs of the wear of the photoconductor drum.",
+        "Describe the procedure for the replacement of the drum, observing the careful handling.",
+        "Describe the role of the filters and the separators in a laser printer."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for the toner drums, the filters and the separators in laser printers.",
+      "questions": [
+        "What is the photoconductor drum, and what is its role?",
+        "What are the signs of the wear of the drum?",
+        "Why does the drum require the careful handling?",
+        "What are the toner filters for?",
+        "What do the separators do in a laser printer?"
+      ]
+    },
+    {
+      "code": "6.15",
+      "title": "Replacement and care of the anodes, cathodes, corona wires and rollers in scanners, fax machines and laser printers",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "industrial",
+      "objective": "To form practical skills in replacing and caring for the corona wires, the rollers and the other wearing elements in scanners, fax machines and laser printers.",
+      "theory": [
+        "The corona wire (the corotron) creates the electric charge on the drum or the paper in a laser printer, which is necessary for the transfer of the toner. The contamination or the wear of the corona wire worsens the quality of the printing. The rollers feed and move the paper.",
+        "The care of these elements includes the cleaning of the deposits and the timely replacement. The contamination of the corona wire leads to the defects of the printing (the stripes, the uneven density)."
+      ],
+      "materials": [
+        "A laser printer (or a fax machine).",
+        "Wearing elements for the replacement.",
+        "Means for the cleaning.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the role of the corona wires (the corotrons) in a laser printer.",
+        "Determine the signs of the contamination or the wear of the corona wire.",
+        "Perform the cleaning of the corona wire, observing the careful handling.",
+        "Study the procedure for the replacement of the worn rollers and the elements.",
+        "Describe the consequences of the wear of these elements for the quality of the printing.",
+        "Make a conclusion about the replacement and the care of the corona wires and the rollers."
+      ],
+      "tasks": [
+        "Describe the role of the corona wires in a laser printer.",
+        "Describe the signs of the contamination of the corona wire and the method of its cleaning.",
+        "Compile a list of the wearing elements of a laser printer."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of replacing and caring for the corona wires, the rollers and the other wearing elements in printing devices.",
+      "questions": [
+        "What is the role of the corona wire in a laser printer?",
+        "What are the signs of the contamination of the corona wire?",
+        "How is the cleaning of the corona wire performed?",
+        "What do the defects of the printing connected with the corona wire look like?",
+        "What wearing elements does a laser printer have?"
+      ]
+    },
+    {
+      "code": "6.16",
+      "title": "Organization of the stock of consumables and their efficient use",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "industrial",
+      "objective": "To form practical skills in organizing the stock of consumables and the planning of their efficient use.",
+      "theory": [
+        "The organization of the stock of consumables ensures the uninterrupted operation of the equipment. The stock must be sufficient to avoid the downtime, but not excessive, in order not to freeze the funds and not to allow the expiration of the shelf life.",
+        "The planning of the stock is based on the analysis of the consumption of the consumables, the determination of the optimal level of the stock and the order point. The accounting of the consumables allows one to control the consumption and to plan the purchases."
+      ],
+      "materials": [
+        "Data on the consumption of the consumables.",
+        "A computer for the accounting.",
+        "Templates of the accounting of the stock.",
+        "A report form."
+      ],
+      "procedure": [
+        "Compile a list of the consumables necessary for the operation of the equipment.",
+        "Analyse the consumption of the consumables over a period and determine the average consumption.",
+        "Determine the optimal level of the stock and the order point for each consumable.",
+        "Organize the accounting of the consumables (the receipt, the consumption, the balance).",
+        "Develop a plan of the purchases of the consumables.",
+        "Make a conclusion about the organization of the stock and the efficient use of the consumables."
+      ],
+      "tasks": [
+        "Compile a system of the accounting of the consumables.",
+        "Determine the optimal level of the stock and the order point.",
+        "Develop a plan of the purchases of the consumables."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of organizing the stock of consumables and the planning of their efficient use.",
+      "questions": [
+        "Why is the organization of the stock of consumables important?",
+        "How is the optimal level of the stock determined?",
+        "What is the order point?",
+        "How is the accounting of the consumables organized?",
+        "How does the planning of the stock help to avoid the downtime?"
+      ]
+    },
+    {
+      "code": "6.17",
+      "title": "Analysis of the methods of the preventive maintenance of computer and office equipment",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "industrial",
+      "objective": "To form practical skills in analysing and applying the methods of the preventive maintenance of computer and office equipment.",
+      "theory": [
+        "The preventive maintenance of computer and office equipment includes the regular cleaning, the check of the state, the replacement of the consumables and the wearing elements, and the testing. The regular maintenance prevents the faults and prolongs the service life.",
+        "The methods of the preventive maintenance differ for the various types of equipment but have the common principles: the regularity, the systematicity, the documenting and the use of the suitable means and consumables."
+      ],
+      "materials": [
+        "Computer and office equipment.",
+        "Tools and means for the maintenance.",
+        "Schedules and journals of the maintenance.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the methods of the preventive maintenance for the various types of equipment.",
+        "Compile a schedule of the preventive maintenance for a given set of equipment.",
+        "Perform the preventive maintenance of one of the devices (the cleaning, the check, the replacement of the consumables).",
+        "Document the carried-out maintenance in the journal.",
+        "Compare the methods of the maintenance of the various types of equipment.",
+        "Make a conclusion about the methods of the preventive maintenance."
+      ],
+      "tasks": [
+        "Compile a schedule of the preventive maintenance for a set of equipment.",
+        "Perform and document the preventive maintenance of a device.",
+        "Compile a comparative table of the methods of the maintenance of the various types of equipment."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of analysing and applying the methods of the preventive maintenance of computer and office equipment.",
+      "questions": [
+        "What does the preventive maintenance of equipment include?",
+        "What are the common principles of the preventive maintenance?",
+        "How is a schedule of the preventive maintenance compiled?",
+        "Why is the documenting of the maintenance necessary?",
+        "How do the methods of the maintenance of the various types of equipment differ?"
+      ]
+    },
+    {
+      "code": "6.18",
+      "title": "Analysis of the methods of the maintenance of the consumables of office equipment",
+      "type_en": "Comprehensive assessment of knowledge",
+      "kind": "industrial",
+      "objective": "To check and consolidate, in a comprehensive form, the skills of the replacement and the maintenance of the consumables of computing and office equipment, summing up the learning outcome.",
+      "theory": [
+        "This lesson generalizes the material of the learning outcome on the replacement of the consumables of computing and office equipment. The student must demonstrate the comprehensive skills of the maintenance: from the determination of the need for the replacement to its execution and the check of the result.",
+        "The maintenance of the consumables includes their accounting, the timely replacement, the correct handling and the utilization. The comprehensive approach ensures the uninterrupted operation of the equipment."
+      ],
+      "materials": [
+        "A set of computing and office equipment.",
+        "Various consumables.",
+        "Tools and means of protection.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Determine the consumables of the proposed equipment and their state.",
+        "Determine the need for the replacement of the consumables by their signs.",
+        "Perform the replacement of one of the consumables, observing the technology and the safety measures.",
+        "Check the quality of the operation of the equipment after the replacement.",
+        "Compile a plan of the maintenance of the consumables of the equipment.",
+        "Make a final conclusion about the maintenance of the consumables."
+      ],
+      "tasks": [
+        "Perform the replacement of a consumable and check the result.",
+        "Compile a comprehensive plan of the maintenance of the consumables of the equipment.",
+        "Prepare a memo on the maintenance of the consumables of office equipment."
+      ],
+      "conclusion": "As a result of the work, the student has demonstrated comprehensive skills of the replacement and the maintenance of the consumables of computing and office equipment.",
+      "questions": [
+        "What consumables does office equipment use?",
+        "How is the need for the replacement of a consumable determined?",
+        "What is included in the maintenance of the consumables?",
+        "How is the quality of the operation of the equipment checked after the replacement?",
+        "How is the utilization of the used consumables performed?"
+      ]
+    }
+  ]
+}

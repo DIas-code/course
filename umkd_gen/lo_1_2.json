@@ -1,0 +1,1093 @@
+{
+  "id": "1.2",
+  "title": "Determine the operability of computer systems at the circuit-engineering level",
+  "weight": "11%",
+  "hours": "60 hours",
+  "glossary": [
+    ["Capacitor", "A passive two-terminal component that stores energy in an electric field; characterized by its capacitance, rated voltage and type of dielectric."],
+    ["Circuit engineering (circuitry)", "The branch of engineering that deals with the principles of building and analysing electronic circuits from discrete and integrated components."],
+    ["Conductor", "A material with a large number of free charge carriers that easily conducts electric current (for example, copper or aluminium)."],
+    ["Dielectric", "A material that practically does not conduct electric current and is used for insulation and in capacitors."],
+    ["Electromagnetism", "The branch of physics that studies the interconnection of electric and magnetic phenomena; the basis for the operation of transformers, motors and inductive components."],
+    ["Integrated circuit (IC)", "A miniature electronic circuit manufactured on a single semiconductor crystal that contains many interconnected components."],
+    ["Multimeter", "A universal measuring instrument for measuring voltage, current, resistance and other parameters of electrical circuits."],
+    ["Oscilloscope", "A measuring instrument that displays the dependence of a voltage on time, used to observe the shape of signals."],
+    ["POST card", "A diagnostic board that displays the codes of the power-on self-test (POST) of a motherboard, helping to localize faults."],
+    ["Power supply unit (PSU)", "A device that converts the alternating mains voltage into the stabilized direct voltages required by the components of a computer."],
+    ["Resistor", "A passive component that limits the current and creates a voltage drop in a circuit; characterized by its resistance and dissipated power."],
+    ["Short circuit", "An abnormal connection of points of a circuit with a very small resistance, leading to a sharp increase in current."],
+    ["Voltage", "The potential difference between two points of an electric circuit, measured in volts (V)."]
+  ],
+  "lessons": [
+    {
+      "code": "2.1",
+      "title": "Fundamentals of circuit engineering",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The subject of circuit engineering and its role in computing technology.",
+        "Passive and active components of electronic circuits.",
+        "Basic laws of electric circuits (Ohm's law, Kirchhoff's laws).",
+        "Types of circuit diagrams and conventional graphic symbols."
+      ],
+      "body": [
+        "Circuit engineering is the branch of engineering that studies the principles of building, analysing and calculating electronic circuits made up of discrete and integrated components. For an information-systems technician, the fundamentals of circuit engineering are necessary in order to understand how computer devices work and to be able to determine their operability at the level of components and circuits.",
+        "All elements of electronic circuits are divided into passive and active. Passive elements (resistors, capacitors, inductors) do not amplify a signal and do not require an external power source for their operation. Active elements (diodes, transistors, integrated circuits) can control the current and amplify signals, and they require power to be supplied.",
+        "A resistor is a passive element that limits the current and creates a voltage drop. Its main parameters are the resistance, measured in ohms, and the dissipated power, measured in watts. Resistors are used to set the operating modes of other components, to divide voltage and to limit currents.",
+        "A capacitor is a passive element that stores energy in an electric field between two plates separated by a dielectric. Its main parameter is the capacitance, measured in farads. Capacitors are used for filtering, decoupling power circuits, storing charge and forming time delays.",
+        "An inductor is a passive element that stores energy in a magnetic field. Its parameter is the inductance, measured in henries. Inductors are used in filters, power-supply circuits and signal circuits, where their property of resisting a change in current is important.",
+        "The operation of electric circuits is described by fundamental laws. Ohm's law establishes the relationship between voltage, current and resistance: the current in a section of a circuit is directly proportional to the voltage and inversely proportional to the resistance. This is the basic relationship for any calculation of a circuit.",
+        "Kirchhoff's laws describe the behaviour of currents and voltages in branched circuits. The first law (the current law) states that the sum of the currents flowing into a node is equal to the sum of the currents flowing out of it. The second law (the voltage law) states that the sum of the voltage drops in a closed loop is equal to the sum of the electromotive forces.",
+        "Circuit diagrams are used to represent electronic devices. A schematic (principal) diagram shows all the components and the electrical connections between them by means of conventional graphic symbols. A block diagram shows the device at the level of functional blocks. An assembly diagram shows the actual placement of the components on the board.",
+        "Conventional graphic symbols are a standardized 'language' of circuit engineering. Each type of component has its own symbol: a resistor is depicted as a rectangle, a capacitor as two parallel lines, a diode as a triangle with a line, and so on. The ability to read these symbols is the basis for understanding any circuit diagram.",
+        "In computer technology, circuit engineering is applied at all levels: from the power supply, which converts and stabilizes voltages, to the motherboard, the central processor and memory, which contain millions of components. Understanding the principles of circuit engineering allows the technician to localize a fault to a specific node or component.",
+        "Modern computer devices are built mainly on integrated circuits, in which a huge number of components are placed on a single crystal. Nevertheless, the discrete components of the strapping (resistors, capacitors, inductors) remain an important part of the circuits and are often the cause of faults.",
+        "Thus, the fundamentals of circuit engineering give the technician an understanding of the components of electronic circuits, the laws of their operation and the methods of representing circuits. This knowledge is the foundation for diagnosing and determining the operability of computer systems."
+      ],
+      "questions": [
+        "What does circuit engineering study, and why is it necessary for an information-systems technician?",
+        "What is the difference between passive and active components of electronic circuits?",
+        "Formulate Ohm's law and explain its meaning.",
+        "What do Kirchhoff's first and second laws state?",
+        "What types of circuit diagrams exist and what is the difference between them?"
+      ]
+    },
+    {
+      "code": "2.2",
+      "title": "Capacitors. Types of capacitors and their connections",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The design and operating principle of a capacitor.",
+        "The main parameters of capacitors.",
+        "Types of capacitors by the type of dielectric.",
+        "Series and parallel connection of capacitors."
+      ],
+      "body": [
+        "A capacitor is one of the most widespread passive components of electronic circuits. It consists of two conductive plates separated by a dielectric. When a voltage is applied, charges of opposite signs accumulate on the plates, and energy is stored in the electric field between them.",
+        "The main parameter of a capacitor is its capacitance — the ability to accumulate a charge at a given voltage. Capacitance is measured in farads, but in practice fractions are used: microfarads, nanofarads and picofarads. The capacitance depends on the area of the plates, the distance between them and the properties of the dielectric.",
+        "The second most important parameter is the rated voltage — the maximum voltage at which the capacitor can operate for a long time without breakdown of the dielectric. Exceeding the rated voltage leads to the failure of the capacitor, often with a characteristic swelling or rupture of the case of electrolytic capacitors.",
+        "Other parameters include the tolerance on the capacitance, the temperature coefficient, the equivalent series resistance (ESR) and the leakage current. For the power circuits of a computer, a low ESR is especially important, since capacitors with an increased ESR cease to filter the ripple effectively and cause instability.",
+        "Capacitors are classified by the type of dielectric. Ceramic capacitors have a small capacitance, low losses and are used in high-frequency and decoupling circuits. Electrolytic (aluminium and tantalum) capacitors have a large capacitance and are used in power filters; they are polar and require the correct connection of the polarity.",
+        "Film capacitors have good stability and are used in signal and timing circuits. Tantalum capacitors are compact and stable but sensitive to exceeding the voltage. The choice of the type of capacitor is determined by the requirements of the circuit for capacitance, frequency, stability and dimensions.",
+        "Electrolytic capacitors of the power supplies and motherboards of computers are one of the most frequent causes of faults. Over time and under the influence of heat, the electrolyte dries out, the ESR increases, and the case swells. The replacement of swollen capacitors is a typical repair operation.",
+        "Capacitors can be connected in series and in parallel. With a parallel connection, the capacitances are added, and the total capacitance increases; the rated voltage remains equal to the smallest of the rated voltages. A parallel connection is used to obtain a large capacitance and to reduce the total ESR.",
+        "With a series connection, the total capacitance decreases (the reciprocal of the total capacitance is equal to the sum of the reciprocals of the capacitances), but the permissible voltage increases, since it is distributed among the capacitors. A series connection is used to operate at an increased voltage.",
+        "When working with capacitors, one must remember that charged capacitors of power supplies and monitors can store a dangerous charge even after the device is disconnected from the mains. Before servicing, such capacitors must be safely discharged through a resistor.",
+        "For checking capacitors, a multimeter with a capacitance-measurement function, an ESR meter and a visual inspection for swelling and leakage of electrolyte are used. The combination of these methods allows faulty capacitors to be reliably detected.",
+        "Thus, knowledge of the design, parameters, types and methods of connecting capacitors allows the technician to understand their role in the circuits of a computer, to correctly select replacements and to diagnose the typical faults associated with them."
+      ],
+      "questions": [
+        "What does a capacitor consist of and on what principle does it operate?",
+        "What are the main parameters of a capacitor, and why is the rated voltage important?",
+        "What types of capacitors are distinguished by the type of dielectric, and where are they applied?",
+        "How does the total capacitance change with a series and a parallel connection of capacitors?",
+        "Why are electrolytic capacitors a frequent cause of faults, and how are they checked?"
+      ]
+    },
+    {
+      "code": "2.3",
+      "title": "Analysis of the types of capacitors and their application in computer devices",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in identifying the types of capacitors, reading their markings and measuring their parameters, and in determining their role in the circuits of computer devices.",
+      "theory": [
+        "In the circuits of a computer, capacitors of various types are used: ceramic capacitors for high-frequency decoupling, electrolytic and polymer capacitors for power filters, and film capacitors for signal circuits. The ability to identify the type of capacitor and to read its markings is a basic skill of diagnostics.",
+        "The marking of capacitors may be alphanumeric (on the case directly) or in code (three digits for ceramic capacitors). The parameters can be checked with a multimeter in the capacitance-measurement mode and with an ESR meter without unsoldering, with the power off."
+      ],
+      "materials": [
+        "A set of capacitors of various types (ceramic, electrolytic, film, tantalum).",
+        "A motherboard and a power supply for studying the placement of capacitors.",
+        "A multimeter with a capacitance-measurement function and an ESR meter.",
+        "A magnifying glass and a report form."
+      ],
+      "procedure": [
+        "Examine the proposed capacitors, determine their type by appearance and design, and enter the data in a table.",
+        "Read the markings of the capacitors and determine the capacitance and the rated voltage of each.",
+        "Measure the actual capacitance of the capacitors with a multimeter and compare it with the markings.",
+        "Examine the motherboard and the power supply, find the capacitors and determine in which circuits they are used (power filters, decoupling).",
+        "Find capacitors with signs of faults (swelling, leakage of electrolyte) and measure their ESR.",
+        "Draw conclusions about the conformity of the parameters of the capacitors with the markings and about the presence of faulty elements."
+      ],
+      "tasks": [
+        "Compile a table of the examined capacitors indicating their type, capacitance, rated voltage and place of application.",
+        "Determine which capacitors on the board belong to the power filters and which to the decoupling circuits.",
+        "Prepare a conclusion on the technical condition of the examined capacitors."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the skills of identifying the types of capacitors, reading their markings and measuring their parameters, and of determining their role in the circuits of computer devices.",
+      "questions": [
+        "What types of capacitors are used in computer devices, and where?",
+        "How is the markings of ceramic and electrolytic capacitors deciphered?",
+        "How is the capacitance and the ESR of a capacitor measured?",
+        "What external signs indicate a faulty electrolytic capacitor?",
+        "What role do capacitors play in the power filters of a computer?"
+      ]
+    },
+    {
+      "code": "2.4",
+      "title": "Detecting faults in the power supplies of computer systems",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in diagnosing the power supplies of computer systems, measuring the output voltages and detecting typical faults.",
+      "theory": [
+        "The power supply unit (PSU) converts the alternating mains voltage into the stabilized direct voltages +3.3 V, +5 V and +12 V that are required by the components of a computer. A faulty power supply is one of the most frequent causes of the failure of a computer to start and of unstable operation.",
+        "The diagnostics of a power supply includes a visual inspection, checking the start signal (Power Good), measuring the output voltages under load and without load, and checking the ripple. The measurements are performed with a multimeter, and the deviation of the voltages from the nominal value must not exceed the permissible tolerances (usually ±5 %)."
+      ],
+      "materials": [
+        "An ATX power supply for diagnostics.",
+        "A multimeter and a power-supply tester.",
+        "A load (a load resistor or a serviceable motherboard).",
+        "An anti-static strap and a report form."
+      ],
+      "procedure": [
+        "Perform a visual inspection of the power supply: check the integrity of the case, the cables, the connectors and the fan, and look for swollen capacitors.",
+        "Connect the power-supply tester and check the presence of all the output voltages and the Power Good signal.",
+        "Start the power supply (by closing the PS_ON contact to ground) and measure the output voltages with a multimeter without a load.",
+        "Connect a load and again measure the output voltages, comparing them with the nominal values and the tolerances.",
+        "Assess the operation of the fan and the degree of heating of the power supply during operation.",
+        "Make a conclusion about the serviceability of the power supply and about the detected faults."
+      ],
+      "tasks": [
+        "Prepare a table of the measured output voltages with an indication of the conformity with the tolerances.",
+        "Describe the typical faults of power supplies and their external manifestations.",
+        "Formulate a conclusion about the serviceability of the diagnosed power supply."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of diagnosing power supplies, measuring the output voltages and detecting the typical faults of the power circuits of a computer.",
+      "questions": [
+        "What voltages does a computer power supply produce, and what are they intended for?",
+        "What does the diagnostics of a power supply include?",
+        "What is the Power Good signal and what is its role?",
+        "What deviation of the output voltages from the nominal value is considered permissible?",
+        "What are the typical faults of computer power supplies?"
+      ]
+    },
+    {
+      "code": "2.5",
+      "title": "Investigation of the causes of faults of the power supplies of computer systems",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the causes of faults of power supplies, localizing the faulty nodes and determining the methods of their elimination.",
+      "theory": [
+        "The faults of a power supply can be located in various nodes: the input filter and the rectifier, the high-voltage part with the switching transistors, the pulse transformer, the secondary rectifiers and filters, and the stabilization and protection circuits. Each node has its own characteristic signs of a fault.",
+        "The most frequent causes of faults are dried-out and swollen electrolytic capacitors, failed switching transistors, blown fuses as a result of a short circuit, and faults of the standby-voltage circuit. The analysis of the causes allows not only the elimination of the fault but also the prevention of its recurrence."
+      ],
+      "materials": [
+        "Faulty power supplies for analysis.",
+        "A multimeter and an ESR meter.",
+        "A schematic diagram of a typical ATX power supply.",
+        "A tool for disassembly and a report form."
+      ],
+      "procedure": [
+        "Study the block diagram of a pulse power supply and determine the function of each node.",
+        "Disassemble the faulty power supply, observing safety measures (discharge the high-voltage capacitors).",
+        "Perform a visual inspection and detect the components with external signs of a fault (swelling, darkening, traces of overheating).",
+        "Check the fuse, the switching transistors and the diodes of the rectifiers with a multimeter.",
+        "Measure the ESR of the electrolytic capacitors of the secondary circuits and detect the degraded ones.",
+        "Determine the cause of the fault, the node in which it is located, and the method of its elimination."
+      ],
+      "tasks": [
+        "Compile a list of the typical causes of faults of power supplies with an indication of their external manifestations.",
+        "For the analysed power supply, determine the faulty node and the cause of the fault.",
+        "Propose a method of eliminating the detected fault and measures to prevent its recurrence."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methodology of analysing the causes of faults of power supplies, localizing the faulty nodes and determining the methods of their elimination.",
+      "questions": [
+        "What nodes does a pulse power supply consist of?",
+        "What are the most frequent causes of faults of power supplies?",
+        "How are the switching transistors and the rectifier diodes checked?",
+        "Why is it important to discharge the high-voltage capacitors before servicing?",
+        "How does the analysis of the cause of a fault help to prevent its recurrence?"
+      ]
+    },
+    {
+      "code": "2.6",
+      "title": "Conductors and dielectrics in an electric field",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The structure of conductors and dielectrics.",
+        "The behaviour of conductors in an electric field.",
+        "Polarization of dielectrics and their breakdown.",
+        "The application of conductors and dielectrics in computer devices."
+      ],
+      "body": [
+        "All materials with respect to the conduction of electric current are divided into conductors, dielectrics and semiconductors. This division is based on the presence and mobility of free charge carriers. Understanding the behaviour of conductors and dielectrics in an electric field is the basis for understanding the operation of any electronic device.",
+        "Conductors are materials with a large number of free electrons that can move under the action of an electric field. Metals (copper, aluminium, gold, silver) are good conductors. In computer technology, conductors are used for the conductive tracks of boards, wires, contacts and connectors.",
+        "In an external electric field, the free electrons of a conductor are redistributed so that the field inside the conductor becomes equal to zero. This phenomenon — electrostatic induction — underlies the screening (shielding) of electronic devices from external electromagnetic interference.",
+        "Dielectrics are materials in which there are practically no free charge carriers, so they do not conduct electric current. Examples are the textolite of boards, the plastic of cases, ceramics, mica and air. Dielectrics are used for insulation and as the working medium of capacitors.",
+        "In an electric field, the dielectric is polarized: the bound charges are displaced, forming an internal field directed against the external one. The degree of polarization is characterized by the dielectric permittivity. The higher the permittivity, the greater the capacitance of a capacitor with such a dielectric.",
+        "If the field strength in a dielectric exceeds a certain limit, an electrical breakdown occurs — the dielectric loses its insulating properties and begins to conduct current. The value of the field strength at which breakdown occurs is called the electrical (dielectric) strength. Breakdown is one of the causes of the failure of capacitors and insulation.",
+        "Semiconductors occupy an intermediate position between conductors and dielectrics. Their conductivity depends strongly on temperature, illumination and the addition of impurities. It is on the basis of semiconductors (silicon, germanium) that diodes, transistors and integrated circuits — the foundation of all modern electronics — are built.",
+        "In a printed circuit board, conductors and dielectrics work together: the conductive copper tracks are placed on a dielectric base of textolite, and between the layers of a multilayer board there are dielectric layers. The correct combination of materials ensures the working of the circuit and the absence of unwanted leakages.",
+        "The properties of dielectrics depend on external conditions. Moisture, contamination and dust on the surface of a board can create conductive paths and cause leakage currents, faults and even fires. Therefore the cleanliness and dryness of boards is important for their reliable operation.",
+        "Knowledge of the properties of conductors and dielectrics is applied in the diagnostics of faults: a short circuit is a place where a dielectric has lost its properties or where conductors have closed; a break is a place where a conductor has lost its continuity. The technician must understand the physical nature of these faults.",
+        "The screening of cables and devices, the insulation of wires, the choice of materials for boards and the protection against static electricity — all this is based on an understanding of the behaviour of conductors and dielectrics in an electric field.",
+        "Thus, the division of materials into conductors, dielectrics and semiconductors and the understanding of their behaviour in an electric field is a fundamental basis for understanding the design, operation and faults of computer devices."
+      ],
+      "questions": [
+        "Into which groups are materials divided according to their ability to conduct current, and on what basis?",
+        "How does a conductor behave in an external electric field?",
+        "What is the polarization of a dielectric, and how is it connected with the dielectric permittivity?",
+        "What is the electrical breakdown of a dielectric, and why is it dangerous?",
+        "How are conductors and dielectrics used together in a printed circuit board?"
+      ]
+    },
+    {
+      "code": "2.7",
+      "title": "The fundamentals of circuit engineering and its role in determining the operability of computer systems",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "Circuit engineering as a tool for assessing operability.",
+        "Functional nodes of a computer from the point of view of circuitry.",
+        "Signs of operability and inoperability of nodes.",
+        "The sequence of circuit-engineering diagnostics."
+      ],
+      "body": [
+        "Determining the operability of a computer system at the circuit-engineering level means establishing whether each functional node performs its function and whether the electrical signals and voltages correspond to the nominal values. Circuit engineering provides the technician with the methods and criteria for such an assessment.",
+        "Any computer can be represented as a set of functional nodes connected by buses and power circuits: the power supply, the voltage-regulator modules (VRM), the central processor, the chipset, the memory, the graphics subsystem, the storage and input/output controllers. Each node has its own power supply and signal circuits.",
+        "The operability of a node is determined by several criteria: the presence of the correct supply voltage, the presence of a clock signal, the presence of a reset signal, and the correct exchange of signals over the buses. The absence or distortion of any of these signs indicates a fault.",
+        "The power supply of the nodes deserves special attention. Modern processors and memory require several supply voltages formed by the VRM directly on the motherboard. A fault of the VRM leads to the inoperability of the processor even with a serviceable power supply.",
+        "The clock signals are formed by quartz resonators and clock generators. Without a clock signal, the digital nodes cannot work. The reset signal puts the nodes into the initial state when switched on. The verification of the presence of these signals is an important step in diagnostics.",
+        "For determining operability, both passive and active methods are used. Passive methods include a visual inspection, the verification of voltages and signals without intervention in the operation of the circuit. Active methods include the substitution of nodes, the injection of test signals and the use of diagnostic equipment.",
+        "An important diagnostic tool is the power-on self-test (POST), which the motherboard performs at start-up. The POST checks the main nodes and signals the result with codes (on a POST card or indicators) and sound signals. The decoding of POST codes allows the faulty node to be localized.",
+        "The sequence of circuit-engineering diagnostics is usually built from the simple to the complex: a visual inspection, the verification of the power supply, the verification of the clock and reset signals, the analysis of the POST codes, and only then the in-depth verification of specific circuits and components.",
+        "The role of circuit engineering in diagnostics is that it allows one to move from the symptom of a fault (the computer does not turn on, hangs, restarts) to a specific cause at the level of a node or component. Without an understanding of circuitry, diagnostics is reduced to a blind replacement of parts.",
+        "The localization of a fault is based on the principle of dividing the system into parts and checking each of them. By measuring the voltages and signals at the control points and comparing them with the nominal values, the technician gradually narrows the search area to a specific faulty element.",
+        "Modern diagnostics combines circuit-engineering methods with software ones: diagnostic utilities read the data of the sensors of voltage, temperature and frequency, which complements the picture obtained by measurements. The combination of these approaches gives the most complete assessment of operability.",
+        "Thus, circuit engineering plays a key role in determining the operability of computer systems: it provides the criteria for the operability of nodes, the methods of measurement and the logic of localizing faults, allowing the technician to perform diagnostics meaningfully and effectively."
+      ],
+      "questions": [
+        "What does it mean to determine the operability of a computer at the circuit-engineering level?",
+        "Into which functional nodes can a computer be divided from the point of view of circuitry?",
+        "What are the criteria for the operability of a node?",
+        "What is the difference between passive and active methods of diagnostics?",
+        "How is the sequence of circuit-engineering diagnostics built?"
+      ]
+    },
+    {
+      "code": "2.8",
+      "title": "Methods of analysing circuits for faults in computer systems",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "Visual and instrumental methods of circuit analysis.",
+        "Measurement of voltages, currents and resistances.",
+        "Use of an oscilloscope to analyse signals.",
+        "The method of comparison with a serviceable device."
+      ],
+      "body": [
+        "The analysis of circuits for faults is the central task of the diagnostics of computer systems at the circuit-engineering level. It combines visual and instrumental methods, each of which provides its own part of the information about the state of the circuit.",
+        "The visual method is the first and simplest. An inspection reveals burnt and swollen components, traces of overheating and soot, cracks in the board, cold solder joints, broken tracks and foreign objects. A significant part of faults can be detected precisely by visual inspection, including with the use of a magnifying glass and a microscope.",
+        "The measurement of voltages with a multimeter or an oscilloscope at the control points allows one to check whether the supply voltages and signals correspond to the nominal values. The deviation of a voltage from the nominal value, its absence or instability indicate a fault in the corresponding circuit.",
+        "The measurement of resistance (in the power-off state) is used to detect short circuits and breaks. A resistance close to zero between a power circuit and ground indicates a short circuit; an infinitely large resistance where there should be a connection indicates a break.",
+        "The measurement of current consumption allows one to assess the general state of a node. An increased current consumption may indicate a short circuit or a faulty component, and the absence of consumption may indicate a break in the power circuit or the inoperability of the node.",
+        "The oscilloscope is an indispensable tool for analysing dynamic signals. It allows one to observe the shape, amplitude, frequency and timing relations of signals — the clock pulses, the data buses, the control signals. The distortion of the shape of a signal often indicates a fault that cannot be detected by a multimeter.",
+        "The method of comparison with a serviceable device is very effective. By measuring the parameters at the same points of a faulty and a serviceable device, the technician quickly detects discrepancies and localizes the fault. This method is especially useful for complex circuits whose nominal values are unknown.",
+        "The 'freezing' and 'heating' methods are used to detect faults that depend on temperature. Local cooling or heating of a component allows one to detect an element that loses its operability when the temperature changes, which is typical of 'floating' faults.",
+        "The method of signal injection (signal tracing) consists in supplying a test signal to the input of a circuit and tracing its passage through the nodes. The place where the signal disappears or is distorted indicates the faulty node. This method is applied in the diagnostics of signal paths.",
+        "The analysis of the consumed current by the thermal method uses a thermal imager or simply the touch of a finger (with the power off and observing safety) to detect overheating components. An overheating element is often the faulty one or the one operating in an abnormal mode.",
+        "Modern diagnostics is built on a combination of these methods. The technician begins with a visual inspection and the measurement of the power supply, then uses the oscilloscope and the method of comparison, and applies thermal and other methods to localize complex faults.",
+        "Thus, the methods of analysing circuits for faults form an arsenal of the technician, allowing one to reliably detect and localize faults at the level of nodes and components and to determine the operability of computer systems."
+      ],
+      "questions": [
+        "What does the visual method of circuit analysis reveal?",
+        "What faults are detected by the measurement of voltage and what by the measurement of resistance?",
+        "Why is an oscilloscope necessary, and what does it allow one to see?",
+        "What is the essence of the method of comparison with a serviceable device?",
+        "How do the 'freezing' and 'heating' methods help to detect temperature-dependent faults?"
+      ]
+    },
+    {
+      "code": "2.9",
+      "title": "Practical skills in measuring and analysing electrical circuits in computers",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "Measuring instruments and the rules for their use.",
+        "Safety techniques when measuring electrical circuits.",
+        "Methods of measuring the main parameters.",
+        "Interpretation of the measurement results."
+      ],
+      "body": [
+        "The practical mastery of the methods of measuring and analysing electrical circuits is a key skill of a technician. It includes knowledge of the measuring instruments, the rules for their use, the methods of measurement and the ability to interpret the results.",
+        "The main measuring instrument is the digital multimeter, which measures voltage, current, resistance, and also has functions for checking diodes and continuity, and sometimes for measuring capacitance and temperature. The multimeter must be serviceable, with serviceable probes and a charged battery.",
+        "For the measurement of voltage, the multimeter is connected in parallel to the section of the circuit, observing the polarity and choosing the correct measurement range. For the measurement of current, the multimeter is connected in series in the open circuit, which requires caution to avoid a short circuit.",
+        "The measurement of resistance and continuity is performed only with the power off, otherwise the readings will be incorrect and the instrument may be damaged. The continuity mode with a sound signal is convenient for quickly checking the integrity of conductors and the presence of short circuits.",
+        "The oscilloscope is used for the analysis of dynamic signals. When working with it, it is important to correctly choose the time and amplitude scan, to connect the ground of the probe to the ground of the circuit, and to take into account the input parameters of the probe. The oscilloscope allows one to see the shape of the signal that the multimeter cannot show.",
+        "Safety techniques when measuring are of paramount importance. The measurements on energized equipment are performed with caution, using insulated probes, without touching the bare current-carrying parts. In the power supply, dangerous voltages are present even after disconnection, on the charged capacitors.",
+        "When measuring, control (reference) points are chosen — the contacts of connectors, the terminals of components, the test points of the board. The measurement results are compared with the nominal values from the documentation or with the readings of a serviceable device.",
+        "The interpretation of the results requires an understanding of the operation of the circuit. A voltage below the nominal value may indicate an overload or a fault of the stabilizer; the absence of a clock signal indicates a faulty generator; an increased current consumption indicates a short circuit. The technician must be able to connect a measurement with a possible cause.",
+        "The systematic recording of the measurement results in a table or protocol allows one to track the dynamics, to compare the data and to substantiate the conclusion about the fault. The accuracy and completeness of the measurements directly affect the reliability of the diagnosis.",
+        "Typical errors when measuring include the wrong choice of the measurement range, a bad contact of the probes, the measurement of resistance on an energized circuit, and the incorrect connection of the ground of the oscilloscope. Knowledge of these errors helps to avoid them.",
+        "The combination of measurements with a multimeter and an oscilloscope, the comparison with the nominal values and with a serviceable device, and the competent interpretation of the results form a complete picture of the state of the circuit and allow the fault to be localized.",
+        "Thus, the practical skills of measuring and analysing electrical circuits — the correct use of instruments, the observance of safety, the methods of measurement and the interpretation of the results — are the basis of the practical diagnostics of computer systems."
+      ],
+      "questions": [
+        "How is the multimeter connected when measuring voltage and when measuring current?",
+        "Why is the measurement of resistance performed only with the power off?",
+        "What safety rules must be observed when measuring energized circuits?",
+        "How are the control points for measurement chosen?",
+        "How is the result of a measurement connected with a possible cause of a fault?"
+      ]
+    },
+    {
+      "code": "2.10",
+      "title": "Testing and debugging of central processors in computer systems",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The architecture and power supply of the central processor.",
+        "Signs of a faulty processor.",
+        "Methods of testing the processor.",
+        "Stress testing and stability check."
+      ],
+      "body": [
+        "The central processor (CPU) is the main computing node of a computer, which executes the instructions of programs. Its testing and debugging require an understanding of the architecture of the processor, of its power supply and of the methods of checking its operability and stability.",
+        "A modern processor is a complex integrated circuit containing billions of transistors, several computing cores, cache memory and integrated controllers. The processor requires several supply voltages formed by the voltage-regulator module (VRM) of the motherboard, and a clock signal.",
+        "The signs of a faulty processor or of its strapping may be: the complete failure of the computer to start, a start without an image, restarts and freezes, errors during calculations, and overheating. It is important to distinguish a fault of the processor itself from a fault of its power supply, the socket or the motherboard.",
+        "Before concluding that the processor is faulty, one must check its power supply (the voltages of the VRM), the integrity of the contacts of the socket (the absence of bent or oxidized pins), the correct installation and the quality of the thermal contact with the cooler.",
+        "The testing of the processor begins with checking the start: the presence of the supply voltages, the clock signal and the passage of the POST. If the computer passes the POST and loads the operating system, the processor is generally operational, and further testing checks its stability and performance.",
+        "Stress testing is used to check the stability of the processor under maximum load. Programs such as Prime95, LinX, OCCT and AIDA64 load all the cores of the processor with calculations and monitor the temperature, the frequency and the absence of errors. Errors or shutdowns during stress testing indicate instability.",
+        "The temperature of the processor is a critical parameter. Under load, it must not exceed the limit value specified by the manufacturer (usually about 90–100 °C, with throttling beginning earlier). Overheating leads to a forced reduction of the frequency (thermal throttling) and to shutdowns.",
+        "Thermal throttling is a protective mechanism that reduces the frequency and voltage of the processor when the limit temperature is reached. If a processor under load constantly throttles, this indicates an insufficient efficiency of the cooling system: a poor thermal contact, dried-out thermal paste or a clogged radiator.",
+        "The monitoring of the parameters of the processor during testing is performed by utilities (HWMonitor, HWiNFO, Core Temp), which read the data of the built-in sensors: the temperature, the voltage, the frequency and the load of each core. The analysis of these data helps to assess the state of the processor and its power supply.",
+        "Debugging the operation of the processor includes checking and correcting the settings of the BIOS/UEFI: the frequencies, the voltages, the power-supply modes and the memory profiles. Incorrect settings (for example, an excessive overclocking) can cause instability that is eliminated by returning to the default settings.",
+        "When replacing or reinstalling a processor, it is important to observe the rules: discharge the static, do not touch the contacts, correctly orient the processor in the socket by the key, apply the thermal paste in the right amount, and evenly tighten the cooler. Violation of these rules leads to faults.",
+        "Thus, the testing and debugging of central processors combines checking the power supply and the contacts, analysing the start and the POST, stress testing for stability, monitoring the temperature and the parameters, and correcting the settings of the BIOS/UEFI."
+      ],
+      "questions": [
+        "What supply voltages and signals does a central processor require?",
+        "What signs may indicate a fault of the processor or of its strapping?",
+        "What must be checked before concluding that the processor is faulty?",
+        "What is stress testing, and what programs are used for it?",
+        "What is thermal throttling, and what does its constant occurrence indicate?"
+      ]
+    },
+    {
+      "code": "2.11",
+      "title": "Working with memory and the analysis of memory circuits in computers",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "Types and operating principles of computer memory.",
+        "The power supply and signal circuits of the memory.",
+        "Signs of memory faults.",
+        "Testing and analysing memory circuits."
+      ],
+      "body": [
+        "The random-access memory (RAM) is one of the most important nodes of a computer, which stores the data and the code of the running programs. Working with memory and analysing its circuits require an understanding of the types of memory, of its power supply and of the methods of detecting faults.",
+        "Modern computers use dynamic memory of the DDR standard (DDR3, DDR4, DDR5) in the form of DIMM and SO-DIMM modules. Dynamic memory stores a bit of information in a capacitor of a memory cell and requires constant regeneration (refresh) of the charge, which is performed by the memory controller.",
+        "The memory module contains memory chips, an SPD chip with the parameters of the module, power circuits and a connector. The power supply of the memory is formed by a separate stabilizer of the motherboard; for DDR4, the supply voltage is about 1.2 V, and there are also reference voltages and the voltage of the controller.",
+        "The signs of memory faults are varied: the failure of the computer to start with a characteristic sound signal, the 'blue screens' of the operating system, freezes, spontaneous restarts, errors of applications and damage to data. These signs may be caused both by the modules themselves and by their power supply or the controller.",
+        "Before testing the memory, one must check the correct installation of the modules in the slots, the cleanliness of the contacts and the compatibility of the modules with the motherboard and the processor. Often the problem is solved by reseating the module and cleaning the contacts.",
+        "The testing of memory is performed by software: the built-in Windows tool, and the specialized programs MemTest86 and TestMem5. These programs write test patterns into the memory and check that they are read correctly, detecting errors of individual cells.",
+        "The testing of memory is performed for a long time and in several passes, since some errors appear only after the memory warms up or under a certain load. The detection of even a single error indicates a problem that must be eliminated.",
+        "If errors are detected, the localization is performed by the method of exclusion: the modules are checked one by one in different slots. This allows one to determine whether the faulty element is a specific module, a slot or the memory controller of the processor.",
+        "The analysis of the memory circuits at the hardware level includes checking the supply and reference voltages, the integrity of the contacts of the slots and the absence of short circuits. A fault of the memory power stabilizer leads to the inoperability of all the modules.",
+        "The settings of the memory in the BIOS/UEFI affect its stability. Incorrect timings, an overestimated frequency or an aggressive XMP/EXPO profile can cause errors. Returning to the standard settings or manually adjusting the parameters often restores stability.",
+        "When working with memory, anti-static measures must be observed, the modules must be taken by the edges without touching the contacts and the chips, and they must be installed until the latches click. The cleaning of the contacts is performed with a soft eraser or alcohol.",
+        "Thus, working with memory and analysing memory circuits combines an understanding of the types and operation of memory, checking the installation and the power supply, software testing, the localization of faults by the method of exclusion and the correction of the settings of the BIOS/UEFI."
+      ],
+      "questions": [
+        "What type of memory is used in modern computers, and how does it work?",
+        "What does a memory module consist of, and what is the SPD chip for?",
+        "What signs may indicate a memory fault?",
+        "What programs are used to test memory, and why is testing performed in several passes?",
+        "How is a memory fault localized by the method of exclusion?"
+      ]
+    },
+    {
+      "code": "2.12",
+      "title": "Analysis and testing of the circuits of the motherboards of computers",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The structure and functional nodes of a motherboard.",
+        "The power circuits of a motherboard.",
+        "The sequence of the start of a motherboard.",
+        "Methods of testing and diagnosing a motherboard."
+      ],
+      "body": [
+        "The motherboard is the basic board of a computer, which unites all its components: the processor, the memory, the expansion cards, the storage and the peripheral devices. The analysis and testing of its circuits is one of the most complex tasks of diagnostics, requiring an understanding of the structure and the start sequence of the board.",
+        "The main functional nodes of a motherboard are: the processor socket, the memory slots, the chipset, the VRM power modules, the clock generator, the BIOS/UEFI chip, the expansion slots, the storage and input/output controllers, and the connectors of the power supply and the front panel.",
+        "The chipset is a set of microcircuits that organizes the interaction of the processor with the memory, the buses and the peripheral devices. In modern platforms, part of the functions of the chipset is integrated into the processor, and the remaining part is performed by a single chip (PCH). The chipset is the centre of the connections of the board.",
+        "The power circuits of a motherboard are formed by several stabilizers (VRM) that produce the voltages for the processor, the memory, the chipset and other nodes. The start of the board begins with the appearance of the standby voltage, which is present immediately when the board is connected to the power supply.",
+        "The start sequence of a motherboard is strictly defined: the appearance of the standby voltage, the formation of the power-on signal, the start of the power supply, the appearance of all the supply voltages, the formation of the clock signals, the removal of the reset signal, and the start of the processor with the execution of the BIOS/UEFI code.",
+        "The diagnostics of a motherboard is built on checking each step of this sequence. The technician checks the presence of the standby voltage, the operation of the power-on, the appearance of the supply voltages, the clock signals and the reset, gradually localizing the place where the start sequence breaks down.",
+        "The POST card is an effective tool for diagnosing a motherboard. It is inserted into a slot and displays the codes of the passage of the POST. The last code displayed indicates the stage at which the start stopped, which helps to localize the faulty node.",
+        "The visual inspection of a motherboard reveals swollen capacitors, traces of overheating of the VRM, mechanical damage, cracks of the board, faults of the connectors and traces of moisture or oxidation. Many faults of motherboards are detected precisely visually.",
+        "The measurement of voltages at the control points (the chokes of the VRM, the connectors, the components) and the comparison with the nominal values allow one to detect faults of the power circuits. The measurement of resistance to ground at the power circuits reveals short circuits, which are a frequent cause of the failure of the board to start.",
+        "The faults of motherboards are diverse: faults of the VRM, of the BIOS/UEFI chip, of the clock generator, of the chipset, of the connectors and slots, breaks of tracks and short circuits. Some faults are eliminated by replacing components, while others require complex repair or the replacement of the board.",
+        "The testing of a serviceable motherboard includes assembling a minimal configuration (the board, the processor, one memory module, the power supply) and checking the start, the passage of the POST and the loading of the system. The gradual connection of the components helps to detect an incompatible or faulty device.",
+        "Thus, the analysis and testing of the circuits of a motherboard is based on the knowledge of its structure and start sequence, on the use of a POST card and measurements, on the visual inspection and on the method of the minimal configuration, which allows the most complex faults to be localized."
+      ],
+      "questions": [
+        "What are the main functional nodes of a motherboard?",
+        "What function does the chipset perform?",
+        "What is the start sequence of a motherboard?",
+        "How does a POST card help to diagnose a motherboard?",
+        "What faults of motherboards are detected by a visual inspection?"
+      ]
+    },
+    {
+      "code": "2.13",
+      "title": "Investigation of the methods of diagnosing graphics adapters and monitors",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in diagnosing graphics adapters and monitors, detecting typical faults and determining the methods of their elimination.",
+      "theory": [
+        "A graphics adapter (video card) forms the image and outputs it to the monitor. Its main nodes are the graphics processor (GPU), the video memory, the power circuits (VRM), the cooling system and the output connectors. The faults of a video card are connected with overheating, the power circuits and the GPU.",
+        "A monitor displays the image. Its faults may be located in the power supply, the backlight, the matrix or the control board. The diagnostics of the 'video card – monitor' link begins with determining where the problem is located — in the source of the image or in the device that displays it."
+      ],
+      "materials": [
+        "A graphics adapter and a monitor for diagnostics.",
+        "A serviceable computer for substitution checks.",
+        "A multimeter and diagnostic software (FurMark, GPU-Z).",
+        "A report form."
+      ],
+      "procedure": [
+        "Perform a visual inspection of the graphics adapter: check the condition of the cooling system, the capacitors and the connectors.",
+        "Install the video card in a serviceable computer and check the passage of the POST, the appearance of the image and the recognition of the card by the system.",
+        "Run a stress test of the video card (FurMark) and monitor the temperature, the frequency and the absence of artifacts on the image.",
+        "Check the monitor by connecting it to a serviceable source through different interfaces (HDMI, DisplayPort) and assess the quality of the image.",
+        "Localize the fault by the method of substitution: determine whether the problem is in the video card, the cable or the monitor.",
+        "Make a conclusion about the technical condition of the graphics adapter and the monitor and about the methods of eliminating the detected faults."
+      ],
+      "tasks": [
+        "Compile a list of typical faults of graphics adapters and their external manifestations.",
+        "Determine, by the method of substitution, where the fault of the image is located in a given case.",
+        "Prepare a conclusion on the technical condition of the diagnosed video card and monitor."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of diagnosing graphics adapters and monitors, of detecting typical faults and of localizing them by the method of substitution.",
+      "questions": [
+        "What are the main nodes of a graphics adapter?",
+        "What faults are typical of video cards?",
+        "How is the location of a fault of the image determined — in the card or the monitor?",
+        "What does a stress test of a video card check?",
+        "What faults can be located in a monitor?"
+      ]
+    },
+    {
+      "code": "2.14",
+      "title": "Electromagnetism",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The magnetic field and its sources.",
+        "Electromagnetic induction.",
+        "Inductive components and transformers.",
+        "Electromagnetic interference and compatibility."
+      ],
+      "body": [
+        "Electromagnetism is the branch of physics that studies the interconnection of electric and magnetic phenomena. The understanding of electromagnetism is necessary for understanding the operation of many nodes of a computer — power supplies, transformers, chokes, motors of disk drives and fans — and also the phenomena of interference.",
+        "A magnetic field arises around moving electric charges, that is, around any conductor carrying a current. The magnetic field acts on other currents and magnets and is characterized by the magnetic induction. The direction of the field around a conductor is determined by the right-hand rule.",
+        "A coil of wire (a solenoid) creates a magnetic field similar to that of a permanent magnet. By placing a ferromagnetic core inside the coil, the magnetic field is greatly amplified. This principle underlies the operation of electromagnets, relays, chokes and transformers.",
+        "The phenomenon of electromagnetic induction, discovered by Faraday, consists in the appearance of an electromotive force in a circuit when the magnetic flux through it changes. The faster the flux changes, the greater the induced EMF. This phenomenon is the basis for the operation of transformers and generators.",
+        "An inductor (a choke) is a component that, owing to self-induction, resists a change in the current through it. It stores energy in a magnetic field and is used in filters, in the power circuits of the VRM, and in pulse power supplies, where it participates in the conversion of energy.",
+        "A transformer converts an alternating voltage of one value into a voltage of another value owing to electromagnetic induction between two windings on a common core. The ratio of the voltages is determined by the ratio of the numbers of turns. Transformers are used in power supplies to isolate and convert voltage.",
+        "In pulse power supplies of computers, a high-frequency transformer operates, which, owing to the high frequency of conversion, has small dimensions with a large power. The choke and the transformer are key components that determine the operation of the power supply.",
+        "Electric motors of fans and disk drives also operate on the principle of the interaction of a magnetic field and a current. The understanding of electromagnetism helps in the diagnostics of these devices and of the circuits that control them.",
+        "Electromagnetic interference is the unwanted electromagnetic effect of some devices on others. The fast switching of currents in digital circuits and power supplies generates interference that can disrupt the operation of neighbouring nodes and devices.",
+        "Electromagnetic compatibility (EMC) is the ability of a device to operate normally in the presence of interference and not to create unacceptable interference for others. EMC is ensured by screening, filtering, the correct layout of boards and the earthing of cases and cables.",
+        "The screening of cables and cases, the use of ferrite filters, the correct earthing and the layout of the tracks of a board are practical applications of the knowledge of electromagnetism for ensuring the reliable operation of computer equipment.",
+        "Thus, electromagnetism explains the operation of the inductive components, transformers and motors of a computer, and also the phenomena of interference and electromagnetic compatibility, the knowledge of which is necessary for the diagnostics and reliable operation of equipment."
+      ],
+      "questions": [
+        "Around what does a magnetic field arise, and how is its direction determined?",
+        "What is the phenomenon of electromagnetic induction?",
+        "How do a choke and a transformer work, and where are they applied in a computer?",
+        "Why does a pulse power supply use a high-frequency transformer?",
+        "What is electromagnetic compatibility, and how is it ensured?"
+      ]
+    },
+    {
+      "code": "2.15",
+      "title": "Analysis of conductors, dielectrics and electromagnetic phenomena in electronic circuits",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the behaviour of conductors and dielectrics and in detecting the influence of electromagnetic phenomena in the electronic circuits of a computer.",
+      "theory": [
+        "In the electronic circuits of a computer, the properties of conductors (the tracks of boards, wires) and dielectrics (the base of the board, insulation) work together. Faults are often connected with the violation of these properties: short circuits, breaks, leakage currents.",
+        "Electromagnetic phenomena manifest themselves in the operation of chokes, transformers and motors, and also in the form of interference. The analysis of these phenomena helps to understand the operation of the power circuits and to detect the sources of interference."
+      ],
+      "materials": [
+        "A motherboard and a power supply for analysis.",
+        "A multimeter and an oscilloscope.",
+        "A set of conductors and dielectrics for experiments.",
+        "A report form."
+      ],
+      "procedure": [
+        "Check the continuity of the conductive tracks of a board with a multimeter and detect possible breaks.",
+        "Measure the resistance between the power circuits and ground and detect possible short circuits or leakages.",
+        "Examine the inductive components (chokes, transformers) of the power supply and the VRM of the motherboard and describe their purpose.",
+        "Observe the signal on the choke of the VRM with an oscilloscope and analyse its shape.",
+        "Investigate the influence of the screening on the level of interference by comparing the signals with and without a screen.",
+        "Formulate conclusions about the role of conductors, dielectrics and electromagnetic phenomena in the operation of the analysed circuits."
+      ],
+      "tasks": [
+        "Compile a map of the power circuits of the board indicating the conductors and the inductive components.",
+        "Describe the faults connected with the violation of the properties of conductors and dielectrics.",
+        "Explain how screening reduces the level of electromagnetic interference."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of analysing the behaviour of conductors and dielectrics and of detecting electromagnetic phenomena in the electronic circuits of a computer.",
+      "questions": [
+        "How is the continuity of conductors and the absence of short circuits checked?",
+        "What faults are connected with the violation of the properties of conductors and dielectrics?",
+        "What inductive components are present in the power circuits of a computer?",
+        "How does screening affect the level of electromagnetic interference?",
+        "How does the oscilloscope help to analyse the operation of the power circuits?"
+      ]
+    },
+    {
+      "code": "2.16",
+      "title": "Analysis and repair of graphics cards and monitors",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The structure of a graphics card and the typical faults of its nodes.",
+        "Diagnostics of the power circuits and the GPU of a video card.",
+        "The structure of a monitor and the typical faults.",
+        "Methods of repairing video cards and monitors."
+      ],
+      "body": [
+        "Graphics cards and monitors are devices of the graphics subsystem of a computer that form and display the image. The analysis and repair of these devices require an understanding of their structure, of the typical faults and of the methods of their elimination.",
+        "A graphics card consists of a graphics processor (GPU), video memory, power circuits (VRM), a cooling system, a BIOS chip, and output connectors. The GPU is the most complex node, which performs the calculations of the image; it requires powerful power supply and intensive cooling.",
+        "The typical faults of video cards are connected with overheating and the power circuits. Overheating leads to the degradation of the GPU and of the soldering of the BGA chips, the appearance of artifacts on the image and shutdowns. The faults of the VRM lead to the inability to start or to the instability of the card.",
+        "The diagnostics of a video card begins with a visual inspection of the cooling system, the capacitors and the connectors. Then the power circuits are checked: the presence of the supply voltages of the GPU and the memory, the operation of the VRM. The measurement of the resistance to ground reveals short circuits in the power circuits.",
+        "Artifacts on the image (distortions, stripes, dots) often indicate problems of the video memory or the GPU, including a violation of the soldering of the BGA. In some cases, the situation is temporarily improved by warming up, but a reliable repair requires the resoldering or replacement of the chip.",
+        "The cooling system of a video card requires regular maintenance: the cleaning of the radiator from dust, the replacement of the dried-out thermal paste and the thermal pads. A significant part of the problems of video cards is caused precisely by the deterioration of the cooling and the overheating that results from it.",
+        "A monitor consists of a power supply, a backlight (LED), a matrix (the LCD panel), a control board (the scaler) and the input connectors. The faults of a monitor may be located in any of these nodes, and the diagnostics determines the faulty one.",
+        "The typical faults of monitors are: the absence of the image with a working indicator (a problem of the backlight or the power supply of the backlight), the complete absence of power (the power supply), stripes and spots on the image (the matrix or the loop), and the absence of a reaction to the signal (the scaler).",
+        "The diagnostics of the power supply of a monitor includes checking the output voltages and the electrolytic capacitors, which often swell. The replacement of swollen capacitors restores the operability of many monitors. The diagnostics of the backlight requires checking the LED strips and their power supply.",
+        "The repair of video cards and monitors requires a soldering tool, a soldering station, sometimes an infrared station for working with BGA chips, measuring instruments and replacement components. The repair of complex faults (the GPU, the matrix) is not always economically justified.",
+        "Safety techniques during repair require disconnecting the device from the mains, discharging the capacitors, observing anti-static measures and caution when working with a hot soldering tool. The high voltages in the power supply of a monitor are especially dangerous.",
+        "Thus, the analysis and repair of graphics cards and monitors is based on the knowledge of their structure and typical faults, on the diagnostics of the power circuits, the cooling and the nodes, and on the mastery of the methods of repair and the rules of safety."
+      ],
+      "questions": [
+        "What nodes does a graphics card consist of, and which of them is the most complex?",
+        "What faults of video cards are connected with overheating?",
+        "How is the diagnostics of the power circuits of a video card performed?",
+        "What nodes does a monitor consist of, and what are their typical faults?",
+        "Why does the replacement of swollen capacitors often restore a monitor?"
+      ]
+    },
+    {
+      "code": "2.17",
+      "title": "The role of the BIOS and the methods of its diagnostics in computers",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in working with the BIOS/UEFI, in diagnosing the problems associated with it and in restoring its operability.",
+      "theory": [
+        "The BIOS (and its modern form, UEFI) is the basic firmware of a motherboard, stored in a special chip. It performs the initialization of the equipment at start-up, the power-on self-test (POST), and the transfer of control to the boot loader of the operating system.",
+        "The problems associated with the BIOS/UEFI include the loss of settings (a discharged CMOS battery), incorrect settings that prevent the start, the corruption of the firmware, and incompatibility with new equipment, requiring an update. The diagnostics determines the nature of the problem and the method of its elimination."
+      ],
+      "materials": [
+        "A computer with access to the BIOS/UEFI.",
+        "A CMOS battery and a multimeter for checking it.",
+        "A flash drive with a firmware file for the update.",
+        "A report form."
+      ],
+      "procedure": [
+        "Enter the BIOS/UEFI and study its main sections: information about the system, the boot settings, the parameters of the equipment.",
+        "Check and set the correct date and time and verify the voltage of the CMOS battery with a multimeter.",
+        "Study the boot settings (Boot), the boot order of the devices and the operating modes of the disks (AHCI, the security settings).",
+        "Perform a reset of the BIOS/UEFI settings to the default values and describe the situations in which this is necessary.",
+        "Study the procedure for updating the BIOS/UEFI from a flash drive (without actually updating, if it is not required) and describe its stages and risks.",
+        "Make a conclusion about the role of the BIOS/UEFI and about the methods of diagnosing and eliminating the associated problems."
+      ],
+      "tasks": [
+        "Make a list of the main sections and settings of the BIOS/UEFI.",
+        "Describe the signs of a discharged CMOS battery and the procedure for replacing it.",
+        "Compile an algorithm for safely updating the BIOS/UEFI with an indication of the precautions."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of working with the BIOS/UEFI, of diagnosing the associated problems and of restoring the operability of the system by resetting the settings and replacing the CMOS battery.",
+      "questions": [
+        "What functions does the BIOS/UEFI perform at the start of a computer?",
+        "What problems are connected with the BIOS/UEFI?",
+        "What are the signs of a discharged CMOS battery?",
+        "In which cases is it necessary to reset the BIOS/UEFI settings?",
+        "What precautions must be observed when updating the BIOS/UEFI?"
+      ]
+    },
+    {
+      "code": "2.18",
+      "title": "Analysis of the methods of diagnosing the BIOS and the network interfaces of a computer",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in diagnosing problems of the BIOS/UEFI and the network interfaces of a computer and in restoring their operability.",
+      "theory": [
+        "The network interface (the network card) provides the connection of a computer to a local network and to the Internet. It may be integrated into the motherboard or made as a separate card. The faults of the network interface manifest themselves as the absence of a connection, low speed or instability of the link.",
+        "The diagnostics of network interfaces combines a hardware check (the integrity of the connector, the indicators of the link, the cable) and a software check (the presence and operation of the driver, the network settings, the test of the connection with utilities)."
+      ],
+      "materials": [
+        "A computer with an integrated and (or) a separate network card.",
+        "A network cable and a cable tester.",
+        "Diagnostic utilities (ping, ipconfig, the device manager).",
+        "A report form."
+      ],
+      "procedure": [
+        "Check the settings of the BIOS/UEFI that relate to the network interface (the enabling of the integrated network card, the Wake-on-LAN modes).",
+        "Examine the network connector and the link indicators and check the network cable with a cable tester.",
+        "Check the presence and the operation of the driver of the network card in the device manager and update it if necessary.",
+        "View the network settings (the IP address, the gateway) with the ipconfig utility and check the connection with the ping utility.",
+        "Localize the problem: determine whether it is located in the BIOS settings, the hardware, the driver or the network settings.",
+        "Make a conclusion about the state of the network interface and about the methods of eliminating the detected problems."
+      ],
+      "tasks": [
+        "Compile a checklist for diagnosing a network interface.",
+        "Describe the typical faults of network cards and the methods of their detection.",
+        "Show how the ping and ipconfig utilities help in the diagnostics of a network connection."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of diagnosing the BIOS/UEFI and the network interfaces of a computer and has learned to localize and eliminate the associated problems.",
+      "questions": [
+        "What settings of the network interface are located in the BIOS/UEFI?",
+        "What hardware and software checks does the diagnostics of a network card include?",
+        "How are the ping and ipconfig utilities used?",
+        "What are the typical faults of network interfaces?",
+        "How is the location of a network problem determined?"
+      ]
+    },
+    {
+      "code": "2.19",
+      "title": "Testing and repair of network interfaces and network cards",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in testing and repairing network interfaces and network cards, including checking the hardware and restoring the operability of the network.",
+      "theory": [
+        "A network card contains a network controller (PHY/MAC), a connector (RJ-45) with built-in transformers and indicators, and power circuits. The faults may be located in the controller, the connector, the magnetic components or the power circuits.",
+        "Testing includes checking the physical link (the indicators, the cable test), the operation at different speeds (10/100/1000 Mbit/s) and the stability of the data transmission. The repair may consist in replacing the connector, restoring the soldering or replacing a separate card."
+      ],
+      "materials": [
+        "Network cards (integrated and separate) for testing.",
+        "A network cable, a switch and a cable tester.",
+        "A multimeter and a soldering tool.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the network card, check the integrity of the RJ-45 connector and the condition of the link indicators.",
+        "Connect the card to a network through a serviceable cable and a switch and check the establishment of the link.",
+        "Test the operation of the card at different speeds and assess the stability of the data transmission with the ping utility in a continuous mode.",
+        "If there is no link, check the cable with a tester, the driver and the settings, and localize the cause of the fault.",
+        "Describe the procedure for repairing the typical faults (replacement of the connector, restoration of the soldering, replacement of the card).",
+        "Make a conclusion about the operability of the tested network cards and about the necessary repair measures."
+      ],
+      "tasks": [
+        "Prepare a protocol for testing a network card with the results of checking the link and the speed.",
+        "Describe the procedure for replacing a faulty RJ-45 connector.",
+        "Formulate recommendations for choosing between repairing and replacing a network card."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of testing and repairing network interfaces and network cards and of restoring the operability of a network connection.",
+      "questions": [
+        "What nodes does a network card consist of?",
+        "What does the testing of a network card include?",
+        "How is the cause of the absence of a link determined?",
+        "What typical faults of network cards can be repaired?",
+        "In which cases is it more advisable to replace a network card than to repair it?"
+      ]
+    },
+    {
+      "code": "2.20",
+      "title": "Analysis and repair of the circuits of data-storage devices (hard disk drives and SSDs)",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The structure and operating principle of HDDs and SSDs.",
+        "The power and interface circuits of the drives.",
+        "Typical faults of HDDs and SSDs.",
+        "Diagnostics and methods of restoring drives."
+      ],
+      "body": [
+        "Data-storage devices store the information of a computer permanently. The two main types are hard disk drives (HDD) and solid-state drives (SSD). The analysis and repair of their circuits require an understanding of their structure, the operating principle and the typical faults.",
+        "A hard disk drive stores data on rotating magnetic plates, from which the information is read and written by movable heads. The HDD consists of a hermetic block (the plates, the heads, the motor) and a control board with a controller, memory and power circuits. The mechanical part makes the HDD sensitive to shocks.",
+        "A solid-state drive stores data in flash memory and has no moving parts. The SSD consists of flash-memory chips, a controller, a buffer (DRAM) and power circuits. The absence of mechanics makes the SSD faster and more resistant to shocks, but the flash memory has a limited number of rewrite cycles.",
+        "The power and interface circuits of the drives are located on the control board. The drives receive the supply voltages +5 V and +12 V (for the HDD) through the SATA power connector and exchange data over the SATA or NVMe interface. The faults of the power circuits lead to the inoperability of the drive.",
+        "The typical faults of HDDs are connected with the mechanics and the electronics: the wear and sticking of the heads, the jamming of the motor, bad sectors on the plates, and the faults of the control board. A characteristic sign of mechanical faults is an extraneous sound (knocking, clicking) during operation.",
+        "The typical faults of SSDs are connected with the controller and the flash memory: the failure of the controller (the drive is not detected), the depletion of the resource of the memory cells, and faults of the firmware. SSDs more often fail suddenly and completely, which makes the backing-up of data especially important.",
+        "The S.M.A.R.T. technology (self-monitoring) is built into the drives and accumulates data on their state: the number of bad sectors, the temperature, the number of switch-ons, the wear of the resource. The analysis of the S.M.A.R.T. attributes allows one to assess the state of the drive and to predict its failure.",
+        "The diagnostics of drives is performed by utilities (CrystalDiskInfo, Victoria, the manufacturers' utilities), which read the S.M.A.R.T., test the surface and the speed of reading, and detect bad sectors and degraded blocks. The deterioration of the S.M.A.R.T. attributes is a signal for replacing the drive.",
+        "The restoration of the operability of a drive depends on the nature of the fault. Software faults (logical bad sectors, errors of the file system) can be eliminated by utilities. Hardware faults (the mechanics of the HDD, the controller of the SSD) require complex repair, which is most often not advisable.",
+        "The recovery of data from a faulty drive is a separate complex task. Logical recovery is performed by programs; physical recovery (in the event of a mechanical fault of the HDD) requires special conditions and equipment. The most reliable protection against the loss of data is a backup.",
+        "When working with drives, one must observe caution: not subject the HDD to shocks, observe anti-static measures, correctly connect the power and the interface. The data on the drives is often more valuable than the drives themselves, so caution is paramount.",
+        "Thus, the analysis and repair of the circuits of data-storage devices is based on the knowledge of the structure of HDDs and SSDs, the analysis of the S.M.A.R.T., the diagnostics by utilities and the understanding of the limits of the advisability of repair and the importance of backing up data."
+      ],
+      "questions": [
+        "What is the difference in the structure and operating principle of an HDD and an SSD?",
+        "What faults are typical of hard disk drives and what for SSDs?",
+        "What is the S.M.A.R.T. technology, and how is it used in diagnostics?",
+        "What utilities are used to diagnose drives?",
+        "Why is a backup the most reliable protection against the loss of data?"
+      ]
+    },
+    {
+      "code": "2.21",
+      "title": "Investigation of faults of data-storage devices and cooling systems of computers",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in investigating the faults of data-storage devices and cooling systems of computers and in determining the methods of their elimination.",
+      "theory": [
+        "The faults of drives are detected by the analysis of the S.M.A.R.T. and by surface testing, and the faults of cooling systems by checking the rotation of the fans, the temperature of the components and the condition of the radiators and the thermal paste.",
+        "There is a close connection between cooling and the operability of the components: overheating accelerates the degradation of the processor, the video card and the drives, and causes throttling and shutdowns. Therefore the diagnostics of cooling is an important part of maintenance."
+      ],
+      "materials": [
+        "A computer with drives and a cooling system.",
+        "Diagnostic utilities (CrystalDiskInfo, Victoria, HWMonitor).",
+        "A tool for cleaning and replacing the thermal paste.",
+        "A report form."
+      ],
+      "procedure": [
+        "Read and analyse the S.M.A.R.T. attributes of the drives and assess their state.",
+        "Perform a surface test of the drive (a reading test) and detect bad sectors or degraded blocks.",
+        "Check the operation of the fans of the cooling system: the rotation, the speed, the absence of extraneous sounds.",
+        "Measure the temperature of the processor and the video card at rest and under load with monitoring utilities.",
+        "Assess the condition of the radiators and the thermal paste and, if necessary, clean the radiator and replace the thermal paste.",
+        "Make a conclusion about the state of the drives and the cooling system and about the necessary measures."
+      ],
+      "tasks": [
+        "Prepare a report on the analysis of the S.M.A.R.T. of the drive with an assessment of its state.",
+        "Compile a temperature map of the components at rest and under load.",
+        "Formulate recommendations for the maintenance of the cooling system."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of investigating the faults of data-storage devices and cooling systems and of determining the measures for their maintenance and restoration.",
+      "questions": [
+        "How are the faults of a drive detected by the analysis of the S.M.A.R.T.?",
+        "What does a surface test of a drive reveal?",
+        "How is the operability of a cooling system checked?",
+        "What is the connection between overheating and the degradation of the components?",
+        "When is it necessary to replace the thermal paste and clean the radiator?"
+      ]
+    },
+    {
+      "code": "2.22",
+      "title": "The principles of operation and the analysis of the circuits of cooling systems of computers",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the circuits of cooling systems of computers, in controlling the speed of the fans and in assessing the efficiency of cooling.",
+      "theory": [
+        "The cooling system removes the heat from the components of a computer. It includes radiators, fans, heat pipes and (in liquid systems) a pump, a radiator and a coolant. The control of the fans is performed by the motherboard on the basis of the temperature sensors.",
+        "The fans are controlled in two ways: by voltage and by the PWM (pulse-width modulation) signal. The motherboard changes the speed of the fans depending on the temperature, which ensures a balance between cooling and noise."
+      ],
+      "materials": [
+        "A computer with an air cooling system.",
+        "Fans with voltage and PWM control.",
+        "Monitoring utilities and the settings of the BIOS/UEFI.",
+        "A multimeter and a report form."
+      ],
+      "procedure": [
+        "Examine the cooling system of the computer and describe its elements: the radiators, the fans, the heat pipes.",
+        "Determine the type of control of the fans (3-pin by voltage or 4-pin by PWM) by the number of contacts of the connector.",
+        "Configure the fan-control curve in the BIOS/UEFI or in a utility depending on the temperature.",
+        "Measure the speed of the fans and the temperature of the components at different load levels and build a dependence.",
+        "Assess the efficiency of cooling by comparing the temperatures with the permissible values and detect the bottlenecks.",
+        "Formulate conclusions and recommendations for improving the cooling and reducing the noise."
+      ],
+      "tasks": [
+        "Compile a description of the cooling system of the computer with an indication of the type of control of the fans.",
+        "Build a graph of the dependence of the temperature of the components on the speed of the fans.",
+        "Propose measures to improve the efficiency of the cooling system."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of analysing the circuits of cooling systems, of controlling the speed of the fans and of assessing the efficiency of cooling.",
+      "questions": [
+        "What elements does the air cooling system of a computer consist of?",
+        "What methods of controlling the speed of the fans exist?",
+        "How is the fan-control curve configured?",
+        "How is the efficiency of a cooling system assessed?",
+        "What measures help to improve cooling and reduce noise?"
+      ]
+    },
+    {
+      "code": "2.23",
+      "title": "Methods of diagnosing and measuring the parameters of the electrical circuits of a computer",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in the comprehensive diagnostics and measurement of the parameters of the electrical circuits of a computer with the use of measuring instruments.",
+      "theory": [
+        "The comprehensive diagnostics of the electrical circuits of a computer combines the measurement of the supply voltages, the analysis of the signals, the detection of short circuits and breaks, and the assessment of the consumed current. For this, a multimeter, an oscilloscope and a POST card are used.",
+        "The measurements are performed at the control points: the connectors of the power supply, the chokes of the VRM, the contacts of the components. The results are compared with the nominal values, which allows the faulty circuits to be detected."
+      ],
+      "materials": [
+        "A motherboard and a power supply for diagnostics.",
+        "A multimeter, an oscilloscope and a POST card.",
+        "A reference table of the nominal voltages.",
+        "A report form."
+      ],
+      "procedure": [
+        "Measure the output voltages of the power supply at the connectors and compare them with the nominal values.",
+        "Measure the supply voltages of the processor, the memory and the chipset at the control points of the board.",
+        "Check the absence of short circuits in the power circuits by measuring the resistance to ground with the power off.",
+        "Observe the clock and control signals with the oscilloscope and assess their shape and amplitude.",
+        "Insert a POST card and analyse the codes of the passage of the POST.",
+        "Compile a protocol of the measurements and make a conclusion about the state of the electrical circuits of the computer."
+      ],
+      "tasks": [
+        "Prepare a protocol of the measurements of the voltages with a comparison with the nominal values.",
+        "Describe the procedure for detecting a short circuit in the power circuits.",
+        "Make a conclusion about the operability of the electrical circuits of the diagnosed board."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of the comprehensive diagnostics and measurement of the parameters of the electrical circuits of a computer with the use of a multimeter, an oscilloscope and a POST card.",
+      "questions": [
+        "At which control points are the supply voltages of a computer measured?",
+        "How is the absence of short circuits in the power circuits checked?",
+        "What does the oscilloscope allow one to assess?",
+        "How does a POST card help in the diagnostics?",
+        "How are the results of the measurements compared with the nominal values?"
+      ]
+    },
+    {
+      "code": "2.24",
+      "title": "Detecting faults in the circuits of the sound subsystem of computers",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The structure and operating principle of the sound subsystem.",
+        "The signal and power circuits of the sound path.",
+        "Typical faults of the sound subsystem.",
+        "Methods of diagnosing sound faults."
+      ],
+      "body": [
+        "The sound subsystem of a computer provides the input and output of audio signals. It may be integrated into the motherboard (an audio codec) or made as a separate sound card. The understanding of its structure and circuits allows one to diagnose the typical faults of sound.",
+        "The basis of the sound subsystem is the audio codec — a microcircuit that converts the digital sound into an analog signal (a DAC) for output to speakers and headphones, and the analog signal into a digital one (an ADC) for input from a microphone. The codec is connected to the chipset over a special interface.",
+        "The sound path includes the codec, the analog amplification and filtering circuits, the output connectors (the jacks), the input circuits of the microphone and the line input. The quality of the sound depends on the quality of these circuits and on the screening from the interference of the digital part.",
+        "The power supply of the sound subsystem is performed from the supply voltages of the board, often through additional filters to reduce interference. The analog circuits are sensitive to interference, so they are separated from the digital part and screened.",
+        "The typical faults of the sound subsystem are: the complete absence of sound, the absence of sound in one channel, noise and crackling, a low volume, and the inoperability of the microphone or the line input. These faults may be caused by the hardware, the drivers or the settings.",
+        "Before searching for a hardware fault, one must exclude software causes: check the connection of the speakers, the volume settings, the choice of the playback device, and the presence and operation of the driver of the audio codec. A significant part of the problems of sound is solved at the software level.",
+        "The hardware diagnostics of the sound subsystem includes checking the output connectors (the jacks), which often wear out and oxidize, the integrity of the contacts, and the operability of the codec. The faults of the connectors are a frequent cause of the absence of sound in a channel.",
+        "The measurement of the signals in the sound path with an oscilloscope allows one to trace where the signal disappears or is distorted. The comparison with a serviceable device and the method of substitution help to localize the faulty node.",
+        "Noise and crackling in the sound are often caused by the interference of the digital part, a bad earthing or a fault of the filtering circuits. The improvement of the screening and the earthing, and the elimination of the sources of interference reduce the noise.",
+        "If the integrated sound subsystem is faulty and the repair is impossible, the simplest solution is to install a separate sound card or to use an external USB sound adapter, which completely replaces the faulty path.",
+        "The diagnostics of the microphone and the line input is performed similarly: the checking of the connectors, the settings, the driver and the signal circuits. The recording and playback of a test signal helps to assess the operability of the input path.",
+        "Thus, the detection of faults in the circuits of the sound subsystem combines the exclusion of software causes, the checking of the connectors and the codec, the measurement of the signals and the methods of substitution and comparison, which allows the typical faults of sound to be localized and eliminated."
+      ],
+      "questions": [
+        "What does the sound subsystem of a computer consist of, and what function does the audio codec perform?",
+        "What is included in the sound path, and why are the analog circuits screened?",
+        "What are the typical faults of the sound subsystem?",
+        "What software causes of the absence of sound must be excluded before searching for a hardware fault?",
+        "How can the operability of a faulty integrated sound subsystem be restored?"
+      ]
+    },
+    {
+      "code": "2.25",
+      "title": "Testing and analysis of the circuits of USB and other input/output ports",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in testing and analysing the circuits of USB and other input/output ports and in detecting their faults.",
+      "theory": [
+        "USB ports provide the connection of peripheral devices and their power supply. Each USB port has data lines and power lines (+5 V and ground). The faults of the ports are connected with the connectors, the power circuits and the controllers.",
+        "In addition to USB, a computer has other input/output ports: PS/2, the audio jacks, the video outputs, and the network connector. The testing of the ports includes checking the supply voltage, the data exchange and the integrity of the connectors."
+      ],
+      "materials": [
+        "A computer with a set of USB and other ports.",
+        "Test USB devices (a flash drive, a mouse).",
+        "A multimeter and a USB tester.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the USB ports of the computer and check the integrity of the connectors and the absence of mechanical damage.",
+        "Measure the supply voltage (+5 V) at the USB ports with a multimeter or a USB tester.",
+        "Check the operation of the ports by connecting test devices and assessing their recognition by the system.",
+        "Test the data-transmission speed of the USB ports of different versions (2.0, 3.0) using a flash drive.",
+        "Check the operation of the other ports (audio, network, video) by connecting the corresponding devices.",
+        "Make a conclusion about the operability of the ports and about the detected faults."
+      ],
+      "tasks": [
+        "Compile a table of the ports of the computer with the results of testing each of them.",
+        "Describe the typical faults of USB ports and the methods of their detection.",
+        "Measure and compare the data-transmission speed of USB 2.0 and USB 3.0 ports."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of testing and analysing the circuits of USB and other input/output ports and of detecting their faults.",
+      "questions": [
+        "What lines does a USB port contain, and what voltage is supplied to it?",
+        "How is the supply voltage of a USB port checked?",
+        "What are the typical faults of USB ports?",
+        "How is the data-transmission speed of USB ports tested?",
+        "What other input/output ports does a computer have?"
+      ]
+    },
+    {
+      "code": "2.26",
+      "title": "Analysis of the circuits of temperature monitoring and control in computers",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "Temperature sensors and their placement in a computer.",
+        "The circuits of monitoring and reading the sensors.",
+        "The mechanisms of protection against overheating.",
+        "Software monitoring of temperatures."
+      ],
+      "body": [
+        "The control of the temperature of the components is critically important for the reliable operation of a computer. Overheating leads to the degradation and failure of components, to throttling and to shutdowns. The circuits of temperature monitoring and control track the heating and protect the equipment.",
+        "Temperature sensors are placed in the key nodes of a computer: inside the processor and the graphics processor (built-in digital sensors), on the motherboard near the VRM and the chipset, in the drives (through the S.M.A.R.T.), and sometimes in the case. They measure the temperature in real time.",
+        "The built-in sensors of the processor (the DTS — digital thermal sensors) measure the temperature of each core and transmit the data to the registers, from which the operating system and the utilities read them. These sensors are also used by the protection mechanisms of the processor itself.",
+        "The motherboard contains a hardware-monitoring controller (the Super I/O or a separate chip) that reads the analog and digital temperature sensors, the voltages and the speed of the fans. This controller provides the data for monitoring and controls the fans.",
+        "The reading of the sensors is performed over special buses (for example, I2C/SMBus). The monitoring utilities turn to the hardware-monitoring controller and the registers of the processor and the video card to obtain the values of the temperatures, the voltages and the frequencies.",
+        "The mechanisms of protection against overheating operate at several levels. The first level is the regulation of the speed of the fans depending on the temperature. The second level is throttling — the reduction of the frequency and voltage when the threshold temperature is reached. The third level is the emergency shutdown at a critical temperature.",
+        "Thermal throttling protects the components from damage but reduces the performance. The constant occurrence of throttling indicates an insufficient efficiency of cooling and requires maintenance — the cleaning of the radiators and the replacement of the thermal paste.",
+        "The emergency shutdown (thermal shutdown) occurs when the protection mechanisms cannot keep the temperature within the limits. This is the last line of defence, which prevents the physical destruction of the components. Frequent emergency shutdowns are a serious signal of a problem of cooling.",
+        "Software monitoring of temperatures is performed by utilities (HWMonitor, HWiNFO, AIDA64, Core Temp), which display the current, minimum and maximum values of the temperatures of all the nodes. The analysis of these data allows one to assess the state of cooling and to detect the overheating nodes.",
+        "The setting of the monitoring includes the choice of the displayed sensors, the setting of the alarm thresholds and the logging of the temperatures over time. The logging is useful for detecting overheating under specific loads and for diagnosing 'floating' problems.",
+        "The correct interpretation of the readings of the sensors requires the knowledge of the permissible values for each component. The temperatures at rest and under load are compared with the recommendations of the manufacturers, which allows one to assess whether the cooling system copes with its task.",
+        "Thus, the analysis of the circuits of temperature monitoring and control includes the understanding of the placement and operation of the sensors, the circuits of their reading, the multi-level mechanisms of protection against overheating and the software monitoring, which together ensure the thermal safety of a computer."
+      ],
+      "questions": [
+        "Where are the temperature sensors placed in a computer?",
+        "What controller of the motherboard reads the temperatures, the voltages and the speed of the fans?",
+        "What levels of protection against overheating exist?",
+        "What does the constant occurrence of thermal throttling indicate?",
+        "What utilities are used for the software monitoring of temperatures?"
+      ]
+    },
+    {
+      "code": "2.27",
+      "title": "Analysis of the typical faults of the central processor, the random-access memory and the motherboard",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing and localizing the typical faults of the central processor, the random-access memory and the motherboard.",
+      "theory": [
+        "The faults of the processor, the memory and the motherboard often have similar manifestations (the failure to start, freezes, restarts), which complicates the diagnostics. The task of the technician is to localize the fault to a specific node by the method of exclusion and substitution.",
+        "The diagnostics is built on the principle of the minimal configuration and the gradual substitution of components: the board, the processor, one memory module and the power supply. The substitution of components for obviously serviceable ones allows one to determine the faulty node."
+      ],
+      "materials": [
+        "A set of components (a board, a processor, memory) for diagnostics.",
+        "Serviceable components for substitution.",
+        "A POST card and a multimeter.",
+        "A report form."
+      ],
+      "procedure": [
+        "Assemble a minimal configuration and check the start and the passage of the POST.",
+        "Use a POST card to determine the stage at which the start stops.",
+        "Check the memory by substituting the modules and reseating them in different slots.",
+        "Check the processor by inspecting the socket, the contacts and (if possible) by substitution.",
+        "Check the power circuits of the board by measuring the supply voltages of the processor and the memory.",
+        "Localize the faulty node and make a conclusion about the cause of the fault."
+      ],
+      "tasks": [
+        "Compile a table of the typical faults of the processor, the memory and the board with their manifestations.",
+        "Describe the procedure for localizing a fault by the method of the minimal configuration.",
+        "Make a conclusion about the faulty node in a given case and propose a method of elimination."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of analysing and localizing the typical faults of the processor, the memory and the motherboard by the methods of the minimal configuration and substitution.",
+      "questions": [
+        "Why do the faults of the processor, the memory and the board have similar manifestations?",
+        "What is the method of the minimal configuration?",
+        "How is a memory fault localized?",
+        "How is the serviceability of the power circuits of the board checked?",
+        "How does a POST card help to localize a fault?"
+      ]
+    },
+    {
+      "code": "2.28",
+      "title": "The role of circuit engineering in protecting computer systems from overheating and overvoltage",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the circuit-engineering means of protecting computer systems from overheating and overvoltage and in assessing their operability.",
+      "theory": [
+        "The circuit-engineering protection of computer systems includes the means of protection against overheating (temperature monitoring, throttling, the control of the fans) and against overvoltage (filters, stabilizers, protective diodes, fuses).",
+        "The protection against overvoltage in the power supply and on the motherboard prevents the damage of the components in the event of voltage surges and faults. The understanding of these means allows one to assess the reliability of the system and to diagnose the protection circuits."
+      ],
+      "materials": [
+        "A power supply and a motherboard for analysis.",
+        "A multimeter and an oscilloscope.",
+        "A schematic diagram of the protection circuits.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the means of protection against overheating in the system: the sensors, the throttling, the control of the fans.",
+        "Find the elements of protection against overvoltage in the power supply (the input filter, the fuse, the protective circuits).",
+        "Examine the protective elements on the motherboard (the filters, the protective diodes at the power inputs and the ports).",
+        "Check the operability of the temperature protection by observing the reaction of the system to a load and heating.",
+        "Describe how the protection circuits prevent the damage of the components in the event of faults.",
+        "Make a conclusion about the operability of the protection means of the analysed system."
+      ],
+      "tasks": [
+        "Compile a list of the circuit-engineering means of protection against overheating and overvoltage.",
+        "Describe the operation of the protection against overvoltage in a power supply.",
+        "Assess the operability of the temperature protection of the analysed system."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of analysing the circuit-engineering means of protecting computer systems from overheating and overvoltage and of assessing their operability.",
+      "questions": [
+        "What circuit-engineering means protect a computer from overheating?",
+        "What elements protect a computer from overvoltage?",
+        "How does the protection against overvoltage in a power supply work?",
+        "How is the operability of the temperature protection checked?",
+        "Why is the protection of the power inputs and the ports important?"
+      ]
+    },
+    {
+      "code": "2.29",
+      "title": "Modern methods of diagnosing integrated circuits, microcontrollers and monitoring systems of computers",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in applying modern methods of diagnosing integrated circuits, microcontrollers and monitoring systems of computers.",
+      "theory": [
+        "Modern computer systems are built on integrated circuits and microcontrollers that perform the functions of control and monitoring. Their diagnostics combines hardware methods (the measurement of the power supply, the signals, the use of an oscilloscope) and software methods (reading the data of the sensors, analysing the logs).",
+        "Monitoring systems collect data on the state of the equipment (temperatures, voltages, frequencies, the speed of the fans) and provide it to the operating system and the utilities. The analysis of these data is a modern non-destructive method of diagnostics."
+      ],
+      "materials": [
+        "A computer with monitoring systems.",
+        "Diagnostic utilities (HWiNFO, AIDA64).",
+        "An oscilloscope and a multimeter.",
+        "A report form."
+      ],
+      "procedure": [
+        "Read the data of all the available sensors of the computer with a monitoring utility and analyse them.",
+        "Identify the microcontrollers and the monitoring circuits on the motherboard (the Super I/O, the hardware-monitoring controller).",
+        "Check the power supply and the clock signals of the microcontrollers with a multimeter and an oscilloscope.",
+        "Compare the readings of the software monitoring with the results of the hardware measurements.",
+        "Detect deviations of the parameters and localize the possible causes.",
+        "Make a conclusion about the state of the integrated circuits and the monitoring systems."
+      ],
+      "tasks": [
+        "Prepare a report on the analysis of the data of the monitoring of a computer.",
+        "Compare the readings of the software and hardware diagnostics.",
+        "Describe the modern non-destructive methods of diagnosing integrated circuits."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the modern methods of diagnosing integrated circuits, microcontrollers and monitoring systems, combining hardware and software approaches.",
+      "questions": [
+        "On what basis are modern computer systems built?",
+        "What hardware and software methods of diagnostics are combined?",
+        "What monitoring circuits are located on a motherboard?",
+        "How are the readings of the software and hardware diagnostics compared?",
+        "What are the advantages of the non-destructive methods of diagnostics?"
+      ]
+    },
+    {
+      "code": "2.30",
+      "title": "Diagnostics and repair of integrated circuits and microcontrollers in computers",
+      "type_en": "Consolidation and assessment of knowledge",
+      "kind": "practical",
+      "objective": "To consolidate and check, in a comprehensive form, the skills of diagnosing and repairing integrated circuits and microcontrollers in computers, summing up the learning outcome on circuit engineering.",
+      "theory": [
+        "This lesson generalizes the material of the learning outcome on determining the operability of computer systems at the circuit-engineering level. The student must demonstrate the ability to diagnose comprehensively, from the power supply to the integrated circuits, and to determine the methods of repair.",
+        "The repair of integrated circuits and microcontrollers requires special equipment (a soldering and an infrared station for BGA), measuring instruments and skills of working with miniature components. In many cases, the repair is reduced to the replacement of a board or a module."
+      ],
+      "materials": [
+        "A motherboard and components for comprehensive diagnostics.",
+        "A multimeter, an oscilloscope, a POST card and a soldering station.",
+        "A set of situational problems on diagnostics and repair.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Perform a comprehensive diagnostics of the proposed board: a visual inspection, the checking of the power supply, the clock signals and the POST.",
+        "Localize the fault to a specific node or integrated circuit using all the studied methods.",
+        "Determine whether the detected fault can be repaired and what equipment is required for this.",
+        "Describe the technology of replacing a faulty microcircuit (the preparation, the dismantling, the installation, the verification).",
+        "Solve the proposed situational problems on the diagnostics and repair of computer systems.",
+        "Make a final conclusion about the state of the board and about the method of restoring its operability."
+      ],
+      "tasks": [
+        "Prepare a comprehensive diagnostic report for the proposed board.",
+        "Describe the technology of replacing a faulty integrated circuit.",
+        "Solve a situational problem on determining the cause of a fault and the method of its elimination."
+      ],
+      "conclusion": "As a result of the work, the student has demonstrated comprehensive skills of diagnosing and repairing integrated circuits and microcontrollers and the ability to determine the operability of computer systems at the circuit-engineering level.",
+      "questions": [
+        "What does the comprehensive diagnostics of a motherboard include?",
+        "How is a fault localized to a specific integrated circuit?",
+        "What equipment is required for the repair of microcircuits?",
+        "What is the technology of replacing a faulty microcircuit?",
+        "In which cases is the repair of an integrated circuit not advisable?"
+      ]
+    }
+  ]
+}

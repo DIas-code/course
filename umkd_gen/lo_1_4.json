@@ -1,0 +1,664 @@
+{
+  "id": "1.4",
+  "title": "Perform diagnostics and eliminate malfunctions and failures of the hardware of computing equipment",
+  "weight": "7%",
+  "hours": "36 hours",
+  "glossary": [
+    ["BIOS/UEFI", "The basic firmware of a motherboard that initializes the equipment at start-up and transfers control to the operating-system loader."],
+    ["Diagnostics", "The process of determining the technical state of equipment and detecting the causes of faults."],
+    ["Diagnostic utility", "A program for checking, testing and obtaining information about the state of the hardware components of a computer."],
+    ["Hardware", "The physical components of a computer system: the system unit, the boards, the drives, the peripheral devices."],
+    ["POST (Power-On Self-Test)", "The self-test of the equipment performed by the motherboard at power-on; its result is signalled by codes and sound signals."],
+    ["Preventive maintenance", "Planned maintenance aimed at preventing faults and prolonging the service life of equipment."],
+    ["System unit", "The main part of a stationary computer that contains the motherboard, the processor, the memory, the drives and the power supply."],
+    ["Thermal paste", "A heat-conducting compound applied between a component and a radiator to improve the heat removal."],
+    ["Troubleshooting", "The systematic search for and elimination of the causes of the faults of equipment."],
+    ["Upgrade (modernization)", "The replacement or addition of the components of a computer to increase its performance or capabilities."]
+  ],
+  "lessons": [
+    {
+      "code": "4.1",
+      "title": "Composition and types of the hardware of computer systems",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of hardware and its role.",
+        "The main components of a computer system.",
+        "The classification of hardware.",
+        "The interaction of the components."
+      ],
+      "body": [
+        "The hardware of a computer system is the totality of its physical components: the electronic, electrical and mechanical devices that ensure the operation of the computer. The understanding of the composition and the types of the hardware is the basis for the diagnostics and the elimination of its faults.",
+        "The central core of a computer is formed by the central processor and the random-access memory. The processor performs the calculations and controls the operation of the system; the memory stores the data and the code of the running programs. These components determine the performance of the computer.",
+        "The motherboard unites all the components of the computer, providing their interaction. It contains the processor socket, the memory slots, the chipset, the expansion slots, the controllers and the connectors. The motherboard is the basis of the architecture of the computer.",
+        "The power supply unit converts the alternating mains voltage into the direct stabilized voltages required by the components. The reliability of the power supply directly affects the stability of the operation of the entire computer.",
+        "The data-storage devices (HDD, SSD) provide the long-term storage of the information. The graphics adapter forms the image and outputs it to the monitor. These components extend and complete the functionality of the computer.",
+        "The cooling system removes the heat from the components, preventing their overheating. It includes radiators, fans and (in some systems) liquid cooling. The efficient cooling is necessary for the reliable operation of the computer.",
+        "The case unites and protects the internal components, provides their placement and the air circulation. The peripheral devices (the monitor, the keyboard, the mouse, the printer) ensure the interaction of the user with the computer.",
+        "The hardware is classified into internal (located inside the case) and external (connected from the outside); into the main (without which the computer will not work) and the additional; and into the components by their functional purpose (computing, storage, input/output).",
+        "The components of a computer interact over buses — the sets of conductors for the transfer of data, addresses and control signals. The modern buses (PCI Express, DMI) provide a high speed of the exchange between the components.",
+        "The compatibility of the components is an important factor when assembling and modernizing a computer. The processor must correspond to the socket of the motherboard; the memory must correspond to the supported standard; the power supply must provide a sufficient power. The incompatibility of the components leads to the inoperability of the system.",
+        "The knowledge of the composition and the types of the hardware allows the technician to understand how the computer works, to determine the purpose of each component and to localize the faults to a specific component during the diagnostics.",
+        "Thus, the hardware of a computer system is a totality of interacting components, each of which performs its function. The understanding of their composition, types and interaction is the foundation for the diagnostics and the elimination of the faults of the hardware."
+      ],
+      "questions": [
+        "What is the hardware of a computer system?",
+        "What components form the central core of a computer?",
+        "What function does the motherboard perform?",
+        "How is the hardware of a computer classified?",
+        "Why is the compatibility of the components important?"
+      ]
+    },
+    {
+      "code": "4.2",
+      "title": "The structure of the system unit and the purpose of its components",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The structure of the system unit.",
+        "The placement of the components in the case.",
+        "The purpose of each component.",
+        "The organization of the air flows."
+      ],
+      "body": [
+        "The system unit is the main part of a stationary computer, which contains its key components. The understanding of the structure of the system unit and the placement of the components in it is necessary for the assembly, the maintenance and the diagnostics of the computer.",
+        "The case of the system unit serves for the placement and the protection of the components, the organization of the cooling and the provision of access for the maintenance. The cases differ in their dimensions (form factor), the number of bays for the drives and the capabilities of the cooling.",
+        "The motherboard is fixed to the rear or the side wall of the case and is the basis on which the other components are installed. Its form factor (ATX, microATX, mini-ITX) must correspond to the case.",
+        "The central processor is installed in the socket of the motherboard and is covered with a cooling system — a radiator with a fan or a liquid cooling system. The quality of the thermal contact between the processor and the radiator is critically important for the heat removal.",
+        "The random-access-memory modules are installed in the slots of the motherboard near the processor. The number and the volume of the modules determine the total volume of the random-access memory of the computer.",
+        "The data-storage devices (HDD, SSD) are placed in the special bays of the case or are installed directly on the motherboard (M.2 SSD). They are connected to the motherboard over the SATA or NVMe interface and to the power supply over the power cables.",
+        "The power supply unit is installed in the special compartment of the case (usually at the top or the bottom) and supplies all the components with the necessary voltages over the cables. Its power must be sufficient for all the installed components.",
+        "The graphics adapter (if it is not integrated into the processor) is installed in the PCI Express slot of the motherboard and is connected to the monitor over the video connectors. Powerful video cards require additional power from the power supply.",
+        "The fans of the case provide the through ventilation: the cool air enters from the front and the bottom, and the warm air is removed from the rear and the top. The correct organization of the air flows ensures the efficient cooling of all the components.",
+        "The placement of the components in the case takes into account the convenience of the assembly and the maintenance, the organization of the cooling, and the management of the cables. The neat laying of the cables improves the air circulation and the appearance and simplifies the maintenance.",
+        "The understanding of the placement and the connection of the components allows the technician to assemble and disassemble the computer correctly, to connect all the cables, to organize the cooling and to perform the maintenance and the diagnostics.",
+        "Thus, the system unit is an organized structure in which each component has its place and purpose, and the correct placement and connection of the components ensures the reliable operation, the cooling and the convenience of the maintenance of the computer."
+      ],
+      "questions": [
+        "What is the system unit, and what does it contain?",
+        "What function does the case of the system unit perform?",
+        "Where are the processor, the memory and the drives placed?",
+        "How are the air flows organized in the system unit?",
+        "Why is the management of the cables important?"
+      ]
+    },
+    {
+      "code": "4.3",
+      "title": "Comparative analysis of the components of a modern system unit",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in the comparative analysis of the components of a modern system unit and in selecting the components for various tasks.",
+      "theory": [
+        "The choice of the components of a system unit depends on the tasks: an office computer, a gaming one, a workstation. The comparative analysis of the components by their characteristics, the compatibility and the cost allows one to assemble an optimal configuration.",
+        "The compatibility of the components is a key factor: the processor must correspond to the socket of the motherboard, the memory to the supported standard, the power supply to the total power consumption, and the case to the form factor of the board."
+      ],
+      "materials": [
+        "Technical specifications of the components (processors, motherboards, memory, drives, video cards, power supplies).",
+        "A computer for working with information.",
+        "Tools for assessing the compatibility.",
+        "A report form."
+      ],
+      "procedure": [
+        "Choose a task for which a system unit is to be assembled (office, gaming, workstation).",
+        "Select the components corresponding to the task and compile their list.",
+        "Compile a comparative table of the characteristics of the chosen components.",
+        "Check the compatibility of the components (the socket, the memory standard, the form factor, the power).",
+        "Assess the total power consumption and select a suitable power supply.",
+        "Make a conclusion about the optimality of the assembled configuration for the chosen task."
+      ],
+      "tasks": [
+        "Compile the configuration of a system unit for a given task with a justification of the choice of the components.",
+        "Check and confirm the compatibility of the chosen components.",
+        "Calculate the total power consumption and select a power supply with a reserve."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of the comparative analysis of the components of a system unit and of selecting a compatible configuration for various tasks.",
+      "questions": [
+        "On what does the choice of the components of a system unit depend?",
+        "What factors of the compatibility of the components must be taken into account?",
+        "How is the total power consumption calculated?",
+        "What components are critical for a gaming computer?",
+        "How is the optimality of the assembled configuration assessed?"
+      ]
+    },
+    {
+      "code": "4.4",
+      "title": "Capacitors and their application in computer equipment",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The role of capacitors in computer equipment.",
+        "Capacitors in the power circuits.",
+        "Capacitors in the signal circuits.",
+        "Faults of capacitors and their diagnostics."
+      ],
+      "body": [
+        "Capacitors are one of the most widespread components of computer equipment. They are used in the power circuits, the signal circuits and the timing circuits, performing the functions of filtering, decoupling, accumulating the charge and forming delays. The understanding of their role is necessary for the diagnostics.",
+        "In the power circuits, capacitors perform the function of filtering — smoothing the ripples of the voltage after the rectification and the conversion. The electrolytic and polymer capacitors of the power filters accumulate the charge and supply it at the moments of the increase of the consumption, maintaining the stability of the voltage.",
+        "The decoupling capacitors are installed near the microcircuits and supply them with energy at the moments of the fast switching, smoothing the local drops of the voltage. Without the decoupling capacitors, the operation of the high-speed microcircuits would be unstable.",
+        "In the voltage-regulator modules (VRM) of the processor and the memory, the capacitors smooth the output voltage and ensure its stability under the changing load. The quality and the state of these capacitors directly affect the stability of the operation of the processor.",
+        "In the signal circuits, capacitors are used for the transmission of the alternating component of the signal with the blocking of the constant one (the decoupling capacitors of the signal), and also in the filters that separate the signals by the frequency. In the timing circuits, the capacitors together with the resistors form the time delays.",
+        "The electrolytic capacitors of the power circuits are the most frequent point of the faults. Over time and under the action of the heat, the electrolyte dries out, the equivalent series resistance (ESR) increases, and the capacitor ceases to perform its function of filtering, which leads to the instability of the operation.",
+        "The external signs of a faulty electrolytic capacitor are the swelling of the case (the bulging of the upper cover), the leakage of the electrolyte, and the change of the colour. The swollen capacitors of the motherboards and the power supplies are a classic cause of the faults.",
+        "The diagnostics of capacitors includes the visual inspection (the detection of the swelling and the leakage), the measurement of the capacitance with a multimeter, and the measurement of the ESR with a special meter. The increased ESR indicates the degradation of the capacitor even in the absence of the external signs.",
+        "The measurement of the ESR can be performed without unsoldering the capacitor, which speeds up the diagnostics. However, for the exact measurement of the capacitance, the capacitor often has to be unsoldered, since the parallel elements of the circuit affect the readings.",
+        "The replacement of faulty capacitors is one of the most frequent repair operations. The replacement is performed with capacitors of the same capacitance and the same or a higher rated voltage, observing the polarity for the electrolytic ones and a low ESR for the power circuits.",
+        "The prevention of the faults of capacitors consists in the provision of a good cooling (since the heat accelerates their degradation), the avoidance of the operation in the overload modes, and the timely replacement of the aging capacitors during the planned maintenance.",
+        "Thus, capacitors play a key role in the power and signal circuits of computer equipment, and their faults are a frequent cause of the instability of the operation, which makes the ability to diagnose and replace them an important skill of the technician."
+      ],
+      "questions": [
+        "What functions do capacitors perform in the power circuits?",
+        "What are the decoupling capacitors for?",
+        "Why are the electrolytic capacitors a frequent point of the faults?",
+        "What are the external signs of a faulty electrolytic capacitor?",
+        "How is the diagnostics of capacitors performed?"
+      ]
+    },
+    {
+      "code": "4.5",
+      "title": "Investigation of the application of capacitors in computer equipment",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in detecting and analysing the application of capacitors in the circuits of computer equipment and in diagnosing their faults.",
+      "theory": [
+        "On a motherboard and in a power supply, dozens of capacitors of various types are used in the power, decoupling and signal circuits. The ability to find the capacitors, to determine their role and to check their state is an important skill of the diagnostics.",
+        "The diagnostics of capacitors is performed by the visual inspection (the swelling, the leakage) and by the measurement of the capacitance and the ESR. The faulty capacitors of the power circuits cause the instability of the operation of the equipment."
+      ],
+      "materials": [
+        "A motherboard and a power supply for analysis.",
+        "A multimeter and an ESR meter.",
+        "A magnifying glass for the inspection.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the motherboard and find the capacitors in the power circuits of the processor (the VRM) and the memory.",
+        "Determine the role of the capacitors in various circuits (filtering, decoupling, timing).",
+        "Perform the visual inspection of the capacitors and detect the elements with the signs of the faults.",
+        "Measure the ESR of the electrolytic capacitors and compare it with the typical values.",
+        "Examine the capacitors of the power supply and assess their state.",
+        "Make a conclusion about the state of the capacitors and the necessity of their replacement."
+      ],
+      "tasks": [
+        "Compile a map of the placement of the capacitors on the board with an indication of their role.",
+        "Detect the capacitors with the signs of the faults and measure their ESR.",
+        "Formulate a conclusion about the state of the capacitors of the analysed equipment."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of detecting and analysing the application of capacitors in computer equipment and of diagnosing their faults.",
+      "questions": [
+        "In what circuits of a motherboard are capacitors used?",
+        "How is the role of a capacitor in a circuit determined?",
+        "What signs indicate a faulty capacitor?",
+        "How is the ESR of a capacitor measured?",
+        "When is it necessary to replace a capacitor?"
+      ]
+    },
+    {
+      "code": "4.6",
+      "title": "The fundamentals of the diagnostics and the check of the operability of computer equipment",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in carrying out the basic diagnostics and the check of the operability of computer equipment.",
+      "theory": [
+        "The diagnostics of computer equipment is the process of determining its technical state and the detection of the causes of the faults. It is built on a systematic approach: from the check of the obvious causes to the in-depth analysis of the components.",
+        "The basic diagnostics includes the visual inspection, the check of the connections and the power, the analysis of the symptoms, the passage of the POST and the use of the diagnostic utilities. Most problems are detected at these stages."
+      ],
+      "materials": [
+        "A computer for the diagnostics.",
+        "Diagnostic utilities (AIDA64, HWiNFO).",
+        "A multimeter and a POST card.",
+        "A report form."
+      ],
+      "procedure": [
+        "Perform the visual inspection of the computer: the integrity of the components, the connections, the signs of overheating and the faults of the capacitors.",
+        "Check the connection and the power of the components and the operability of the power supply.",
+        "Power on the computer and observe the passage of the POST and the loading of the system.",
+        "Run the diagnostic utilities and obtain the information about the components and their state.",
+        "Analyse the symptoms of the problems and formulate the hypotheses about the causes.",
+        "Make a conclusion about the technical state of the computer and the detected problems."
+      ],
+      "tasks": [
+        "Compile a checklist of the basic diagnostics of a computer.",
+        "Carry out the diagnostics of a computer and prepare a report on its state.",
+        "Describe the sequence of the actions of the diagnostics from the simple to the complex."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of carrying out the basic diagnostics and the check of the operability of computer equipment.",
+      "questions": [
+        "What is the diagnostics of computer equipment?",
+        "What does the basic diagnostics include?",
+        "Why is the diagnostics built from the simple to the complex?",
+        "What utilities are used for the diagnostics?",
+        "What does the visual inspection of a computer reveal?"
+      ]
+    },
+    {
+      "code": "4.7",
+      "title": "The use of diagnostic programs and utilities for the analysis of the hardware",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The purpose and the types of diagnostic programs.",
+        "Programs for obtaining information about the system.",
+        "Programs for testing the components.",
+        "The interpretation of the results of the diagnostics."
+      ],
+      "body": [
+        "The diagnostic programs and utilities are an important tool of the modern technician. They allow one to obtain detailed information about the components of a computer, to test their operability and to detect the faults without disassembling the equipment.",
+        "The diagnostic programs are divided into informational (which provide the data about the components and their state), testing (which check the operability and the stability), and monitoring (which track the parameters in real time). Each type solves its own tasks.",
+        "The informational programs (AIDA64, HWiNFO, CPU-Z, GPU-Z) read the data about the processor, the memory, the motherboard, the video card and the drives — the model, the characteristics, the current parameters. They give a complete picture of the configuration and the state of the computer.",
+        "The programs for testing the memory (MemTest86, TestMem5) write the test patterns into the memory and check the correctness of the reading, detecting the errors of the cells. The testing of the memory is performed for a long time and in several passes to detect the unstable errors.",
+        "The programs for testing the processor (Prime95, OCCT, LinX) load the processor with the calculations and check the stability and the absence of the errors under the maximum load, while monitoring the temperature. They are used to check the stability and after the modernization.",
+        "The programs for testing the drives (Victoria, CrystalDiskMark, the manufacturers' utilities) check the surface, measure the speed, read the S.M.A.R.T. and detect the bad sectors. They allow one to assess the state and the performance of the drives.",
+        "The programs for testing the video card (FurMark, 3DMark) load the graphics processor with the calculations and check the stability, the temperature and the absence of the artifacts. They are used to check the video card after the assembly or the repair.",
+        "The monitoring programs (HWMonitor, HWiNFO) track the temperatures, the voltages, the frequencies and the speed of the fans in real time. They are indispensable for the diagnostics of the problems of cooling and the power supply.",
+        "The interpretation of the results of the diagnostics requires the knowledge of the norms and the typical values. The technician compares the readings of the programs with the permissible values and detects the deviations indicating the problems. The correct interpretation determines the accuracy of the diagnosis.",
+        "The advantage of the software diagnostics is the speed, the safety and the depth: the programs obtain the information directly from the sensors and the registers of the components without the need to disassemble the computer. However, the software diagnostics complements but does not replace the hardware methods.",
+        "The combination of the software and the hardware diagnostics gives the most complete picture of the state of the equipment. The programs detect and localize the problems, and the hardware methods (the measurements, the inspection) confirm and specify the causes.",
+        "Thus, the diagnostic programs and utilities provide the technician with the powerful means of obtaining the information, the testing and the monitoring of the components, and the skill of their use and the interpretation of the results is an important part of the modern diagnostics."
+      ],
+      "questions": [
+        "Into what types are the diagnostic programs divided?",
+        "What programs provide the information about the components of a computer?",
+        "What programs are used to test the memory and the processor?",
+        "What is necessary for the correct interpretation of the results of the diagnostics?",
+        "Why does the software diagnostics complement but not replace the hardware methods?"
+      ]
+    },
+    {
+      "code": "4.8",
+      "title": "Overview of modern software tools for the diagnostics of the hardware",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in working with modern software tools for the diagnostics of the hardware and in analysing the obtained data.",
+      "theory": [
+        "Modern software tools for the diagnostics provide a wide range of capabilities: from obtaining the information about the configuration to the deep testing of the stability. The technician must master the main tools and be able to choose the right one for the task.",
+        "The analysis of the data of the diagnostics includes the comparison of the obtained parameters with the norms, the detection of the deviations and the formulation of the conclusions about the state of the equipment."
+      ],
+      "materials": [
+        "A computer with a set of diagnostic programs.",
+        "Internet access for downloading the utilities.",
+        "Reference data on the norms of the parameters.",
+        "A report form."
+      ],
+      "procedure": [
+        "Install and run the informational utility (AIDA64 or HWiNFO) and obtain the data about all the components.",
+        "Run the monitoring of the temperatures, the voltages and the frequencies and analyse the values.",
+        "Perform the testing of the memory with the MemTest86 utility (or the built-in tool) and assess the result.",
+        "Perform the check of the drive with the CrystalDiskInfo utility and analyse the S.M.A.R.T.",
+        "Compile a summary report on the state of the computer on the basis of the data of all the utilities.",
+        "Make a conclusion about the technical state of the equipment and the detected problems."
+      ],
+      "tasks": [
+        "Prepare a report on the configuration and the state of the computer on the basis of the diagnostic utilities.",
+        "Analyse the data of the monitoring and detect the possible deviations.",
+        "Compile a list of the recommended diagnostic utilities with an indication of their purpose."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the modern software tools for the diagnostics of the hardware and the methods of analysing the obtained data.",
+      "questions": [
+        "What software tools are used for the diagnostics of the hardware?",
+        "How is the monitoring of the temperatures and the voltages performed?",
+        "How are the results of the testing of the memory analysed?",
+        "What does the analysis of the S.M.A.R.T. of a drive give?",
+        "How is a summary report on the state of a computer compiled?"
+      ]
+    },
+    {
+      "code": "4.9",
+      "title": "Performing the diagnostics and the configuration of the BIOS/UEFI parameters of a computer system",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in the diagnostics and the configuration of the BIOS/UEFI parameters of a computer system.",
+      "theory": [
+        "The BIOS/UEFI is the basic firmware of a motherboard that initializes the equipment and provides its configuration. Through the BIOS/UEFI, one can obtain the information about the equipment, configure its parameters and diagnose the problems of the start.",
+        "The main sections of the BIOS/UEFI: the information about the system, the boot settings (Boot), the operating modes of the disks, the parameters of the memory and the processor, the monitoring of the temperatures and the voltages, and the security settings."
+      ],
+      "materials": [
+        "A computer with access to the BIOS/UEFI.",
+        "Documentation of the motherboard.",
+        "A flash drive for the boot settings.",
+        "A report form."
+      ],
+      "procedure": [
+        "Enter the BIOS/UEFI and study its main sections and their purpose.",
+        "Obtain the information about the equipment (the processor, the memory, the drives) from the BIOS/UEFI.",
+        "Configure the order of the boot devices and the operating mode of the disks (AHCI).",
+        "Study the monitoring of the temperatures, the voltages and the speed of the fans in the BIOS/UEFI.",
+        "Configure the fan-control curve and the energy-saving parameters.",
+        "Make a conclusion about the capabilities of the diagnostics and the configuration through the BIOS/UEFI."
+      ],
+      "tasks": [
+        "Describe the main sections of the BIOS/UEFI and their purpose.",
+        "Configure the order of the boot and the operating mode of the disks.",
+        "Configure the monitoring and the management of the cooling in the BIOS/UEFI."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of the diagnostics and the configuration of the BIOS/UEFI parameters of a computer system.",
+      "questions": [
+        "What functions does the BIOS/UEFI perform?",
+        "What are the main sections of the BIOS/UEFI?",
+        "How is the order of the boot devices configured?",
+        "What monitoring is available in the BIOS/UEFI?",
+        "How is the management of the cooling configured in the BIOS/UEFI?"
+      ]
+    },
+    {
+      "code": "4.10",
+      "title": "Diagnostics and configuration of the central processor of a computer system",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The parameters and the operating modes of the processor.",
+        "The diagnostics of the state of the processor.",
+        "The configuration of the parameters of the processor.",
+        "The cooling and the thermal mode."
+      ],
+      "body": [
+        "The central processor is the main computing component of a computer. The diagnostics and the configuration of the processor require the understanding of its parameters, the operating modes, the methods of the check of the state and the provision of the thermal mode.",
+        "The main parameters of the processor are the number of cores and threads, the clock frequency, the volume of the cache memory, and the heat-release power (TDP). The current parameters (the frequency, the voltage, the temperature, the load) are read by the monitoring utilities.",
+        "The processor operates in various modes depending on the load: at a low load, the frequency and the voltage are reduced for the energy saving; at a high load, the frequency is increased (the Turbo modes) within the limits of the thermal package. The understanding of these modes is necessary for the diagnostics.",
+        "The diagnostics of the state of the processor includes the check of the start (the passage of the POST), the testing of the stability under the load and the monitoring of the temperature and the parameters. The instability or the errors under the load indicate a problem of the processor, its power supply or the cooling.",
+        "Before concluding that the processor is faulty, one must exclude the problems of its strapping: check the power supply (the VRM), the contacts of the socket, the correctness of the installation and the quality of the thermal contact. Often the problem is located not in the processor itself.",
+        "The configuration of the parameters of the processor is performed through the BIOS/UEFI: the frequency, the voltage, the operating modes and the power-supply limits. The default settings ensure the stable operation; the manual configuration is used for the optimization or the overclocking.",
+        "The overclocking of the processor is the increase of its frequency above the nominal one for the increase of the performance. It requires the increase of the voltage and the improved cooling and is accompanied by the risk of the instability and the reduction of the service life. The overclocking is performed consciously and with the testing of the stability.",
+        "The temperature of the processor is a critical parameter. Under the load, it must not exceed the limit value (usually about 90-100 degrees, with the start of the throttling earlier). The overheating leads to the throttling and the shutdowns.",
+        "The cooling system of the processor must correspond to its heat release. A poor thermal contact, the dried-out thermal paste or an insufficiently powerful cooler lead to the overheating and the throttling. The replacement of the thermal paste and the cleaning of the radiator restore the efficiency of the cooling.",
+        "The thermal paste between the processor and the radiator ensures the efficient heat removal. Over time, it dries out and loses its properties, which leads to the overheating. The periodic replacement of the thermal paste is a part of the maintenance of the computer.",
+        "The monitoring of the parameters of the processor during the operation (the temperature, the frequency, the voltage, the load) allows one to assess its state and the efficiency of the cooling and to detect the problems in a timely manner.",
+        "Thus, the diagnostics and the configuration of the central processor combine the understanding of its parameters and modes, the check of the state and the stability, the configuration through the BIOS/UEFI and the provision of the proper thermal mode."
+      ],
+      "questions": [
+        "What are the main parameters of the central processor?",
+        "In what modes does the processor operate depending on the load?",
+        "What does the diagnostics of the state of the processor include?",
+        "What must be excluded before concluding that the processor is faulty?",
+        "Why is the timely replacement of the thermal paste important?"
+      ]
+    },
+    {
+      "code": "4.11",
+      "title": "Analysis and repair of the memory (RAM) in computer systems",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the state of the random-access memory, in testing it and in eliminating the typical problems.",
+      "theory": [
+        "The random-access memory (RAM) stores the data and the code of the running programs. Its faults manifest themselves as the failure to start, the 'blue screens', the freezes and the errors. The diagnostics of the memory is performed by software (MemTest86) and by the method of exclusion.",
+        "The problems of the memory may be caused by the modules themselves, the poor contact in the slots, the incompatibility, or the incorrect settings in the BIOS/UEFI. The localization is performed by the check of the modules one by one in the different slots."
+      ],
+      "materials": [
+        "A computer with the random-access memory.",
+        "Memory modules for the substitution.",
+        "The MemTest86 utility on a flash drive.",
+        "A report form."
+      ],
+      "procedure": [
+        "Check the correct installation of the memory modules in the slots and the cleanliness of the contacts.",
+        "Run the testing of the memory with the MemTest86 utility in several passes.",
+        "If errors are detected, localize the faulty module by the method of exclusion (check the modules one by one).",
+        "Check the operation of the modules in the different slots and detect the possible problems of the slots.",
+        "Study the settings of the memory in the BIOS/UEFI and assess their influence on the stability.",
+        "Make a conclusion about the state of the memory and the methods of eliminating the problems."
+      ],
+      "tasks": [
+        "Carry out the testing of the memory and prepare a report on its result.",
+        "Describe the procedure for localizing a faulty memory module.",
+        "Formulate the recommendations for eliminating the problems of the memory."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of analysing the state of the random-access memory, of testing it and of eliminating the typical problems.",
+      "questions": [
+        "How do the faults of the random-access memory manifest themselves?",
+        "What utility is used to test the memory, and why in several passes?",
+        "How is a faulty memory module localized?",
+        "What may cause the problems of the memory besides the modules themselves?",
+        "How do the settings of the memory in the BIOS/UEFI affect the stability?"
+      ]
+    },
+    {
+      "code": "4.12",
+      "title": "Diagnostics and repair of motherboards and the system logic",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The structure of a motherboard and the system logic.",
+        "The diagnostics of the start of a motherboard.",
+        "The typical faults of motherboards.",
+        "The methods of repairing motherboards."
+      ],
+      "body": [
+        "The motherboard is the basic component of a computer that unites all the others. Its diagnostics and repair are among the most complex tasks, requiring the understanding of the structure, the system logic and the start sequence of the board.",
+        "The system logic (the chipset) organizes the interaction of the processor with the memory, the buses and the peripheral devices. In the modern platforms, the part of the functions is integrated into the processor, and the remaining part is performed by a single chip (the PCH). The chipset is the centre of the connections of the board.",
+        "The start of a motherboard is a strictly defined sequence: the appearance of the standby voltage, the formation of the power-on signal, the start of the power supply, the appearance of all the voltages, the clock signals, the removal of the reset, and the start of the processor with the execution of the BIOS/UEFI code.",
+        "The diagnostics of a motherboard is built on the check of each step of this sequence. The technician checks the standby voltage, the power-on, the supply voltages, the clock and the reset, gradually localizing the place where the start sequence breaks down.",
+        "The POST card is an effective tool for the diagnostics of a motherboard. It displays the codes of the passage of the POST, and the last displayed code indicates the stage at which the start stopped, which helps to localize the faulty node.",
+        "The visual inspection reveals the swollen capacitors, the traces of the overheating of the VRM, the mechanical damage, the cracks of the board, the faults of the connectors and the traces of the moisture and the oxidation. Many faults of motherboards are detected precisely visually.",
+        "The measurement of the voltages at the control points and the comparison with the nominal values reveal the faults of the power circuits. The measurement of the resistance to ground at the power circuits reveals the short circuits, which are a frequent cause of the failure of the board to start.",
+        "The typical faults of motherboards are the faults of the VRM, the BIOS/UEFI chip, the clock generator, the chipset, the connectors and the slots, the breaks of the tracks and the short circuits. Some faults are eliminated by the replacement of the components, others require complex repair.",
+        "The faults of the power circuits (the VRM) lead to the inability to start or to the instability. The diagnostics of the VRM includes the check of the supply voltages, the chokes, the transistors and the capacitors. The replacement of the faulty elements restores the operability.",
+        "The faults of the BIOS/UEFI chip (the corruption of the firmware) lead to the inability to start. They are eliminated by the reflashing of the chip with a programmer or by the replacement of the chip. The modern boards have the means of restoring the BIOS.",
+        "The repair of motherboards requires the soldering tool, the soldering and the infrared stations for the work with the BGA chips, the measuring instruments and the replacement components. The repair of the complex faults (the chipset, the multilayer tracks) is not always advisable.",
+        "Thus, the diagnostics and the repair of motherboards are based on the knowledge of their structure and start sequence, on the use of a POST card and the measurements, on the visual inspection and the localization of the faults, and on the mastery of the methods of repair."
+      ],
+      "questions": [
+        "What function does the system logic (the chipset) perform?",
+        "What is the start sequence of a motherboard?",
+        "How does a POST card help in the diagnostics?",
+        "What are the typical faults of motherboards?",
+        "How is the diagnostics of the power circuits (the VRM) performed?"
+      ]
+    },
+    {
+      "code": "4.13",
+      "title": "Analysis of the typical faults of processors, the random-access memory and motherboards",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing and localizing the typical faults of processors, the random-access memory and motherboards by the methods of the minimal configuration and substitution.",
+      "theory": [
+        "The faults of the processor, the memory and the motherboard often have similar manifestations (the failure to start, the freezes, the restarts). The task of the technician is to localize the fault to a specific component by the methods of exclusion and substitution.",
+        "The method of the minimal configuration consists in the assembly of the system from the minimum set of the components (the board, the processor, one memory module, the power supply) and the gradual connection of the others, which allows the faulty component to be detected."
+      ],
+      "materials": [
+        "A set of the components for the diagnostics.",
+        "Serviceable components for the substitution.",
+        "A POST card and a multimeter.",
+        "A report form."
+      ],
+      "procedure": [
+        "Assemble the minimal configuration and check the start and the passage of the POST.",
+        "Use a POST card to determine the stage at which the start stops.",
+        "Check the memory by the substitution of the modules and the reseating in the different slots.",
+        "Check the processor by the inspection of the socket and the contacts and (if possible) by the substitution.",
+        "Check the power circuits of the board by the measurement of the supply voltages.",
+        "Localize the faulty component and make a conclusion about the cause of the fault."
+      ],
+      "tasks": [
+        "Compile a table of the typical faults of the processor, the memory and the board with their manifestations.",
+        "Localize the faulty component in the given case by the method of the minimal configuration.",
+        "Propose a method of eliminating the detected fault."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of analysing and localizing the typical faults of processors, the random-access memory and motherboards.",
+      "questions": [
+        "Why do the faults of the processor, the memory and the board have similar manifestations?",
+        "What is the method of the minimal configuration?",
+        "How is a memory fault localized?",
+        "How does a POST card help in the localization of a fault?",
+        "How is the serviceability of the power circuits of a board checked?"
+      ]
+    },
+    {
+      "code": "4.14",
+      "title": "Assessment and repair of video cards, monitors and graphics devices",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in assessing the state and repairing video cards, monitors and graphics devices.",
+      "theory": [
+        "The graphics subsystem includes the video card and the monitor. The faults of the video card are connected with the overheating, the power circuits and the GPU; the faults of the monitor are connected with the power supply, the backlight and the matrix. The diagnostics determines where the problem is located.",
+        "The assessment of the state includes the visual inspection, the testing under the load, the monitoring of the temperature and the detection of the artifacts. The repair may consist in the maintenance of the cooling, the replacement of the capacitors or more complex operations."
+      ],
+      "materials": [
+        "A video card and a monitor for the diagnostics.",
+        "A serviceable computer for the substitution checks.",
+        "Tools for the maintenance and the testing utilities.",
+        "A report form."
+      ],
+      "procedure": [
+        "Perform the visual inspection of the video card and assess the state of the cooling system and the capacitors.",
+        "Test the video card under the load (FurMark) and monitor the temperature and the artifacts.",
+        "Perform the maintenance of the cooling of the video card: the cleaning of the radiator and the replacement of the thermal paste.",
+        "Check the monitor by the connection to a serviceable source through the different interfaces.",
+        "Localize the fault by the method of substitution and determine the faulty node.",
+        "Make a conclusion about the state of the graphics devices and the methods of eliminating the faults."
+      ],
+      "tasks": [
+        "Carry out the diagnostics and the maintenance of a video card.",
+        "Determine the location of a fault of the image by the method of substitution.",
+        "Describe the procedure for repairing the typical faults of a monitor."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of assessing the state and repairing video cards, monitors and graphics devices.",
+      "questions": [
+        "What faults are typical of video cards?",
+        "How is the maintenance of the cooling of a video card performed?",
+        "How is the location of a fault of the image determined?",
+        "What faults are typical of monitors?",
+        "What does a stress test of a video card check?"
+      ]
+    },
+    {
+      "code": "4.15",
+      "title": "Investigation of the methods of the diagnostics of data-storage devices and power supplies",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in the diagnostics of data-storage devices and power supplies and in detecting their faults.",
+      "theory": [
+        "The diagnostics of drives is performed by the analysis of the S.M.A.R.T. and by the surface testing; the diagnostics of power supplies is performed by the measurement of the output voltages under the load and the visual inspection. Both components are critical for the operability of a computer.",
+        "The faults of a power supply lead to the failure to start, the instability and the restarts; the faults of a drive lead to the loss of data and the slow operation. The timely diagnostics allows one to prevent these problems."
+      ],
+      "materials": [
+        "Drives and power supplies for the diagnostics.",
+        "A multimeter and a power-supply tester.",
+        "Utilities for the diagnostics of the drives.",
+        "A report form."
+      ],
+      "procedure": [
+        "Read and analyse the S.M.A.R.T. of the drive and assess its state.",
+        "Perform a surface test of the drive and detect the bad sectors.",
+        "Perform the visual inspection of the power supply and detect the swollen capacitors.",
+        "Measure the output voltages of the power supply under the load and compare them with the nominal values.",
+        "Assess the operation of the fan of the power supply and the degree of its heating.",
+        "Make a conclusion about the state of the drive and the power supply."
+      ],
+      "tasks": [
+        "Prepare a report on the analysis of the S.M.A.R.T. of the drive.",
+        "Prepare a protocol of the measurement of the output voltages of the power supply.",
+        "Formulate a conclusion about the state of the diagnosed components."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of the diagnostics of data-storage devices and power supplies and the detection of their faults.",
+      "questions": [
+        "How is the state of a drive assessed by the S.M.A.R.T.?",
+        "What does a surface test of a drive reveal?",
+        "How is the diagnostics of a power supply performed?",
+        "What deviation of the voltages of a power supply is permissible?",
+        "What faults of a power supply are detected by the visual inspection?"
+      ]
+    },
+    {
+      "code": "4.16",
+      "title": "Diagnostics and restoration of the operability of power supplies and power supply",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The structure and the operating principle of a pulse power supply.",
+        "The diagnostics of the power supply.",
+        "The typical faults and the causes of their occurrence.",
+        "The methods of restoring the operability."
+      ],
+      "body": [
+        "The power supply unit (PSU) provides the conversion of the alternating mains voltage into the direct stabilized voltages required by the components of a computer. The diagnostics and the restoration of the operability of a power supply require the understanding of its structure and the typical faults.",
+        "A pulse power supply consists of several nodes: the input filter and the rectifier, the high-voltage part with the switching transistors, the pulse transformer, the secondary rectifiers and filters, and the stabilization and protection circuits. Each node has its own function and characteristic faults.",
+        "The input part rectifies and filters the mains voltage and charges the high-voltage capacitor. The switching transistors convert the constant voltage into a high-frequency one, which is fed to the pulse transformer. The transformer converts and isolates the voltage.",
+        "The secondary rectifiers and filters form the output voltages +3.3 V, +5 V and +12 V. The stabilization circuits maintain these voltages constant under the changing load. The protection circuits disconnect the power supply in the event of an overload or a short circuit.",
+        "The diagnostics of a power supply begins with the visual inspection: the integrity of the case, the cables, the connectors and the fan, and the detection of the swollen capacitors and the traces of the overheating. Many faults are detected at this stage.",
+        "The check of the output voltages is performed with a power-supply tester and a multimeter under the load and without the load. The deviation of the voltages from the nominal values beyond the tolerances (usually 5 percent), their absence or instability indicate a fault.",
+        "The most frequent causes of the faults of power supplies are the dried-out and swollen electrolytic capacitors, the failed switching transistors, the blown fuses as a result of a short circuit, and the faults of the standby-voltage circuit.",
+        "The dried-out capacitors of the secondary circuits increase the ripple of the output voltages, which leads to the instability of the operation of the computer. Their replacement is one of the most frequent operations of the repair of power supplies.",
+        "The faults of the switching transistors and the input rectifier most often occur as a result of the voltage surges in the mains and lead to the complete inoperability of the power supply, often with the blowing of the fuse. The repair requires the replacement of the failed elements.",
+        "The restoration of the operability of a power supply requires the observance of the safety measures: the disconnection from the mains, the discharge of the high-voltage capacitors, and the caution when working with the high voltage. The high-voltage part of a power supply is dangerous even after the disconnection.",
+        "After the repair, the power supply is necessarily checked under the load before the connection to the computer, in order to be sure of the correctness of all the output voltages and the absence of the ripple. The connection of a faulty power supply may damage the components of the computer.",
+        "Thus, the diagnostics and the restoration of the operability of power supplies are based on the understanding of their structure and the typical faults, on the diagnostics by the inspection and the measurements, and on the observance of the safety measures during the repair."
+      ],
+      "questions": [
+        "What nodes does a pulse power supply consist of?",
+        "What output voltages does a power supply form?",
+        "What does the diagnostics of a power supply include?",
+        "What are the most frequent causes of the faults of power supplies?",
+        "What safety measures must be observed when repairing a power supply?"
+      ]
+    },
+    {
+      "code": "4.17",
+      "title": "Preventive maintenance of computer systems and the prolongation of the service life of equipment",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept and the goals of the preventive maintenance.",
+        "The types and the frequency of the preventive maintenance.",
+        "The operations of the preventive maintenance.",
+        "The prolongation of the service life of equipment."
+      ],
+      "body": [
+        "The preventive maintenance of computer systems is a complex of the planned measures aimed at preventing the faults, maintaining the operability and prolonging the service life of the equipment. The regular preventive maintenance is more economical than the repair of the faults that have already occurred.",
+        "The goals of the preventive maintenance are the prevention of the faults, the maintenance of the performance and the reliability, the prolongation of the service life of the equipment and the reduction of the costs of the repair and the downtime. The preventive maintenance is the basis of the proactive approach to the maintenance.",
+        "The preventive maintenance is divided into the planned (carried out according to a schedule at certain intervals) and the unplanned (carried out as needed). The planned preventive maintenance is the most effective, since it prevents the faults.",
+        "The frequency of the preventive maintenance depends on the operating conditions of the equipment: in the dusty and hot conditions, the maintenance is carried out more often. Usually the cleaning of the computers is carried out once every few months, and the full preventive maintenance once or twice a year.",
+        "The main operation of the preventive maintenance is the cleaning of the equipment from the dust. The dust accumulates on the radiators, the fans and the boards, worsening the cooling and causing the overheating. The cleaning is performed with compressed air, brushes and a vacuum cleaner.",
+        "The replacement of the thermal paste between the processor and the radiator is an important operation of the preventive maintenance. Over time, the thermal paste dries out and loses its properties, which leads to the overheating. The periodic replacement of the thermal paste restores the efficiency of the cooling.",
+        "The check of the state of the components includes the inspection of the capacitors, the check of the operation of the fans, the analysis of the S.M.A.R.T. of the drives and the monitoring of the temperatures. The detection of the signs of wear allows one to plan the replacement of the components before their failure.",
+        "The maintenance of the software is also a part of the preventive maintenance: the updating of the operating system and the drivers, the cleaning of the disk from the unnecessary files, the check for malware, and the defragmentation (for HDD). This maintains the performance of the system.",
+        "The check and the maintenance of the cooling system include the cleaning of the radiators and the fans, the check of their operation, the replacement of the thermal paste and the thermal pads. The efficient cooling is the key to the long service life of the components.",
+        "The keeping of the records of the preventive maintenance (the schedule, the journal of the carried-out works) allows one to plan the maintenance, to track the state of the equipment and to forecast the need for the replacement of the components and consumables.",
+        "The prolongation of the service life of the equipment is achieved by the regular preventive maintenance, the provision of the proper operating conditions (the temperature, the humidity, the cleanliness, the stable power supply), and the timely replacement of the wearing components.",
+        "Thus, the preventive maintenance of computer systems includes the cleaning, the replacement of the thermal paste, the check of the state of the components and the maintenance of the software, which prevents the faults and prolongs the service life of the equipment."
+      ],
+      "questions": [
+        "What is the preventive maintenance, and what are its goals?",
+        "What is the difference between the planned and the unplanned preventive maintenance?",
+        "What determines the frequency of the preventive maintenance?",
+        "What are the main operations of the preventive maintenance?",
+        "How is the prolongation of the service life of the equipment achieved?"
+      ]
+    },
+    {
+      "code": "4.18",
+      "title": "Performing the check of the state of data-storage devices with the use of diagnostic utilities",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To consolidate, in a comprehensive form, the skills of the diagnostics of the hardware on the example of the check of the state of data-storage devices, summing up the learning outcome.",
+      "theory": [
+        "This lesson generalizes the material of the learning outcome on the diagnostics and the elimination of the faults of the hardware. The check of the state of the drives demonstrates the comprehensive application of the diagnostic utilities and the analysis of the obtained data.",
+        "The diagnostics of the drives includes the reading and the analysis of the S.M.A.R.T., the surface testing, the measurement of the speed and the check of the file system. The comprehensive assessment allows one to forecast the failures and to plan the maintenance."
+      ],
+      "materials": [
+        "Drives of various types for the check.",
+        "Diagnostic utilities (CrystalDiskInfo, Victoria, CrystalDiskMark).",
+        "A computer for the connection of the drives.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Connect the drives and read the S.M.A.R.T. of each of them with the CrystalDiskInfo utility.",
+        "Analyse the critical attributes of the S.M.A.R.T. and assess the state of the drives.",
+        "Perform a surface test of the drive with the Victoria utility and detect the bad sectors.",
+        "Measure the speed of reading and writing of the drives with the CrystalDiskMark utility.",
+        "Check the file system of the drive for errors with the system tool.",
+        "Make a comprehensive conclusion about the state of the drives and the recommendations for their maintenance and replacement."
+      ],
+      "tasks": [
+        "Prepare a comprehensive report on the state of the checked drives.",
+        "Forecast the failure of a drive on the basis of the analysis of the S.M.A.R.T.",
+        "Formulate the recommendations for the maintenance and the timely replacement of the drives."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the comprehensive skills of the diagnostics of the hardware on the example of the check of the state of data-storage devices and the forecasting of their failures.",
+      "questions": [
+        "What does the comprehensive diagnostics of a drive include?",
+        "What critical attributes of the S.M.A.R.T. are analysed?",
+        "How is the surface test of a drive performed?",
+        "How is the failure of a drive forecast?",
+        "What recommendations are formulated by the results of the diagnostics?"
+      ]
+    }
+  ]
+}

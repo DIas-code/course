@@ -1,0 +1,669 @@
+{
+  "id": "1.3",
+  "title": "Operate and control the work of computers and peripheral devices",
+  "weight": "7%",
+  "hours": "36 hours",
+  "glossary": [
+    ["Driver", "A program that allows the operating system to control a specific device and to interact with it."],
+    ["Input/output (I/O)", "The exchange of data between a computer and external devices or the environment through the corresponding interfaces and ports."],
+    ["NAS (Network Attached Storage)", "A network data store connected to a local network and providing shared access to files."],
+    ["NVMe", "A high-speed protocol for accessing solid-state drives connected over the PCI Express bus."],
+    ["Peripheral device", "A device connected to a computer to extend its capabilities of input, output or storage of information (printer, scanner, monitor, keyboard, etc.)."],
+    ["Power management", "A set of hardware and software means for controlling the energy consumption of a computer and its components."],
+    ["Preventive maintenance", "Planned maintenance carried out to prevent faults: cleaning, inspection, replacement of consumables, updating of software."],
+    ["SSD (Solid-State Drive)", "A data-storage device based on flash memory without moving parts."],
+    ["USB (Universal Serial Bus)", "A universal serial interface for connecting peripheral devices and supplying them with power."],
+    ["Software management", "The process of installing, updating, configuring and removing programs in an operating system."]
+  ],
+  "lessons": [
+    {
+      "code": "3.1",
+      "title": "Modern peripheral devices: overview and classification",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept and purpose of peripheral devices.",
+        "Classification of peripheral devices.",
+        "Input, output and storage devices.",
+        "Interfaces for connecting peripherals."
+      ],
+      "body": [
+        "Peripheral devices are devices connected to a computer to extend its capabilities of input, output, processing and storage of information. They are not part of the central core of the computer (the processor and the memory) but are necessary for the interaction of the user and the computer with the external environment.",
+        "Peripheral devices are classified by their purpose into input devices, output devices, input/output devices and storage devices. This classification helps to understand the role of each device in the operation of a computer system.",
+        "Input devices serve to enter information and commands into a computer. These are the keyboard, the mouse, scanners, graphics tablets, web cameras, microphones, and various sensors. They convert the actions of the user or the signals of the environment into a digital form understandable to the computer.",
+        "Output devices serve to display the results of the work of a computer. These are monitors, printers, plotters, speakers, headphones and projectors. They convert the digital data into a form perceptible to the human being — an image, a printout, sound.",
+        "Input/output devices combine both functions. These are touch screens, multifunction devices (which print, scan and copy), network devices, and modems. They both receive and transmit information.",
+        "Storage devices, although sometimes considered separately, are also referred to peripherals in a broad sense. These are external hard disk drives and SSDs, flash drives, memory cards, optical drives and network stores (NAS). They serve for the long-term storage and transfer of data.",
+        "By the method of connection, peripheral devices are divided into internal (installed inside the case) and external (connected from the outside). By the type of interface — into devices with a USB, HDMI, DisplayPort, Ethernet, Bluetooth, Wi-Fi connection and others.",
+        "The interface determines the method and the speed of the exchange of data between the computer and the peripheral device. USB is the most universal interface for connecting most external devices; HDMI and DisplayPort serve for transmitting video and audio; Ethernet and Wi-Fi serve for the network connection.",
+        "Modern peripheral devices increasingly support wireless connection (Bluetooth, Wi-Fi), which increases the convenience of use but requires attention to the security and the stability of the connection. Wired connections, in turn, provide greater reliability and speed.",
+        "An important characteristic of peripheral devices is their compatibility with the operating system and the availability of drivers. A driver is a program that allows the operating system to control the device. Without a suitable driver, the device may not work or work with limited functionality.",
+        "The development of peripheral devices goes in the direction of increasing the speed of the interfaces, the universality of the connection, the wireless technologies and the integration of functions. The technician must keep track of these trends in order to competently select, connect and service the devices.",
+        "Thus, peripheral devices are a diverse class of devices that extend the capabilities of a computer. Their classification by purpose, method of connection and interface, and the understanding of their characteristics, are the basis for their correct operation and control."
+      ],
+      "questions": [
+        "What are peripheral devices, and what are they for?",
+        "How are peripheral devices classified by purpose?",
+        "What is the difference between input, output and input/output devices?",
+        "What interfaces are used to connect peripheral devices?",
+        "Why is the availability of a suitable driver important for the operation of a peripheral device?"
+      ]
+    },
+    {
+      "code": "3.2",
+      "title": "Types and purpose of the peripheral devices of a PC",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in identifying the types of peripheral devices, determining their purpose and characteristics, and connecting them to a computer.",
+      "theory": [
+        "The practical work with peripheral devices begins with the ability to identify their type, to determine the purpose and the characteristics, and to choose the correct interface for connection. Each type of device has its own connection and configuration features.",
+        "When connecting a peripheral device, the type of interface, the availability of a driver and the settings of the operating system are taken into account. After the connection, the operability of the device and the correctness of its operation are checked."
+      ],
+      "materials": [
+        "A set of peripheral devices (keyboard, mouse, printer, scanner, web camera, headphones).",
+        "A computer with various ports.",
+        "Cables and connectors for connection.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the proposed peripheral devices and determine the type and the purpose of each.",
+        "Determine the interface for connecting each device and find the corresponding port on the computer.",
+        "Connect the devices to the computer and check their recognition by the operating system.",
+        "Install or update the drivers of the devices if necessary and check their operability.",
+        "Determine the main characteristics of each device (resolution, speed, type of connection).",
+        "Compile a table of the connected devices with their purpose and characteristics."
+      ],
+      "tasks": [
+        "Compile a table of peripheral devices indicating their type, purpose, interface and characteristics.",
+        "Connect and configure at least three peripheral devices of different types.",
+        "Describe the procedure for installing a driver for a peripheral device."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of identifying the types of peripheral devices, of determining their purpose and characteristics, and of connecting and configuring them.",
+      "questions": [
+        "What types of peripheral devices were examined in the work?",
+        "How is the interface for connecting a device determined?",
+        "What is necessary for the correct operation of a peripheral device after connection?",
+        "What characteristics of peripheral devices are the most important?",
+        "How is the operability of a connected device checked?"
+      ]
+    },
+    {
+      "code": "3.3",
+      "title": "Analysis of modern peripheral devices and the areas of their application",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the characteristics of modern peripheral devices and in determining the optimal devices for various areas of application.",
+      "theory": [
+        "The choice of a peripheral device depends on the area of its application. For office work, reliable and economical devices are needed; for design, devices with high accuracy and resolution; for gaming, devices with a high response speed. The analysis of the characteristics allows one to make the optimal choice.",
+        "The main parameters for comparison are the performance, the resolution, the speed of the interface, the energy consumption, the reliability and the cost. The comparison of devices by these parameters is the basis for a reasoned choice."
+      ],
+      "materials": [
+        "Technical specifications of various peripheral devices.",
+        "Access to the catalogues and reviews of manufacturers.",
+        "A computer for working with information.",
+        "A report form."
+      ],
+      "procedure": [
+        "Choose a category of peripheral devices for analysis (printers, monitors, scanners or others).",
+        "Select several models of devices of this category with different characteristics.",
+        "Compile a comparative table of the characteristics of the chosen models.",
+        "Determine the areas of application for which each model is optimal.",
+        "Formulate recommendations for choosing a device for a given task (office, design, home use).",
+        "Make a conclusion about the criteria for choosing a peripheral device for a specific area."
+      ],
+      "tasks": [
+        "Prepare a comparative table of several models of peripheral devices of one category.",
+        "Determine the optimal device for an office, for design and for home use.",
+        "Justify the choice of a device for a given task by its characteristics."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of analysing the characteristics of peripheral devices and of choosing the optimal devices for various areas of application.",
+      "questions": [
+        "On what does the choice of a peripheral device depend?",
+        "What parameters are used to compare devices?",
+        "What devices are optimal for office work and which for design?",
+        "How is the choice of a device justified by its characteristics?",
+        "Why is it important to take into account the area of application when choosing a device?"
+      ]
+    },
+    {
+      "code": "3.4",
+      "title": "Operation of peripheral devices",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The rules for operating peripheral devices.",
+        "Connection and configuration of devices.",
+        "Maintenance and care of peripherals.",
+        "Typical operation problems and their elimination."
+      ],
+      "body": [
+        "The operation of peripheral devices is the process of their correct use and maintenance to ensure reliable and long-term operation. The competent operation prolongs the service life of the devices, prevents faults and ensures the quality of their work.",
+        "The operation begins with the correct connection of the device. The type of interface, the polarity and the orientation of the connectors, and the need to install drivers are taken into account. Some devices require connection with the power off, others support a 'hot' connection (USB).",
+        "After the connection, the device is configured: the installation of drivers, the setting of the operating parameters (the resolution, the print quality, the speed), and the verification of the operability. The correct configuration ensures the optimal operation of the device.",
+        "Each type of peripheral device has its own operation features. Printers require the correct loading of paper and consumables; monitors require the setting of brightness and resolution; scanners require the correct placement of the originals; keyboards and mice require maintenance of cleanliness.",
+        "The maintenance and care of peripheral devices includes the regular cleaning of dust and dirt, the timely replacement of consumables, the updating of drivers and firmware, and the verification of the condition of the cables and the connectors. The regular maintenance prevents many faults.",
+        "The cleaning of devices is performed with means that are suitable for the specific type of device. Monitors are cleaned with soft cloths and special liquids; keyboards are cleaned of dust and crumbs; printers require the cleaning of the print heads and the rollers. The use of unsuitable means may damage the device.",
+        "The replacement of consumables (cartridges, toner, paper, batteries) is performed in a timely manner and with the use of suitable materials. The use of low-quality consumables may worsen the quality of the work and damage the device.",
+        "The updating of drivers and firmware improves the operation of devices, eliminates errors and adds new functions. The updating is performed from the official sources of the manufacturers, observing the precautions to avoid damaging the device.",
+        "The typical operation problems include the absence of a connection, the incorrect operation of the device, the deterioration of the quality of the work, and error messages. Most of these problems are solved by checking the connection, the drivers and the settings.",
+        "The diagnostics of operation problems is built from the simple to the complex: the verification of the connection and the power, the verification of the drivers and the settings, and only then the search for a hardware fault. A significant part of the problems is solved at the level of the connection and the configuration.",
+        "Observing the rules of operation, the temperature and humidity conditions, and protecting the devices from overloads and mechanical damage are the basis for their reliable operation. The technician must know and apply these rules and teach them to the users.",
+        "Thus, the operation of peripheral devices includes their correct connection and configuration, the regular maintenance and care, and the timely elimination of the typical problems, which ensures the reliable and long-term operation of the devices."
+      ],
+      "questions": [
+        "What does the operation of peripheral devices include?",
+        "What is taken into account when connecting and configuring a device?",
+        "What does the maintenance and care of peripheral devices include?",
+        "How is the replacement of consumables performed correctly?",
+        "What are the typical operation problems, and how are they eliminated?"
+      ]
+    },
+    {
+      "code": "3.5",
+      "title": "Storage devices: SSD, NVMe, external drives, NAS",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "Modern types of storage devices.",
+        "SSD and the NVMe protocol.",
+        "External drives and their interfaces.",
+        "Network stores (NAS)."
+      ],
+      "body": [
+        "Storage devices provide the long-term storage of the data of a computer. Modern technologies offer a variety of solutions, from high-speed SSDs to network stores, each of which has its own characteristics, advantages and areas of application.",
+        "A solid-state drive (SSD) stores data in flash memory and has no moving parts. Compared with a hard disk drive, the SSD provides a much higher speed of access and data transfer, lower energy consumption, noiselessness and resistance to shocks. The SSD has become the main drive for the operating system and programs.",
+        "SSDs are made in various form factors and with various interfaces. The SATA SSD uses the SATA interface and the form factor of a 2.5-inch disk. The M.2 SSD has a compact form factor and may use either the SATA interface or the high-speed PCI Express bus.",
+        "The NVMe (Non-Volatile Memory Express) protocol is designed specifically for solid-state drives connected over the PCI Express bus. It provides a much higher speed and a lower latency than SATA, since it is optimized for the parallel operation of flash memory. NVMe drives are the fastest mass-market drives.",
+        "Hard disk drives (HDD) retain their relevance for storing large volumes of data at a low cost per gigabyte. They are slower than SSDs but offer a large capacity at an affordable price, which makes them suitable for archives, backups and media libraries.",
+        "External drives are storage devices connected from the outside, usually over the USB interface. They serve for the transfer of data, the backing-up and the extension of the storage volume. External drives may be based on either an HDD or an SSD.",
+        "The choice of the interface of an external drive affects the speed of the data transfer. USB 3.0 and higher provide a high speed sufficient for an external SSD. Modern interfaces (USB-C, Thunderbolt) provide an even higher speed.",
+        "Network stores (NAS — Network Attached Storage) are devices connected to a local network and providing shared access to files for several users and devices. A NAS contains one or several drives, often united into a RAID array for reliability.",
+        "A NAS is used for the centralized storage of data, the organization of backups, the media library and the shared access in a home or office. Modern NAS devices have their own operating system and provide many functions, including remote access.",
+        "The combination of the RAID technology in a NAS increases the reliability of the storage: the data is duplicated or distributed among several drives so that the failure of one of them does not lead to the loss of information. The choice of the RAID level determines the balance between the reliability, the speed and the usable volume.",
+        "When choosing a storage device, one takes into account the required volume, the speed, the reliability, the budget and the scenario of use. For the system and programs, an NVMe SSD is optimal; for the archive, an HDD; for the shared access, a NAS; for the transfer of data, an external drive.",
+        "Thus, modern storage devices — SSD, NVMe, external drives and NAS — offer a wide range of solutions for various tasks. The understanding of their characteristics and areas of application allows the technician to competently select and operate them."
+      ],
+      "questions": [
+        "What advantages does an SSD have over a hard disk drive?",
+        "What is the NVMe protocol, and why is it faster than SATA?",
+        "In which cases do hard disk drives retain their relevance?",
+        "What are external drives for, and what interfaces do they use?",
+        "What is a NAS, and what tasks does it solve?"
+      ]
+    },
+    {
+      "code": "3.6",
+      "title": "Investigation of modern data-storage technologies (SSD, NVMe, NAS)",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in investigating and comparing modern data-storage technologies and in measuring their performance.",
+      "theory": [
+        "The investigation of data-storage technologies includes the comparison of their characteristics, the measurement of the speed of reading and writing, and the assessment of the suitability for various tasks. For the measurement of the performance, the utilities CrystalDiskMark and the manufacturers' utilities are used.",
+        "The key parameters of the performance are the speed of sequential reading and writing, the speed of random access (IOPS), and the latency. These parameters are compared for SSD, NVMe and HDD."
+      ],
+      "materials": [
+        "Drives of various types (HDD, SATA SSD, NVMe SSD).",
+        "A computer for connecting and testing the drives.",
+        "Utilities for measuring the performance (CrystalDiskMark, CrystalDiskInfo).",
+        "A report form."
+      ],
+      "procedure": [
+        "Connect the drives of various types to the computer and ensure their recognition by the system.",
+        "Read the characteristics and the S.M.A.R.T. of each drive with the CrystalDiskInfo utility.",
+        "Measure the speed of sequential and random reading and writing of each drive with CrystalDiskMark.",
+        "Compile a comparative table of the performance of the drives.",
+        "Investigate the operating principle of a NAS (or describe it) and determine the areas of its application.",
+        "Make a conclusion about the suitability of each technology for various tasks."
+      ],
+      "tasks": [
+        "Prepare a comparative table of the performance of HDD, SATA SSD and NVMe SSD.",
+        "Determine which drive is optimal for the system, for the archive and for the transfer of data.",
+        "Describe the advantages of a NAS for the organization of shared storage."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of investigating and comparing modern data-storage technologies and of measuring their performance.",
+      "questions": [
+        "What parameters characterize the performance of a drive?",
+        "How is the speed of reading and writing of a drive measured?",
+        "Why is an NVMe SSD faster than a SATA SSD?",
+        "What utility shows the S.M.A.R.T. and the characteristics of a drive?",
+        "For what tasks is a NAS optimal?"
+      ]
+    },
+    {
+      "code": "3.7",
+      "title": "Input/output. Functions and characteristics",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The concept of input/output and its role in a computer system.",
+        "Input/output interfaces and ports.",
+        "Methods of organizing input/output.",
+        "Characteristics of input/output systems."
+      ],
+      "body": [
+        "Input/output (I/O) is the process of the exchange of data between the central part of a computer and the external devices and the environment. The input/output system provides the connection of the computer with the outside world and is one of the most important parts of the computer architecture.",
+        "Without an input/output system, a computer would be useless, since it could not receive data and commands or display the results. The input/output combines the work of the processor, the memory, the buses, the controllers and the peripheral devices into a single system.",
+        "Input/output is performed through interfaces and ports. An interface is a set of rules and means for connecting and exchanging data. A port is a specific connector or a logical access point. The interfaces determine the speed, the protocol and the physical method of the exchange.",
+        "Modern computers have a variety of input/output interfaces: USB for universal connection, SATA and NVMe for drives, PCI Express for expansion cards, HDMI and DisplayPort for video, Ethernet and Wi-Fi for networks, and Bluetooth for wireless peripherals.",
+        "There are several methods of organizing input/output. Programmed input/output is controlled directly by the processor, which constantly polls the device. This method is simple but loads the processor and is used for slow devices.",
+        "Input/output by interruptions allows the processor to perform other work and to be distracted to the device only when it is ready, having received a signal — an interruption. This method increases the efficiency of the use of the processor and is widely applied.",
+        "Direct memory access (DMA) allows the device to exchange data with the memory directly, bypassing the processor. This is the most efficient method for fast devices (drives, network cards), since it frees the processor from the transfer of large volumes of data.",
+        "A controller is an intermediary between the processor and a peripheral device. It takes upon itself the management of the device, the buffering of the data and the coordination of the speeds. Modern controllers are integrated into the chipset or made as separate microcircuits.",
+        "The characteristics of input/output systems include the bandwidth (the speed of the data transfer), the latency (the time of the response), the number of connected devices, and the support of various protocols. These characteristics determine the performance of the input/output.",
+        "The bandwidth of the interfaces is constantly growing: from the first versions of USB with a speed of a few megabits per second to the modern versions with a speed of tens of gigabits per second. The growth of the bandwidth is necessary for working with high-speed drives and devices.",
+        "The balance of the input/output system is important for the performance of the entire computer. A fast processor and memory will not show their potential if the input/output is a bottleneck. Therefore the development of input/output interfaces goes in step with the development of the other components.",
+        "Thus, the input/output system provides the connection of a computer with the external devices and the environment through interfaces and ports, using various methods of organization (programmed, by interruptions, DMA), and its characteristics determine the efficiency of the exchange of data."
+      ],
+      "questions": [
+        "What is input/output, and what is its role in a computer system?",
+        "What is the difference between an interface and a port?",
+        "What methods of organizing input/output exist?",
+        "What is direct memory access (DMA), and what is its advantage?",
+        "What characteristics determine the performance of an input/output system?"
+      ]
+    },
+    {
+      "code": "3.8",
+      "title": "Comparative analysis of the input and output interfaces of computer systems",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in the comparative analysis of the input and output interfaces of computer systems by their characteristics and areas of application.",
+      "theory": [
+        "Modern computers use many input/output interfaces, each of which is optimized for certain tasks. The comparative analysis by the bandwidth, the latency, the universality and the areas of application allows one to choose the optimal interface for a specific task.",
+        "The key parameters for the comparison are the bandwidth (the maximum speed), the support of power supply, the maximum length of the cable, the number of connected devices, and the type of transmitted data (universal, video, network, storage)."
+      ],
+      "materials": [
+        "A computer with various interfaces.",
+        "Reference data on the characteristics of the interfaces.",
+        "Cables and devices with different interfaces.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the interfaces available on the computer and determine their type and version.",
+        "Compile a table of the characteristics of the main interfaces (USB of various versions, SATA, NVMe, HDMI, DisplayPort, Ethernet).",
+        "Compare the interfaces by the bandwidth, the universality and the areas of application.",
+        "Determine which interface is optimal for connecting a specific device (a drive, a monitor, a network, a peripheral).",
+        "Measure the actual data-transmission speed over different interfaces (for example, USB 2.0 and USB 3.0).",
+        "Make a conclusion about the criteria for choosing an interface for various tasks."
+      ],
+      "tasks": [
+        "Prepare a comparative table of the input/output interfaces by their characteristics.",
+        "Determine the optimal interface for connecting a drive, a monitor and a network.",
+        "Justify the choice of an interface for a given task."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of the comparative analysis of the input and output interfaces of computer systems and of choosing the optimal interface for a specific task.",
+      "questions": [
+        "What input/output interfaces are available on a modern computer?",
+        "What parameters are used to compare interfaces?",
+        "Which interface is optimal for connecting a high-speed drive?",
+        "What is the difference between HDMI and DisplayPort?",
+        "How is the choice of an interface for a specific device justified?"
+      ]
+    },
+    {
+      "code": "3.9",
+      "title": "The fundamentals of operating computers: power-on, power-off, initialization of the operating system",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in the correct power-on and power-off of a computer and in understanding the process of the initialization of the operating system.",
+      "theory": [
+        "The correct operation of a computer begins with the proper power-on and power-off. The process of the power-on includes the initialization of the equipment by the BIOS/UEFI, the power-on self-test (POST), the search for and the launch of the boot loader, and the loading of the operating system.",
+        "The incorrect power-off (the abrupt disconnection of the power) may lead to the loss of data and to errors of the file system. The correct power-off includes the completion of the work of the programs and the shutdown of the operating system, which correctly completes all the processes."
+      ],
+      "materials": [
+        "A computer with an installed operating system.",
+        "Access to the BIOS/UEFI.",
+        "Tools for monitoring the loading.",
+        "A report form."
+      ],
+      "procedure": [
+        "Power on the computer and observe the process of the initialization of the equipment and the passage of the POST.",
+        "Enter the BIOS/UEFI and study the boot settings and the order of the boot devices.",
+        "Observe the process of the loading of the operating system and determine its stages.",
+        "Study the modes of the power-off and the energy saving (shutdown, sleep, hibernation) and the difference between them.",
+        "Perform the correct power-off of the computer and explain why the abrupt disconnection of the power is undesirable.",
+        "Make a conclusion about the rules of the correct operation of a computer."
+      ],
+      "tasks": [
+        "Describe the stages of the loading of a computer from the power-on to the loading of the operating system.",
+        "Compile a table of the modes of the power-off and the energy saving with their differences.",
+        "Formulate the rules of the correct power-on and power-off of a computer."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of the correct power-on and power-off of a computer and the understanding of the process of the initialization of the operating system.",
+      "questions": [
+        "What stages does the process of the power-on of a computer include?",
+        "What does the BIOS/UEFI do at the start of a computer?",
+        "What modes of the power-off and the energy saving exist?",
+        "Why is the abrupt disconnection of the power of a computer undesirable?",
+        "What does the correct power-off of a computer include?"
+      ]
+    },
+    {
+      "code": "3.10",
+      "title": "Features of the installation, updating and removal of software in Windows and Linux",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in installing, updating and removing software in the Windows and Linux operating systems.",
+      "theory": [
+        "The management of software differs in Windows and Linux. In Windows, programs are installed from installation files (installers) or from the store; in Linux, package managers and repositories are used, which automatically resolve the dependencies.",
+        "The correct installation, updating and removal of software maintains the system in working order, frees up resources and ensures security. The incorrect removal may leave 'tails' and disrupt the operation of the system."
+      ],
+      "materials": [
+        "Computers with the Windows and Linux operating systems (or virtual machines).",
+        "Installation files and access to the repositories.",
+        "Administrator rights.",
+        "A report form."
+      ],
+      "procedure": [
+        "Install a program in Windows from an installation file and configure its parameters.",
+        "Install a program in Linux through the package manager from the repository and observe the resolution of the dependencies.",
+        "Update an installed program and the system in both operating systems.",
+        "Correctly remove a program in Windows (through the control panel) and in Linux (through the package manager).",
+        "Compare the processes of the management of software in Windows and Linux.",
+        "Make a conclusion about the features of the management of software in different operating systems."
+      ],
+      "tasks": [
+        "Describe the procedure for installing, updating and removing a program in Windows.",
+        "Describe the procedure for installing, updating and removing a program in Linux through the package manager.",
+        "Compile a comparative table of the management of software in Windows and Linux."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of installing, updating and removing software in the Windows and Linux operating systems and understands the differences between them.",
+      "questions": [
+        "How does the installation of software in Windows and in Linux differ?",
+        "What is a package manager, and how does it resolve dependencies?",
+        "Why is the correct removal of a program important?",
+        "How is the updating of programs and the system performed?",
+        "What are the advantages of repositories in Linux?"
+      ]
+    },
+    {
+      "code": "3.11",
+      "title": "Management of software: installation, updating, removal of applications in Windows/Linux",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To consolidate the practical skills of the comprehensive management of software in Windows and Linux, including the management of versions and the resolution of conflicts.",
+      "theory": [
+        "The comprehensive management of software includes not only the installation and removal, but also the management of the versions, the resolution of conflicts and dependencies, the maintenance of the relevance of the programs and the cleaning of the system from unnecessary software.",
+        "The maintenance of the system in an up-to-date and clean state increases its security, performance and reliability. The technician must master the tools of the management of software of both operating systems."
+      ],
+      "materials": [
+        "Computers with Windows and Linux.",
+        "Package managers and installation tools.",
+        "Administrator rights.",
+        "A report form."
+      ],
+      "procedure": [
+        "Make a list of the installed programs in Windows and in Linux and assess their relevance.",
+        "Update all the installed programs and the system to the current versions.",
+        "Remove unnecessary and outdated programs, cleaning the system of residual files.",
+        "Resolve a conflict of versions or dependencies (model the situation and describe the solution).",
+        "Configure the automatic updating of the programs and the system.",
+        "Make a conclusion about the methods of maintaining the system in an up-to-date and clean state."
+      ],
+      "tasks": [
+        "Prepare a list of the installed programs with an assessment of their relevance.",
+        "Describe the procedure for resolving a conflict of versions or dependencies.",
+        "Formulate recommendations for maintaining the system in a clean and up-to-date state."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the skills of the comprehensive management of software in Windows and Linux, including the management of versions and the maintenance of the system in an up-to-date state.",
+      "questions": [
+        "What does the comprehensive management of software include?",
+        "How is the relevance of the installed programs assessed?",
+        "How is a conflict of versions or dependencies resolved?",
+        "Why is it necessary to clean the system of unnecessary programs?",
+        "How is the automatic updating of programs configured?"
+      ]
+    },
+    {
+      "code": "3.12",
+      "title": "Monitoring and control of the work of hard disk drives and the storage of data",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The parameters of the state of drives and their monitoring.",
+        "S.M.A.R.T. technology and the analysis of its attributes.",
+        "Control of the free space and the file system.",
+        "Prevention of the loss of data."
+      ],
+      "body": [
+        "The monitoring and control of the work of drives is an important part of the operation of a computer system. The timely detection of the deterioration of the state of a drive allows one to prevent the loss of data and to plan the replacement of the equipment.",
+        "The state of a drive is characterized by a number of parameters: the temperature, the number of bad sectors, the wear of the resource (for SSDs), the time of operation, the number of switch-ons, and the speed of reading and writing. The monitoring of these parameters allows one to assess the 'health' of the drive.",
+        "The S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology) technology is built into modern drives and continuously collects the data on their state in the form of attributes. Each attribute has a current value, a threshold value and the worst recorded value.",
+        "The analysis of the S.M.A.R.T. attributes allows one to detect the deterioration of the state of a drive before its failure. The key attributes are the number of reallocated sectors, the number of pending sectors for reallocation, the number of read errors, the temperature, and (for SSDs) the wear of the resource.",
+        "The deterioration of the values of the critical attributes is a signal of an approaching failure of the drive. In such cases, it is necessary to urgently back up the data and to plan the replacement of the drive. The monitoring of the S.M.A.R.T. is the main method of predicting the failures of drives.",
+        "The utilities for monitoring drives (CrystalDiskInfo, the manufacturers' utilities) read the S.M.A.R.T., display the attributes in a convenient form and give a general assessment of the state of the drive ('good', 'caution', 'bad'). The regular check of the state of the drives is a part of the maintenance.",
+        "The control of the free space on the drives is also important for the stable operation of the system. The filling of the system disk to a critical level slows down the operation of the computer and may lead to errors. It is recommended to leave a sufficient amount of free space.",
+        "The control of the state of the file system includes the checking and the correction of errors with the help of the system tools (chkdsk in Windows, fsck in Linux). The errors of the file system may arise as a result of incorrect shutdowns and faults of the drive.",
+        "The defragmentation of hard disk drives (HDD) improves the speed of access to the data by ordering the fragments of the files. For SSDs, the defragmentation is not required and is even harmful; instead, the TRIM mechanism is used, which maintains the performance of the SSD.",
+        "The prevention of the loss of data is built on a combination of the monitoring of the state of the drives, the regular backing-up and the observance of the rules of operation. The most important rule is that the data must be duplicated, since any drive may fail.",
+        "The planning of the replacement of drives on the basis of the data of the monitoring allows one to avoid an unexpected loss of data. The drives with a deteriorating S.M.A.R.T. are replaced in a planned manner, transferring the data to new drives in advance.",
+        "Thus, the monitoring and control of the work of drives includes the analysis of the S.M.A.R.T., the control of the free space and the file system, the prevention of the loss of data and the planning of the replacement of the equipment, which ensures the reliability of the storage of information."
+      ],
+      "questions": [
+        "What parameters characterize the state of a drive?",
+        "What is the S.M.A.R.T. technology, and what attributes does it contain?",
+        "How does the analysis of the S.M.A.R.T. help to predict a failure?",
+        "Why is the control of the free space on a drive important?",
+        "What is the difference between the maintenance of an HDD and an SSD (defragmentation, TRIM)?"
+      ]
+    },
+    {
+      "code": "3.13",
+      "title": "Management of network connections and security in networks",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The basics of network connections of a computer.",
+        "The setting of network parameters.",
+        "Network security and protection against threats.",
+        "Diagnostics of network connections."
+      ],
+      "body": [
+        "The management of network connections is an important part of the operation of a computer system, since most computers operate in networks and have access to the Internet. The competent management ensures the stable, fast and safe operation of the network.",
+        "A network connection of a computer is provided by a network adapter (wired or wireless) and the corresponding settings. The wired connection (Ethernet) provides a high speed and reliability; the wireless one (Wi-Fi) provides mobility and convenience.",
+        "The setting of the network parameters includes the IP address, the subnet mask, the gateway and the DNS servers. These parameters may be assigned automatically by the DHCP server or set manually. The correct setting ensures the connection of the computer to the network and the Internet.",
+        "The IP address uniquely identifies a device in a network. The DNS server converts the symbolic names of sites into IP addresses. The gateway provides the access of the computer to other networks and the Internet. The understanding of these parameters is necessary for the management of the network.",
+        "Network security is the protection of a computer and the data from network threats: unauthorized access, malware, the interception of data, and network attacks. The security is ensured by a complex of hardware and software means.",
+        "A firewall controls the network traffic and blocks unwanted connections, protecting the computer from network attacks. It may be software (built into the operating system) or hardware (in a router). The correct setting of the firewall is the basis of network security.",
+        "Antivirus protection protects the computer from malware that may penetrate from the network. The regular updating of the antivirus databases and the scanning of the system are necessary for effective protection.",
+        "The encryption of data and connections protects the information from interception. The protocols HTTPS, VPN and the encryption of Wi-Fi (WPA2/WPA3) ensure the confidentiality of the data transmitted over the network. The use of unprotected connections is dangerous.",
+        "The protection of the wireless network includes the setting of a strong password, the use of modern encryption (WPA3), the hiding of the network name and the limitation of the access by the addresses of the devices. An unprotected Wi-Fi network is vulnerable to unauthorized access.",
+        "The diagnostics of network connections is performed by the system utilities: ping (the check of the availability of a node), ipconfig/ifconfig (the viewing of the settings), tracert (the tracing of the route), nslookup (the check of the DNS). These utilities help to detect and eliminate network problems.",
+        "The typical network problems are the absence of a connection, the low speed, the instability and the inaccessibility of certain resources. The diagnostics is built from the check of the physical connection and the settings to the analysis of the route and the operation of the services.",
+        "Thus, the management of network connections includes the setting of the network parameters, the provision of network security and the diagnostics of connections, which together ensure the stable and safe operation of a computer in a network."
+      ],
+      "questions": [
+        "What provides the network connection of a computer?",
+        "What network parameters must be set, and what is each of them for?",
+        "What is a firewall, and how does it protect a computer?",
+        "How is the security of a wireless network ensured?",
+        "What utilities are used for the diagnostics of network connections?"
+      ]
+    },
+    {
+      "code": "3.14",
+      "title": "Methods of ensuring the security of network connections and the protection of data",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in configuring the means of ensuring the security of network connections and the protection of data.",
+      "theory": [
+        "The security of network connections is ensured by a complex of measures: the setting of the firewall, the use of encryption, the protection of the wireless network, and the differentiation of access. The practical mastery of these means is necessary for the technician.",
+        "The protection of data includes encryption, access control, backing-up and antivirus protection. The combination of these measures ensures the confidentiality, integrity and availability of the data."
+      ],
+      "materials": [
+        "A computer with access to a network.",
+        "A router for configuring the wireless network.",
+        "Software for protection (firewall, antivirus).",
+        "A report form."
+      ],
+      "procedure": [
+        "Configure the firewall of the operating system: create rules for allowing and blocking connections.",
+        "Configure the protection of the wireless network: set the WPA3/WPA2 encryption and a strong password.",
+        "Check the operation of the antivirus protection and update its databases.",
+        "Configure a secure connection (HTTPS, VPN) and verify the encryption of the data.",
+        "Configure the differentiation of access to network resources.",
+        "Make a conclusion about the complex of measures for ensuring the security of network connections."
+      ],
+      "tasks": [
+        "Describe the procedure for configuring the firewall of the operating system.",
+        "Configure the protection of a wireless network and describe the chosen settings.",
+        "Compile a list of measures for ensuring the security of network connections and the protection of data."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of configuring the means of ensuring the security of network connections and the protection of data.",
+      "questions": [
+        "What measures ensure the security of network connections?",
+        "How is the firewall of the operating system configured?",
+        "What encryption is used to protect a wireless network?",
+        "How does antivirus protection protect against network threats?",
+        "What measures ensure the protection of data?"
+      ]
+    },
+    {
+      "code": "3.15",
+      "title": "Effective management of the energy consumption of computer systems",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in configuring the energy-consumption management of computer systems and in optimizing the energy efficiency.",
+      "theory": [
+        "The management of the energy consumption allows one to reduce the energy costs, to prolong the operating time of mobile devices from the battery and to reduce the heat release. The operating systems provide flexible means of the management of the power supply.",
+        "The power-supply schemes (plans) determine the behaviour of the computer: the brightness of the screen, the switching-off of the disks, the sleep modes, and the performance of the processor. The choice and the configuration of the scheme allow one to find a balance between the performance and the energy saving."
+      ],
+      "materials": [
+        "A computer (preferably a laptop) with an operating system.",
+        "Tools for the management of the power supply.",
+        "Utilities for monitoring the energy consumption.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the power-supply schemes available in the operating system and their parameters.",
+        "Configure the parameters of the power supply: the time of switching-off the screen and the disks, the sleep mode.",
+        "Configure the performance modes of the processor for various scenarios (maximum performance, balanced, energy saving).",
+        "Measure or assess the energy consumption in different modes.",
+        "Configure the energy-saving modes for a mobile device to prolong the battery life.",
+        "Make a conclusion about the methods of optimizing the energy efficiency of a computer system."
+      ],
+      "tasks": [
+        "Describe the power-supply schemes and their parameters.",
+        "Configure an optimal power-supply scheme for a given scenario of use.",
+        "Formulate recommendations for prolonging the battery life of a mobile device."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of configuring the energy-consumption management of computer systems and of optimizing the energy efficiency.",
+      "questions": [
+        "What does the management of the energy consumption of a computer allow one to achieve?",
+        "What is a power-supply scheme, and what does it determine?",
+        "What parameters of the power supply can be configured?",
+        "How are the performance modes of the processor configured?",
+        "What measures help to prolong the battery life of a mobile device?"
+      ]
+    },
+    {
+      "code": "3.16",
+      "title": "Technical maintenance of peripherals: diagnostics, cleaning, replacement of consumables",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The concept and goals of the technical maintenance of peripherals.",
+        "Diagnostics of the state of peripheral devices.",
+        "Cleaning and care of peripherals.",
+        "Replacement of consumables."
+      ],
+      "body": [
+        "The technical maintenance of peripheral devices is a complex of measures aimed at maintaining them in working order, preventing faults and prolonging their service life. The regular maintenance is more economical than the repair of faults that have already occurred.",
+        "The goals of the technical maintenance are the prevention of faults, the maintenance of the quality of the work of the devices, the prolongation of their service life and the provision of safety. The maintenance may be planned (according to a schedule) or carried out as needed.",
+        "The diagnostics of the state of peripheral devices is the first stage of the maintenance. It includes the visual inspection, the check of the operability, the assessment of the quality of the work and the detection of signs of wear or faults. The diagnostics determines the necessary maintenance measures.",
+        "For different types of devices, different diagnostic methods are applied. For printers, the quality of the printing and the state of the print heads are checked; for monitors, the quality of the image; for the keyboard and the mouse, the operability of all the keys and buttons; for the cooling, the rotation of the fans.",
+        "The cleaning of peripheral devices is an important part of the maintenance. Dust, dirt and the products of wear accumulate in the devices and worsen their work. Monitors are cleaned of dust and prints; keyboards are cleaned of crumbs and dust; printers require the cleaning of the print mechanism.",
+        "The cleaning is performed with means suitable for the specific type of device: soft cloths, brushes, compressed air, special liquids. The use of unsuitable means (aggressive solvents, abrasives) may damage the device.",
+        "The replacement of consumables is a regular operation of the maintenance of peripherals. Consumables are materials that are used up in the process of the work of the devices: cartridges, toner, ink, paper, ribbons, batteries. Their timely replacement ensures the quality of the work.",
+        "The replacement of consumables is performed with the use of suitable materials and observing the technology. The use of low-quality or unsuitable consumables may worsen the quality of the work, damage the device or void the warranty.",
+        "The cartridges and the toner of printers require careful handling: the observance of the storage rules, the correct installation and the timely replacement. The spilling of the toner is dangerous to health, so the replacement is performed carefully.",
+        "The maintenance of the cables and the connectors includes the check of their integrity, the cleaning of the contacts and the replacement of the damaged ones. The poor contact in the connections is a frequent cause of the unstable operation of the devices.",
+        "The keeping of the records of the maintenance (the schedule, the journal of the carried-out works, the records of the replacement of consumables) allows one to plan the maintenance, to track the state of the devices and to forecast the need for consumables and repair.",
+        "Thus, the technical maintenance of peripheral devices includes the diagnostics of their state, the cleaning and the care, and the replacement of consumables, which ensures the reliable operation and the prolongation of the service life of the devices."
+      ],
+      "questions": [
+        "What is the technical maintenance of peripheral devices, and what are its goals?",
+        "What does the diagnostics of the state of a peripheral device include?",
+        "How is the cleaning of peripheral devices performed correctly?",
+        "What are consumables, and why is their timely replacement important?",
+        "Why is it necessary to keep records of the maintenance of peripherals?"
+      ]
+    },
+    {
+      "code": "3.17",
+      "title": "Preventive maintenance and diagnostics of faults of peripheral devices",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in carrying out the preventive maintenance and the diagnostics of faults of peripheral devices.",
+      "theory": [
+        "Preventive maintenance is the planned maintenance carried out to prevent faults. It includes the inspection, the cleaning, the check of the operability and the replacement of the worn elements before they cause a failure.",
+        "The diagnostics of faults of peripheral devices is built from the simple to the complex: the check of the connection and the power, the check of the drivers and the settings, and the search for a hardware fault. Most problems are solved at the early stages."
+      ],
+      "materials": [
+        "A set of peripheral devices for maintenance.",
+        "Tools and means for cleaning.",
+        "Consumables for replacement.",
+        "A report form."
+      ],
+      "procedure": [
+        "Compile a plan of the preventive maintenance for a given set of peripheral devices.",
+        "Carry out the visual inspection and the diagnostics of the state of the devices.",
+        "Perform the cleaning of the devices from dust and dirt.",
+        "Check the operability of the devices and detect possible faults.",
+        "Eliminate the detected problems (the connection, the drivers, the settings) or describe the procedure for their elimination.",
+        "Make a conclusion about the state of the devices and the carried-out maintenance."
+      ],
+      "tasks": [
+        "Compile a plan of the preventive maintenance for a set of peripheral devices.",
+        "Carry out the diagnostics and the cleaning of at least two peripheral devices.",
+        "Describe the procedure for the diagnostics of a fault of a peripheral device."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of carrying out the preventive maintenance and the diagnostics of faults of peripheral devices.",
+      "questions": [
+        "What is preventive maintenance, and what does it include?",
+        "How is the plan of the preventive maintenance compiled?",
+        "In what sequence is the diagnostics of a fault performed?",
+        "What problems are solved at the early stages of the diagnostics?",
+        "Why is preventive maintenance more economical than repair?"
+      ]
+    },
+    {
+      "code": "3.18",
+      "title": "Elimination of typical faults of peripheral devices and the PC",
+      "type_en": "Comprehensive assessment of knowledge",
+      "kind": "practical",
+      "objective": "To check and consolidate, in a comprehensive form, the skills of operating, monitoring and eliminating the typical faults of computers and peripheral devices, summing up the learning outcome.",
+      "theory": [
+        "This lesson generalizes the material of the learning outcome on the operation and control of the work of computers and peripheral devices. The student must demonstrate the ability to comprehensively operate the equipment, to monitor its state and to eliminate the typical faults.",
+        "The elimination of faults is built on a systematic approach: the determination of the symptom, the formulation of the hypotheses about the cause, the check of the hypotheses from the most probable, the elimination of the cause and the verification of the result."
+      ],
+      "materials": [
+        "Computers and peripheral devices with model faults.",
+        "Diagnostic tools and utilities.",
+        "A set of situational problems.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Determine the symptoms of the faults of the proposed devices.",
+        "Formulate the hypotheses about the causes of the faults and arrange them by the probability.",
+        "Check the hypotheses, beginning with the most probable, and localize the causes.",
+        "Eliminate the detected faults (the connection, the drivers, the settings, the replacement of elements) or describe the procedure for their elimination.",
+        "Solve the proposed situational problems on the diagnostics and the elimination of faults.",
+        "Make a final conclusion about the state of the devices and the carried-out works."
+      ],
+      "tasks": [
+        "Prepare a report on the diagnostics and the elimination of the faults of the proposed devices.",
+        "Solve a situational problem on the elimination of a typical fault of a peripheral device.",
+        "Compile a memo on the typical faults of peripheral devices and the methods of their elimination."
+      ],
+      "conclusion": "As a result of the work, the student has demonstrated comprehensive skills of operating, monitoring and eliminating the typical faults of computers and peripheral devices.",
+      "questions": [
+        "What systematic approach is applied to the elimination of faults?",
+        "How are the hypotheses about the causes of a fault formulated and checked?",
+        "What are the typical faults of peripheral devices?",
+        "How is the result of the elimination of a fault verified?",
+        "Why is it important to begin the check with the most probable causes?"
+      ]
+    }
+  ]
+}

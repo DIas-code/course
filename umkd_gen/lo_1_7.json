@@ -1,0 +1,704 @@
+{
+  "id": "1.7",
+  "title": "Manage the internal and external devices of a personal computer",
+  "weight": "7%",
+  "hours": "36 hours",
+  "glossary": [
+    ["API (Application Programming Interface)", "A set of functions and procedures through which a program interacts with the operating system or another program."],
+    ["Device Manager", "A Windows component for viewing and managing the devices installed in a computer and their drivers."],
+    ["OpenHardwareMonitor", "An open program and library for monitoring the temperatures, the voltages and the load of the hardware components of a computer."],
+    ["psutil", "A cross-platform Python library for obtaining information about the processes and the use of the system resources."],
+    ["PnP (Plug and Play)", "A technology for the automatic detection and configuration of the devices connected to a computer."],
+    ["Service", "A program that runs in the background of the operating system and performs system functions without the direct participation of the user."],
+    ["subprocess", "A Python module for launching external programs and system commands from a script."],
+    ["USB device", "A device connected over the universal serial bus and managed through the corresponding controllers and drivers."],
+    ["WMI", "Windows Management Instrumentation — an infrastructure for managing data and operations and obtaining information about the equipment in Windows."],
+    ["Script automation", "The automation of repetitive tasks of management and diagnostics with the help of programs in scripting languages (Python, PowerShell, Bash)."]
+  ],
+  "lessons": [
+    {
+      "code": "7.1",
+      "title": "Introduction to the management of devices through programming",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form a holistic understanding of the management of the devices of a computer through programming and to consolidate the skills of using the system tools.",
+      "theory": [
+        "The management of the devices of a computer can be performed not only manually, through the graphical interface, but also programmatically — with the help of the scripts and the programs that turn to the system interfaces. The programmatic management allows one to automate the routine tasks and to manage many devices.",
+        "For the programmatic management of the devices in Windows, the interfaces WMI, the registry, the Device Manager API and the PowerShell cmdlets are used. The scripting languages Python and PowerShell provide a convenient access to these interfaces."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "Python and PowerShell.",
+        "The Device Manager.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the methods of the management of the devices: the graphical interface and the programmatic management.",
+        "Examine the Device Manager and the information about the devices that it provides.",
+        "Study the system interfaces for the programmatic management of the devices (WMI, PowerShell).",
+        "Obtain the list of the devices with the help of PowerShell (Get-PnpDevice).",
+        "Compare the manual and the programmatic management of the devices.",
+        "Make a conclusion about the capabilities of the programmatic management of the devices."
+      ],
+      "tasks": [
+        "Compile a list of the system interfaces for the management of the devices.",
+        "Obtain the list of the devices with the help of PowerShell.",
+        "Compare the advantages of the manual and the programmatic management."
+      ],
+      "conclusion": "As a result of the work, the student has formed a holistic understanding of the management of the devices of a computer through programming.",
+      "questions": [
+        "What methods of the management of the devices exist?",
+        "What interfaces are used for the programmatic management of the devices?",
+        "What does the Device Manager provide?",
+        "What are the advantages of the programmatic management?",
+        "What languages are used for the management of the devices?"
+      ]
+    },
+    {
+      "code": "7.2",
+      "title": "Overview of the system interfaces of Windows (WMI, PowerShell, Device Manager API)",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in using the system interfaces of Windows for obtaining the information about the devices and managing them.",
+      "theory": [
+        "Windows provides several system interfaces for the management of the devices and the system. WMI provides a unified access to the information about the equipment and the operations of the management. PowerShell provides the cmdlets for the administration. The Device Manager API provides the management of the PnP devices.",
+        "The understanding of these interfaces and their capabilities allows one to choose the optimal tool for a specific task of the management of the devices and to combine them in the scripts."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell with the access to WMI.",
+        "Documentation on the interfaces.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the WMI interface and its classes for the work with the devices.",
+        "Study the cmdlets of PowerShell for the management of the devices (Get-PnpDevice, Enable/Disable-PnpDevice).",
+        "Obtain the information about the devices through WMI with the help of PowerShell.",
+        "Obtain the information about the devices through the PnP cmdlets.",
+        "Compare the capabilities of the various interfaces for the management of the devices.",
+        "Make a conclusion about the system interfaces of Windows for the management of the devices."
+      ],
+      "tasks": [
+        "Compile a comparative table of the system interfaces of Windows.",
+        "Obtain the information about the devices through WMI and the PnP cmdlets.",
+        "Determine the optimal interface for various tasks of the management."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of using the system interfaces of Windows for obtaining the information about the devices and managing them.",
+      "questions": [
+        "What system interfaces of Windows are used for the management of the devices?",
+        "What does the WMI interface provide?",
+        "What cmdlets of PowerShell are used for the management of the devices?",
+        "What is the Device Manager API for?",
+        "How is the optimal interface for a task chosen?"
+      ]
+    },
+    {
+      "code": "7.3",
+      "title": "Work with the Python library psutil: basic capabilities",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in using the basic capabilities of the psutil library for obtaining the information about the resources and the devices of a computer.",
+      "theory": [
+        "psutil (process and system utilities) is a cross-platform Python library for obtaining the information about the use of the system resources (the processor, the memory, the disks, the network) and the management of the processes. It is convenient for the creation of the utilities of the monitoring and the diagnostics.",
+        "psutil provides the functions for obtaining the load of the processor, the use of the memory, the information about the disks and the partitions, the network connections and the running processes. These data are used for the monitoring and the management."
+      ],
+      "materials": [
+        "A computer with the installed Python and the psutil library.",
+        "A code editor.",
+        "Documentation on psutil.",
+        "A report form."
+      ],
+      "procedure": [
+        "Install the psutil library and study its main functions.",
+        "Obtain the information about the load of the processor with the help of psutil.",
+        "Obtain the information about the use of the memory and the disks.",
+        "Obtain the information about the network connections and the processes.",
+        "Write a fragment of the script that displays the main parameters of the system.",
+        "Make a conclusion about the capabilities of the psutil library."
+      ],
+      "tasks": [
+        "Write a Python script for obtaining the information about the resources of the system with psutil.",
+        "Display the load of the processor, the memory and the disks.",
+        "Describe the main functions of the psutil library."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of using the basic capabilities of the psutil library for obtaining the information about the resources and the devices of a computer.",
+      "questions": [
+        "What is the psutil library?",
+        "What information can be obtained with the help of psutil?",
+        "How is the load of the processor obtained?",
+        "How is the information about the disks and the network obtained?",
+        "For what utilities is psutil convenient?"
+      ]
+    },
+    {
+      "code": "7.4",
+      "title": "Obtaining the information about the equipment through WMI",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in obtaining the detailed information about the equipment of a computer through WMI.",
+      "theory": [
+        "WMI provides the detailed information about all the components of the equipment through the corresponding classes: Win32_Processor, Win32_PhysicalMemory, Win32_DiskDrive, Win32_VideoController and others. This information is used for the inventory, the diagnostics and the management.",
+        "The access to WMI is possible from PowerShell (Get-CimInstance) and from Python (the WMI library). The obtaining of the information about the equipment through WMI is the basis for the automation of the administration."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell and (or) Python with the WMI library.",
+        "A list of the WMI classes.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the WMI classes for obtaining the information about the equipment.",
+        "Obtain the information about the processor and the memory through WMI.",
+        "Obtain the information about the disks and the video controller through WMI.",
+        "Obtain the information about the motherboard and the BIOS through WMI.",
+        "Systematize the obtained information into a report on the equipment.",
+        "Make a conclusion about obtaining the information about the equipment through WMI."
+      ],
+      "tasks": [
+        "Obtain the information about the main components of the equipment through WMI.",
+        "Compile a report on the equipment of the computer.",
+        "Compile a list of the WMI classes for obtaining the information about the equipment."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of obtaining the detailed information about the equipment of a computer through WMI.",
+      "questions": [
+        "What WMI classes are used for obtaining the information about the equipment?",
+        "How is the information about the processor obtained through WMI?",
+        "How is the information about the disks obtained through WMI?",
+        "From what tools is the access to WMI possible?",
+        "How is WMI used for the inventory of the equipment?"
+      ]
+    },
+    {
+      "code": "7.5",
+      "title": "Management of the services and the drivers through PowerShell",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in managing the services and the drivers of an operating system with the help of PowerShell.",
+      "theory": [
+        "The services are the programs that run in the background and perform the system functions. PowerShell provides the cmdlets for the management of the services: Get-Service, Start-Service, Stop-Service, Restart-Service. The drivers are managed through the PnP cmdlets and pnputil.",
+        "The programmatic management of the services and the drivers allows one to automate the administration, to mass-manage the systems and to create the scripts of the maintenance and the restoration."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell with administrator rights.",
+        "A list of the cmdlets for the management of the services.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the list of the services with the help of the cmdlet Get-Service.",
+        "Study the state of the services (running, stopped) and their types of start.",
+        "Perform the start, the stop and the restart of a service with the corresponding cmdlets.",
+        "Obtain the information about the drivers with the help of the PnP cmdlets.",
+        "Write a fragment of the script for the management of a service.",
+        "Make a conclusion about the management of the services and the drivers through PowerShell."
+      ],
+      "tasks": [
+        "Obtain the list of the services and analyse their state.",
+        "Perform the management of a service (the start, the stop) from PowerShell.",
+        "Write a fragment of the script for the management of a service."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of managing the services and the drivers of an operating system with the help of PowerShell.",
+      "questions": [
+        "What are the services, and what are they for?",
+        "What cmdlets are used for the management of the services?",
+        "How is the start and the stop of a service performed?",
+        "How are the drivers managed through PowerShell?",
+        "What are the advantages of the programmatic management of the services?"
+      ]
+    },
+    {
+      "code": "7.6",
+      "title": "Management of the processes and the resources with the help of Python",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in managing the processes and the resources of a computer with the help of Python and the psutil library.",
+      "theory": [
+        "psutil allows one not only to obtain the information about the processes but also to manage them: to obtain the list of the processes, the information about each of them (the use of the processor and the memory), and to terminate the processes. This is used for the monitoring and the management of the resources.",
+        "The management of the processes from a Python script allows one to automate the tracking of the resource-intensive processes, the termination of the hung processes and the analysis of the load of the system."
+      ],
+      "materials": [
+        "A computer with the installed Python and the psutil library.",
+        "A code editor.",
+        "Documentation on psutil.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the list of the running processes with the help of psutil.",
+        "Obtain the information about each process: the name, the identifier, the use of the processor and the memory.",
+        "Sort the processes by the use of the resources and detect the resource-intensive ones.",
+        "Write a fragment of the script for the termination of a process by its identifier.",
+        "Add the monitoring of the load of the resources by the processes.",
+        "Make a conclusion about the management of the processes and the resources with Python."
+      ],
+      "tasks": [
+        "Write a Python script for obtaining and analysing the list of the processes.",
+        "Detect the most resource-intensive processes.",
+        "Demonstrate the termination of a process from a script."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of managing the processes and the resources of a computer with the help of Python and the psutil library.",
+      "questions": [
+        "What does psutil allow one to do with the processes?",
+        "How is the list of the processes obtained?",
+        "How are the resource-intensive processes detected?",
+        "How is a process terminated from a script?",
+        "What is the management of the processes used for?"
+      ]
+    },
+    {
+      "code": "7.7",
+      "title": "Connection and configuration of the external devices through the system commands",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in connecting and configuring the external devices with the help of the system commands and the scripts.",
+      "theory": [
+        "The external devices can be configured not only through the graphical interface but also through the system commands and the scripts. This allows one to automate the configuration, to apply the uniform settings to many computers and to manage the devices remotely.",
+        "For the configuration of the devices through the commands, the utilities pnputil, the PowerShell cmdlets and the WMI are used. They allow one to enable, disable and configure the devices programmatically."
+      ],
+      "materials": [
+        "A computer with the connected external devices.",
+        "PowerShell and the system utilities.",
+        "External devices for the experiments.",
+        "A report form."
+      ],
+      "procedure": [
+        "Connect an external device and observe its automatic detection (PnP).",
+        "Obtain the information about the connected device through the system commands.",
+        "Configure the parameters of the device through the commands or the scripts.",
+        "Demonstrate the enabling and the disabling of the device with the PnP cmdlets.",
+        "Write a fragment of the script for the configuration of a device.",
+        "Make a conclusion about the configuration of the external devices through the system commands."
+      ],
+      "tasks": [
+        "Obtain the information about a connected device through the commands.",
+        "Demonstrate the enabling and the disabling of a device from PowerShell.",
+        "Write a fragment of the script for the configuration of a device."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of connecting and configuring the external devices with the help of the system commands and the scripts.",
+      "questions": [
+        "How can the external devices be configured besides the graphical interface?",
+        "What utilities are used for the configuration of the devices through the commands?",
+        "What is the technology PnP?",
+        "How is a device enabled and disabled programmatically?",
+        "What are the advantages of the configuration of the devices through the scripts?"
+      ]
+    },
+    {
+      "code": "7.8",
+      "title": "Work with USB devices through the programming interfaces",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in obtaining the information about the USB devices and managing them through the programming interfaces.",
+      "theory": [
+        "The USB devices are connected over the universal serial bus and are managed through the corresponding controllers and drivers. The information about the USB devices can be obtained through WMI (the class Win32_USBControllerDevice) and the PnP cmdlets.",
+        "The programmatic work with the USB devices allows one to obtain the list of the connected devices, their parameters, and to track the connection and the disconnection of the devices, which is used for the monitoring and the security."
+      ],
+      "materials": [
+        "A computer with the USB ports.",
+        "USB devices for the experiments.",
+        "PowerShell and (or) Python.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the list of the connected USB devices through WMI or the PnP cmdlets.",
+        "Obtain the information about each USB device: the name, the identifier, the type.",
+        "Connect and disconnect a USB device and observe the change of the list.",
+        "Write a fragment of the script for obtaining the list of the USB devices.",
+        "Study the possibilities of tracking the connection of the USB devices.",
+        "Make a conclusion about the work with the USB devices through the programming interfaces."
+      ],
+      "tasks": [
+        "Write a script for obtaining the list of the connected USB devices.",
+        "Obtain the information about the parameters of the USB devices.",
+        "Describe the possibilities of tracking the connection of the USB devices."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of obtaining the information about the USB devices and managing them through the programming interfaces.",
+      "questions": [
+        "How are the USB devices managed?",
+        "Through what interfaces is the information about the USB devices obtained?",
+        "How is the list of the connected USB devices obtained?",
+        "How can the connection of the USB devices be tracked?",
+        "What is the tracking of the USB devices used for?"
+      ]
+    },
+    {
+      "code": "7.9",
+      "title": "Determination of the status of the devices and the diagnostics of the errors",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in determining the status of the devices and diagnosing the errors of their operation programmatically.",
+      "theory": [
+        "Each device in the system has a status that reflects its state: working correctly, having a problem, disabled. The status and the error codes of the devices can be obtained through the PnP cmdlets and WMI, which allows one to automate the diagnostics.",
+        "The error codes of the devices (the Device Manager codes) indicate the nature of the problem: the absence of the driver, the conflict of the resources, the disabling of the device. The analysis of these codes helps to determine the cause of the problem."
+      ],
+      "materials": [
+        "A computer with the connected devices.",
+        "PowerShell with the PnP cmdlets.",
+        "A reference of the error codes of the devices.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the list of the devices and their status with the help of the cmdlet Get-PnpDevice.",
+        "Detect the devices with the problems (the status differs from OK).",
+        "Obtain the error codes of the problem devices.",
+        "Analyse the error codes and determine the cause of the problems.",
+        "Write a fragment of the script for the detection of the problem devices.",
+        "Make a conclusion about the determination of the status and the diagnostics of the errors of the devices."
+      ],
+      "tasks": [
+        "Write a script for obtaining the status of the devices and the detection of the problems.",
+        "Analyse the error codes of the problem devices.",
+        "Compile a table of the typical error codes and their meaning."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of determining the status of the devices and diagnosing the errors of their operation programmatically.",
+      "questions": [
+        "What is the status of a device?",
+        "How is the status of the devices obtained?",
+        "What do the error codes of the devices indicate?",
+        "How are the problem devices detected?",
+        "How does the analysis of the error codes help in the diagnostics?"
+      ]
+    },
+    {
+      "code": "7.10",
+      "title": "Monitoring of the temperature of the processor through the OpenHardwareMonitor API",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in monitoring the temperature of the processor and the other components through the OpenHardwareMonitor API.",
+      "theory": [
+        "OpenHardwareMonitor is an open program and library for monitoring the temperatures, the voltages, the speed of the fans and the load of the components. It provides the access to the data of the sensors through WMI, which allows one to use it in the scripts.",
+        "The monitoring of the temperature of the processor and the components allows one to track the thermal mode, to detect the overheating and to take the measures in a timely manner. This is an important part of the maintenance and the management of the equipment."
+      ],
+      "materials": [
+        "A computer with the installed OpenHardwareMonitor.",
+        "PowerShell or Python for the access to the data.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Install and launch OpenHardwareMonitor and study the data of the sensors.",
+        "Study the access to the data of OpenHardwareMonitor through WMI.",
+        "Obtain the temperature of the processor through the WMI namespace of OpenHardwareMonitor.",
+        "Obtain the temperatures of the other components and the speed of the fans.",
+        "Write a fragment of the script for the monitoring of the temperature.",
+        "Make a conclusion about the monitoring of the temperature through the OpenHardwareMonitor API."
+      ],
+      "tasks": [
+        "Obtain the temperature of the processor through OpenHardwareMonitor.",
+        "Write a script for the monitoring of the temperatures of the components.",
+        "Describe the access to the data of OpenHardwareMonitor through WMI."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of monitoring the temperature of the processor and the other components through the OpenHardwareMonitor API.",
+      "questions": [
+        "What is OpenHardwareMonitor?",
+        "What data does OpenHardwareMonitor provide?",
+        "How is the access to the data of OpenHardwareMonitor performed?",
+        "How is the temperature of the processor obtained programmatically?",
+        "What is the monitoring of the temperature used for?"
+      ]
+    },
+    {
+      "code": "7.11",
+      "title": "Monitoring of the load of CPU, RAM, Disk with psutil",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in monitoring the load of the processor, the memory and the disks with the help of the psutil library.",
+      "theory": [
+        "psutil provides the functions for obtaining the load of the processor (cpu_percent), the use of the memory (virtual_memory), and the load of the disks (disk_usage, disk_io_counters). On their basis, the monitoring of the load of the system is built.",
+        "The monitoring of the load allows one to detect the bottlenecks of the system, the resource-intensive processes and the moments of the peak load, which is used for the optimization and the diagnostics."
+      ],
+      "materials": [
+        "A computer with the installed Python and the psutil library.",
+        "A code editor.",
+        "A tool for creating the load.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the load of the processor with the help of psutil.",
+        "Obtain the use of the memory and the load of the disks.",
+        "Organize the periodic collection of the parameters in a cycle.",
+        "Add the output of the load on the screen and the saving to a file.",
+        "Create the load on the system and observe the change of the parameters.",
+        "Make a conclusion about the monitoring of the load with psutil."
+      ],
+      "tasks": [
+        "Write a Python script for the monitoring of the load of the CPU, the RAM and the disks.",
+        "Save the data of the monitoring to a file.",
+        "Analyse the dynamics of the load under the load on the system."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of monitoring the load of the processor, the memory and the disks with the help of the psutil library.",
+      "questions": [
+        "What functions of psutil are used for the monitoring of the load?",
+        "How is the load of the processor obtained?",
+        "How is the use of the memory and the disks obtained?",
+        "How is the periodic collection of the parameters organized?",
+        "What does the monitoring of the load allow one to detect?"
+      ]
+    },
+    {
+      "code": "7.12",
+      "title": "Automation of the update of the drivers with the help of scripts",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in automating the update of the drivers of the devices with the help of scripts.",
+      "theory": [
+        "The update of the drivers maintains the correct operation of the devices and eliminates the errors. The automation of the update with the help of the scripts (pnputil, PowerShell) allows one to update the drivers on many computers and to apply the uniform drivers.",
+        "The utility pnputil allows one to add, to delete and to manage the drivers from the command line, which is convenient for the automation. The PowerShell cmdlets provide the additional capabilities of the management of the drivers."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell and the utility pnputil.",
+        "Driver files for the experiments.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the list of the installed drivers with the help of pnputil.",
+        "Study the commands of pnputil for the management of the drivers.",
+        "Demonstrate the addition of a driver to the system through pnputil.",
+        "Write a fragment of the script for the automation of the update of the drivers.",
+        "Add the logging of the actions to the script.",
+        "Make a conclusion about the automation of the update of the drivers."
+      ],
+      "tasks": [
+        "Obtain the list of the installed drivers with the help of pnputil.",
+        "Write a fragment of the script for the management of the drivers.",
+        "Describe the commands of pnputil for the work with the drivers."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of automating the update of the drivers of the devices with the help of scripts.",
+      "questions": [
+        "Why is the update of the drivers necessary?",
+        "What utility is used for the management of the drivers from the command line?",
+        "What commands does pnputil provide?",
+        "How is the addition of a driver automated?",
+        "What are the advantages of the automation of the update of the drivers?"
+      ]
+    },
+    {
+      "code": "7.13",
+      "title": "Writing of the utilities for the management of the network devices",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in writing the utilities for the management of the network devices and the network settings.",
+      "theory": [
+        "The network devices (the network adapters) can be managed programmatically through the PowerShell cmdlets (Get-NetAdapter, Set-NetIPAddress) and through WMI. This allows one to automate the configuration of the network and to manage the network settings of many computers.",
+        "The utilities for the management of the network devices automate the typical tasks: the configuration of the IP addresses, the enabling and the disabling of the adapters, the configuration of the DNS, and the diagnostics of the network."
+      ],
+      "materials": [
+        "A computer with the network adapters.",
+        "PowerShell with administrator rights.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the list of the network adapters with the help of Get-NetAdapter.",
+        "Obtain and analyse the network settings of the adapters.",
+        "Demonstrate the enabling and the disabling of a network adapter.",
+        "Write a fragment of the script for the configuration of the network settings.",
+        "Add the diagnostics of the network connection to the utility.",
+        "Make a conclusion about the management of the network devices through the scripts."
+      ],
+      "tasks": [
+        "Write a utility for obtaining and analysing the network settings.",
+        "Demonstrate the management of a network adapter from a script.",
+        "Add the configuration of the network settings to the utility."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of writing the utilities for the management of the network devices and the network settings.",
+      "questions": [
+        "How are the network devices managed programmatically?",
+        "What cmdlets are used for the management of the network adapters?",
+        "How are the network settings configured through the scripts?",
+        "How is the enabling and the disabling of an adapter performed?",
+        "What tasks do the utilities for the management of the network automate?"
+      ]
+    },
+    {
+      "code": "7.14",
+      "title": "Management of the configuration of the system through Python scripts",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in managing the configuration of an operating system through Python scripts.",
+      "theory": [
+        "The management of the configuration of the system includes the change of the settings of the operating system, the registry, the services and the parameters of the devices. Python allows one to automate these tasks through the modules winreg, subprocess and WMI.",
+        "The automation of the management of the configuration allows one to apply the uniform settings to many computers, to quickly configure the new systems and to maintain the configuration in the required state."
+      ],
+      "materials": [
+        "A computer with the installed Python.",
+        "The modules winreg, subprocess, WMI.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the parameters of the configuration of the system that are to be managed.",
+        "Write a fragment of the script for the reading of the parameters of the configuration through winreg.",
+        "Write a fragment of the script for the change of the settings of the system.",
+        "Add the management of the services through the script.",
+        "Add the safety measures and the logging to the script.",
+        "Make a conclusion about the management of the configuration of the system through Python."
+      ],
+      "tasks": [
+        "Write a Python script for the management of the parameters of the configuration of the system.",
+        "Demonstrate the change of a setting of the system from a script.",
+        "Add the logging of the changes to the script."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of managing the configuration of an operating system through Python scripts.",
+      "questions": [
+        "What does the management of the configuration of the system include?",
+        "What modules of Python are used for the management of the configuration?",
+        "How are the parameters of the configuration read and changed?",
+        "How are the services managed from a script?",
+        "What are the advantages of the automation of the management of the configuration?"
+      ]
+    },
+    {
+      "code": "7.15",
+      "title": "Configuration of the parameters of the devices: sound, network, input",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in configuring the parameters of the various devices (sound, network, input) programmatically.",
+      "theory": [
+        "The parameters of the various devices — the sound (the volume, the playback device), the network (the IP, the DNS), the input (the keyboard, the mouse) — can be configured programmatically through the system interfaces and the scripts. This allows one to automate the configuration of the workplaces.",
+        "For the configuration of the various devices, the corresponding PowerShell cmdlets, the WMI and the system utilities are used. The combination of these means allows one to configure the devices comprehensively."
+      ],
+      "materials": [
+        "A computer with the sound, network and input devices.",
+        "PowerShell and the system utilities.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the methods of the programmatic configuration of the sound devices.",
+        "Configure the network parameters of the device through the scripts.",
+        "Study the configuration of the parameters of the input devices.",
+        "Write a fragment of the script for the comprehensive configuration of the devices.",
+        "Test the script and check the applied settings.",
+        "Make a conclusion about the configuration of the parameters of the devices programmatically."
+      ],
+      "tasks": [
+        "Configure the network parameters of a device through a script.",
+        "Describe the methods of the configuration of the sound and the input devices.",
+        "Write a fragment of the script for the configuration of the devices."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of configuring the parameters of the various devices programmatically.",
+      "questions": [
+        "What parameters of the devices can be configured programmatically?",
+        "How are the sound devices configured?",
+        "How are the network parameters configured through the scripts?",
+        "How are the parameters of the input devices configured?",
+        "What are the advantages of the programmatic configuration of the devices?"
+      ]
+    },
+    {
+      "code": "7.16",
+      "title": "Execution of the system commands through subprocess",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in executing the system commands and managing the devices through the subprocess module of Python.",
+      "theory": [
+        "The subprocess module of Python allows one to launch the system commands and the utilities from a script, to obtain their output and to process it. This is used for the management of the devices through the system utilities that do not have a direct API.",
+        "Through subprocess, one can launch the utilities pnputil, netsh, sc and others, combining their capabilities with the logic of Python. This makes Python a universal tool for the automation."
+      ],
+      "materials": [
+        "A computer with the installed Python.",
+        "The subprocess module.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the capabilities of the subprocess module for the launch of the commands.",
+        "Write a fragment of the script for the launch of a system command and obtaining its output.",
+        "Process the result of the execution of the command in the script.",
+        "Launch the device-management utilities through subprocess.",
+        "Add the handling of the errors of the execution of the commands.",
+        "Make a conclusion about the execution of the system commands through subprocess."
+      ],
+      "tasks": [
+        "Write a Python script for the launch of the system commands.",
+        "Process the result of the execution of a command.",
+        "Add the handling of the errors to the script."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of executing the system commands and managing the devices through the subprocess module of Python.",
+      "questions": [
+        "What does the subprocess module allow one to do?",
+        "How is a system command launched from a script?",
+        "How is the output of a command obtained and processed?",
+        "What utilities can be launched through subprocess?",
+        "Why is the handling of the errors necessary?"
+      ]
+    },
+    {
+      "code": "7.17",
+      "title": "Collection of the data about the equipment into log files",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in collecting the data about the equipment and the state of the system into log files for the subsequent analysis.",
+      "theory": [
+        "The collection of the data about the equipment and the state of the system into log files allows one to track the dynamics of the parameters, to detect the trends and to diagnose the problems. The logs are written in a structured form for the convenience of the analysis.",
+        "For the collection of the data, the scripts that periodically obtain the parameters of the system and write them to a file with a time stamp are used. The format of the log (text, CSV, JSON) is chosen for the convenience of the subsequent analysis."
+      ],
+      "materials": [
+        "A computer with the installed Python.",
+        "The libraries psutil and WMI.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the parameters of the equipment and the system to be logged.",
+        "Write a fragment of the script for obtaining the parameters and writing them to a file.",
+        "Add the time stamp and the structured format (CSV) to the log.",
+        "Organize the periodic collection of the data in a cycle.",
+        "Analyse the collected log and the dynamics of the parameters.",
+        "Make a conclusion about the collection of the data about the equipment into the logs."
+      ],
+      "tasks": [
+        "Write a script for the collection of the data about the equipment into a log file.",
+        "Organize the structured format of the log with the time stamps.",
+        "Analyse the collected log."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of collecting the data about the equipment and the state of the system into log files for the subsequent analysis.",
+      "questions": [
+        "What does the collection of the data into the logs allow one to do?",
+        "In what format are the logs written?",
+        "How is the periodic collection of the data organized?",
+        "Why is the time stamp necessary in a log?",
+        "How is the collected log analysed?"
+      ]
+    },
+    {
+      "code": "7.18",
+      "title": "Final mini-project: «Automated device-management system»",
+      "type_en": "Consolidation and assessment of knowledge",
+      "kind": "practical",
+      "objective": "To consolidate and check, in a comprehensive form, the skills of the management of the devices through programming by developing a final mini-project — an automated device-management system, summing up the learning outcome and the module as a whole.",
+      "theory": [
+        "The final mini-project integrates all the skills acquired in the learning outcome: obtaining the information about the devices, monitoring their state, managing the devices and the services, and automating the typical tasks. The result is a complete automated device-management system.",
+        "The automated device-management system collects the information about the devices, monitors their state, detects the problems and performs the actions of the management or the notification. This is a comprehensive task that demonstrates the mastery of the management of the devices through programming."
+      ],
+      "materials": [
+        "A computer with the installed Python and (or) PowerShell.",
+        "The libraries psutil, WMI and the system interfaces.",
+        "A code editor.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Design the structure of the device-management system: the modules of the collection of the information, the monitoring and the management.",
+        "Implement the module of obtaining the information about the devices and their state.",
+        "Implement the module of the monitoring of the parameters and the detection of the problems.",
+        "Implement the module of the management of the devices or the notification of the problems.",
+        "Integrate the modules into a single system and add the logging and the report.",
+        "Test the system, demonstrate its operation and make a conclusion about the project."
+      ],
+      "tasks": [
+        "Develop an automated device-management system as a mini-project.",
+        "Implement the collection of the information, the monitoring and the management in the system.",
+        "Test and demonstrate the operation of the system and prepare a report."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the comprehensive skills of the management of the devices of a computer through programming and has developed a complete automated device-management system, summing up the learning outcome and the module.",
+      "questions": [
+        "What skills does the final mini-project integrate?",
+        "What does an automated device-management system include?",
+        "How is the structure of the system designed?",
+        "How is the monitoring and the detection of the problems implemented?",
+        "How is the operation of the developed system tested and demonstrated?"
+      ]
+    }
+  ]
+}

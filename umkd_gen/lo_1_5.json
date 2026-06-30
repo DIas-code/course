@@ -1,0 +1,1675 @@
+{
+  "id": "1.5",
+  "title": "Restore equipment after hardware and software failures and prevent them",
+  "weight": "15%",
+  "hours": "90 hours",
+  "glossary": [
+    ["Backup", "A copy of data created for its restoration in the event of loss or damage of the originals."],
+    ["Disaster Recovery", "A plan and a set of measures for restoring the operability of IT systems after serious failures and emergency situations."],
+    ["Event log", "A system file in which the operating system records the events of the operation of the system, the applications and the security."],
+    ["Hardware failure", "A malfunction of the physical components of a computer that disrupts its operation."],
+    ["psutil", "A cross-platform Python library for obtaining information about the processes and the use of the system resources (CPU, memory, disks, network)."],
+    ["PowerShell", "A task-automation and configuration-management framework from Microsoft, consisting of a command-line shell and a scripting language."],
+    ["Restore point", "A saved state of the system parameters and the files to which the system can be returned after a failure."],
+    ["Script", "A program in an interpreted language that automates a sequence of actions."],
+    ["WMI (Windows Management Instrumentation)", "An infrastructure for managing data and operations in Windows that provides access to the information about the equipment and the system."],
+    ["winreg", "A Python module for working with the Windows registry — reading and changing the system parameters."]
+  ],
+  "lessons": [
+    {
+      "code": "5.1",
+      "title": "The personal computer and its hardware part",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The structure of a personal computer.",
+        "The main hardware components.",
+        "The interaction of the components.",
+        "The reliability of the hardware and the causes of failures."
+      ],
+      "body": [
+        "A personal computer is a universal computing device intended for the work of one user. The understanding of its hardware part is the basis for the diagnostics, the restoration of the operability and the prevention of failures.",
+        "The hardware part of a personal computer consists of the central processor, the random-access memory, the motherboard, the data-storage devices, the graphics adapter, the power supply, the cooling system and the case. Each of these components performs its function and affects the reliability of the whole.",
+        "The central processor performs the calculations and controls the operation of the system. The random-access memory stores the data and the code of the running programs. The motherboard unites all the components and provides their interaction over the buses.",
+        "The data-storage devices store the information permanently. The graphics adapter forms the image. The power supply provides all the components with the necessary voltages. The cooling system removes the heat, preventing the overheating.",
+        "The components of a computer interact over the buses and the interfaces, forming a single system. The reliability of the operation of the computer depends on the reliability of each component and the correctness of their interaction.",
+        "The hardware failures may be caused by various reasons: the natural wear of the components, the overheating, the voltage surges, the mechanical damage, the manufacturing defects and the violation of the operating conditions. The understanding of these causes helps to prevent the failures.",
+        "The natural wear concerns first of all the components with the moving parts (the hard disk drives, the fans) and the components subject to the thermal degradation (the capacitors, the thermal paste). The planned replacement of these components prevents the failures.",
+        "The overheating is one of the main causes of the failures. It accelerates the degradation of the components, causes the throttling and the shutdowns and may lead to the irreversible damage. The provision of the efficient cooling is the key factor of the reliability.",
+        "The voltage surges in the mains may damage the power supply and the components. The protection against the surges is provided by the surge protectors and the sources of uninterruptible power supply, which it is recommended to use to connect the computers.",
+        "The prevention of the hardware failures is based on the provision of the proper operating conditions (the temperature, the humidity, the cleanliness, the stable power supply), the regular preventive maintenance and the monitoring of the state of the components. The proactive approach prevents most of the failures.",
+        "The understanding of the hardware part of a personal computer, the interaction of its components and the causes of the failures is the foundation for the work on the restoration of the operability and the prevention of the failures, to which this learning outcome is devoted.",
+        "Thus, the personal computer is a system of interacting hardware components, the reliability of which depends on the operating conditions and the maintenance, and the understanding of its structure and the causes of the failures is the basis for their prevention and elimination."
+      ],
+      "questions": [
+        "What components form the hardware part of a personal computer?",
+        "How do the components of a computer interact?",
+        "What causes can lead to hardware failures?",
+        "Why is the overheating one of the main causes of failures?",
+        "On what is the prevention of hardware failures based?"
+      ]
+    },
+    {
+      "code": "5.2",
+      "title": "Elimination of hardware failures of a personal computer",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The classification of hardware failures.",
+        "The diagnostics of hardware failures.",
+        "The methods of eliminating failures.",
+        "The restoration of the operability after a failure."
+      ],
+      "body": [
+        "The elimination of hardware failures is the process of detecting, localizing and eliminating the malfunctions of the physical components of a computer. It requires a systematic approach and the understanding of the operation of the components and their interaction.",
+        "The hardware failures are classified by their nature into the complete (the component does not work at all) and the partial (the component works incorrectly or unstably); by the location into the failures of the processor, the memory, the board, the drives and the other components; and by the manifestation into the obvious and the latent.",
+        "The diagnostics of a hardware failure begins with the analysis of the symptoms: the failure to start, the freezes, the restarts, the errors, the extraneous sounds, the absence of the image. The symptoms allow one to formulate the hypotheses about the possible causes of the failure.",
+        "The localization of the failure is performed by the methods of the minimal configuration and the substitution: the assembly of the system from the minimum set of the components and the gradual connection of the others, and the substitution of the suspicious components for the obviously serviceable ones.",
+        "The systematic approach to the localization consists in the consistent check of the components, beginning with the most probable causes. This allows one to gradually narrow the search area and to determine the faulty component.",
+        "After the localization of the failure, the method of its elimination is determined. The simple problems (the poor contact, the dust, the dried-out thermal paste) are eliminated by the maintenance. The faults of the components require their repair or replacement.",
+        "The replacement of a faulty component is the most frequent method of eliminating a hardware failure. The replacement is performed with a compatible serviceable component, observing the rules of the installation and the anti-static measures.",
+        "The repair of a component (for example, the replacement of the swollen capacitors of a board or a power supply) is possible for some types of faults and is economically justified for the expensive components. The complex repair requires special equipment and skills.",
+        "The restoration of the operability after the elimination of a failure includes the assembly of the computer, the check of all the connections, the start and the testing. It is important to make sure that the failure is completely eliminated and that no new problems have arisen.",
+        "After the restoration of the operability, the testing of the stability is performed: the check of the operation under the load, the monitoring of the temperatures and the parameters, the testing of the memory and the drives. This confirms the success of the elimination of the failure.",
+        "The documenting of the eliminated failures (the symptom, the cause, the method of elimination) accumulates the experience and helps in the diagnostics of the similar problems in the future. The keeping of the records is a part of the professional approach.",
+        "Thus, the elimination of hardware failures includes the diagnostics by the symptoms, the localization by the methods of the minimal configuration and the substitution, the elimination by the maintenance, the repair or the replacement, and the restoration and the testing of the operability."
+      ],
+      "questions": [
+        "How are hardware failures classified?",
+        "With what does the diagnostics of a hardware failure begin?",
+        "What methods are used to localize a failure?",
+        "What methods of eliminating failures exist?",
+        "What is performed after the restoration of the operability?"
+      ]
+    },
+    {
+      "code": "5.3",
+      "title": "External devices of a personal computer",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in connecting, configuring and diagnosing the external devices of a personal computer.",
+      "theory": [
+        "The external devices of a personal computer are connected from the outside and extend its capabilities: the monitors, the printers, the scanners, the keyboards, the mice, the external drives and others. They are connected over various interfaces and require the corresponding drivers.",
+        "The diagnostics of the external devices includes the check of the connection, the power, the drivers and the settings. Most problems of the external devices are solved at these levels."
+      ],
+      "materials": [
+        "A set of external devices.",
+        "A computer with various ports.",
+        "Cables and drivers.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the external devices and determine the interface for connecting each of them.",
+        "Connect the devices to the computer and check their recognition by the system.",
+        "Install or update the drivers of the devices and configure their parameters.",
+        "Check the operability of each device and detect the possible problems.",
+        "Perform the diagnostics of a non-working device (the connection, the power, the driver, the settings).",
+        "Make a conclusion about the state of the external devices and the methods of eliminating the problems."
+      ],
+      "tasks": [
+        "Connect and configure at least three external devices.",
+        "Carry out the diagnostics of a non-working external device.",
+        "Compile a memo on the connection and the diagnostics of external devices."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of connecting, configuring and diagnosing the external devices of a personal computer.",
+      "questions": [
+        "What are the external devices of a personal computer?",
+        "Over what interfaces are the external devices connected?",
+        "What does the diagnostics of an external device include?",
+        "Why is a driver necessary for the operation of a device?",
+        "How is a non-working external device diagnosed?"
+      ]
+    },
+    {
+      "code": "5.4",
+      "title": "Investigation of the types of external devices and the connection interfaces of a personal computer",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in investigating and classifying the external devices and the connection interfaces of a personal computer.",
+      "theory": [
+        "The external devices are connected over various interfaces: USB, HDMI, DisplayPort, Ethernet, Bluetooth, Wi-Fi. Each interface has its own characteristics of the speed, the universality and the area of application. The choice of the interface affects the operation of the device.",
+        "The classification of the external devices by their purpose, the type of connection and the interface helps to systematize the knowledge and to choose the optimal method of connection."
+      ],
+      "materials": [
+        "A set of external devices with various interfaces.",
+        "A computer with various ports.",
+        "Reference data on the interfaces.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the external devices and classify them by their purpose and the type of connection.",
+        "Determine the interface of each device and its characteristics (the speed, the universality).",
+        "Compile a comparative table of the interfaces used by the devices.",
+        "Connect the devices over the different interfaces and assess the convenience and the speed.",
+        "Determine the optimal interface for each type of device.",
+        "Make a conclusion about the classification of the external devices and the criteria for choosing the interface."
+      ],
+      "tasks": [
+        "Compile a classification of the external devices by their purpose and the interface.",
+        "Prepare a comparative table of the connection interfaces.",
+        "Justify the choice of the interface for each type of device."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of investigating and classifying the external devices and the connection interfaces of a personal computer.",
+      "questions": [
+        "What interfaces are used to connect external devices?",
+        "How are external devices classified?",
+        "What are the characteristics of the interface that affect the operation of a device?",
+        "How is the optimal interface for a device chosen?",
+        "What is the difference between the wired and the wireless interfaces?"
+      ]
+    },
+    {
+      "code": "5.5",
+      "title": "Cables and their types",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in identifying the types of cables, determining their purpose and checking their serviceability.",
+      "theory": [
+        "Cables provide the connection of the components and the devices of a computer and the transmission of the data and the power. There are many types of cables: the power cables, the data cables (SATA, USB, HDMI, DisplayPort, Ethernet), and the internal cables of the computer.",
+        "The serviceability of the cables affects the reliability of the connections. A faulty cable is a frequent cause of the problems of the connection of the devices. The check of the cables is performed by the visual inspection and by the testing."
+      ],
+      "materials": [
+        "A set of cables of various types.",
+        "A cable tester and a multimeter.",
+        "A computer for the check of the connections.",
+        "A report form."
+      ],
+      "procedure": [
+        "Examine the cables and determine the type and the purpose of each of them.",
+        "Determine the connectors of the cables and the devices for the connection of which they are intended.",
+        "Perform the visual inspection of the cables and detect the damage.",
+        "Check the serviceability of the cables with a cable tester or a multimeter (the continuity).",
+        "Check the operation of the connection through the cables on the computer.",
+        "Make a conclusion about the types and the serviceability of the examined cables."
+      ],
+      "tasks": [
+        "Compile a table of the types of cables with an indication of their purpose and the connectors.",
+        "Check the serviceability of at least five cables.",
+        "Describe the typical faults of the cables and the methods of their detection."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of identifying the types of cables, of determining their purpose and of checking their serviceability.",
+      "questions": [
+        "What types of cables are used in a computer?",
+        "How is the type and the purpose of a cable determined?",
+        "How is the serviceability of a cable checked?",
+        "What are the typical faults of cables?",
+        "Why is the serviceability of the cables important for the reliability of the connections?"
+      ]
+    },
+    {
+      "code": "5.6",
+      "title": "Utilities for work",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept and the purpose of the system utilities.",
+        "The utilities for the diagnostics and the monitoring.",
+        "The utilities for the maintenance and the optimization.",
+        "The utilities for the restoration and the backing-up."
+      ],
+      "body": [
+        "The system utilities are the auxiliary programs intended for the maintenance, the diagnostics, the optimization and the restoration of a computer system. They are an important tool of the technician for maintaining the operability and the reliability of the computers.",
+        "The utilities are classified by their purpose into the diagnostic, the monitoring, the maintenance, the optimization, the restoration and the backing-up ones. Each group solves its own tasks of maintaining the operability of the system.",
+        "The diagnostic utilities (AIDA64, HWiNFO, CrystalDiskInfo) provide the information about the components and their state and detect the problems. They are the basis for assessing the state of the computer and planning the maintenance.",
+        "The monitoring utilities (HWMonitor, HWiNFO) track the parameters of the system in real time: the temperatures, the voltages, the frequencies, the load and the speed of the fans. They allow one to detect the problems of the cooling and the power supply.",
+        "The maintenance and optimization utilities clean the system of the unnecessary files, optimize the autostart, defragment the disks (for HDD), and clean the registry. They maintain the performance and the order in the system.",
+        "The built-in utilities of the operating system (the disk cleanup, the disk checking, the system restore, the task manager) provide the basic capabilities of the maintenance without the installation of the additional software.",
+        "The restoration utilities (the system restore, the recovery tools, the boot-recovery means) allow one to restore the operability of the system after the failures. They return the system to a working state or restore its damaged components.",
+        "The backing-up utilities create the copies of the data and the system for their restoration in the event of the loss. The regular backing-up with the help of these utilities is the most reliable protection against the loss of data.",
+        "The antivirus utilities protect the system from malware. The regular scanning and the updating of the antivirus databases ensure the security of the system and prevent the failures caused by the malware.",
+        "The choice of the utilities depends on the task: for the diagnostics, the informational and the testing utilities are used; for the maintenance, the cleaning and the optimization utilities; for the protection, the antivirus and the backing-up ones. The technician must master the main utilities.",
+        "The correct use of the system utilities allows one to maintain the computer in working order, to diagnose and to eliminate the problems, to optimize the performance and to protect the data, which is the basis of the proactive maintenance.",
+        "Thus, the system utilities are a diverse set of tools for the diagnostics, the monitoring, the maintenance, the optimization, the restoration and the protection of a computer system, the mastery of which is necessary for the technician."
+      ],
+      "questions": [
+        "What are the system utilities, and what are they for?",
+        "How are the utilities classified by their purpose?",
+        "What utilities are used for the diagnostics and the monitoring?",
+        "What do the maintenance and optimization utilities do?",
+        "Why is the use of the backing-up utilities important?"
+      ]
+    },
+    {
+      "code": "5.7",
+      "title": "Analysis of the utilities for the diagnostics and the monitoring of computer systems",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in working with the utilities for the diagnostics and the monitoring of computer systems and in analysing the obtained data.",
+      "theory": [
+        "The utilities for the diagnostics and the monitoring provide the data about the state of the components and the parameters of the operation of the system. The analysis of these data allows one to assess the state of the computer and to detect the problems.",
+        "The monitoring in real time allows one to track the dynamics of the parameters under the load and to detect the problems that appear only in certain modes of operation."
+      ],
+      "materials": [
+        "A computer with the diagnostic and the monitoring utilities.",
+        "Reference data on the norms of the parameters.",
+        "A tool for creating the load.",
+        "A report form."
+      ],
+      "procedure": [
+        "Run the informational utility and obtain the data about all the components of the computer.",
+        "Run the monitoring of the temperatures, the voltages and the frequencies in real time.",
+        "Create the load on the computer and observe the change of the parameters.",
+        "Analyse the obtained data and compare them with the norms.",
+        "Detect the possible deviations and the problems.",
+        "Make a conclusion about the state of the computer on the basis of the analysis of the data."
+      ],
+      "tasks": [
+        "Prepare a report on the state of the computer on the basis of the diagnostic utilities.",
+        "Analyse the dynamics of the parameters under the load.",
+        "Detect and describe the possible deviations of the parameters."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of working with the utilities for the diagnostics and the monitoring and of analysing the obtained data.",
+      "questions": [
+        "What utilities are used for the diagnostics and the monitoring?",
+        "What does the monitoring in real time give?",
+        "How are the obtained data compared with the norms?",
+        "Why is it important to observe the parameters under the load?",
+        "How is a conclusion about the state of a computer made?"
+      ]
+    },
+    {
+      "code": "5.8",
+      "title": "The fundamentals of the restoration and the prevention of failures in computer equipment",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of the restoration of the operability.",
+        "The strategies of the prevention of failures.",
+        "The means of the restoration of the system.",
+        "The proactive maintenance."
+      ],
+      "body": [
+        "The restoration of the operability and the prevention of failures are two interconnected directions of the work on the provision of the reliability of computer systems. The prevention reduces the probability of the failures, and the restoration returns the operability after the failures that have occurred.",
+        "The restoration of the operability is the process of returning a computer system to a working state after a hardware or software failure. It may include the repair or the replacement of the components, the restoration of the software, the data and the settings.",
+        "The strategies of the prevention of failures are based on the proactive approach: the regular maintenance, the monitoring of the state, the timely replacement of the wearing components and the backing-up of the data. The prevention is more economical than the elimination of the consequences of the failures.",
+        "The monitoring of the state of the system allows one to detect the signs of the approaching failures (the deterioration of the S.M.A.R.T., the overheating, the instability) and to take the measures before the failure occurs. This is the basis of the proactive maintenance.",
+        "The means of the restoration of the system include the restore points, the system images, the backups of the data, the recovery tools and the boot-recovery means. They allow one to restore the system or its components after the failures.",
+        "The restore points save the state of the system parameters and allow one to return the system to a working state after the failures caused by the changes of the settings, the installation of the programs or the drivers. They are created automatically and manually.",
+        "The system image is a complete copy of the system disk, which allows one to fully restore the system to the state at the moment of the creation of the image. The restoration from the image is used in the event of the serious failures and the corruption of the system.",
+        "The backups of the data are the copies of the important files created for their restoration in the event of the loss. The backing-up is the most reliable protection against the loss of data, since any drive may fail.",
+        "The proactive maintenance combines the monitoring of the state, the regular preventive maintenance, the backing-up and the planning of the replacement of the components. It allows one to prevent most of the failures and to minimize the consequences of those that have occurred.",
+        "The planning of the restoration includes the determination of the critical systems and data, the development of the procedures of the restoration, the provision of the backups and the means of the restoration, and the periodic check of their operability. The readiness for the restoration reduces the downtime.",
+        "The combination of the prevention and the readiness for the restoration ensures the high reliability of computer systems. The prevention reduces the number of the failures, and the readiness for the restoration minimizes the consequences of those that occur.",
+        "Thus, the fundamentals of the restoration and the prevention of failures include the strategies of the proactive maintenance, the monitoring of the state, the means of the restoration of the system and the backing-up of the data, which together ensure the reliability of computer systems."
+      ],
+      "questions": [
+        "What are the restoration of the operability and the prevention of failures?",
+        "On what are the strategies of the prevention of failures based?",
+        "What means of the restoration of the system exist?",
+        "What is the difference between a restore point and a system image?",
+        "What does the proactive maintenance combine?"
+      ]
+    },
+    {
+      "code": "5.9",
+      "title": "Preparation of a brief report on the application of WMI for obtaining information about the hardware part of a computer",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in using WMI for obtaining information about the hardware part of a computer and in preparing a report on the obtained data.",
+      "theory": [
+        "WMI (Windows Management Instrumentation) is an infrastructure for managing data and operations in Windows that provides access to the information about the equipment, the system and the processes. WMI is accessed through PowerShell, the wmic utility or from programs.",
+        "Through WMI, one can obtain the information about the processor, the memory, the drives, the motherboard, the BIOS, the operating system and other components. This information is used for the inventory, the diagnostics and the monitoring."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell or the wmic utility.",
+        "Examples of the WMI queries.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the structure of WMI and the main classes for obtaining the information about the equipment.",
+        "Obtain the information about the processor through WMI (the class Win32_Processor) with the help of PowerShell.",
+        "Obtain the information about the memory, the drives and the motherboard through the corresponding WMI classes.",
+        "Obtain the information about the BIOS and the operating system.",
+        "Systematize the obtained data and prepare a report on the hardware part of the computer.",
+        "Make a conclusion about the capabilities of WMI for obtaining the information about the equipment."
+      ],
+      "tasks": [
+        "Prepare a report on the hardware part of a computer on the basis of the data of WMI.",
+        "Compile a list of the WMI classes for obtaining the information about the main components.",
+        "Describe the procedure for obtaining the information about a component through WMI."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of using WMI for obtaining the information about the hardware part of a computer and of preparing a report on the obtained data.",
+      "questions": [
+        "What is WMI, and what does it provide access to?",
+        "Through what means is WMI accessed?",
+        "What WMI class is used to obtain the information about the processor?",
+        "What information about the equipment can be obtained through WMI?",
+        "How is WMI used for the inventory and the diagnostics?"
+      ]
+    },
+    {
+      "code": "5.10",
+      "title": "Backing-up of data and the restoration of information after failures",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept and the importance of backing-up.",
+        "The types of backups.",
+        "The strategies and the schedules of backing-up.",
+        "The restoration of data from a backup."
+      ],
+      "body": [
+        "The backing-up of data is the creation of the copies of the information for its restoration in the event of the loss or the damage of the originals. The backing-up is the most reliable protection against the loss of data, since any drive may fail at any moment.",
+        "The importance of the backing-up is difficult to overestimate. The loss of data may occur as a result of the failure of a drive, the malware, the erroneous deletion, the damage of the file system or the theft of the equipment. The backing-up allows one to restore the data in all these cases.",
+        "There are several types of backups. A full backup copies all the data; it requires a lot of space and time but provides the simplest restoration. An incremental backup copies only the data changed since the previous copy; it is economical but the restoration is more complex.",
+        "A differential backup copies the data changed since the last full copy. It occupies an intermediate position between the full and the incremental copies in terms of the space and the speed of the restoration. The choice of the type depends on the requirements.",
+        "The strategy of the backing-up determines what data to copy, how often, where to store the copies and how long to keep them. A well-known rule is the rule '3-2-1': to keep three copies of the data on two different media, one of which is located off-site.",
+        "The schedule of the backing-up determines the frequency of the creation of the copies. The critical data is copied more often (daily or several times a day), the less important data less often. The frequency is chosen on the basis of the permissible volume of the loss of data.",
+        "The place of the storage of the backups affects their reliability. The copies are stored on the external drives, the network stores (NAS), in the cloud storages or on the specialized backup servers. The off-site storage protects against the local accidents.",
+        "The automation of the backing-up ensures the regularity and the reliability of the creation of the copies. The backing-up programs create the copies according to the schedule without the participation of the user, which excludes the human factor.",
+        "The restoration of the data from a backup is the reverse process — the recovery of the lost or the damaged data from the copy. The procedure of the restoration depends on the type of the copy and the backing-up program.",
+        "The check of the operability of the backups is a critically important but often neglected stage. A backup is useful only if it is possible to restore the data from it. The periodic check of the restoration confirms the operability of the copies.",
+        "The combination of the correct strategy, the automation, the reliable storage and the regular check of the backups ensures the reliable protection of the data against the loss. This is the basis of the data-protection policy of any organization.",
+        "Thus, the backing-up of data is the most reliable protection against the loss of information, and its effectiveness depends on the correct choice of the type and the strategy of the copying, the automation, the reliable storage and the regular check of the operability of the copies."
+      ],
+      "questions": [
+        "What is the backing-up of data, and why is it important?",
+        "What types of backups exist, and what is the difference between them?",
+        "What is the rule '3-2-1'?",
+        "How is the frequency of the backing-up chosen?",
+        "Why is it necessary to periodically check the operability of the backups?"
+      ]
+    },
+    {
+      "code": "5.11",
+      "title": "Investigation of the methods of backing-up and the restoration of information after failures",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in performing the backing-up of data by various methods and the restoration of the information from the copies.",
+      "theory": [
+        "The practical mastery of the backing-up includes the creation of the copies of various types (full, incremental, differential), the configuration of the schedule and the storage, and the restoration of the data from the copies. The built-in and the specialized tools are used for this.",
+        "The check of the restoration is a mandatory stage that confirms the operability of the backup. The backing-up without the check of the restoration does not guarantee the protection of the data."
+      ],
+      "materials": [
+        "A computer with the data for the copying.",
+        "An external drive or a network store for the storage of the copies.",
+        "Backing-up software (the built-in tools or the specialized ones).",
+        "A report form."
+      ],
+      "procedure": [
+        "Create a full backup of the selected data to an external drive.",
+        "Configure an incremental or a differential backup according to a schedule.",
+        "Model the loss of the data (delete the test files) and restore them from the copy.",
+        "Check the completeness and the correctness of the restoration of the data.",
+        "Configure the automatic backing-up according to a schedule.",
+        "Make a conclusion about the methods of the backing-up and the restoration of the data."
+      ],
+      "tasks": [
+        "Create a full and an incremental backup of the data.",
+        "Restore the data from the copy and check the correctness of the restoration.",
+        "Configure the automatic backing-up according to a schedule and describe its parameters."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of performing the backing-up of data by various methods and the restoration of the information from the copies.",
+      "questions": [
+        "What types of backups were created in the work?",
+        "How is the automatic backing-up configured?",
+        "How is the data restored from a copy?",
+        "Why is it necessary to check the correctness of the restoration?",
+        "Where is it recommended to store the backups?"
+      ]
+    },
+    {
+      "code": "5.12",
+      "title": "Proactive maintenance of the hardware for the prevention of failures",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of the proactive maintenance.",
+        "The monitoring of the state of the equipment.",
+        "The planning of the maintenance and the replacement of the components.",
+        "The advantages of the proactive approach."
+      ],
+      "body": [
+        "The proactive maintenance is an approach to the maintenance of the equipment in which the measures are taken before the failures occur, on the basis of the monitoring of the state and the forecasting. It is opposed to the reactive approach, in which the equipment is repaired after the failure.",
+        "The proactive maintenance is based on the monitoring of the state of the components, the analysis of the data, the forecasting of the failures and the planned execution of the maintenance and the replacement of the wearing components. This allows one to prevent most of the failures.",
+        "The monitoring of the state of the equipment includes the tracking of the temperatures, the voltages, the load, the state of the drives (the S.M.A.R.T.), the operation of the cooling and the other parameters. The deviation of the parameters from the norm is a signal of the possible problem.",
+        "The analysis of the data of the monitoring allows one to detect the trends of the deterioration of the state of the components and to forecast their failure. For example, the deterioration of the attributes of the S.M.A.R.T. of a drive indicates its approaching failure.",
+        "The forecasting of the failures on the basis of the monitoring allows one to plan the replacement of the components before their failure, which excludes the unexpected downtime and the loss of data. This is the key advantage of the proactive approach.",
+        "The planning of the maintenance includes the determination of the frequency of the preventive maintenance, the schedule of the cleaning, the replacement of the thermal paste and the wearing components, and the check of the state. The planned maintenance maintains the operability of the equipment.",
+        "The planning of the replacement of the components is based on the data of the monitoring and the service life of the components. The drives with a deteriorating S.M.A.R.T., the aging capacitors and the worn fans are replaced in a planned manner, before their failure.",
+        "The keeping of the records of the state and the maintenance of the equipment allows one to track the dynamics, to plan the maintenance and to forecast the need for the replacement of the components and the consumables. The documenting is the basis of the systematic maintenance.",
+        "The advantages of the proactive approach are the reduction of the number of the failures, the exclusion of the unexpected downtime, the prevention of the loss of data, the prolongation of the service life of the equipment and the reduction of the total costs of the maintenance.",
+        "The proactive maintenance requires the initial costs of the monitoring and the planned maintenance, but it pays off by the reduction of the costs of the elimination of the consequences of the failures, the downtime and the emergency repair.",
+        "The combination of the proactive maintenance, the monitoring, the backing-up and the readiness for the restoration ensures the high reliability and the availability of computer systems, which is especially important for the critical systems.",
+        "Thus, the proactive maintenance of the hardware is an approach based on the monitoring of the state, the forecasting of the failures and the planned maintenance, which allows one to prevent most of the failures and to ensure the reliability of the equipment."
+      ],
+      "questions": [
+        "What is the proactive maintenance, and how does it differ from the reactive approach?",
+        "What does the monitoring of the state of the equipment include?",
+        "How does the analysis of the data of the monitoring help to forecast the failures?",
+        "What does the planning of the maintenance and the replacement of the components include?",
+        "What are the advantages of the proactive approach?"
+      ]
+    },
+    {
+      "code": "5.13",
+      "title": "Comprehensive analysis of the state of the operating system and the hardware components of a PC",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in the comprehensive analysis of the state of the operating system and the hardware components of a computer.",
+      "theory": [
+        "The comprehensive analysis of the state of a computer combines the assessment of the hardware components (the processor, the memory, the drives, the cooling) and the operating system (the performance, the errors, the security). This gives a complete picture of the state of the computer.",
+        "The analysis is performed with the help of the diagnostic and the monitoring utilities, the system tools and the analysis of the event logs. The result is a conclusion about the state and the recommendations for the maintenance."
+      ],
+      "materials": [
+        "A computer for the analysis.",
+        "The diagnostic and the monitoring utilities.",
+        "The system tools (the event viewer, the resource monitor).",
+        "A report form."
+      ],
+      "procedure": [
+        "Analyse the state of the hardware components: the processor, the memory, the drives, the cooling.",
+        "Analyse the state of the operating system: the performance, the load of the resources, the errors.",
+        "View the event logs of the system and detect the warnings and the errors.",
+        "Check the security of the system: the antivirus, the updates, the firewall.",
+        "Systematize the results of the analysis and compile a comprehensive report.",
+        "Make a conclusion about the state of the computer and the recommendations for the maintenance."
+      ],
+      "tasks": [
+        "Prepare a comprehensive report on the state of the hardware and the operating system.",
+        "Analyse the event logs and detect the problems.",
+        "Formulate the recommendations for the maintenance on the basis of the analysis."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methods of the comprehensive analysis of the state of the operating system and the hardware components of a computer.",
+      "questions": [
+        "What does the comprehensive analysis of the state of a computer combine?",
+        "What tools are used for the analysis?",
+        "What do the event logs of the system give?",
+        "How is the security of the system checked?",
+        "How are the recommendations for the maintenance formulated?"
+      ]
+    },
+    {
+      "code": "5.14",
+      "title": "Restoration of operating systems after failures and critical errors",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in restoring operating systems after failures and critical errors with the use of the built-in and the additional means.",
+      "theory": [
+        "The failures of the operating system may be caused by the corruption of the system files, the erroneous changes of the settings, the conflicts of the drivers, the malware or the hardware problems. For the restoration, the built-in and the additional means are used.",
+        "The means of the restoration of Windows include the restore points, the recovery environment (WinRE), the system-file checker (sfc), the recovery of the loading (bootrec) and the restoration from a system image. The choice of the means depends on the nature of the failure."
+      ],
+      "materials": [
+        "A computer with an operating system (or a virtual machine).",
+        "Bootable recovery media.",
+        "Restore points and a system image.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the means of the restoration of the operating system and the situations of their application.",
+        "Perform the restoration of the system from a restore point.",
+        "Use the system-file checker (sfc) to restore the corrupted system files.",
+        "Study the recovery environment (WinRE) and its capabilities.",
+        "Perform the restoration of the loading of the system (model the problem and describe the solution).",
+        "Make a conclusion about the means and the methods of the restoration of the operating system."
+      ],
+      "tasks": [
+        "Describe the means of the restoration of the operating system and the situations of their application.",
+        "Perform the restoration of the system from a restore point.",
+        "Compile an algorithm for the restoration of the operating system after a critical error."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of restoring operating systems after failures and critical errors with the use of the built-in and the additional means.",
+      "questions": [
+        "What may cause the failures of the operating system?",
+        "What means of the restoration of Windows exist?",
+        "How is the restoration of the system from a restore point performed?",
+        "What does the system-file checker (sfc) do?",
+        "What is the recovery environment (WinRE)?"
+      ]
+    },
+    {
+      "code": "5.15",
+      "title": "Protection against malware and viruses: methods of prevention and removal",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The types of malware.",
+        "The methods of the penetration of malware.",
+        "The means of protection against malware.",
+        "The detection and the removal of malware."
+      ],
+      "body": [
+        "Malware (viruses, trojans, worms, ransomware, spyware) is one of the main threats to the security and the operability of computer systems. The protection against malware is an important part of the work on the prevention of the failures.",
+        "Malware is classified by the method of the propagation and the action. Viruses attach themselves to the files and propagate together with them. Worms propagate independently over the networks. Trojans disguise themselves as useful programs. Ransomware encrypts the data and demands a ransom.",
+        "Spyware collects the information about the user without his knowledge. Adware shows the unwanted advertising. Rootkits hide the presence of the malware in the system. Each type of the malware poses its own threat and requires the corresponding methods of protection.",
+        "Malware penetrates the system in various ways: through the infected files and the programs, the malicious sites and the links, the email attachments, the removable media, and the vulnerabilities of the software. The understanding of these ways helps to prevent the infection.",
+        "The means of protection against malware include the antivirus programs, the firewalls, the updating of the software, the differentiation of the access rights and the observance of the rules of the safe behaviour. The complex protection is the most effective.",
+        "The antivirus program is the main means of protection. It detects and blocks the malware by the signatures (the known samples) and by the behaviour (the heuristic analysis). The regular updating of the antivirus databases is necessary for the protection against the new threats.",
+        "The firewall controls the network traffic and blocks the unwanted connections, protecting the system from the network threats and the propagation of the malware over the network. The correct setting of the firewall is an important element of the protection.",
+        "The updating of the software eliminates the vulnerabilities through which the malware penetrates. The timely installation of the security updates of the operating system and the programs significantly reduces the risk of the infection.",
+        "The rules of the safe behaviour include the caution when opening the files and the links, the downloading of the programs only from the trusted sources, the non-use of the pirated software, and the attentiveness to the email attachments. The human factor is often the weak link.",
+        "The detection of the malware is performed by the scanning of the system with the antivirus, the analysis of the suspicious behaviour (the slowdown, the unusual network activity, the unexpected windows) and the check of the autostart and the processes. The timely detection limits the damage.",
+        "The removal of the malware is performed by the antivirus or manually. In the difficult cases, the scanning from bootable media or the specialized removal utilities is used. After the removal, the check of the system and the restoration of the damaged data are necessary.",
+        "Thus, the protection against malware combines the means of the prevention (the antivirus, the firewall, the updates, the safe behaviour) and the methods of the detection and the removal, which together ensure the security and the operability of computer systems."
+      ],
+      "questions": [
+        "What types of malware exist?",
+        "In what ways does malware penetrate a system?",
+        "What means of protection against malware are used?",
+        "How does an antivirus program detect malware?",
+        "How are malware detected and removed?"
+      ]
+    },
+    {
+      "code": "5.16",
+      "title": "Analysis of modern methods of protection against malware and viruses",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in applying modern methods of protection against malware and in detecting and removing it.",
+      "theory": [
+        "The modern methods of protection against malware include the antivirus protection with the heuristic and the behavioural analysis, the protection in real time, the cloud technologies of the detection, the sandboxes and the protection against ransomware.",
+        "The practical mastery of these methods includes the configuration of the antivirus protection, the scanning of the system, the detection and the removal of the malware, and the restoration after the infection."
+      ],
+      "materials": [
+        "A computer with an antivirus program.",
+        "Tools for the analysis of the processes and the autostart.",
+        "Test (safe) samples for the demonstration.",
+        "A report form."
+      ],
+      "procedure": [
+        "Configure the antivirus protection: the protection in real time, the scheduled scanning, the updating of the databases.",
+        "Perform a full scan of the system and analyse the results.",
+        "Analyse the autostart and the running processes for the suspicious elements.",
+        "Study the methods of protection against ransomware and configure the corresponding protection.",
+        "Describe the procedure for detecting and removing the malware and restoring the system.",
+        "Make a conclusion about the modern methods of protection against malware."
+      ],
+      "tasks": [
+        "Configure the antivirus protection and perform a scan of the system.",
+        "Analyse the autostart and the processes for the suspicious elements.",
+        "Compile an algorithm for the actions when malware is detected."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of applying modern methods of protection against malware and of detecting and removing it.",
+      "questions": [
+        "What modern methods of protection against malware exist?",
+        "How is the antivirus protection configured?",
+        "How is the autostart analysed for the suspicious elements?",
+        "What is the protection against ransomware?",
+        "What is the algorithm of the actions when malware is detected?"
+      ]
+    },
+    {
+      "code": "5.17",
+      "title": "Restoration of the operation of network systems and connections after failures",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in diagnosing and restoring the operation of network systems and connections after failures.",
+      "theory": [
+        "The failures of the network connection may be caused by the hardware problems (the cable, the network card, the equipment), the incorrect settings, the faults of the drivers or the network services. The diagnostics determines the cause and the method of the restoration.",
+        "For the diagnostics and the restoration of the network, the system utilities are used: ping, ipconfig, tracert, nslookup, netsh. They allow one to detect and to eliminate the network problems."
+      ],
+      "materials": [
+        "A computer with a network connection.",
+        "Network cables and equipment.",
+        "Network diagnostic utilities.",
+        "A report form."
+      ],
+      "procedure": [
+        "Check the physical connection of the network: the cable, the connectors, the indicators of the link.",
+        "View the network settings with the ipconfig utility and check their correctness.",
+        "Check the availability of the network nodes with the ping utility.",
+        "Trace the route to a remote node with the tracert utility and detect the place of the problem.",
+        "Restore the network connection: reset the settings, restart the adapter, reinstall the driver.",
+        "Make a conclusion about the cause of the failure and the method of the restoration of the network."
+      ],
+      "tasks": [
+        "Carry out the diagnostics of a network failure with the use of the system utilities.",
+        "Restore the network connection after a failure.",
+        "Compile an algorithm for the diagnostics and the restoration of a network connection."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of diagnosing and restoring the operation of network systems and connections after failures.",
+      "questions": [
+        "What may cause the failures of a network connection?",
+        "What utilities are used for the diagnostics of a network?",
+        "How is the physical connection of a network checked?",
+        "What does the ping utility show, and what does the tracert utility show?",
+        "How is a network connection restored after a failure?"
+      ]
+    },
+    {
+      "code": "5.18",
+      "title": "Work with backup systems and recovery plans in emergency situations (Disaster Recovery)",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of Disaster Recovery.",
+        "The components of a recovery plan.",
+        "The metrics RTO and RPO.",
+        "The testing of the recovery plan."
+      ],
+      "body": [
+        "Disaster Recovery (DR) is a set of policies, tools and procedures for restoring the operability of the IT systems and the infrastructure after serious failures and emergency situations: the accidents, the natural disasters, the cyber-attacks and the large-scale failures of the equipment.",
+        "The need for Disaster Recovery is due to the fact that the modern organizations critically depend on their IT systems. The prolonged downtime or the loss of data may lead to the serious financial losses and even to the termination of the activity.",
+        "A recovery plan (DR plan) is a documented set of the procedures for restoring the operability of the systems. It includes the description of the critical systems, the procedures of the restoration, the responsible persons, the contacts and the resources necessary for the restoration.",
+        "The components of a DR plan include the inventory of the critical systems and data, the strategy of the backing-up, the procedures of the restoration, the alternative resources (the backup site, the equipment), and the plan of the communication and the coordination during the emergency situation.",
+        "The metric RTO (Recovery Time Objective) is the maximum permissible time of the restoration of the operability of a system after a failure. It determines how quickly the system must be restored and affects the choice of the means and the strategies of the restoration.",
+        "The metric RPO (Recovery Point Objective) is the maximum permissible volume of the loss of data, expressed in the time. It determines how often it is necessary to make the backups: the smaller the RPO, the more frequent the backing-up must be.",
+        "The RTO and the RPO are the key metrics that determine the requirements for the Disaster Recovery system. On their basis, the strategies of the backing-up and the restoration, the means and the resources necessary for achieving the required indicators are chosen.",
+        "The strategies of the Disaster Recovery differ in the cost and the speed of the restoration: from the simple backing-up with the restoration on the new equipment to the hot reserve sites that provide the restoration in the minutes. The choice depends on the criticality of the systems and the budget.",
+        "The backup site is an alternative infrastructure to which the operation is switched in the event of a failure of the main one. It may be 'cold' (the equipment without the data), 'warm' (the partially prepared) or 'hot' (the fully ready and the synchronized).",
+        "The testing of the recovery plan is a critically important stage. A plan that has not been tested may turn out to be inoperable at the decisive moment. The regular exercises of the restoration confirm the operability of the plan and reveal its weak points.",
+        "The maintenance of the relevance of the DR plan is necessary, since the IT systems change. The plan is regularly reviewed and updated taking into account the changes of the infrastructure, the systems and the requirements of the business.",
+        "Thus, Disaster Recovery is a comprehensive approach to the restoration of the IT systems after serious failures, based on the recovery plan, the metrics RTO and RPO, the choice of the strategies and the resources, and the regular testing of the readiness."
+      ],
+      "questions": [
+        "What is Disaster Recovery, and why is it necessary?",
+        "What components does a recovery plan include?",
+        "What is the metric RTO, and what does it determine?",
+        "What is the metric RPO, and how is it connected with the frequency of the backing-up?",
+        "Why is the testing of the recovery plan necessary?"
+      ]
+    },
+    {
+      "code": "5.19",
+      "title": "Development of scenarios for the restoration of the operability of a computer system",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in developing scenarios for the restoration of the operability of a computer system for various types of failures.",
+      "theory": [
+        "A scenario of the restoration is a documented sequence of the actions for restoring the operability of a system after a specific type of the failure. The well-developed scenarios reduce the time of the restoration and exclude the errors.",
+        "The scenarios are developed for the typical failures: the failure of a drive, the corruption of the operating system, the malware, the loss of data, the network failure. Each scenario contains the procedure of the actions and the necessary resources."
+      ],
+      "materials": [
+        "A description of a computer system.",
+        "Templates of the scenarios of the restoration.",
+        "Information about the means of the restoration.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the typical types of the failures for the given computer system.",
+        "For each type of the failure, determine the procedure of the restoration of the operability.",
+        "Develop a detailed scenario of the restoration for one of the types of the failures.",
+        "Determine the resources necessary for the restoration (the backups, the means, the time).",
+        "Assess the time of the restoration (RTO) and the volume of the possible loss of data (RPO).",
+        "Make a conclusion about the developed scenarios of the restoration."
+      ],
+      "tasks": [
+        "Develop a scenario of the restoration of the operability for a given type of the failure.",
+        "Determine the resources and the time necessary for the restoration.",
+        "Compile a list of the typical failures with the brief scenarios of the restoration."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of developing scenarios for the restoration of the operability of a computer system for various types of failures.",
+      "questions": [
+        "What is a scenario of the restoration?",
+        "For what types of the failures are the scenarios developed?",
+        "What does a scenario of the restoration contain?",
+        "How are the resources necessary for the restoration determined?",
+        "How are the RTO and the RPO assessed for a scenario?"
+      ]
+    },
+    {
+      "code": "5.20",
+      "title": "Application of WMI for obtaining information about the hardware part of a computer",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The architecture of WMI.",
+        "The WMI classes and the namespaces.",
+        "The methods of accessing WMI.",
+        "The application of WMI for the diagnostics and the monitoring."
+      ],
+      "body": [
+        "WMI (Windows Management Instrumentation) is the implementation by Microsoft of the standard of the management of the IT infrastructure. It provides a unified interface for obtaining the information about the system and the equipment and for managing them, which makes it a powerful tool of the technician.",
+        "The architecture of WMI includes the providers (which supply the data about the various components), the repository (the storage of the descriptions of the classes), the WMI service (the intermediary), and the consumers (the programs and the scripts that request the data).",
+        "The data in WMI is organized in the form of the classes, which describe the manageable objects (the processor, the disk, the service, the process). Each class has the properties (the characteristics of the object) and the methods (the operations on the object). The instances of the classes represent the specific objects.",
+        "The classes of WMI are grouped into the namespaces. The main namespace for the management of the system is root\\CIMV2, which contains the classes for the work with the equipment and the operating system, such as Win32_Processor, Win32_PhysicalMemory and Win32_DiskDrive.",
+        "The access to WMI is possible in several ways: through PowerShell (the cmdlets Get-CimInstance and Get-WmiObject), through the command-line utility wmic, through the scripts (VBScript, Python with the WMI library) and from the programs in various languages.",
+        "PowerShell is the most convenient and the modern way of working with WMI. The cmdlet Get-CimInstance allows one to request the instances of the classes and to obtain their properties. For example, the query of the class Win32_Processor returns the information about the processor.",
+        "The Win32_Processor class provides the information about the processor: the model, the number of cores, the frequency, the load. The Win32_PhysicalMemory class provides the information about the memory modules. The Win32_DiskDrive class provides the information about the drives.",
+        "The Win32_OperatingSystem class provides the information about the operating system: the version, the build, the volume of the memory, the time of the operation. The Win32_BIOS class provides the information about the BIOS. These classes are the basis for the inventory of the system.",
+        "The application of WMI for the diagnostics consists in obtaining the data about the state of the components: the temperatures, the load, the state of the drives. WMI provides the access to this information in a unified form, which is convenient for the automation.",
+        "The application of WMI for the monitoring consists in the periodic obtaining of the parameters of the system and the tracking of their changes. On the basis of WMI, the monitoring scripts that collect and analyse the data about the state of the equipment are built.",
+        "The advantage of WMI is the universality and the standardization: a unified interface for obtaining the information about the various components and for managing them. This makes WMI the basis for the automation of the administration and the diagnostics in Windows.",
+        "Thus, WMI is a powerful and universal tool for obtaining the information about the equipment and the system and for managing them, the mastery of which opens up wide possibilities for the diagnostics, the monitoring and the automation."
+      ],
+      "questions": [
+        "What is WMI, and what does it provide?",
+        "What does the architecture of WMI include?",
+        "How is the data organized in WMI?",
+        "In what ways is the access to WMI possible?",
+        "How is WMI applied for the diagnostics and the monitoring?"
+      ]
+    },
+    {
+      "code": "5.21",
+      "title": "Comprehensive analysis of the state of the operating system and the hardware components of a PC",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To consolidate the skills of the comprehensive analysis of the state of the operating system and the hardware components with the use of WMI and the diagnostic utilities.",
+      "theory": [
+        "The comprehensive analysis of the state of a computer with the use of WMI allows one to obtain the data about the equipment and the operating system in a unified form and to automate their collection. This complements the analysis with the diagnostic utilities.",
+        "The combination of WMI, the diagnostic utilities and the analysis of the event logs gives the most complete picture of the state of the computer and allows one to detect the problems and to plan the maintenance."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell with the access to WMI.",
+        "The diagnostic and the monitoring utilities.",
+        "A report form."
+      ],
+      "procedure": [
+        "Obtain the data about the hardware components through WMI with the help of PowerShell.",
+        "Obtain the data about the operating system and its state through WMI.",
+        "Supplement the data with the results of the diagnostic and the monitoring utilities.",
+        "Analyse the event logs of the system for the warnings and the errors.",
+        "Systematize all the obtained data into a comprehensive report.",
+        "Make a conclusion about the state of the computer and the recommendations for the maintenance."
+      ],
+      "tasks": [
+        "Prepare a comprehensive report on the state of the computer with the use of WMI.",
+        "Combine the data of WMI, the utilities and the event logs.",
+        "Formulate the recommendations for the maintenance on the basis of the analysis."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the skills of the comprehensive analysis of the state of the operating system and the hardware components with the use of WMI and the diagnostic utilities.",
+      "questions": [
+        "How does WMI complement the analysis of the state of a computer?",
+        "What data is obtained through WMI?",
+        "How are the data of WMI, the utilities and the logs combined?",
+        "What gives the most complete picture of the state of a computer?",
+        "How are the recommendations for the maintenance formulated?"
+      ]
+    },
+    {
+      "code": "5.22",
+      "title": "Development of scenarios for the restoration of the operability of a computer system",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The principles of the development of the scenarios of the restoration.",
+        "The structure of a scenario of the restoration.",
+        "The automation of the scenarios.",
+        "The testing and the maintenance of the scenarios."
+      ],
+      "body": [
+        "The development of the scenarios for the restoration of the operability is an important part of the work on the provision of the reliability of computer systems. A well-developed scenario allows one to quickly and correctly restore the operability after a failure, minimizing the downtime and the loss of data.",
+        "The principles of the development of the scenarios include the completeness (the coverage of all the typical failures), the detail (the description of every step), the clarity (the understandability for the executor), the realism (the correspondence to the real conditions) and the testability.",
+        "A scenario of the restoration is developed for a specific type of the failure: the failure of a drive, the corruption of the operating system, the malware, the loss of data, the network failure. Each scenario takes into account the features of the corresponding failure.",
+        "The structure of a scenario of the restoration includes the description of the failure and its symptoms, the conditions of the application of the scenario, the necessary resources, the step-by-step procedure of the restoration, the criteria of the successful restoration and the actions in the event of the impossibility of the restoration.",
+        "The step-by-step procedure of the restoration describes in detail the sequence of the actions: the diagnostics, the preparation of the resources, the execution of the restoration, the check of the result. Each step is formulated clearly and unambiguously.",
+        "The necessary resources include the backups, the bootable media, the recovery means, the replacement components and the time. The availability and the readiness of these resources are a condition for the successful restoration.",
+        "The automation of the scenarios of the restoration with the help of the scripts (PowerShell, Python) increases the speed and the reliability of the restoration and excludes the errors of the manual execution. The automated scenarios are especially useful for the typical and the frequent failures.",
+        "The scripts of the restoration can automate the diagnostics, the backing-up, the restoration of the data and the settings, the restart of the services and the check of the result. The combination of the automation and the manual control ensures the flexibility and the reliability.",
+        "The testing of the scenarios of the restoration is a critically important stage. A scenario that has not been tested may turn out to be inoperable at the decisive moment. The regular exercises of the restoration confirm the operability of the scenarios and reveal their weak points.",
+        "The maintenance of the relevance of the scenarios is necessary, since the computer systems change. The scenarios are regularly reviewed and updated taking into account the changes of the configuration, the software and the requirements.",
+        "The documenting of the scenarios and the keeping of the records of their application accumulate the experience and improve the scenarios. The analysis of the real cases of the restoration helps to improve the scenarios and to prevent the repeated failures.",
+        "Thus, the development of the scenarios for the restoration of the operability is based on the principles of the completeness, the detail and the testability, includes the clear structure and the procedure, the automation with the scripts and the regular testing and the maintenance of the relevance."
+      ],
+      "questions": [
+        "What principles underlie the development of the scenarios of the restoration?",
+        "What does the structure of a scenario of the restoration include?",
+        "What resources are necessary for the restoration?",
+        "How does the automation of the scenarios increase the reliability of the restoration?",
+        "Why is the testing and the maintenance of the relevance of the scenarios necessary?"
+      ]
+    },
+    {
+      "code": "5.23",
+      "title": "Creation of a script for the automatic diagnostics of a computer in Python",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating a script for the automatic diagnostics of a computer in the Python language with the use of the system libraries.",
+      "theory": [
+        "Python is a high-level programming language convenient for the automation of the tasks of the administration and the diagnostics. For obtaining the information about the system, the libraries psutil (the processes and the resources), WMI (the access to WMI) and platform (the information about the system) are used.",
+        "A script for the automatic diagnostics collects the data about the state of the computer (the processor, the memory, the disks, the network), analyses them and forms a report. This automates the routine diagnostics and increases its speed and accuracy."
+      ],
+      "materials": [
+        "A computer with the installed Python.",
+        "The libraries psutil, WMI, platform.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the capabilities of the psutil library for obtaining the information about the resources of the system.",
+        "Write a fragment of the script for obtaining the information about the processor and its load with the help of psutil.",
+        "Add to the script the obtaining of the information about the memory, the disks and the network.",
+        "Add the analysis of the obtained data and the formation of a report on the state of the system.",
+        "Run the script, check its operation and analyse the report.",
+        "Make a conclusion about the capabilities of Python for the automation of the diagnostics."
+      ],
+      "tasks": [
+        "Write a Python script for obtaining the information about the processor, the memory and the disks.",
+        "Add the formation of a report on the state of the system to the script.",
+        "Describe the capabilities of the psutil library for the diagnostics."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating a script for the automatic diagnostics of a computer in Python with the use of the system libraries.",
+      "questions": [
+        "Why is Python convenient for the automation of the diagnostics?",
+        "What libraries are used for obtaining the information about the system?",
+        "What does the psutil library allow one to obtain?",
+        "How is a report on the state of the system formed in a script?",
+        "What are the advantages of the automatic diagnostics?"
+      ]
+    },
+    {
+      "code": "5.24",
+      "title": "Investigation of the capabilities of PowerShell for the diagnostics and the restoration of network connections",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in using PowerShell for the diagnostics and the restoration of network connections.",
+      "theory": [
+        "PowerShell is a powerful framework for the automation of the administration of Windows. It contains the cmdlets for the work with the network: Test-Connection (the analogue of ping), Get-NetAdapter, Get-NetIPConfiguration, Restart-NetAdapter and others.",
+        "The cmdlets of PowerShell allow one to diagnose and to restore the network connections in an automated way, which is convenient for the mass administration and the creation of the scripts of the restoration."
+      ],
+      "materials": [
+        "A computer with the Windows operating system and a network connection.",
+        "PowerShell.",
+        "Examples of the network cmdlets.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the cmdlets of PowerShell for the work with the network and their parameters.",
+        "Check the availability of the network nodes with the cmdlet Test-Connection.",
+        "Obtain the information about the network adapters and the settings with the cmdlets Get-NetAdapter and Get-NetIPConfiguration.",
+        "Perform the restart of the network adapter with the cmdlet Restart-NetAdapter.",
+        "Write a fragment of the script for the automatic diagnostics of the network connection.",
+        "Make a conclusion about the capabilities of PowerShell for the diagnostics and the restoration of the network."
+      ],
+      "tasks": [
+        "Compile a list of the cmdlets of PowerShell for the work with the network.",
+        "Write a fragment of the script for the diagnostics of a network connection.",
+        "Describe the procedure for the restoration of a network connection with PowerShell."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of using PowerShell for the diagnostics and the restoration of network connections.",
+      "questions": [
+        "What is PowerShell, and what is it for?",
+        "What cmdlets are used for the work with the network?",
+        "What does the cmdlet Test-Connection do?",
+        "How is the restart of a network adapter performed?",
+        "What are the advantages of PowerShell for the administration of the network?"
+      ]
+    },
+    {
+      "code": "5.25",
+      "title": "Performing the diagnostics and the restoration of network connections with the use of PowerShell",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To consolidate the practical skills of the diagnostics and the restoration of network connections with the use of PowerShell scripts.",
+      "theory": [
+        "The automation of the diagnostics and the restoration of the network with the help of PowerShell scripts allows one to quickly and reliably eliminate the typical network problems. A script can check the connection, the settings and restart the adapter automatically.",
+        "The script of the restoration of the network combines the diagnostics (the check of the connection and the settings) and the actions of the restoration (the reset of the settings, the restart of the adapter, the renewal of the address)."
+      ],
+      "materials": [
+        "A computer with PowerShell and a network connection.",
+        "Examples of the scripts of the diagnostics.",
+        "Administrator rights.",
+        "A report form."
+      ],
+      "procedure": [
+        "Write a PowerShell script for the diagnostics of a network connection (the check of the adapter, the settings, the availability of the nodes).",
+        "Add to the script the actions of the restoration (the restart of the adapter, the renewal of the IP address).",
+        "Test the script on a working and a model-broken network connection.",
+        "Analyse the operation of the script and its messages.",
+        "Improve the script by adding the handling of the errors and the logging.",
+        "Make a conclusion about the automation of the diagnostics and the restoration of the network."
+      ],
+      "tasks": [
+        "Write a PowerShell script for the diagnostics and the restoration of a network connection.",
+        "Test the script and describe the result.",
+        "Add the logging of the actions to the script."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the skills of the diagnostics and the restoration of network connections with the use of PowerShell scripts.",
+      "questions": [
+        "What does a PowerShell script for the diagnostics of a network include?",
+        "What actions of the restoration can a script perform?",
+        "How is a network-diagnostics script tested?",
+        "Why is the handling of the errors necessary in a script?",
+        "What does the logging of the actions of a script give?"
+      ]
+    },
+    {
+      "code": "5.26",
+      "title": "Modern means of the automation of the diagnostics and the monitoring of computer systems",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The need for the automation of the diagnostics and the monitoring.",
+        "The means and the languages of the automation.",
+        "The monitoring systems.",
+        "The integration of the means of the automation."
+      ],
+      "body": [
+        "The automation of the diagnostics and the monitoring is a modern direction of the work of the technician, which allows one to increase the speed, the accuracy and the scale of the maintenance of computer systems. The manual diagnostics of a large number of computers is laborious and is subject to the errors.",
+        "The need for the automation grows with the increase of the number of the serviced computers. The automated means allow one to simultaneously diagnose and to monitor many systems, to collect and to analyse the data centrally and to react to the problems in a timely manner.",
+        "For the automation of the diagnostics and the monitoring, the scripting languages are used: PowerShell (for Windows), Python (cross-platform), Bash (for Linux). They allow one to create the scripts that automate the collection of the data, the analysis and the actions of the maintenance.",
+        "PowerShell is the standard means of the automation of the administration of Windows. It provides the access to WMI, the registry, the services, the network and the other components of the system, which makes it a universal tool for the automation of the diagnostics and the maintenance.",
+        "Python is a cross-platform language with the rich set of the libraries (psutil, WMI, paramiko) for the work with the system. It is convenient for the creation of the complex scripts and the utilities of the diagnostics and the monitoring with the analysis and the visualization of the data.",
+        "The monitoring systems (Zabbix, Nagios, Prometheus and others) are the specialized means for the centralized monitoring of the state of the computers and the network. They collect the data from many systems, analyse them and notify of the problems.",
+        "The monitoring systems track the parameters of the equipment and the software (the load, the temperatures, the availability, the errors) and notify the administrators of the deviations. This allows one to react to the problems before they lead to the failures.",
+        "The agents of the monitoring are installed on the serviced systems and collect the data, transmitting them to the central server. The agentless monitoring uses the standard protocols (WMI, SNMP) for the collection of the data without the installation of the additional software.",
+        "The integration of the means of the automation allows one to build the complex solutions: the monitoring detects the problem, the script performs the diagnostics and the restoration, and the system notifies the administrator. This is the basis of the modern automated maintenance.",
+        "The automation of the routine tasks frees the technician from the monotonous work and allows him to concentrate on the complex problems. At the same time, the technician must understand the operation of the automated means and be able to create and to maintain the scripts.",
+        "The development of the means of the automation goes in the direction of the integration with the cloud technologies, the use of the machine learning for the forecasting of the failures and the creation of the self-healing systems that restore the operability without the participation of the person.",
+        "Thus, the modern means of the automation of the diagnostics and the monitoring — the scripting languages and the monitoring systems — allow one to increase the efficiency and the scale of the maintenance of computer systems and are an important tool of the modern technician."
+      ],
+      "questions": [
+        "Why is the automation of the diagnostics and the monitoring necessary?",
+        "What languages are used for the automation?",
+        "What are the advantages of PowerShell and Python for the automation?",
+        "What are the monitoring systems for?",
+        "What does the integration of the means of the automation allow one to achieve?"
+      ]
+    },
+    {
+      "code": "5.27",
+      "title": "Development of a script for the automated check of the state of a computer system in Python",
+      "type_en": "Comprehensive assessment of knowledge",
+      "kind": "practical",
+      "objective": "To consolidate, in a comprehensive form, the skills of the automation of the diagnostics by developing a complete script for the automated check of the state of a computer system in Python.",
+      "theory": [
+        "A script for the automated check of the state of a computer system collects the data about all the main components (the processor, the memory, the disks, the network), analyses them, compares them with the norms and forms a report indicating the problems.",
+        "The complete script combines the obtaining of the data with the help of psutil and WMI, the analysis, the formation of the report and the logging. This is a comprehensive task that demonstrates the mastery of the automation of the diagnostics."
+      ],
+      "materials": [
+        "A computer with the installed Python and the libraries.",
+        "A code editor.",
+        "Reference data on the norms of the parameters.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Design the structure of the script: the modules of the collection of the data, the analysis and the report.",
+        "Implement the collection of the data about the processor, the memory, the disks and the network with the help of psutil.",
+        "Implement the analysis of the data: the comparison with the norms and the detection of the problems.",
+        "Implement the formation of the report on the state of the system and the logging.",
+        "Test the script and check the correctness of its operation and the report.",
+        "Make a conclusion about the developed script and the capabilities of its application."
+      ],
+      "tasks": [
+        "Develop a complete Python script for the check of the state of a computer system.",
+        "Implement the analysis of the data and the formation of the report in the script.",
+        "Test the script and describe the result of its operation."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the comprehensive skills of the automation of the diagnostics by developing a complete script for the automated check of the state of a computer system in Python.",
+      "questions": [
+        "What does a script for the check of the state of a computer system include?",
+        "How is the collection of the data about the components implemented?",
+        "How is the analysis of the data and the detection of the problems implemented?",
+        "How is the report on the state of the system formed?",
+        "Why is the logging necessary in a diagnostics script?"
+      ]
+    },
+    {
+      "code": "5.28",
+      "title": "Introduction to the diagnostics of computers and the software methods of restoration",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form a holistic understanding of the software methods of the diagnostics and the restoration of computers and to consolidate the skills of their application.",
+      "theory": [
+        "The software methods of the diagnostics and the restoration use the programs and the scripts to detect and to eliminate the problems of computer systems. They complement the hardware methods and allow one to automate the maintenance.",
+        "The software methods include the diagnostic utilities, the system tools of the restoration, the scripts of the automation and the monitoring systems. The combination of these means provides the comprehensive software maintenance of the computers."
+      ],
+      "materials": [
+        "A computer for the diagnostics.",
+        "A set of the software means of the diagnostics and the restoration.",
+        "Documentation on the means.",
+        "A report form."
+      ],
+      "procedure": [
+        "Systematize the software methods of the diagnostics and the restoration of computers.",
+        "Apply the diagnostic utilities to assess the state of the computer.",
+        "Apply the system tools of the restoration to eliminate a model problem.",
+        "Apply a script of the automation for the diagnostics or the maintenance.",
+        "Compare the effectiveness of the various software methods.",
+        "Make a conclusion about the software methods of the diagnostics and the restoration."
+      ],
+      "tasks": [
+        "Compile a classification of the software methods of the diagnostics and the restoration.",
+        "Apply at least three different software methods on practice.",
+        "Compare the effectiveness of the applied methods."
+      ],
+      "conclusion": "As a result of the work, the student has formed a holistic understanding of the software methods of the diagnostics and the restoration of computers and has consolidated the skills of their application.",
+      "questions": [
+        "What are the software methods of the diagnostics and the restoration?",
+        "How do the software methods complement the hardware ones?",
+        "What software means of the restoration exist?",
+        "What are the advantages of the software methods?",
+        "How is the effectiveness of the various methods compared?"
+      ]
+    },
+    {
+      "code": "5.29",
+      "title": "Analysis of the system logs: principles, formats, main files",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in analysing the system logs of an operating system for the diagnostics of the problems.",
+      "theory": [
+        "The system logs (the event logs) record the events of the operation of the system, the applications and the security. The analysis of the logs is an important method of the diagnostics that allows one to detect the causes of the problems and to forecast the failures.",
+        "In Windows, the logs are stored in the Event Viewer and are divided into the logs of the system, the applications and the security. In Linux, the logs are stored in the directory /var/log in the form of the text files. Each event has the level (the information, the warning, the error)."
+      ],
+      "materials": [
+        "A computer with the Windows and (or) Linux operating system.",
+        "The Event Viewer (Windows) and the access to /var/log (Linux).",
+        "Tools for the analysis of the logs.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the structure of the system logs in Windows (the Event Viewer) and the levels of the events.",
+        "View the log of the system and detect the warnings and the errors.",
+        "Analyse the detected errors and determine their possible causes.",
+        "Study the structure of the logs in Linux (/var/log) and the main files.",
+        "Find in the logs the events connected with the problems of the equipment or the software.",
+        "Make a conclusion about the application of the analysis of the logs for the diagnostics."
+      ],
+      "tasks": [
+        "Describe the structure of the system logs in Windows and Linux.",
+        "Analyse the log and detect the events connected with the problems.",
+        "Compile a list of the typical events that indicate the problems."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of analysing the system logs of an operating system for the diagnostics of the problems.",
+      "questions": [
+        "What do the system logs record?",
+        "How are the logs organized in Windows and Linux?",
+        "What levels of the events exist?",
+        "How does the analysis of the logs help in the diagnostics?",
+        "What events indicate the problems?"
+      ]
+    },
+    {
+      "code": "5.30",
+      "title": "Use of Python for reading and processing logs",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in using Python for the automated reading, processing and analysis of the logs.",
+      "theory": [
+        "Python is convenient for the automated processing of the logs: the reading of the files, the search for the events by the patterns, the filtering, the counting of the statistics and the formation of the reports. For this, the standard means of the language and the modules re (the regular expressions), and for Windows the modules for the work with the Event Log are used.",
+        "The automated analysis of the logs allows one to quickly process the large volumes of the data, to detect the patterns and the anomalies and to form the reports, which is impossible to do manually."
+      ],
+      "materials": [
+        "A computer with the installed Python.",
+        "Files of the logs for the analysis.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the means of Python for the reading and the processing of the text files.",
+        "Write a fragment of the script for the reading of a log file.",
+        "Add the search for the events by the pattern with the help of the regular expressions.",
+        "Add the filtering of the events by the level (the errors, the warnings) and the counting of the statistics.",
+        "Add the formation of a report on the detected events.",
+        "Make a conclusion about the capabilities of Python for the analysis of the logs."
+      ],
+      "tasks": [
+        "Write a Python script for the reading and the filtering of a log file.",
+        "Add the search for the events by the pattern and the counting of the statistics.",
+        "Form a report on the detected events."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of using Python for the automated reading, processing and analysis of the logs.",
+      "questions": [
+        "Why is Python convenient for the processing of the logs?",
+        "What means are used for the reading of the files and the search for the events?",
+        "What are the regular expressions, and how are they used?",
+        "How is the filtering of the events by the level performed?",
+        "What are the advantages of the automated analysis of the logs?"
+      ]
+    },
+    {
+      "code": "5.31",
+      "title": "The fundamentals of the system monitoring: parameters, methods, tools",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in organizing the system monitoring of a computer: the choice of the parameters, the methods and the tools.",
+      "theory": [
+        "The system monitoring is the continuous tracking of the parameters of the state of a computer system: the load of the processor, the use of the memory and the disks, the network activity, the temperatures and the availability of the services. The monitoring allows one to detect the problems in a timely manner.",
+        "The methods of the monitoring include the periodic polling of the parameters, the tracking of the events and the setting of the thresholds with the notification of their excess. The tools include the system utilities, the scripts and the specialized monitoring systems."
+      ],
+      "materials": [
+        "A computer for the monitoring.",
+        "The system tools and the monitoring utilities.",
+        "Python with the psutil library.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the parameters of the system that are subject to the monitoring.",
+        "Study the system tools of the monitoring (the task manager, the resource monitor).",
+        "Configure the monitoring of the parameters with the help of the utilities.",
+        "Write a fragment of the script for the periodic collection of the parameters with the help of psutil.",
+        "Configure the thresholds of the parameters and the notification of their excess.",
+        "Make a conclusion about the methods and the tools of the system monitoring."
+      ],
+      "tasks": [
+        "Compile a list of the parameters for the monitoring of a computer system.",
+        "Configure the monitoring of the parameters with the help of the tools.",
+        "Write a fragment of the script for the collection of the parameters."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of organizing the system monitoring of a computer: the choice of the parameters, the methods and the tools.",
+      "questions": [
+        "What is the system monitoring?",
+        "What parameters are subject to the monitoring?",
+        "What methods of the monitoring exist?",
+        "What tools are used for the monitoring?",
+        "How are the thresholds of the parameters and the notifications configured?"
+      ]
+    },
+    {
+      "code": "5.32",
+      "title": "PowerShell for the diagnostics of the equipment: basic commands",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in using the basic commands of PowerShell for the diagnostics of the equipment of a computer.",
+      "theory": [
+        "PowerShell provides the cmdlets for obtaining the information about the equipment through WMI/CIM: Get-CimInstance with the various classes, Get-ComputerInfo, Get-PhysicalDisk, Get-Volume and others. These cmdlets allow one to diagnose the equipment in an automated way.",
+        "The basic commands of PowerShell for the diagnostics form the foundation for the creation of the scripts of the automated diagnostics and the monitoring of the equipment."
+      ],
+      "materials": [
+        "A computer with the Windows operating system.",
+        "PowerShell.",
+        "Examples of the diagnostics cmdlets.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the basic cmdlets of PowerShell for obtaining the information about the equipment.",
+        "Obtain the information about the processor and the memory with the help of Get-CimInstance.",
+        "Obtain the information about the disks with the help of Get-PhysicalDisk and Get-Volume.",
+        "Obtain the general information about the computer with the help of Get-ComputerInfo.",
+        "Write a fragment of the script that combines several commands of the diagnostics.",
+        "Make a conclusion about the capabilities of PowerShell for the diagnostics of the equipment."
+      ],
+      "tasks": [
+        "Compile a list of the basic cmdlets of PowerShell for the diagnostics of the equipment.",
+        "Obtain the information about the main components with the help of PowerShell.",
+        "Write a fragment of the script of the diagnostics of the equipment."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of using the basic commands of PowerShell for the diagnostics of the equipment of a computer.",
+      "questions": [
+        "What cmdlets of PowerShell are used for the diagnostics of the equipment?",
+        "How is the information about the processor and the memory obtained?",
+        "How is the information about the disks obtained?",
+        "What does the cmdlet Get-ComputerInfo provide?",
+        "How are several commands of the diagnostics combined in a script?"
+      ]
+    },
+    {
+      "code": "5.33",
+      "title": "Creation of the first monitoring scripts in Python",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating the first scripts of the monitoring of the state of a computer in Python.",
+      "theory": [
+        "A monitoring script in Python periodically collects the parameters of the state of the system (the load of the processor, the use of the memory and the disks, the network activity) with the help of the psutil library and displays or saves them.",
+        "The basis of a monitoring script is a cycle with a delay, in which the parameters are collected at the specified interval. The collected data can be displayed on the screen, saved to a file or analysed."
+      ],
+      "materials": [
+        "A computer with the installed Python and the psutil library.",
+        "A code editor.",
+        "Examples of the monitoring scripts.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the functions of the psutil library for obtaining the parameters of the system.",
+        "Write a fragment of the script for obtaining the load of the processor and the use of the memory.",
+        "Add a cycle with a delay for the periodic collection of the parameters.",
+        "Add the output of the parameters on the screen and the saving to a file.",
+        "Run the monitoring script and observe its operation.",
+        "Make a conclusion about the creation of the monitoring scripts in Python."
+      ],
+      "tasks": [
+        "Write a Python script for the periodic monitoring of the load of the processor and the memory.",
+        "Add the saving of the parameters to a file.",
+        "Describe the structure of a monitoring script."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating the scripts of the monitoring of the state of a computer in Python.",
+      "questions": [
+        "What does a monitoring script in Python collect?",
+        "What functions of psutil are used for obtaining the parameters?",
+        "How is the periodic collection of the parameters organized?",
+        "How are the collected parameters saved?",
+        "What is the structure of a monitoring script?"
+      ]
+    },
+    {
+      "code": "5.34",
+      "title": "Work with the Windows API by means of Python (WMI)",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in working with the Windows API through WMI by means of Python for obtaining the information about the system and managing it.",
+      "theory": [
+        "Python can interact with the Windows API through WMI with the help of the WMI library (a wrapper over the COM interface of WMI). This allows one to obtain the information about the equipment and the system and to perform the operations of the management directly from a Python script.",
+        "The WMI library provides a convenient access to the WMI classes from Python: the obtaining of the instances, the reading of the properties and the call of the methods. This combines the power of WMI and the convenience of Python."
+      ],
+      "materials": [
+        "A computer with the Windows operating system and the installed Python.",
+        "The WMI library for Python.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Install the WMI library for Python and study its capabilities.",
+        "Write a fragment of the script for the connection to WMI and obtaining the information about the processor.",
+        "Obtain the information about the memory, the disks and the operating system through WMI.",
+        "Obtain the information about the services and the processes through WMI.",
+        "Form a report on the system on the basis of the data of WMI.",
+        "Make a conclusion about the capabilities of the work with WMI from Python."
+      ],
+      "tasks": [
+        "Write a Python script for obtaining the information about the system through WMI.",
+        "Obtain the information about several components through WMI.",
+        "Form a report on the system on the basis of the data of WMI."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of working with the Windows API through WMI by means of Python.",
+      "questions": [
+        "How does Python interact with WMI?",
+        "What does the WMI library provide?",
+        "How is the connection to WMI from Python performed?",
+        "What information can be obtained through WMI from Python?",
+        "What are the advantages of the combination of WMI and Python?"
+      ]
+    },
+    {
+      "code": "5.35",
+      "title": "Reading and changing the parameters of the system through winreg",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in reading and changing the parameters of the system through the Windows registry with the help of the winreg module of Python.",
+      "theory": [
+        "The Windows registry is a hierarchical database of the settings of the operating system and the programs. The winreg module of Python allows one to read and to change the parameters of the registry, which is used for the configuration and the automation.",
+        "The work with the registry requires caution: the incorrect changes may disrupt the operation of the system. Before the changes, it is recommended to make a backup of the registry."
+      ],
+      "materials": [
+        "A computer with the Windows operating system and the installed Python.",
+        "The winreg module (built into Python).",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the structure of the Windows registry and the main sections.",
+        "Write a fragment of the script for the reading of a parameter of the registry with the help of winreg.",
+        "Read several system parameters from the registry.",
+        "Write a fragment of the script for the change of a parameter of the registry (on a test key).",
+        "Observe the safety measures: make a backup before the change.",
+        "Make a conclusion about the capabilities of the work with the registry through winreg."
+      ],
+      "tasks": [
+        "Write a Python script for the reading of the parameters of the registry.",
+        "Demonstrate the change of a parameter of the registry on a test key.",
+        "Describe the safety measures when working with the registry."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of reading and changing the parameters of the system through the registry with the help of the winreg module of Python.",
+      "questions": [
+        "What is the Windows registry?",
+        "What does the winreg module allow one to do?",
+        "How is a parameter of the registry read?",
+        "What safety measures must be observed when changing the registry?",
+        "Why is it recommended to make a backup before the changes?"
+      ]
+    },
+    {
+      "code": "5.36",
+      "title": "Management of the processes and the services through subprocess",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in managing the processes and the services of an operating system with the help of the subprocess module of Python.",
+      "theory": [
+        "The subprocess module of Python allows one to launch the external programs and the system commands from a script and to obtain their result. This is used for the automation of the management of the processes, the services and the execution of the system commands.",
+        "Through subprocess, one can launch the system utilities (tasklist, sc, net), obtain their output and process it. This combines the capabilities of the system commands and the logic of Python."
+      ],
+      "materials": [
+        "A computer with the Windows operating system and the installed Python.",
+        "The subprocess module (built into Python).",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the capabilities of the subprocess module for the launch of the system commands.",
+        "Write a fragment of the script for obtaining the list of the processes with the help of subprocess.",
+        "Write a fragment of the script for the management of a service (the start, the stop) through the system commands.",
+        "Process the result of the execution of the commands in the script.",
+        "Add the handling of the errors of the execution of the commands.",
+        "Make a conclusion about the management of the processes and the services through subprocess."
+      ],
+      "tasks": [
+        "Write a Python script for obtaining the list of the processes through subprocess.",
+        "Demonstrate the management of a service from a script.",
+        "Add the handling of the errors to the script."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of managing the processes and the services of an operating system with the help of the subprocess module of Python.",
+      "questions": [
+        "What does the subprocess module allow one to do?",
+        "How is a system command launched from a script?",
+        "How is the result of the execution of a command obtained?",
+        "How are the processes and the services managed through subprocess?",
+        "Why is the handling of the errors of the execution of the commands necessary?"
+      ]
+    },
+    {
+      "code": "5.37",
+      "title": "Scripts for the cleaning and the optimization of the state of the system",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating the scripts for the cleaning and the optimization of the state of a computer system.",
+      "theory": [
+        "The scripts for the cleaning and the optimization automate the routine tasks of the maintenance: the removal of the temporary files, the cleaning of the caches, the optimization of the autostart and the freeing of the disk space. This maintains the performance of the system.",
+        "The cleaning scripts must be careful and remove only the files that are knowingly unnecessary, in order not to damage the system. Before the mass removal, it is recommended to check the list of the files."
+      ],
+      "materials": [
+        "A computer for the cleaning and the optimization.",
+        "Python or PowerShell.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the objects of the cleaning: the temporary files, the caches, the logs, the recycle bin.",
+        "Write a fragment of the script for the search and the removal of the temporary files.",
+        "Add to the script the cleaning of the caches and the freeing of the disk space.",
+        "Add the safety measures: the check of the files before the removal and the logging.",
+        "Test the script and assess the freed space.",
+        "Make a conclusion about the automation of the cleaning and the optimization of the system."
+      ],
+      "tasks": [
+        "Write a script for the cleaning of the temporary files of the system.",
+        "Add the logging of the removed files to the script.",
+        "Assess the volume of the freed disk space."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating the scripts for the cleaning and the optimization of the state of a computer system.",
+      "questions": [
+        "What tasks do the cleaning and optimization scripts automate?",
+        "What objects are subject to the cleaning?",
+        "Why must the cleaning scripts be careful?",
+        "Why is the logging of the removed files necessary?",
+        "How is the result of the cleaning assessed?"
+      ]
+    },
+    {
+      "code": "5.38",
+      "title": "Automatic diagnostics of network problems",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating the scripts for the automatic diagnostics of network problems.",
+      "theory": [
+        "A script for the automatic diagnostics of the network checks the main aspects of the network connection: the availability of the gateway and the external nodes, the correctness of the settings, the operation of the DNS. This allows one to quickly determine the cause of a network problem.",
+        "The diagnostics is built sequentially: from the check of the local connection to the check of the access to the Internet, which allows one to localize the problem at a specific level."
+      ],
+      "materials": [
+        "A computer with a network connection.",
+        "Python or PowerShell.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Determine the sequence of the checks for the diagnostics of the network (the adapter, the settings, the gateway, the DNS, the Internet).",
+        "Write a fragment of the script for the check of the availability of the gateway and the external nodes.",
+        "Add the check of the operation of the DNS (the resolution of the names).",
+        "Add the analysis of the results and the determination of the level of the problem.",
+        "Test the script on a working and a model-broken network.",
+        "Make a conclusion about the automatic diagnostics of the network problems."
+      ],
+      "tasks": [
+        "Write a script for the automatic diagnostics of a network connection.",
+        "Add the determination of the level of the problem to the script.",
+        "Test the script and describe the result."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating the scripts for the automatic diagnostics of network problems.",
+      "questions": [
+        "What does a script for the diagnostics of the network check?",
+        "In what sequence is the diagnostics of the network built?",
+        "How is the operation of the DNS checked?",
+        "How is the level of a network problem determined?",
+        "What are the advantages of the automatic diagnostics of the network?"
+      ]
+    },
+    {
+      "code": "5.39",
+      "title": "Methods of the restoration of network connections through PowerShell",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in applying the methods of the restoration of network connections with the help of PowerShell.",
+      "theory": [
+        "PowerShell provides the cmdlets for the restoration of the network: Restart-NetAdapter (the restart of the adapter), the renewal of the IP address, the reset of the DNS cache (Clear-DnsClientCache), the reset of the network stack. These methods allow one to eliminate the typical network problems.",
+        "The script of the restoration of the network combines the diagnostics and the consistent application of the methods of the restoration until the connection is restored."
+      ],
+      "materials": [
+        "A computer with the Windows operating system and a network connection.",
+        "PowerShell with administrator rights.",
+        "Examples of the cmdlets of the restoration.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the cmdlets of PowerShell for the restoration of the network.",
+        "Perform the restart of the network adapter with the cmdlet Restart-NetAdapter.",
+        "Perform the renewal of the IP address and the reset of the DNS cache.",
+        "Write a fragment of the script that consistently applies the methods of the restoration.",
+        "Test the script on a model-broken network connection.",
+        "Make a conclusion about the methods of the restoration of the network through PowerShell."
+      ],
+      "tasks": [
+        "Compile a list of the methods of the restoration of the network in PowerShell.",
+        "Write a script for the consistent restoration of a network connection.",
+        "Test the script and describe its operation."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of applying the methods of the restoration of network connections with the help of PowerShell.",
+      "questions": [
+        "What cmdlets are used for the restoration of the network?",
+        "How is the restart of a network adapter performed?",
+        "What does the reset of the DNS cache give?",
+        "How does a script of the restoration of the network work?",
+        "In what sequence are the methods of the restoration applied?"
+      ]
+    },
+    {
+      "code": "5.40",
+      "title": "Utilities for the check of the file system (Python + system tools)",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating the utilities for the check of the file system with the combination of Python and the system tools.",
+      "theory": [
+        "The check of the file system reveals and corrects the errors that arise as a result of the incorrect shutdowns and the faults. The system tools (chkdsk in Windows, fsck in Linux) perform the check, and Python automates their launch and the analysis of the results.",
+        "The combination of Python and the system tools allows one to create the utilities that automatically check the file system, analyse the result and form a report."
+      ],
+      "materials": [
+        "A computer with a file system.",
+        "Python and the system tools of the check.",
+        "A code editor.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the system tools of the check of the file system (chkdsk, fsck).",
+        "Write a fragment of the script for the launch of the check of the file system through subprocess.",
+        "Add the analysis of the result of the check and the extraction of the information about the errors.",
+        "Add the formation of a report on the state of the file system.",
+        "Test the utility and analyse the report.",
+        "Make a conclusion about the automation of the check of the file system."
+      ],
+      "tasks": [
+        "Write a utility for the launch of the check of the file system and the analysis of the result.",
+        "Form a report on the state of the file system.",
+        "Describe the system tools of the check of the file system."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating the utilities for the check of the file system with the combination of Python and the system tools.",
+      "questions": [
+        "What does the check of the file system reveal?",
+        "What system tools are used for the check?",
+        "How does Python automate the launch of the check?",
+        "How is the result of the check analysed?",
+        "What does a report on the state of the file system contain?"
+      ]
+    },
+    {
+      "code": "5.41",
+      "title": "Diagnostics and fixing of the problems of the drivers",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in diagnosing and fixing the problems of the drivers of the devices.",
+      "theory": [
+        "The drivers ensure the interaction of the operating system with the devices. The problems of the drivers (the absence, the outdated version, the conflict, the corruption) lead to the incorrect operation or the inoperability of the devices.",
+        "The diagnostics of the drivers is performed through the device manager, which shows the devices with the problems, and through the system tools. The fixing consists in the installation, the update or the rollback of the drivers."
+      ],
+      "materials": [
+        "A computer with the devices and the drivers.",
+        "The device manager and the system tools.",
+        "PowerShell for the automation.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the device manager and detect the devices with the problems of the drivers.",
+        "Determine the type of the problem of the driver (the absence, the outdated version, the conflict).",
+        "Perform the update of the driver of the device.",
+        "Perform the rollback of the driver to the previous version (model the situation).",
+        "Obtain the information about the drivers with the help of PowerShell (Get-PnpDevice).",
+        "Make a conclusion about the diagnostics and the fixing of the problems of the drivers."
+      ],
+      "tasks": [
+        "Detect the devices with the problems of the drivers in the device manager.",
+        "Perform the update or the rollback of a driver.",
+        "Obtain the information about the drivers with the help of PowerShell."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of diagnosing and fixing the problems of the drivers of the devices.",
+      "questions": [
+        "What do the drivers ensure?",
+        "What problems of the drivers exist?",
+        "How are the problems of the drivers detected?",
+        "How are the problems of the drivers fixed?",
+        "How is the information about the drivers obtained with PowerShell?"
+      ]
+    },
+    {
+      "code": "5.42",
+      "title": "Creation of a Python utility for the comprehensive check of the system",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating a Python utility for the comprehensive check of the state of a computer system.",
+      "theory": [
+        "A utility for the comprehensive check combines the checks of the various aspects of the system: the equipment, the file system, the network, the drivers, the security. It collects the data, analyses them and forms a comprehensive report on the state of the system.",
+        "The combination of several checks in one utility requires the modular structure: each check is implemented as a separate function, and the main program calls them and combines the results."
+      ],
+      "materials": [
+        "A computer with the installed Python and the libraries.",
+        "A code editor.",
+        "Reference data on the norms.",
+        "A report form."
+      ],
+      "procedure": [
+        "Design the modular structure of the utility: the functions of the checks and the main program.",
+        "Implement the function of the check of the equipment (the processor, the memory, the disks) with psutil.",
+        "Implement the function of the check of the file system and the network.",
+        "Implement the formation of the comprehensive report combining all the checks.",
+        "Test the utility and analyse the report.",
+        "Make a conclusion about the creation of the comprehensive utility of the check."
+      ],
+      "tasks": [
+        "Create a Python utility for the comprehensive check of the system.",
+        "Implement at least three different checks in the utility.",
+        "Form a comprehensive report on the state of the system."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating a Python utility for the comprehensive check of the state of a computer system.",
+      "questions": [
+        "What checks does a utility for the comprehensive check combine?",
+        "Why is the modular structure of the utility necessary?",
+        "How is each check implemented?",
+        "How is the comprehensive report formed?",
+        "What are the advantages of the comprehensive check?"
+      ]
+    },
+    {
+      "code": "5.43",
+      "title": "Integration of Python and PowerShell in one maintenance process",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in integrating Python and PowerShell in one process of the maintenance of a computer system.",
+      "theory": [
+        "Python and PowerShell complement each other: PowerShell provides a convenient access to the Windows components, and Python provides the rich capabilities of the processing of the data and the logic. Their integration allows one to combine the strengths of both languages.",
+        "The integration is performed by the launch of the PowerShell commands from Python (through subprocess) or the Python scripts from PowerShell. This allows one to use the optimal tool for each task."
+      ],
+      "materials": [
+        "A computer with the installed Python and PowerShell.",
+        "A code editor.",
+        "Examples of the integration.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the methods of the integration of Python and PowerShell.",
+        "Write a fragment of the Python script that launches a PowerShell command and obtains the result.",
+        "Process the result of the PowerShell command in the Python script.",
+        "Create a maintenance process that combines the capabilities of both languages.",
+        "Test the integrated process and analyse its operation.",
+        "Make a conclusion about the integration of Python and PowerShell."
+      ],
+      "tasks": [
+        "Write a Python script that launches a PowerShell command.",
+        "Process the result of the PowerShell command in Python.",
+        "Create a maintenance process combining both languages."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of integrating Python and PowerShell in one process of the maintenance of a computer system.",
+      "questions": [
+        "How do Python and PowerShell complement each other?",
+        "How is the integration of Python and PowerShell performed?",
+        "How is a PowerShell command launched from Python?",
+        "How is the result of a PowerShell command processed in Python?",
+        "What are the advantages of the integration of the two languages?"
+      ]
+    },
+    {
+      "code": "5.44",
+      "title": "Creation of an automated recovery scenario (a mini-project)",
+      "type_en": "Comprehensive application of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in creating an automated scenario of the restoration of the operability of a computer system as a mini-project.",
+      "theory": [
+        "An automated scenario of the restoration combines the diagnostics, the decision-making and the actions of the restoration in a single script. It detects a problem and automatically performs the actions for its elimination, minimizing the participation of the person.",
+        "The mini-project of the automated restoration integrates the studied skills: the collection of the data, the analysis, the actions of the restoration, the logging and the formation of the report. This is a comprehensive task that demonstrates the mastery of the automation."
+      ],
+      "materials": [
+        "A computer with the installed Python and (or) PowerShell.",
+        "A code editor.",
+        "A description of the scenario of the restoration.",
+        "A report form."
+      ],
+      "procedure": [
+        "Choose a typical problem for the automated restoration (for example, the restoration of the network or the cleaning of the system).",
+        "Design the scenario of the restoration: the diagnostics, the conditions, the actions, the check of the result.",
+        "Implement the diagnostics of the problem in the script.",
+        "Implement the actions of the restoration and the check of the result.",
+        "Add the logging and the formation of the report and test the scenario.",
+        "Make a conclusion about the developed automated scenario of the restoration."
+      ],
+      "tasks": [
+        "Develop an automated scenario of the restoration for a chosen problem.",
+        "Implement the diagnostics, the restoration and the check of the result in the script.",
+        "Test the scenario and describe its operation."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of creating an automated scenario of the restoration of the operability of a computer system as a mini-project.",
+      "questions": [
+        "What does an automated scenario of the restoration combine?",
+        "How is the scenario of the restoration designed?",
+        "How is the diagnostics of the problem implemented in the script?",
+        "How is the check of the result of the restoration implemented?",
+        "Why are the logging and the report necessary in the scenario?"
+      ]
+    },
+    {
+      "code": "5.45",
+      "title": "Testing and demonstration of the operability of the developed utility",
+      "type_en": "Generalization and assessment of knowledge",
+      "kind": "practical",
+      "objective": "To consolidate and check, in a comprehensive form, the skills of the development of the means of the automation by testing and demonstrating the operability of the developed utility, summing up the learning outcome.",
+      "theory": [
+        "The testing of the developed utility confirms its operability and reveals the errors. The testing is performed on the various scenarios, including the boundary and the erroneous situations. The demonstration shows the operation of the utility in the real conditions.",
+        "This lesson generalizes the material of the learning outcome on the restoration and the prevention of the failures and the automation of the maintenance. The student demonstrates the developed utility and assesses its operability."
+      ],
+      "materials": [
+        "The utility developed in the previous lessons.",
+        "A computer for the testing.",
+        "Test scenarios.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Prepare the developed utility for the testing and the demonstration.",
+        "Compile a plan of the testing covering the main scenarios and the boundary situations.",
+        "Perform the testing of the utility on the various scenarios.",
+        "Detect and fix the errors revealed during the testing.",
+        "Demonstrate the operation of the utility and assess its operability.",
+        "Make a final conclusion about the developed utility and its application."
+      ],
+      "tasks": [
+        "Compile a plan of the testing of the developed utility.",
+        "Perform the testing and fix the revealed errors.",
+        "Demonstrate the operation of the utility and prepare a report."
+      ],
+      "conclusion": "As a result of the work, the student has consolidated the comprehensive skills of the development, the testing and the demonstration of the means of the automation of the maintenance of computer systems.",
+      "questions": [
+        "What does the testing of the developed utility confirm?",
+        "How is the plan of the testing compiled?",
+        "What scenarios must be covered by the testing?",
+        "How are the errors revealed during the testing fixed?",
+        "What does the demonstration of the operability of the utility show?"
+      ]
+    }
+  ]
+}

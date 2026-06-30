@@ -1,0 +1,556 @@
+{
+  "id": "1.1",
+  "title": "Comply with the requirements and norms of occupational safety, industrial and ecological safety at information-service enterprises",
+  "weight": "6%",
+  "hours": "30 hours",
+  "glossary": [
+    ["Earthing (grounding)", "Intentional electrical connection of equipment housings to the ground, used to protect people from electric shock if the insulation fails."],
+    ["Electrical safety", "A system of organizational and technical measures and means that protect people from the harmful and dangerous effects of electric current, electric arc and static electricity."],
+    ["ESD (electrostatic discharge)", "A sudden flow of electricity between two charged objects; it is one of the main causes of latent damage to electronic components."],
+    ["Fire safety", "The state of an object at which the possibility of a fire is prevented and, if it occurs, the impact of dangerous fire factors on people and property is excluded or limited."],
+    ["Occupational safety (labour protection)", "A system of preserving the life and health of employees during their work, including legal, socio-economic, organizational, technical, sanitary and other measures."],
+    ["Occupational disease", "A chronic or acute disease of an employee that results from exposure to harmful production factors and entails a temporary or permanent loss of professional working capacity."],
+    ["PPE (personal protective equipment)", "Means worn or used by an employee to prevent or reduce the effect of harmful and dangerous production factors (anti-static straps, dielectric gloves, goggles, etc.)."],
+    ["Residual current device (RCD)", "A protective device that quickly disconnects the supply when it detects a leakage (residual) current, protecting a person from electric shock."],
+    ["Risk assessment", "The process of identifying hazards, analysing the probability and severity of harm, and ranking risks to plan measures for their reduction."],
+    ["Safety briefing", "A form of training in which an employee is informed about safe methods of work; types include introductory, primary, repeated, unscheduled and targeted briefings."],
+    ["Static electricity", "Electric charges that accumulate on the surface of dielectrics and isolated conductors and may damage microelectronics through discharge."]
+  ],
+  "lessons": [
+    {
+      "code": "1.1",
+      "title": "Fundamentals of electrical safety",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of electrical safety and the effect of electric current on the human body.",
+        "Factors that determine the severity of electric shock.",
+        "Classification of premises by the degree of electric-shock hazard.",
+        "Basic protective measures: earthing, insulation, RCD and personal protective equipment."
+      ],
+      "body": [
+        "Electrical safety is a system of organizational and technical measures and means that protect people from the harmful and dangerous effects of electric current, electric arc, electromagnetic field and static electricity. For an information-systems technician, electrical safety is a basic professional competency, because all work with computer and server equipment is connected with the operation of devices powered by mains voltage.",
+        "Electric current passing through the human body produces thermal, electrolytic, mechanical and biological effects. The thermal effect causes burns of the skin and internal tissues; the electrolytic effect decomposes blood and other body fluids; the mechanical effect leads to ruptures of tissues; and the biological effect disturbs the work of the nervous system, the heart and the respiratory organs.",
+        "The severity of an electric shock depends on a number of factors: the magnitude of the current, the type and frequency of the current, the duration of its action, the path of the current through the body, and the individual physiological state of the person. The current value is considered the main factor. A current of about 1 mA is the threshold of perception; a current of 10–15 mA is the threshold of non-let-go, at which a person can no longer release the current-carrying part on their own; a current of 100 mA and above is, as a rule, fatal.",
+        "The voltage and the resistance of the human body determine the value of the current according to Ohm's law. The resistance of the body is not constant: it depends on the condition of the skin (dry or wet), the area and tightness of contact, and the duration of the current. Damp skin, sweat and metal jewellery sharply reduce resistance and increase the danger.",
+        "Alternating current of industrial frequency (50 Hz) is more dangerous for a person than direct current of the same value, because it causes more severe muscle contractions and is more likely to cause fibrillation of the heart. With increasing frequency the danger of electric shock decreases, but the danger of burns remains.",
+        "The path of the current through the body is of great importance. The most dangerous paths are those in which the current passes through the heart and respiratory organs — for example, 'hand–hand' and 'hand–legs'. Such loops cover the vital organs and most often lead to a fatal outcome.",
+        "According to the degree of danger of electric shock, all premises are divided into three classes. Premises without increased danger have no factors that increase the risk. Premises with increased danger are characterized by one of the following factors: dampness, conductive dust, conductive floors, high temperature, or the possibility of simultaneous contact with the earthed metal parts of equipment and the metal housings of electrical devices. Especially dangerous premises are characterized by two or more such factors at the same time, or by a chemically active environment.",
+        "Most computer classrooms and server rooms belong to the category of premises without increased danger or with increased danger, depending on the conditions. The technician must be able to determine the class of a room, because the permissible voltages of portable lamps and tools and the requirements for protective measures depend on it.",
+        "The main collective protective measures against electric shock include protective earthing, protective neutral bonding (zeroing), protective disconnection (RCD), the use of low (safe) voltage, electrical separation of networks, insulation of current-carrying parts, fencing and signalling, and safety signs.",
+        "Protective earthing is an intentional electrical connection of the metal non-current-carrying parts of equipment, which may become energized, to the earth or its equivalent. In the event of a breakdown of the insulation, the earthing reduces the touch voltage to a safe value and ensures that the protection operates.",
+        "A residual current device (RCD) continuously compares the current flowing into a load with the current returning from it. If a leakage (residual) current appears — for example, because a person touched a faulty housing — the RCD detects the difference and disconnects the supply within tens of milliseconds, preventing dangerous consequences.",
+        "Personal protective equipment is used when collective measures cannot fully eliminate the danger. Basic electrical-protective equipment (dielectric gloves, insulating tools, voltage indicators) can withstand the operating voltage of the installation and allows work on live parts. Additional equipment (dielectric galoshes, mats, insulating stands) by itself does not provide protection but reinforces the action of the basic equipment.",
+        "When servicing computer equipment, the technician must always de-energize the device before opening the case, check the absence of voltage, discharge capacitors of power supplies and monitors, use a serviceable, earthed tool, and never work on a live installation alone. Compliance with these rules is the foundation of safe professional activity.",
+        "Thus, electrical safety combines knowledge of the physical action of current on the body, the ability to assess the danger of a particular room and operation, and the practical mastery of protective measures and equipment. These skills are mandatory for everyone who maintains and repairs computer and office equipment."
+      ],
+      "questions": [
+        "What types of effects does electric current have on the human body?",
+        "Which factors determine the severity of an electric shock, and why is the magnitude of the current considered the main one?",
+        "Into which classes are premises divided according to the degree of electric-shock danger, and by what features?",
+        "How do protective earthing and a residual current device (RCD) protect a person?",
+        "What is the difference between basic and additional personal electrical-protective equipment?"
+      ]
+    },
+    {
+      "code": "1.2",
+      "title": "The role and importance of occupational safety in the field of information services",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The concept, goals and tasks of occupational safety (labour protection).",
+        "The legal and regulatory basis of occupational safety.",
+        "Specific features of occupational safety at information-service enterprises.",
+        "Responsibilities of the employer and the employee in the field of labour protection."
+      ],
+      "body": [
+        "Occupational safety, or labour protection, is a system of preserving the life and health of employees in the course of their work activity. It includes legal, socio-economic, organizational and technical, sanitary and hygienic, treatment-and-prevention, rehabilitation and other measures. The purpose of labour protection is to minimize the probability of injury or illness of the employee while maintaining their working capacity.",
+        "In the field of information services, occupational safety acquires its own specific features. The main production factors here are not heavy machinery, but prolonged work at a computer, electrical equipment, electromagnetic fields, an unfavourable microclimate, insufficient lighting, visual and neuro-emotional loads, and a forced working posture. Therefore labour protection in IT focuses on ergonomics, electrical safety, fire safety and the prevention of occupational diseases.",
+        "The legal basis of labour protection is formed by the Labour Code, state standards (GOST/ST RK) of the occupational-safety standards system, sanitary norms and rules (SanPiN), fire-safety rules, and the rules for the technical operation of electrical installations of consumers. These documents establish the requirements that both the employer and the employee are obliged to fulfil.",
+        "The goals of occupational safety are achieved through a set of tasks: identifying and assessing harmful and dangerous production factors; bringing workplaces into conformity with the requirements of standards; training and briefing personnel; providing employees with personal protective equipment; organizing medical examinations; and investigating and recording accidents and occupational diseases.",
+        "A harmful production factor is a factor whose impact on an employee can lead to an illness. A dangerous production factor is a factor whose impact can lead to an injury. At an information enterprise, the increased level of noise from cooling systems, the electromagnetic field of equipment, and the eye strain from monitors are harmful factors, while electric current and the possibility of a fire are dangerous factors.",
+        "The employer bears the main responsibility for the state of labour protection. The employer is obliged to ensure safe conditions and labour protection at every workplace, to organize briefings and the verification of knowledge of labour-protection requirements, to provide personal protective equipment, to carry out a special assessment of working conditions, to organize medical examinations and to investigate accidents.",
+        "The employee, in turn, is obliged to comply with labour-protection requirements, to correctly apply the personal and collective protective equipment provided, to undergo training, briefing and verification of knowledge, to immediately notify the manager of any situation that threatens the life and health of people, and to undergo compulsory medical examinations.",
+        "An important element of the labour-protection system is the management of occupational risks. Risk management is a set of interrelated measures, including the identification of hazards, the assessment of occupational risks and the planning of measures to reduce them. A modern enterprise builds its labour-protection system precisely on the basis of risk assessment.",
+        "Briefings on labour protection occupy a special place in the field of information services. The introductory briefing is conducted with all newly hired employees; the primary briefing is conducted directly at the workplace; repeated, unscheduled and targeted briefings maintain and update the employee's knowledge. Without passing a briefing, an employee is not allowed to work.",
+        "The economic importance of labour protection is also significant. Accidents, illnesses and equipment downtime caused by violations of safety requirements lead to direct and indirect losses for the enterprise. Investments in labour protection — modern equipment, ergonomic furniture, training — reduce these losses and increase the productivity and motivation of the staff.",
+        "The social importance of labour protection lies in preserving the health and working capacity of people, in reducing injuries and occupational diseases, and in creating a comfortable and safe working environment. For the IT sphere, where qualified specialists are a key resource, this is especially important.",
+        "Thus, occupational safety in the field of information services is a comprehensive system that combines legal requirements, technical measures and the personal responsibility of every employee. Mastering its principles is a necessary condition for the professional activity of an information-systems technician."
+      ],
+      "questions": [
+        "What is occupational safety (labour protection) and what does this system include?",
+        "What specific features does labour protection have at information-service enterprises?",
+        "What is the difference between a harmful and a dangerous production factor? Give examples for the IT sphere.",
+        "What are the main responsibilities of the employer and of the employee in the field of labour protection?",
+        "What types of safety briefings exist and what is their purpose?"
+      ]
+    },
+    {
+      "code": "1.3",
+      "title": "Features of organizing safe workplaces at information enterprises",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of a workplace and the requirements for its organization.",
+        "Ergonomic requirements for a computer workstation.",
+        "Microclimate, lighting and noise at the workplace of an IT specialist.",
+        "Placement of equipment and electrical wiring at the workplace."
+      ],
+      "body": [
+        "A workplace is the part of the production area equipped with the necessary means in which an employee performs their job duties. The correct organization of the workplace of an IT specialist directly affects their health, working capacity and labour productivity, and also reduces the probability of injuries and occupational diseases.",
+        "Ergonomics is the science of adapting the working environment to the capabilities and characteristics of the human body. Ergonomic requirements for a computer workstation regulate the dimensions of the desk and chair, the height of the monitor, the distance to the screen, the position of the keyboard and the mouse, and the placement of documents and auxiliary devices.",
+        "The work chair must be lifting-and-swivelling and adjustable in height and in the angles of inclination of the seat and the backrest. This allows the posture to be changed during work and reduces the static load on the muscles of the back and neck. The feet should rest on the floor or on a footrest, and the angle at the knees should be close to a right angle.",
+        "The monitor should be placed so that the upper edge of the screen is at or slightly below eye level, and the distance from the eyes to the screen is 600–700 mm. The screen should be positioned to exclude glare from windows and lamps. Correct placement of the monitor reduces visual strain and the load on the cervical spine.",
+        "The microclimate of the premises is characterized by air temperature, relative humidity and air velocity. For premises with computer equipment, an optimal temperature of about 22–24 °C in the cold season and 23–25 °C in the warm season, a relative humidity of 40–60 %, and a low air velocity are recommended. Deviations from these values reduce the comfort and working capacity of the staff.",
+        "Lighting at the workplace must be sufficient and uniform. Both natural and artificial lighting are used. The illumination of the working surface for working with documents should be about 300–500 lux. It is important to avoid sharp contrasts between the brightness of the screen and the surrounding space and to exclude direct and reflected glare.",
+        "The level of noise at the workplace of an IT specialist is created by the cooling fans of computers and servers, printers, air-conditioning systems and other people. Increased noise tires the nervous system and reduces concentration. To reduce noise, low-noise equipment is used, server equipment is placed in separate rooms, and sound-absorbing materials are applied.",
+        "The placement of equipment at the workplace must ensure free access to all devices for maintenance and a convenient working posture. The distance between the side surfaces of monitors should be at least 1.2 m, and the distance from the rear surface of one monitor to the screen of another should be at least 2 m. This reduces the mutual influence of the electromagnetic fields of devices.",
+        "Particular attention is paid to electrical wiring and the connection of equipment. All cables must be laid in such a way as to exclude their mechanical damage and tripping of people. The use of damaged sockets, plugs and extension cords is not allowed. The number of devices connected to one socket group must not exceed its rated load.",
+        "It is recommended to connect computer equipment through sources of uninterruptible power supply and surge protectors. This protects the equipment from voltage surges and short-term power outages, and also reduces the risk of fire and loss of data. Earthing of the equipment housings is mandatory.",
+        "The organization of a safe workplace also includes the rational arrangement of furniture and passages, compliance with fire-safety requirements, the availability of primary fire-extinguishing means, and free access to the means of disconnecting electricity. All these elements together form a safe and productive working environment.",
+        "Thus, the safe organization of the workplace of an IT specialist is based on ergonomic principles, on compliance with the requirements for the microclimate, lighting and noise, and on the correct and safe placement of equipment and electrical wiring."
+      ],
+      "questions": [
+        "What is a workplace, and why is its correct organization important for an IT specialist?",
+        "What ergonomic requirements apply to a computer workstation?",
+        "What microclimate and lighting parameters are recommended for premises with computer equipment?",
+        "What requirements apply to the placement of equipment and the distances between workstations?",
+        "What requirements must be observed when connecting equipment and laying electrical wiring?"
+      ]
+    },
+    {
+      "code": "1.4",
+      "title": "Practical aspects of fire safety at information-sector enterprises",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "Causes of fires at information enterprises.",
+        "Classes of fire and the choice of extinguishing agent.",
+        "Primary fire-extinguishing means for electrical equipment.",
+        "Actions of personnel in the event of a fire."
+      ],
+      "body": [
+        "Fire safety is the state of an object at which the possibility of a fire is prevented, and in the event of its occurrence the impact of dangerous fire factors on people and property is excluded or limited. At information-sector enterprises, where a large amount of electrical equipment and combustible materials is concentrated, fire safety is of particular importance.",
+        "The main causes of fires at information enterprises are connected with the electrical part. These are short circuits in wiring and equipment, overloading of electrical networks, poor contact in connections leading to overheating, the use of faulty devices, and the violation of the rules for operating heating and electrical appliances. A significant proportion of fires is also caused by the human factor — careless handling of fire and smoking in unauthorized places.",
+        "Combustible materials at an information enterprise include the polymer cases of equipment, cable insulation, furniture, paper documents and finishing materials. When they burn, not only is heat released, but also toxic combustion products that pose a danger to people even before the fire reaches them.",
+        "Dangerous fire factors that affect people are open flame and sparks, an increased temperature of the environment, toxic combustion products, smoke, a reduced concentration of oxygen, and the destruction of building structures. The greatest number of victims in fires is caused precisely by the toxic combustion products and smoke.",
+        "Fires are classified into classes depending on the type of burning material. Class A is the burning of solid substances (paper, wood, plastics); class B is the burning of flammable liquids; class C is the burning of gases; class D is the burning of metals; and class E (in a number of classifications) is the burning of electrical installations under voltage. The choice of extinguishing agent depends on the class of the fire.",
+        "The extinguishing of electrical installations under voltage has important features. Water and foam extinguishers conduct electric current and cannot be used on live equipment, as this creates a danger of electric shock. For extinguishing energized electrical equipment, carbon-dioxide and powder fire extinguishers are used, which do not conduct current.",
+        "A carbon-dioxide (CO2) fire extinguisher is the preferred means for server rooms and computer classes, because carbon dioxide does not leave traces and does not damage the electronics. When using it, one must avoid contact of the skin with the bell of the extinguisher, the temperature of which drops sharply, and ensure ventilation of the room after extinguishing, since carbon dioxide displaces oxygen.",
+        "Powder fire extinguishers are universal and suitable for most classes of fire, including energized equipment up to a certain voltage. However, the powder contaminates the equipment and the room and may render the electronics inoperable, so for valuable equipment carbon-dioxide extinguishers are preferred.",
+        "Automatic fire-extinguishing and fire-alarm systems play a key role in protecting server rooms and data centres. Gas fire-extinguishing systems based on inert gases or chemical agents extinguish a fire without damaging the equipment and without harming people if the evacuation rules are observed. Fire detectors detect smoke or a temperature rise and trigger an alarm.",
+        "In the event of a fire, the personnel must act quickly and in a coordinated manner. The general sequence of actions is: immediately report the fire to the fire service by calling the emergency number; de-energize the equipment if it is safe to do so; begin evacuating people through the emergency exits; and, if possible and safe, begin extinguishing the fire with the available primary means.",
+        "Evacuation must be carried out according to the evacuation plan, which is posted in a visible place in each room. Employees must know the location of the emergency exits, fire extinguishers, fire hydrants and electrical-disconnection points. During evacuation it is forbidden to use lifts, and one should move along the evacuation routes, covering the respiratory organs from smoke.",
+        "The prevention of fires is based on compliance with the operating rules for electrical equipment, the timely inspection and repair of wiring, the prohibition of overloading the network and of using faulty devices, the maintenance of order at the workplace, and the regular training and briefing of personnel on fire safety.",
+        "Thus, fire safety at information-sector enterprises requires knowledge of the causes and classes of fires, the correct choice of extinguishing agents for electrical equipment, the availability and serviceability of fire-extinguishing means, and the clear and trained actions of personnel in the event of a fire."
+      ],
+      "questions": [
+        "What are the main causes of fires at information enterprises?",
+        "Into which classes are fires divided, and how does this affect the choice of extinguishing agent?",
+        "Why can water and foam extinguishers not be used on energized electrical equipment?",
+        "Which fire extinguishers are preferable for server rooms and computer classes, and why?",
+        "What is the sequence of actions of personnel in the event of a fire?"
+      ]
+    },
+    {
+      "code": "1.5",
+      "title": "Prevention and treatment of occupational diseases among IT specialists",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in identifying the risk factors of occupational diseases of IT specialists and in developing a set of preventive measures for a specific workplace.",
+      "theory": [
+        "Prolonged work at a computer is associated with a number of harmful factors that can lead to occupational and work-related diseases. The main groups of such diseases are visual disorders (computer vision syndrome), diseases of the musculoskeletal system (osteochondrosis, carpal tunnel syndrome), and neuro-emotional and cardiovascular disorders caused by stress and a sedentary lifestyle.",
+        "Computer vision syndrome manifests itself as eye fatigue, dryness, redness, blurred vision and headache. It is caused by the prolonged focusing of the eyes on the screen, insufficient blinking, glare and incorrect placement of the monitor. Carpal tunnel syndrome is caused by the monotonous load on the hand when working with the keyboard and the mouse.",
+        "Prevention of occupational diseases is based on the organization of the workplace according to ergonomic requirements, on the observance of the work-and-rest regime with regulated breaks, on performing gymnastics for the eyes and the body, and on maintaining physical activity outside working hours."
+      ],
+      "materials": [
+        "A computer workstation (desk, chair, monitor, keyboard, mouse).",
+        "A measuring tape and a level for assessing the geometry of the workplace.",
+        "A lux meter (or a smartphone application) for assessing illumination.",
+        "An assessment checklist and report form."
+      ],
+      "procedure": [
+        "Study the main occupational diseases of IT specialists and the factors that cause them; fill in a table 'factor – disease – preventive measure'.",
+        "Examine the provided (or your own) workstation and assess its conformity with ergonomic requirements: the height of the desk and chair, the placement of the monitor, the position of the keyboard and the mouse.",
+        "Measure the illumination of the working surface with a lux meter and compare the result with the recommended value of 300–500 lux.",
+        "Perform a set of exercises for the eyes and for the musculoskeletal system, and describe in the report how often and at what intervals they should be carried out.",
+        "Develop a regulated work-and-rest regime for an IT specialist, indicating the duration of continuous work and the frequency and duration of breaks.",
+        "Formulate a list of recommendations for the prevention of occupational diseases for the examined workplace."
+      ],
+      "tasks": [
+        "Compile a table of at least five occupational diseases of IT specialists with their causes and methods of prevention.",
+        "Prepare a memo 'Workplace gymnastics for an IT specialist' with a description of exercises for the eyes, hands, neck and back.",
+        "Propose measures to bring the examined workplace into conformity with ergonomic requirements."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of identifying the risk factors of occupational diseases and of developing a comprehensive program for their prevention at the workplace of an IT specialist.",
+      "questions": [
+        "What are the main occupational diseases that arise from prolonged work at a computer?",
+        "What causes computer vision syndrome and how can it be prevented?",
+        "What ergonomic measures help to prevent diseases of the musculoskeletal system?",
+        "What work-and-rest regime is recommended when working at a computer?",
+        "What exercises are included in workplace gymnastics for an IT specialist?"
+      ]
+    },
+    {
+      "code": "1.6",
+      "title": "Risk assessment and development of measures for their reduction at information-service enterprises",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "The concept of occupational risk and the goals of risk management.",
+        "Identification of hazards at an information enterprise.",
+        "Methods of assessing occupational risks.",
+        "Development and implementation of risk-reduction measures."
+      ],
+      "body": [
+        "Occupational risk is the probability of harm to the health of an employee as a result of exposure to harmful and (or) dangerous production factors in the performance of their job duties, taking into account the severity of the possible consequences. Risk management is the basis of the modern system of labour protection and allows resources to be directed first of all to the most significant hazards.",
+        "The process of risk management includes several stages: the identification (revealing) of hazards, the assessment of the magnitude of the risk, the ranking of risks by significance, the development and implementation of measures to reduce them, and the monitoring of the effectiveness of these measures. This process is cyclical and is repeated regularly.",
+        "The identification of hazards is the first and key stage. At an information enterprise, the hazards include electric current, the possibility of a fire, an unfavourable microclimate, insufficient lighting, increased noise, an electromagnetic field, visual and neuro-emotional loads, a forced working posture, and the risk of injury when working with tools.",
+        "For the identification of hazards, the inspection of workplaces, the analysis of the technological process, the study of the statistics of accidents and illnesses, surveys of employees and the analysis of the requirements of regulatory documents are used. The result of identification is a list of hazards for each workplace.",
+        "The assessment of occupational risk can be carried out by qualitative, quantitative or combined (semi-quantitative) methods. The qualitative method describes the risk in words (low, medium, high). The quantitative method expresses the risk in numerical values. The combined method, the most widespread, uses a risk matrix.",
+        "The risk matrix is based on two parameters: the probability of the occurrence of a harmful event and the severity of its consequences. Each parameter is assessed on a scale (for example, from 1 to 5). The product or the combination of these estimates determines the level of risk, which is conveniently displayed in a coloured matrix from green (acceptable) to red (unacceptable).",
+        "After assessing and ranking the risks, measures for their reduction are developed. The hierarchy of risk-control measures provides for the priority of more reliable measures: first of all, the elimination of the hazard; then its replacement with a less dangerous one; then engineering (technical) controls; then administrative measures; and only at the last level — personal protective equipment.",
+        "For an information enterprise, engineering measures include the installation of RCDs and earthing, the replacement of faulty equipment, the improvement of ventilation and lighting, and the reduction of noise. Administrative measures include briefings, work-and-rest regimes, safe-operation instructions and access control. Personal protective equipment includes anti-static straps and dielectric tools.",
+        "An important principle of risk management is that the residual risk after the implementation of measures must be acceptable. If the residual risk remains high, additional measures are developed. All decisions and measures are documented, which allows their implementation and effectiveness to be monitored.",
+        "The monitoring of the effectiveness of measures is carried out through repeated inspections, the analysis of accident and illness statistics, and surveys of employees. If the measures have not produced the expected effect, the risk is reassessed and the program of measures is adjusted.",
+        "Risk management is closely connected with the special assessment of working conditions and with the system of labour-protection management of the enterprise. The results of risk assessment are used in planning the budget for labour protection, in training personnel and in the investigation of incidents.",
+        "Thus, the assessment of occupational risks and the development of measures for their reduction is a systematic, cyclical process that allows the enterprise to consciously and effectively manage the safety of its employees, directing efforts to the most significant hazards."
+      ],
+      "questions": [
+        "What is occupational risk and what is the purpose of risk management?",
+        "What stages does the process of occupational-risk management include?",
+        "What hazards are typical of an information-service enterprise?",
+        "How is a risk matrix constructed and how is the level of risk determined from it?",
+        "What is the hierarchy of risk-control measures, and which measures are considered the most reliable?"
+      ]
+    },
+    {
+      "code": "1.7",
+      "title": "Analysis of occupational risks at the workplace of an IT specialist",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in identifying hazards and in assessing occupational risks at a particular workplace using a risk matrix, and in developing measures for their reduction.",
+      "theory": [
+        "The assessment of occupational risks at a particular workplace is carried out in several steps: the identification of hazards, the assessment of the probability and severity of each hazard, the determination of the level of risk using a matrix, and the planning of risk-reduction measures.",
+        "A risk matrix of dimension 5×5 is conveniently used, where the rows correspond to the probability of an event (from 'very unlikely' to 'almost certain'), and the columns correspond to the severity of the consequences (from 'negligible' to 'catastrophic'). The cell at the intersection determines the level of risk."
+      ],
+      "materials": [
+        "A description (or a real example) of the workplace of an IT specialist.",
+        "A risk-matrix template (5×5).",
+        "A hazard-identification checklist.",
+        "A report form for the results of the risk assessment."
+      ],
+      "procedure": [
+        "Choose a workplace for analysis (a computer class, a server room, or a workplace for repairing equipment).",
+        "Identify the hazards of this workplace and enter them in the table; for the IT sphere, take into account electric current, fire, microclimate, lighting, noise, electromagnetic field, ergonomic and psycho-emotional factors.",
+        "For each hazard, assess the probability of a harmful event on a scale from 1 to 5 and justify the assessment.",
+        "For each hazard, assess the severity of the possible consequences on a scale from 1 to 5 and justify the assessment.",
+        "Using the risk matrix, determine the level of risk for each hazard (acceptable, moderate, significant, unacceptable).",
+        "For the risks of a significant and unacceptable level, develop measures for their reduction in accordance with the hierarchy of controls and assess the residual risk."
+      ],
+      "tasks": [
+        "Prepare a risk-assessment map for the chosen workplace with at least eight identified hazards.",
+        "Build a risk matrix and place the assessed hazards on it.",
+        "Develop a plan of measures to reduce the two most significant risks, indicating the type of measure and the expected result."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the methodology of identifying hazards and assessing occupational risks using a matrix, and has learned to plan reasonable measures for their reduction at a specific workplace.",
+      "questions": [
+        "What steps does the assessment of occupational risks at a workplace consist of?",
+        "How are the probability and the severity of the consequences of a hazard assessed?",
+        "How is the level of risk determined using a risk matrix?",
+        "Which risk levels require the mandatory development of reduction measures?",
+        "What is residual risk and why must it be assessed after implementing the measures?"
+      ]
+    },
+    {
+      "code": "1.8",
+      "title": "The role of training and briefings on safety techniques for staff at information enterprises",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in organizing and conducting safety briefings and in drawing up the corresponding documents (instructions and briefing-registration logs).",
+      "theory": [
+        "Training and briefing personnel on labour protection is one of the most important organizational measures of the safety-management system. Without passing the established briefings and verifying their knowledge, employees are not allowed to work independently.",
+        "There are several types of briefings. The introductory briefing is conducted with all newly hired employees regardless of their profession. The primary briefing at the workplace is conducted before the start of independent work. The repeated briefing is conducted periodically to consolidate knowledge. The unscheduled briefing is conducted when the rules change, when equipment changes, or after an accident. The targeted briefing is conducted before performing one-time work.",
+        "All briefings, except the introductory one in some organizations, are registered in special logs indicating the date, the surname of the person being briefed and the person briefing, and their signatures. The instructions on labour protection for professions and types of work are the basis for conducting briefings."
+      ],
+      "materials": [
+        "Samples of labour-protection instructions for an IT specialist.",
+        "A template of a briefing-registration log.",
+        "Regulatory requirements for the content of briefings.",
+        "A computer for preparing documents."
+      ],
+      "procedure": [
+        "Study the types of briefings on labour protection and the conditions for conducting each of them; fill in a comparative table.",
+        "Develop the structure of a labour-protection instruction for the workplace of an IT specialist (general requirements, requirements before work, during work, in emergency situations, and after work).",
+        "Prepare the text of a primary briefing at the workplace for a newly hired technician for maintaining computer equipment.",
+        "Fill in the briefing-registration log for a conditional group of employees who have passed the briefing.",
+        "Conduct a role-play briefing in pairs, in which one student plays the role of the instructor and the other the role of the employee, and evaluate its completeness.",
+        "Formulate conclusions about the importance of briefings for ensuring safety at the enterprise."
+      ],
+      "tasks": [
+        "Draw up a labour-protection instruction for the workplace of an IT specialist (in abbreviated form, by sections).",
+        "Prepare and fill in a briefing-registration log for at least five employees.",
+        "Make a list of situations in which an unscheduled briefing must be conducted."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of organizing and conducting briefings on labour protection and of drawing up the accompanying documentation, which is an important element of the safety-management system at an information enterprise.",
+      "questions": [
+        "What types of briefings on labour protection exist and when is each of them conducted?",
+        "Who conducts the introductory briefing and who conducts the primary briefing at the workplace?",
+        "In which cases is an unscheduled briefing conducted?",
+        "What sections does a labour-protection instruction contain?",
+        "Why is the registration of briefings in a log necessary?"
+      ]
+    },
+    {
+      "code": "1.9",
+      "title": "The importance of the correct approach to connecting and using electronics and electrical equipment",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "Rules for connecting electrical equipment to the mains.",
+        "Loading of electrical networks and protection against overloads.",
+        "Earthing and protection against static electricity.",
+        "Typical errors when connecting equipment and their consequences."
+      ],
+      "body": [
+        "The correct connection and use of electronics and electrical equipment is a basic condition for the safe and reliable operation of computer systems. Errors at this stage lead to equipment failure, loss of data, electric shock to people and even to fires, therefore the technician must clearly know and follow the connection rules.",
+        "Before connecting any device, one must make sure that its rated supply voltage corresponds to the mains voltage, that the power cable and the plug are in good condition, and that the socket is serviceable and earthed. The use of devices with damaged cables, cracked plugs or traces of overheating is not allowed.",
+        "Each electrical network and each socket group is designed for a certain rated load. Connecting too many powerful devices to one socket through tees and extension cords leads to an overload, the heating of the wiring and the contacts, the melting of the insulation and the risk of fire. The total load must not exceed the permissible value.",
+        "To protect against overloads and short circuits, circuit breakers are used, which automatically disconnect the line when the current exceeds the permissible value. Fuses perform a similar function. The technician must not replace protective devices with 'jumpers' or devices with a higher rated current, since this disables the protection.",
+        "Sources of uninterruptible power supply (UPS) and surge protectors protect equipment from voltage surges, short-term outages and high-frequency interference. The UPS additionally provides power supply to the equipment from batteries for the time necessary for the correct shutdown of the system, which prevents loss of data.",
+        "Earthing of the equipment housings is a mandatory protective measure. It ensures the operation of the protective devices in the event of an insulation breakdown and removes the touch voltage from the housing. The connection of computer equipment to a socket without an earth contact deprives the protective measures of their effectiveness and is dangerous.",
+        "Static electricity poses a special danger to electronic components. Charges accumulating on a person's clothing and body can reach several kilovolts and, when touching a microchip, cause its damage — both obvious (immediate failure) and latent (a gradual degradation of parameters). Therefore, when working with components, anti-static measures are mandatory.",
+        "Anti-static measures include the use of an anti-static wrist strap connected to the earthed housing, anti-static mats, the discharge of static from oneself before starting work, the storage of components in anti-static packaging, and the maintenance of a sufficient humidity of the air in the room.",
+        "When connecting interface cables and peripheral devices, one must observe the polarity and orientation of the connectors, not apply excessive force, and, where required, connect and disconnect the devices with the power off. The 'hot' connection is permissible only for interfaces that explicitly support it (for example, USB).",
+        "Typical errors when connecting equipment include the connection to a socket without earthing, the overloading of the network, the use of faulty extension cords, the laying of cables in passages, the connection of equipment with a voltage that does not correspond to the rating, and the neglect of anti-static measures. Each of these errors can lead to serious consequences.",
+        "The correct organization of the power supply of computer equipment also includes the rational distribution of the load over the lines, the marking of cables and sockets, the maintenance of order in the cable economy, and the regular inspection of the condition of the wiring and connections.",
+        "Thus, the competent approach to connecting and using electrical equipment combines the verification of the conformity and serviceability of devices, the observance of the permissible load, the obligatory earthing, the protection against static electricity, and the avoidance of typical errors. This ensures the safety of people and the reliable operation of equipment."
+      ],
+      "questions": [
+        "What must be checked before connecting an electrical device to the mains?",
+        "What does the overloading of an electrical network lead to, and how is it prevented?",
+        "What functions do circuit breakers and sources of uninterruptible power supply perform?",
+        "Why is the earthing of equipment housings a mandatory protective measure?",
+        "What anti-static measures must be observed when working with electronic components?"
+      ]
+    },
+    {
+      "code": "1.10",
+      "title": "Prevention of occupational diseases of IT specialists",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in developing a comprehensive program for the prevention of occupational diseases of an IT specialist and in assessing the conformity of the working conditions with sanitary-hygienic requirements.",
+      "theory": [
+        "The prevention of occupational diseases of IT specialists is built on three groups of measures: technical and ergonomic (the correct organization of the workplace), organizational (the work-and-rest regime, gymnastics, medical examinations), and individual (a healthy lifestyle and physical activity).",
+        "Regular medical examinations make it possible to detect the initial signs of diseases at an early stage and to take timely measures. For workers at a computer, periodic examinations by an ophthalmologist and a neurologist are especially important."
+      ],
+      "materials": [
+        "A description of the workplace and the working conditions of an IT specialist.",
+        "Sanitary-hygienic norms for premises with computer equipment.",
+        "A checklist for assessing working conditions.",
+        "A report form."
+      ],
+      "procedure": [
+        "Assess the working conditions of the chosen workplace by sanitary-hygienic parameters: microclimate, lighting, noise, ergonomics.",
+        "Identify the deviations of the parameters from the recommended values and determine which occupational diseases these deviations may cause.",
+        "Develop a set of technical and ergonomic measures to eliminate the identified deviations.",
+        "Make a regulated work-and-rest regime and a set of gymnastic exercises for the prevention of the diseases identified at the workplace.",
+        "Formulate recommendations for the individual prevention of occupational diseases (physical activity, nutrition, sleep regime).",
+        "Combine all the measures into a single prevention program and present it in the report."
+      ],
+      "tasks": [
+        "Compile a comprehensive program for the prevention of occupational diseases for the workplace of an IT specialist.",
+        "Prepare a memo for the employee 'How to preserve health when working at a computer'.",
+        "Propose a list of medical specialists whose examinations are recommended for an IT specialist, and the frequency of the examinations."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of comprehensive assessment of the working conditions and of developing a program for the prevention of occupational diseases that combines technical, organizational and individual measures.",
+      "questions": [
+        "What three groups of measures form the basis of the prevention of occupational diseases of IT specialists?",
+        "What sanitary-hygienic parameters of the workplace must be assessed?",
+        "What technical and ergonomic measures help to preserve the health of an employee?",
+        "Why are regular medical examinations important for workers at a computer?",
+        "What individual measures help to prevent occupational diseases?"
+      ]
+    },
+    {
+      "code": "1.11",
+      "title": "Compliance with norms and rules for ensuring safety when working with information and data on computers and servers",
+      "type_en": "Skills-improvement lesson",
+      "kind": "practical",
+      "objective": "To form practical skills in observing the rules of safe work with information and data, including data protection, access control and safe operation of computer and server equipment.",
+      "theory": [
+        "Safety when working with information and data combines two aspects: the physical and electrical safety of working with equipment, and information security — the protection of data from loss, unauthorized access and damage. The technician must take both aspects into account.",
+        "The basic principles of information security are confidentiality (access to data only for authorized persons), integrity (protection of data from unauthorized modification) and availability (data accessible to authorized users when needed). They are ensured by organizational and technical measures: access control, backup, antivirus protection and encryption."
+      ],
+      "materials": [
+        "A computer (workstation) with an operating system installed.",
+        "Rules and instructions for safe work with information.",
+        "Software for backing up and protecting data.",
+        "A report form."
+      ],
+      "procedure": [
+        "Study the rules of safe work with computer and server equipment and the requirements for the protection of information; fill in a checklist.",
+        "Configure user accounts with differentiation of access rights and a password policy on the workstation (or describe the procedure for doing so).",
+        "Perform a backup of important data to an external medium and check the possibility of restoring it.",
+        "Check the operation of the antivirus protection and update its databases; describe the procedure for scanning the system.",
+        "Develop a set of rules for safe handling of confidential information for an IT specialist.",
+        "Describe the procedure for safely de-energizing and maintaining server equipment without losing data."
+      ],
+      "tasks": [
+        "Make a list of organizational and technical measures for protecting information at the workplace.",
+        "Prepare an instruction 'Rules of safe work with confidential data'.",
+        "Draw up a data-backup schedule for a small enterprise with a justification for the chosen frequency."
+      ],
+      "conclusion": "As a result of the work, the student has mastered the practical skills of observing the norms and rules of safe work with information and data, combining the requirements of physical safety and information security.",
+      "questions": [
+        "What two aspects does safety when working with information and data combine?",
+        "What are the basic principles of information security?",
+        "What measures ensure the confidentiality, integrity and availability of data?",
+        "Why is regular data backup necessary, and how is its frequency chosen?",
+        "What rules must be observed for the safe maintenance of server equipment without loss of data?"
+      ]
+    },
+    {
+      "code": "1.12",
+      "title": "Protective measures during the operation of electronic computing equipment. Individual electrical-protective equipment and tools, their classification and design",
+      "type_en": "Study of new material",
+      "kind": "lecture",
+      "outline": [
+        "Protective measures during the operation of computing equipment.",
+        "Classification of electrical-protective equipment into basic and additional.",
+        "Design and purpose of the main types of electrical-protective equipment.",
+        "Rules for using and storing electrical-protective equipment."
+      ],
+      "body": [
+        "The safe operation of electronic computing equipment is ensured by a combination of collective and individual protective measures. Collective measures (earthing, RCDs, insulation, low voltage) protect all employees, while individual measures protect a specific person performing work that involves the danger of electric shock.",
+        "Before any work on the maintenance of computing equipment, organizational and technical measures are carried out. Organizational measures include the issuance of a task, the admission to work and supervision. Technical measures include the disconnection of voltage, the prevention of erroneous switching-on, the verification of the absence of voltage, and the earthing and discharge of capacitors.",
+        "Individual electrical-protective equipment is divided into basic and additional. Basic equipment has insulation that reliably withstands the operating voltage of the electrical installation and allows work on live current-carrying parts to be performed. Additional equipment by itself does not provide protection at a given voltage but reinforces the action of the basic equipment.",
+        "For electrical installations up to 1000 V, the basic equipment includes dielectric gloves, insulating tools with handles up to a certain voltage, and voltage indicators. The additional equipment includes dielectric galoshes, dielectric mats, portable earths and insulating stands.",
+        "Dielectric gloves are made of special rubber and protect the hands from electric current. Before each use, they are checked for the absence of punctures and damage by rolling them towards the fingers and trapping air. Insulating tools (screwdrivers, pliers, wire-cutters) have handles covered with a dielectric that withstands the operating voltage.",
+        "A voltage indicator is a device for checking the presence or absence of voltage on current-carrying parts. Before and after the check, the serviceability of the indicator is verified on an obviously energized source. The verification of the absence of voltage is a mandatory step before starting work on de-energized equipment.",
+        "Anti-static protective equipment occupies a special place when working with electronic components. An anti-static wrist strap is connected through a resistor to the earthed housing and continuously removes the static charge from the human body. An anti-static mat and anti-static packaging protect the components during repair and storage.",
+        "All electrical-protective equipment is subject to periodic testing with a high voltage to confirm its dielectric properties. On each item, a stamp is placed indicating the voltage for which it is intended and the date of the next test. The use of equipment with an expired test period or without a stamp is not allowed.",
+        "The rules for using electrical-protective equipment require checking its serviceability before each use, applying it strictly for its intended purpose and at the corresponding voltage, and observing the methods of working with it. Damaged or untested equipment is immediately removed from use.",
+        "The storage of electrical-protective equipment is organized in such a way as to protect it from mechanical damage, moisture, oils, the sun and high temperatures, which degrade the dielectric properties. Gloves and mats are stored separately from the tools, in dry, ventilated places.",
+        "For the maintenance of computing equipment, in addition to electrical-protective equipment, a special tool is used: insulated screwdrivers, a set of bits, pliers, an anti-static strap, a brush and a vacuum cleaner for cleaning, a multimeter for measurements, and a soldering station for repairs. The serviceability of the tool is a condition for safe work.",
+        "Thus, the protective measures during the operation of computing equipment combine organizational and technical measures, collective and individual protective equipment. Knowledge of the classification, design and rules for the use of electrical-protective equipment is a necessary part of the professional training of a technician."
+      ],
+      "questions": [
+        "What organizational and technical measures are carried out before working on computing equipment?",
+        "What is the difference between basic and additional electrical-protective equipment?",
+        "Which equipment is the basic and which the additional one for installations up to 1000 V?",
+        "How is the serviceability of dielectric gloves and a voltage indicator checked?",
+        "What rules must be observed when using and storing electrical-protective equipment?"
+      ]
+    },
+    {
+      "code": "1.13",
+      "title": "Means of electrical and fire safety in the IT field",
+      "type_en": "Application and consolidation of knowledge",
+      "kind": "practical",
+      "objective": "To form practical skills in selecting and using the means of electrical and fire safety for premises with computer equipment and in checking their serviceability.",
+      "theory": [
+        "The means of electrical safety in the IT field include earthing and neutral-bonding devices, residual current devices (RCDs), circuit breakers, sources of uninterruptible power supply, voltage indicators and individual electrical-protective equipment.",
+        "The means of fire safety include fire alarms and detectors, automatic fire-extinguishing systems, primary fire-extinguishing means (carbon-dioxide and powder fire extinguishers), fire hydrants, and evacuation plans and signs. For computer rooms, the means that do not damage the electronics are especially important."
+      ],
+      "materials": [
+        "Carbon-dioxide and powder fire extinguishers (or their mock-ups).",
+        "A residual current device and a circuit breaker for examination.",
+        "A voltage indicator and individual electrical-protective equipment.",
+        "An evacuation plan of the room and a report form."
+      ],
+      "procedure": [
+        "Examine the means of electrical safety of the room (earthing, RCD, circuit breakers, UPS) and describe their purpose and operating principle.",
+        "Examine the available fire extinguishers, determine their type and the classes of fire for which they are intended, and check the pressure indicator and the date of the next inspection.",
+        "Determine which fire extinguishers may be used to extinguish energized computer equipment and justify the choice.",
+        "Study the evacuation plan of the room, find the location of the exits, the fire extinguishers and the electrical-disconnection points.",
+        "Develop an action algorithm for an employee in the event of an electrical fire in a computer class.",
+        "Compile a checklist for checking the serviceability of the means of electrical and fire safety of the room."
+      ],
+      "tasks": [
+        "Make a table of the means of electrical and fire safety of the room indicating their purpose.",
+        "Prepare an action algorithm for an employee in the event of a fire of energized equipment.",
+        "Develop a checklist for the periodic inspection of fire extinguishers and electrical-safety means."
+      ],
+      "conclusion": "As a result of the work, the student has formed the skills of selecting, using and checking the serviceability of the means of electrical and fire safety for premises with computer equipment.",
+      "questions": [
+        "What means of electrical safety are used in premises with computer equipment?",
+        "What means of fire safety are used in the IT field?",
+        "Which fire extinguishers may be used to extinguish energized equipment, and why?",
+        "What information must be checked on a fire extinguisher before use?",
+        "What does the action algorithm of an employee in the event of an electrical fire include?"
+      ]
+    },
+    {
+      "code": "1.14",
+      "title": "Fundamentals of fire safety",
+      "type_en": "Combined lesson",
+      "kind": "lecture",
+      "outline": [
+        "The concept of combustion and the conditions for the occurrence of a fire.",
+        "The fire triangle and the methods of extinguishing a fire.",
+        "The fire-prevention regime at the enterprise.",
+        "Organization of evacuation and actions in the event of a fire."
+      ],
+      "body": [
+        "Fire safety is based on an understanding of the nature of combustion. Combustion is a complex physico-chemical process of the oxidation of a substance, accompanied by the release of heat and light. For combustion to occur and be maintained, three conditions must be present simultaneously: a combustible substance, an oxidizer (usually the oxygen of the air) and an ignition source.",
+        "These three conditions are conventionally depicted as the 'fire triangle'. If at least one of the sides of the triangle is removed, combustion stops. This principle underlies all methods of extinguishing a fire: the removal or cooling of the combustible substance, the isolation of the source from the oxidizer, and the removal of the heat (the reduction of the temperature below the ignition point).",
+        "Accordingly, the main methods of extinguishing are cooling (with water), dilution and isolation from oxygen (with foam, carbon dioxide, powder or inert gases), and the chemical inhibition of the combustion reaction. The choice of method and agent depends on the class of the fire and the conditions in which it occurs.",
+        "A fire is an uncontrolled combustion that causes material damage, harm to the life and health of people, and the interests of society and the state. Unlike controlled combustion, a fire spreads spontaneously and is accompanied by dangerous factors: flame, high temperature, smoke, toxic products and a reduced oxygen concentration.",
+        "The fire-prevention regime at an enterprise is a set of rules of conduct of people and of the maintenance of the territory, buildings and premises that ensure the prevention of violations and the elimination of fires. It includes the procedure for maintaining evacuation routes, the rules for using electrical appliances, the designation of smoking places and the maintenance of fire-extinguishing means.",
+        "An important element of fire prevention is the maintenance of evacuation routes and exits in a free state. The cluttering of corridors, staircases and passages, the locking of emergency exits and the blocking of approaches to fire extinguishers are categorically forbidden, since this makes evacuation impossible in the event of a fire.",
+        "Fire alarm systems are designed for the early detection of a fire. Smoke, heat and flame detectors register the signs of a fire and transmit a signal to the control panel, which turns on sound and light annunciators and, if necessary, the automatic fire-extinguishing and smoke-removal systems.",
+        "Automatic fire-extinguishing systems are especially important for server rooms and data centres. Gas systems based on inert gases or chemical agents extinguish a fire without damaging the equipment. Water-based (sprinkler) systems are used in rooms where water will not damage the contents.",
+        "The organization of evacuation is based on the evacuation plan, which is developed for each floor and posted in visible places. The plan indicates the location of a person, the directions of movement to the exits, the location of fire extinguishers, fire hydrants and electrical-disconnection points. Employees must know the plan and the evacuation routes.",
+        "In the event of a fire, the personnel must immediately report it to the fire service, turn on the warning system, begin the evacuation of people, de-energize the equipment and, if it is safe, begin extinguishing the fire with primary means. During evacuation, it is forbidden to use lifts and to create panic.",
+        "The training of personnel in fire safety includes briefings, training in the fire-technical minimum, and practical evacuation exercises. Regular exercises develop in the staff a clear and confident sequence of actions, which in a real fire saves lives.",
+        "Thus, the fundamentals of fire safety include an understanding of the conditions of combustion and the methods of extinguishing, the observance of the fire-prevention regime, the maintenance of the means of detection and extinguishing in working order, and the readiness of the personnel for a competent evacuation and the elimination of an incipient fire."
+      ],
+      "questions": [
+        "What conditions are necessary for the occurrence and maintenance of combustion?",
+        "What is the 'fire triangle' and how is it connected with the methods of extinguishing?",
+        "What is the fire-prevention regime at an enterprise, and what does it include?",
+        "What requirements apply to the maintenance of evacuation routes and exits?",
+        "What is the sequence of actions of personnel in the event of a fire?"
+      ]
+    },
+    {
+      "code": "1.15",
+      "title": "Protective measures during the operation of electrical installations and electrical equipment",
+      "type_en": "Comprehensive assessment of knowledge",
+      "kind": "practical",
+      "objective": "To check and consolidate, in a comprehensive form, the knowledge and skills of occupational, electrical and fire safety acquired in the learning outcome, by solving situational problems and developing a set of protective measures for a given object.",
+      "theory": [
+        "This lesson generalizes the material of the learning outcome 'Comply with the requirements and norms of occupational safety'. The student must demonstrate the ability to apply, in a comprehensive way, knowledge of electrical safety, ergonomics, risk assessment, briefings and fire safety to a specific object.",
+        "Protective measures during the operation of electrical installations are divided into organizational (admission to work, briefings, supervision) and technical (de-energizing, earthing, verification of the absence of voltage, fencing and signs). Their combination ensures the safety of work."
+      ],
+      "materials": [
+        "A description of a model object (a computer class or a server room).",
+        "Sets of situational problems on occupational, electrical and fire safety.",
+        "Templates of a risk-assessment map and a labour-protection instruction.",
+        "A final-assessment form."
+      ],
+      "procedure": [
+        "Study the description of the model object and determine the class of the room by the degree of electric-shock danger.",
+        "Identify the hazards of the object and assess the occupational risks using a matrix.",
+        "Develop a set of collective and individual protective measures for the safe operation of the electrical equipment of the object.",
+        "Determine the means of fire safety necessary for the object and the procedure for actions in the event of a fire.",
+        "Solve the proposed situational problems on the provision of first aid in the event of an electric shock and on the actions in emergency situations.",
+        "Combine all the decisions into a single 'safety passport' of the object and present it to the group."
+      ],
+      "tasks": [
+        "Prepare a comprehensive 'safety passport' of the model object, including risk assessment and a set of protective measures.",
+        "Solve a situational problem on the sequence of actions in the event of an electric shock to a person.",
+        "Draw up a list of protective equipment and fire-extinguishing means necessary for the safe operation of the object."
+      ],
+      "conclusion": "As a result of the work, the student has demonstrated comprehensive knowledge and skills in occupational, electrical and fire safety and the ability to develop a holistic set of protective measures for the safe operation of electrical installations and computer equipment.",
+      "questions": [
+        "What organizational and technical protective measures are applied during the operation of electrical installations?",
+        "How is the class of a room determined by the degree of electric-shock danger?",
+        "What is the sequence of providing first aid in the event of an electric shock?",
+        "What set of protective measures ensures the safe operation of a server room?",
+        "How are the requirements of electrical and fire safety combined in the operation of computer equipment?"
+      ]
+    }
+  ]
+}

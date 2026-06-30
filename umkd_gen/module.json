@@ -1,0 +1,123 @@
+{
+  "college": "«APEC PETROTECHNIC HIGHER COLLEGE» LLP",
+  "approved_block": [
+    "«APPROVED»",
+    "Deputy director",
+    "for academic work",
+    "___________ A.E. Shakenova",
+    "«____» ____________ 2025"
+  ],
+  "module_title": "Module: PM 01 «Maintenance and configuration of computer hardware and software»",
+  "specialty": "Specialty: 06130100 – «Software (by types)»",
+  "qualification": "Qualification: 4S06130105 – «Information Systems Technician»",
+  "place_year": "Atyrau, 2025",
+  "module_code": "PM 01",
+  "module_name": "Maintenance and configuration of computer hardware and software",
+  "instructor": "D.M. Yermekov",
+  "exam_weight": "40%",
+  "approval_sheet": [
+    "Reviewed and approved at a meeting of the Subject-Cycle Methodological Commission «Software».",
+    "Protocol № ____ of «____» ____________ 2025.",
+    "Chair of the SCMC: ______________ A.E. Beket",
+    "",
+    "Reviewed and approved at a meeting of the Methodological Council.",
+    "Protocol № ____ of «____» ____________ 2025.",
+    "",
+    "Agreed: Methodologist ______________ A.K. Akhpanbetova",
+    "",
+    "Developers: ______________ Ye.S. Yeleussinov",
+    "______________ A.A. Daulbay",
+    "______________ S.B. Kalmen",
+    "______________ B.R. Romanov",
+    "______________ D.M. Yermekov"
+  ],
+  "introduction": [
+    "The educational-methodological complex (EMC) of the module PM 01 «Maintenance and configuration of computer hardware and software» is intended for students of the specialty 06130100 – «Software (by types)», qualification 4S06130105 – «Information Systems Technician». It is developed in accordance with the working curriculum of the module and the methodical recommendations of the Technical and Professional Education Institute (TIPO) of 2025.",
+    "The module is aimed at studying the methods and means of maintaining, configuring and supporting the hardware and software of computer systems. Students master the principles of installation, configuration, diagnostics, technical maintenance and ensuring the stable operation of computer equipment and software tools.",
+    "The main goal of the module is to form the professional competencies that a future information systems technician needs to perform work on maintaining, configuring, diagnosing and supporting the hardware and software of computer systems.",
+    "The objectives of the module are: to study the basic principles of operation of the hardware and software of computer systems; to master the methods of installing, configuring and updating operating systems and application software; to learn to perform diagnostics, preventive maintenance and troubleshooting of computer equipment; to master the methods of configuring peripheral devices, drivers and system parameters; and to form the skills of ensuring the reliable, safe and stable operation of computer systems.",
+    "Upon completion of the module the student must know the occupational-safety requirements when operating computer systems; the architecture and operating principles of hardware and software of the computer infrastructure; the purpose and operating principles of peripheral devices and operating systems; and the technologies of deployment, cloning and support of computer systems.",
+    "The student must be able to perform diagnostics and minor repair of the hardware components of a personal computer; install, configure and update operating systems and specialized software; connect, configure and maintain peripheral devices; and create and apply master images of operating systems for deploying workplaces.",
+    "The total volume of the module is 336 academic hours. The module is built around seven learning outcomes (LO). Each learning outcome of this EMC contains an academic calendar, a glossary, lecture materials, practical (laboratory or industrial-training) materials, a list of software and multimedia support, and a list of literature. The closing sections contain self-study topics and exam questions for the whole module.",
+    "Prerequisites of the module: BM 02 «Design and analysis of electrical circuits and electronic devices in accordance with standards» and BM 03 «Application of the fundamentals of engineering and computer graphics». Post-requisites: PM 02 «Installation and configuration of personal-computer operating systems» and PM 03 «Installation, processing and configuration of application software packages»."
+  ],
+  "software": [
+    "– Multimedia projector and interactive (smart) board; digital podium; white marker board.",
+    "– PowerPoint presentations for every topic of the module.",
+    "– Personal computers with Internet access and access to local networks.",
+    "– Disassembled training PC stands; sets of motherboards, power supplies, RAM modules, storage drives and graphics adapters.",
+    "– Peripheral and office equipment: printers, scanners, multifunction devices (MFPs), plotters.",
+    "– Measuring instruments: multimeters, POST-cards, power-supply and cable testers.",
+    "– Anti-static wrist straps and mats; PC assembly and repair tool kits; soldering stations.",
+    "– Hardware-diagnostic software: AIDA64, HWiNFO, MemTest86, Victoria, CrystalDiskInfo, HWMonitor, OCCT.",
+    "– Programming and scripting tools: Python 3 (with psutil, WMI, pywin32), PowerShell, Windows Subsystem for Linux.",
+    "– Consumables of office equipment (cartridges, toner, ink, ribbons) for industrial training.",
+    "– Learning Management System (LMS) for hosting materials and assignments; video lectures on PC maintenance and repair."
+  ],
+  "literature": {
+    "core": [
+      "1. Phil Hughes MBE, Ed Ferrett. Introduction to Health and Safety at Work. ISBN: 978-0-415-72308-4.",
+      "2. Mark A. Friend, James P. Kohn. Fundamentals of Occupational Safety and Health. ISBN-13: 978-0-86587-171-7.",
+      "3. Charles K. Alexander, Matthew N. O. Sadiku. Fundamentals of Electric Circuits. ISBN: 978-0-07-352955-4.",
+      "4. John L. Hennessy, David A. Patterson. Computer Architecture: A Quantitative Approach (5th Edition). ISBN-13: 978-8178672663.",
+      "5. Jim Ledin. Modern Computer Architecture and Organization (2nd Edition). ISBN-13: 978-1803234519."
+    ],
+    "extra": [
+      "1. Saurabh Shrivastava, Neelanjali Srivastav. Solutions Architect's Handbook (2nd Edition). ISBN-13: 978-1801816618.",
+      "2. Joseph Ingeno. Software Architect's Handbook. ISBN-13: 978-1788624060.",
+      "3. Robert C. Martin. Clean Architecture: A Craftsman's Guide to Software Structure and Design. ISBN-13: 978-0134494166."
+    ],
+    "web": [
+      "1. Computer Architecture Topics — https://en.wikipedia.org/wiki/Computer_architecture",
+      "2. Fire Protection and Prevention (OSHA) — https://www.osha.gov/sites/default/files/2019-03/fireprotection.pdf",
+      "3. https://learn.microsoft.com — official Microsoft documentation on Windows and administration.",
+      "4. https://support.microsoft.com — technical support and instructions for configuring hardware and software.",
+      "5. https://docs.python.org — documentation on automation and system administration in Python."
+    ]
+  },
+  "self_study_intro": "Independent (self-study) work is an obligatory part of the module. It is aimed at deepening the theoretical knowledge obtained in lectures, developing practical skills, and forming the ability to work independently with technical documentation and information sources. The following topics are recommended for independent study and for the preparation of reports, presentations and abstracts.",
+  "self_study": [
+    "Modern requirements for occupational safety and ergonomics at the workplace of an IT specialist.",
+    "International electrical-safety standards and their application in information-service enterprises.",
+    "Fundamentals of circuitry: analysis of passive and active components of computer devices.",
+    "Methods of diagnosing power supplies of computer systems with measuring instruments.",
+    "Modern peripheral devices: classification, characteristics and areas of application.",
+    "Data-storage technologies: HDD, SSD, NVMe, external drives and NAS.",
+    "Software tools for hardware diagnostics: AIDA64, HWiNFO, MemTest86, Victoria, CrystalDiskInfo.",
+    "BIOS/UEFI: purpose, settings, update and diagnostics.",
+    "Backup and data-recovery strategies after hardware and software failures.",
+    "Automation of computer-system diagnostics with Python and PowerShell.",
+    "Analysis of system event logs to detect and prevent failures.",
+    "Replacement and maintenance of consumables in printers, copiers, scanners and plotters.",
+    "Maintenance of uninterruptible power supplies (UPS) and replacement of their batteries.",
+    "Managing internal and external PC devices through the Windows API (WMI, winreg, psutil).",
+    "Development of a comprehensive utility for monitoring and diagnosing the state of a computer system."
+  ],
+  "exam_intro": "The intermediate certification of the module is conducted in the form of an examination. The exam checks the student's mastery of the learning outcomes of the module — both theoretical knowledge and practical skills in maintaining and configuring computer hardware and software. Below is the list of questions for preparation for the examination.",
+  "exam_questions": [
+    "Occupational-safety, electrical-safety and fire-safety requirements at information-service enterprises.",
+    "Organization of a safe workplace for an IT specialist; risk assessment and risk-reduction measures.",
+    "Individual electrical-protective equipment: classification, design and rules of use.",
+    "Fundamentals of circuitry; passive components (resistors, capacitors) and their role in computer devices.",
+    "Conductors and dielectrics in an electric field; the basics of electromagnetism in electronic circuits.",
+    "Diagnosing faults of computer power supplies; methods of measuring electrical-circuit parameters.",
+    "Testing and diagnostics of the CPU, RAM and motherboard at the circuit level.",
+    "The role of BIOS/UEFI and methods of its diagnostics.",
+    "Peripheral devices of a PC: purpose, classification and characteristics.",
+    "Data-storage devices: SSD, NVMe, NAS; input/output interfaces.",
+    "Operation of computers: power-on, power-off, OS initialization; software management in Windows and Linux.",
+    "Composition and types of hardware of computer systems; the system unit and its components.",
+    "Hardware diagnostics with diagnostic programs and utilities; configuring BIOS/UEFI.",
+    "Diagnostics and repair of the CPU, RAM, motherboard, graphics card and power supply.",
+    "Preventive maintenance of computer systems and extension of equipment service life.",
+    "Recovery of equipment after hardware and software failures; backup and data recovery.",
+    "Protection against malware and viruses; recovery of operating systems after failures.",
+    "Automation of diagnostics and recovery of computer systems with Python and PowerShell.",
+    "Replacement of consumables in computing and office equipment; maintenance of UPS units.",
+    "Maintenance of printers, copiers, scanners and plotters; replacement of cartridges, toner and rollers.",
+    "Managing internal and external PC devices through the Windows API; psutil and WMI.",
+    "Monitoring of CPU, RAM and disk load; collecting hardware data into log files.",
+    "Automation of driver updates and management of system configuration with scripts.",
+    "Development of an automated device-management and monitoring utility (final mini-project)."
+  ]
+}

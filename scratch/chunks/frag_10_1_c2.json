@@ -1,0 +1,79 @@
+{
+ "lo_id": "10.1",
+ "chunk": 2,
+ "out_file": "umkd_gen/frag_10_1_c2.json",
+ "topics": [
+  {
+   "pos": 13,
+   "title_ru": "Минимальное остовное дерево: алгоритмы Прима и Краскала",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 14,
+   "title_ru": "Сетевой анализ и раскраска графов: алгоритмы Форда-Фалкерсона, Эдмондса-Карпа и жадного раскрашивания",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 15,
+   "title_ru": "Алгоритмы обнаружения циклов в графах: поиск компонент связности и топологическая сортировка",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 16,
+   "title_ru": "Алгоритмы взвешенных графов: поиск кратчайшего пути во взвешенном графе",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 17,
+   "title_ru": "Основы алгоритмизации: структуры данных и контрольные конструкции.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 18,
+   "title_ru": "Методы разработки алгоритмов: итерация и рекурсия.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 19,
+   "title_ru": "Анализ сложности алгоритмов: O-большое и его применение.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 20,
+   "title_ru": "Принципы формализации задач: выделение входных и выходных данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 21,
+   "title_ru": "Модель данных и абстракция: как они помогают при создании кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 22,
+   "title_ru": "Проектирование алгоритмов для сортировки и поиска данных.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 23,
+   "title_ru": "Алгоритмы динамического программирования и их применение.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 24,
+   "title_ru": "Методология разработки программного кода: waterfall и agile подходы.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

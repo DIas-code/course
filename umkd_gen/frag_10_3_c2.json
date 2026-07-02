@@ -1,0 +1,508 @@
+[
+ {
+  "code": "10.3.15",
+  "title": "Memory leaks and their prevention",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in detecting memory leaks in object-oriented programs and in applying techniques that prevent them across managed and unmanaged languages.",
+  "theory": [
+   "A memory leak is a situation in which a program allocates memory but loses the ability to release it while that memory is no longer needed. In unmanaged languages such as C++ the leak is literal: a block obtained with new or malloc is never matched by a delete or free, so the operating system continues to consider it in use until the process ends. In managed languages such as Java, C# and Python the runtime frees memory automatically, but a leak still occurs when live references keep reachable objects that the program will never use again, so the garbage collector is never allowed to reclaim them.",
+   "The typical causes are well known. In C++ they include lost pointers, exceptions thrown between allocation and deletion, and ownership that is unclear between modules. In managed languages the classic sources are static collections that only grow, event handlers and listeners that are subscribed but never unsubscribed, caches without eviction, and closures or inner classes that capture an enclosing object. In every case the visible symptom is the same: the resident memory of the process rises steadily over time and does not fall after the load is removed.",
+   "Prevention is built on disciplined ownership and on tools. In C++ the modern rule is to prefer RAII and smart pointers (std::unique_ptr, std::shared_ptr) so that destruction is tied to scope. In managed languages the rules are to null out or clear references that outlive their usefulness, to unsubscribe from events, to bound the size of caches, and to close disposable resources with try-with-resources (Java), using (C#) or the with statement (Python). Profilers such as Valgrind, the .NET memory profiler, Java's VisualVM and Python's tracemalloc make the growth measurable rather than guessed."
+  ],
+  "materials": [
+   "A development machine with a JDK, the .NET SDK, a Python interpreter and a C++ compiler (g++ or clang) installed.",
+   "A memory-profiling tool for at least one platform: VisualVM or JProfiler for Java, the Visual Studio diagnostic tools for C#, tracemalloc for Python, or Valgrind for C++.",
+   "A small sample program supplied by the teacher that deliberately leaks memory.",
+   "A report form with columns for observed memory, suspected cause, and applied fix."
+  ],
+  "procedure": [
+   "Study the difference between an unmanaged leak (unreleased raw memory) and a managed leak (unwanted reachability); write one short example of each in pseudocode.",
+   "Run the supplied leaking program under a profiler and record the growth of the heap or resident memory over several minutes of simulated load.",
+   "Take a heap snapshot, sort objects by retained size, and identify which type of object accumulates and which reference chain keeps it alive.",
+   "Fix a C++ example by replacing raw new/delete with std::unique_ptr so that ownership and destruction are automatic.",
+   "Fix a managed example by unsubscribing an event handler and by clearing a static collection, then re-run the profiler to confirm that memory now stabilises.",
+   "Record before-and-after memory figures in the report and describe the reference chain that had to be broken."
+  ],
+  "tasks": [
+   "Take a C# or Java class that subscribes to an event in its constructor but never unsubscribes, reproduce the leak under a profiler, and correct it by unsubscribing in a Dispose or close method.",
+   "Rewrite a C++ function that leaks on an exception path using smart pointers or RAII so that no leak is possible regardless of where control leaves the function.",
+   "Use Python's tracemalloc to compare two snapshots of a script that fills an unbounded global list, identify the growing allocation site, and add a bounded cache to remove the leak."
+  ],
+  "conclusion": "As a result of the work, the student is able to detect memory leaks with profiling tools and to prevent them through correct ownership, timely release of references and bounded resource usage.",
+  "questions": [
+   "What is the difference between a memory leak in C++ and a memory leak in a garbage-collected language such as Java or C#?",
+   "Why can an object remain in memory in a managed runtime even though the program will never use it again?",
+   "How do RAII and smart pointers prevent leaks in C++?",
+   "Why are unremoved event handlers and unbounded static collections common sources of leaks in managed languages?",
+   "Which tools would you use to confirm that a suspected leak has actually been fixed?"
+  ]
+ },
+ {
+  "code": "10.3.16",
+  "title": "Data typing and its significance in OOP",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of a data type and the role of the type system in a programming language.",
+   "How types relate to classes and objects in object-oriented programming.",
+   "Static versus dynamic type checking and the trade-offs of each.",
+   "Type safety, contracts and the prevention of errors through typing.",
+   "The influence of typing on design, tooling and maintainability of OOP programs."
+  ],
+  "body": [
+   "A data type is a classification that tells the compiler or interpreter what kind of value a piece of data represents, what range of values it may take, and which operations are valid on it. The type system of a language is the set of rules that assigns types to expressions and decides which combinations of values and operations are legal. Typing is therefore not a formality: it is the mechanism through which a language expresses meaning and forbids nonsense such as multiplying a string by a window.",
+   "In object-oriented programming the notion of type and the notion of class are closely linked. A class defines a new type; an object is an instance of that type. When we declare a variable of type Account in Java or C#, we are saying that this variable will refer to objects that understand the messages defined by the Account class. The type therefore describes not only the shape of the data but the behaviour, the public interface, that the object guarantees to provide.",
+   "Types serve several purposes at once. They document intent, because a signature such as double withdraw(double amount) tells the reader what goes in and what comes out. They enable optimisation, because a compiler that knows a value is a 32-bit integer can generate efficient machine code. And, most importantly for reliability, they allow errors to be caught: a great many mistakes are simply the application of an operation to a value of the wrong type.",
+   "Languages differ in when they check types. Statically typed languages such as Java, C# and C++ verify types at compile time, before the program runs. Dynamically typed languages such as Python and JavaScript verify types at run time, as operations are executed. Both approaches use types; they differ only in the moment at which the type rules are enforced, and this single difference has wide consequences for how programs are written and tested.",
+   "Static checking gives early feedback. A type error such as passing a Customer where an Order is expected is reported by the compiler and the program never runs with that fault. This is especially valuable in large object-oriented systems, where a single class may be used by hundreds of others and a broken contract could otherwise surface far from its cause. The price is more ceremony: the programmer must declare types and satisfy the compiler before seeing any result.",
+   "Dynamic checking gives flexibility. In Python a function can accept any object that behaves correctly, without the author naming a specific class, which makes prototyping and generic code very quick to write. The price is that a type mismatch is only discovered when the offending line actually executes, so thorough testing must take on the role that the compiler plays in static languages.",
+   "Type safety is the property that a program cannot perform an operation that is meaningless for the types involved. A type-safe language guarantees, either at compile time or through run-time checks, that you will never, for example, interpret the bytes of a string as if they were a pointer. Type safety is what makes managed languages like Java and C# robust against whole categories of crashes that plague careless C programs.",
+   "In OOP the interface of a type acts as a contract. When a method promises to return a Shape, every caller may rely on the operations that Shape defines, and the compiler enforces that the returned object really is a Shape or a subtype of it. This contractual view lets large teams work independently: as long as each class honours the types in its signatures, the parts fit together.",
+   "Typing also underpins polymorphism. A variable declared with the type of a base class or an interface may hold objects of many concrete subtypes, and the correct method is selected according to the actual object. The static type gives the guarantee of what messages are understood, while the dynamic type determines which implementation runs. This blend of a declared type and a runtime type is central to object-oriented design.",
+   "The type system influences tooling deeply. Rich type information lets an integrated development environment offer accurate autocompletion, safe automated refactoring such as renaming a method everywhere it is used, and immediate highlighting of mistakes. Much of the productivity of modern Java, C# and TypeScript development comes directly from the compiler's knowledge of types.",
+   "Types have a cost as well as a benefit, and good designers balance the two. Excessively rigid typing can force artificial hierarchies and boilerplate; overly loose typing can hide defects until production. Modern languages try to soften the trade-off with features such as type inference, which lets the programmer omit obvious type annotations while the compiler still checks everything, as in C# var or Java var.",
+   "Even dynamically typed languages have moved toward optional typing to regain some of these benefits. Python's type hints and the mypy checker, together with TypeScript layered over JavaScript, let teams add static guarantees to originally dynamic code where reliability matters, without giving up the flexibility elsewhere. This convergence shows that the industry values both discipline and freedom in typing.",
+   "For a developer, understanding the type system is not optional knowledge. It determines how you model a problem into classes, how you design method signatures, how many errors the compiler will catch for you, and how much you must rely on tests instead. A programmer who thinks clearly in types produces designs that are safer, easier to read and cheaper to change.",
+   "Thus, data typing is the backbone of object-oriented programming: it links classes to types, expresses contracts between objects, decides when and how errors are detected, and shapes the tools, safety and maintainability of the systems we build."
+  ],
+  "questions": [
+   "What is a data type, and what does a type system decide about the expressions in a program?",
+   "How are the concepts of type and class related in object-oriented programming?",
+   "What is the essential difference between static and dynamic type checking, and what does each gain and lose?",
+   "What is type safety, and why does it make managed languages more robust?",
+   "How does typing support polymorphism and the idea of an interface as a contract?"
+  ]
+ },
+ {
+  "code": "10.3.17",
+  "title": "Strong and weak typing",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The meaning of strong and weak typing and how it differs from static and dynamic typing.",
+   "Implicit type coercion and its dangers in weakly typed contexts.",
+   "Examples of strong and weak behaviour in Python, Java, C#, C and JavaScript.",
+   "Explicit conversion, casting and the boundaries of type strength.",
+   "Practical consequences of type strength for reliability and debugging."
+  ],
+  "body": [
+   "Strong and weak typing describe how strictly a language enforces the rules of its type system, and in particular how willing it is to mix values of different types without complaint. In a strongly typed language operations that combine incompatible types are rejected or require an explicit conversion; in a weakly typed language the language will silently reinterpret or coerce one type into another to make an operation succeed.",
+   "This axis must not be confused with the static-versus-dynamic axis, which concerns when types are checked, not how strictly. The two are independent. Python is dynamically typed yet strongly typed: it checks at run time, but it refuses to add the integer 1 to the string 'a'. C is statically typed yet relatively weakly typed: it checks at compile time, but it allows a pointer to be reinterpreted as an integer with little resistance. Knowing both axes lets you place any language on a two-dimensional map.",
+   "The clearest sign of weak typing is implicit coercion. In JavaScript the expression 1 + '2' produces the string '12', because the number is silently converted to text, while 1 - '2' produces the number -1, because subtraction forces the string to a number. These automatic conversions are convenient in small scripts but are a notorious source of subtle bugs, because the same values behave differently depending on the operator.",
+   "A strongly typed language behaves predictably in the same situations. In Python 1 + '2' raises a TypeError immediately, forcing the programmer to decide explicitly whether they meant string concatenation str(1) + '2' or numeric addition 1 + int('2'). The language refuses to guess, and this refusal converts a hidden logic error into a loud, early failure that is easy to locate.",
+   "Java and C# sit firmly on the strong side. They perform some widening conversions automatically, such as promoting an int to a long or a double, because these conversions lose no information and cannot surprise the programmer. But narrowing conversions that might lose data, such as double to int, must be written explicitly with a cast, and mixing unrelated reference types is a compile error. The rule is that the language automates only what is provably safe.",
+   "Casting is the programmer's tool for stepping outside the automatic rules while remaining, in a strong language, under supervision. A checked cast in Java, or a cast in C#, is verified at run time: if you cast an Object to a String and the object is not really a String, the runtime throws a ClassCastException rather than corrupting memory. The strength of the type system is preserved even at the moments when the programmer overrides it.",
+   "Weak typing is most extreme in low-level languages where the type is little more than advice about how to read a block of bytes. In C a union lets the same memory be read as an integer or as a float, and a cast between pointer types will happily reinterpret raw bytes. This power is essential for systems programming and hardware access, but it removes the safety net: a mistake produces undefined behaviour rather than a clean error.",
+   "The consequences for reliability are significant. In a strongly typed program a large class of mistakes cannot even be expressed, so they never reach a user. In a weakly typed program the same mistakes compile and run, producing wrong answers that may only be noticed much later, when the corrupted data has spread. Strong typing therefore tends to move the cost of errors earlier, where they are cheap, rather than later, where they are expensive.",
+   "Weak typing is not simply a defect; it is a trade-off. The implicit conversions of JavaScript make it forgiving for beginners and terse for quick web scripting, and the byte-level freedom of C is what makes it suitable for writing operating systems and drivers. The task of the engineer is to know where on the spectrum a language sits and to compensate for its weaknesses with discipline, tests and static analysers.",
+   "In object-oriented design, strong typing reinforces the idea that an object's type is a promise about its behaviour. If a method expects a Shape, a strongly typed language guarantees that only a Shape or a subtype can be passed, so the method can rely on the contract. Weak typing erodes this guarantee, because a value that merely resembles a Shape, or that can be coerced, might slip through and break assumptions deep inside the code.",
+   "Modern practice tries to add strength where languages are weak. TypeScript adds a strong, checkable type layer on top of JavaScript's loose semantics; static analysers and compiler warnings flag suspicious implicit conversions in C; and code-review rules often forbid the riskiest coercions outright. The direction of travel in the industry is toward more strength, because the cost of hidden type errors has proven high in large systems.",
+   "When choosing or evaluating a language, a developer should ask two separate questions: when are types checked, and how strictly are they enforced. A language can be dynamic and strong like Python, static and strong like Java or C#, static and weak like C, or dynamic and weak like classic JavaScript. Each combination has a characteristic feel and a characteristic set of failure modes that experienced programmers learn to anticipate.",
+   "Thus, strong typing means the language refuses to mix incompatible types without an explicit, checked conversion, whereas weak typing silently coerces them; this property, orthogonal to static versus dynamic checking, largely determines how many type errors surface early as clear failures rather than late as corrupted results."
+  ],
+  "questions": [
+   "How does the strong-versus-weak axis differ from the static-versus-dynamic axis of a type system?",
+   "What is implicit type coercion, and why does it make weakly typed code error-prone?",
+   "Why can Python be described as dynamically but strongly typed, while C is statically but weakly typed?",
+   "What is the difference between an automatic widening conversion and a cast that the programmer must write explicitly?",
+   "In what circumstances is weak typing actually useful, and how do engineers compensate for its risks?"
+  ]
+ },
+ {
+  "code": "10.3.18",
+  "title": "Variables and their types in programming languages",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of a variable as a named binding between an identifier and a value.",
+   "Primitive value types versus reference (object) types.",
+   "Scope, lifetime and storage of variables: stack, heap and static memory.",
+   "Declaration, initialisation and type inference across languages.",
+   "Value versus reference semantics and their effect on program behaviour."
+  ],
+  "body": [
+   "A variable is a named connection between an identifier that the programmer uses and a value that the machine stores. When we write count = 5, we create or update a binding so that the name count now denotes the value five. The variable gives human-readable meaning to a location in memory and lets the same piece of code operate on different data each time it runs.",
+   "Every variable has a type, either declared explicitly or determined by the language. The type answers three questions: how much memory the value needs, how the bits are to be interpreted, and which operations are permitted. A variable of type int and a variable of type String may occupy similar-looking storage, but the type is what tells the machine that one supports arithmetic and the other supports concatenation.",
+   "Most languages divide types into two broad families. Primitive or value types, such as int, double, char and bool, hold their data directly; the variable is the value. Reference types, such as objects, arrays and strings in Java and C#, hold a reference that points to data stored elsewhere; the variable is a handle to the value. Understanding which family a type belongs to is essential, because it changes how assignment and comparison behave.",
+   "In C# the distinction is explicit in the language design: struct types are value types and class types are reference types. In Java the eight primitives are value types and every other type is a reference type. In C++ the programmer chooses directly, deciding whether to store an object by value, by pointer or by reference. Python takes a different view again: every value is an object, but immutable objects such as integers behave, for practical purposes, like values.",
+   "A variable does not exist forever; it has a lifetime, the span of time during which its storage is valid. A local variable inside a method typically lives on the call stack and disappears when the method returns. An object created with new usually lives on the heap and survives as long as something refers to it. A static or global variable lives for the whole run of the program. Matching a variable's lifetime to its purpose is a core skill of correct programming.",
+   "Closely related to lifetime is scope, the region of the source code in which the name is visible and may be used. A variable declared inside a loop is not accessible outside it; a field of a class is accessible throughout the class. Well-chosen scopes keep names from clashing and make programs easier to reason about, because the reader knows exactly where a variable can be changed.",
+   "The physical storage of variables usually falls into three areas. The stack stores local variables and call frames and is fast and automatically reclaimed. The heap stores dynamically allocated objects whose size or lifetime is not known in advance. Static storage holds global and class-level data that exists for the program's whole life. Where a variable lives affects both its performance and the rules for when it is freed.",
+   "Declaring a variable introduces its name and type; initialising it gives it a first value. Using a variable before it has been initialised is a classic defect. Java and C# guard against it by refusing to compile code that reads an uninitialised local, and by giving fields safe default values such as zero or null. C and C++ are less protective, and reading uninitialised memory there produces unpredictable results, so disciplined initialisation is vital.",
+   "Modern languages often let the compiler infer the type of a variable from its initial value, sparing the programmer from writing it out. C# var total = 0; and Java var total = 0; both create a strongly typed integer whose type is deduced, not guessed. Inference reduces clutter without weakening safety, because the variable still has a single fixed type that the compiler checks everywhere it is used.",
+   "The deepest practical consequence of the value/reference split appears in assignment. Assigning one value-type variable to another copies the data, so the two are independent afterwards. Assigning one reference-type variable to another copies only the reference, so both now point to the same object, and a change through one is visible through the other. Many puzzling bugs come from expecting a copy where the language gives a shared reference.",
+   "The same split governs how arguments are passed to methods. Passing a value type passes a copy, so the callee cannot alter the caller's variable. Passing a reference type passes a copy of the reference, so the callee can modify the shared object even though it cannot make the caller's variable point somewhere new. Languages such as C# add explicit ref and out keywords to make the caller's variable itself modifiable when that is genuinely intended.",
+   "Constants and immutability are the disciplined opposite of ordinary variables. A value declared final in Java, const or readonly in C#, or const in C++ promises not to change after initialisation. Immutable variables are easier to reason about and safer in concurrent programs, because no other thread can alter them, and modern design increasingly favours them wherever change is not required.",
+   "Choosing good variables is a design act, not a mechanical one. A clear name, the narrowest sufficient scope, the shortest necessary lifetime, and the correct choice between a value and a reference together make code that is easier to read, less prone to accidental sharing, and cheaper to maintain. Sloppy variable use, by contrast, is a reliable predictor of confusing and fragile programs.",
+   "Thus, a variable is a typed, named binding to a value whose family, scope, lifetime and storage together determine how it is copied, shared, initialised and reclaimed; mastering these properties, and especially the difference between value and reference semantics, is fundamental to writing correct programs in any language."
+  ],
+  "questions": [
+   "What is a variable, and what three things does its type determine?",
+   "What is the difference between a value (primitive) type and a reference (object) type?",
+   "How do scope and lifetime differ, and how do the stack, heap and static storage relate to a variable's lifetime?",
+   "Why does assigning a reference-type variable behave differently from assigning a value-type variable?",
+   "What does type inference (var) provide, and does it weaken type safety?"
+  ]
+ },
+ {
+  "code": "10.3.19",
+  "title": "Type control and type checking of data",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in checking and controlling data types at compile time and at run time, and in handling type mismatches safely across several languages.",
+  "theory": [
+   "Type checking is the process of verifying that every operation in a program receives operands of acceptable types. It happens at two moments. Compile-time (static) checking is performed by the compiler before the program runs and is available in Java, C# and C++; run-time (dynamic) checking is performed by the interpreter or runtime as each operation executes and is the norm in Python, but it also occurs in static languages whenever a cast or a downcast must be verified.",
+   "Programmers control types in several ways. They can query a value's type explicitly with operators such as instanceof in Java, is in C# and Python, or typeof; they can attempt a safe conversion with the C# as operator or Java pattern matching, which yield a null or a boolean instead of throwing; and they can force a conversion with a cast, accepting that a mismatch will raise an exception such as ClassCastException or InvalidCastException. Choosing the right technique is the difference between a controlled failure and a crash.",
+   "Good type control combines these tools with validation at the boundaries of a program. Data arriving from a file, a network or a user is untyped text and must be parsed and checked before it enters the typed core of the application. Techniques such as tryParse patterns, exception handling around conversions, and optional static analysis (Python type hints with mypy) let a program reject bad input cleanly rather than fail deep inside the logic."
+  ],
+  "materials": [
+   "A development environment for at least two of Java, C#, Python and C++.",
+   "A set of sample inputs including valid values and deliberately malformed ones.",
+   "A short program skeleton that reads values and converts them to numeric and object types.",
+   "A report form recording each check, the technique used, and the result on valid and invalid input."
+  ],
+  "procedure": [
+   "Write a small class hierarchy (for example Shape with subclasses Circle and Square) and use instanceof or the is operator to detect the actual type of an object held in a base-class variable.",
+   "Perform a safe downcast using the C# as operator or Java pattern matching, and print a clear message when the cast does not apply instead of allowing an exception.",
+   "Perform an unsafe cast on an object of the wrong type, catch the resulting ClassCastException or InvalidCastException, and log it so the failure is controlled.",
+   "Parse numeric text from input using a tryParse-style method and branch on success or failure rather than assuming the input is valid.",
+   "Add Python type hints to a function and run mypy to detect a deliberately introduced type mismatch before the program is executed.",
+   "Record for each case whether the error was caught at compile time or run time, and how the program responded."
+  ],
+  "tasks": [
+   "Implement a function that accepts a base-class reference, uses type checking to identify the concrete subtype, and calls a subtype-specific method only when the check succeeds.",
+   "Write input-validation code that converts user-supplied text to an integer, rejects malformed input with a clear message, and never throws an unhandled exception.",
+   "Annotate a small Python module with type hints, run mypy, introduce one type error on purpose, and show that the checker reports it before the code runs."
+  ],
+  "conclusion": "As a result of the work, the student is able to verify data types at compile time and run time, choose between safe and unsafe conversions, and validate untyped input so that type mismatches produce controlled, informative failures.",
+  "questions": [
+   "What is the difference between compile-time and run-time type checking, and give a language example of each?",
+   "How do instanceof and the is operator help you control types before performing an operation?",
+   "What is the difference between a safe conversion (as / pattern matching) and an unchecked cast?",
+   "Why must data arriving from files, networks or users be checked at the boundary of a program?",
+   "How do optional type hints and a checker such as mypy add compile-time safety to a dynamically typed language?"
+  ]
+ },
+ {
+  "code": "10.3.20",
+  "title": "Dynamic typing and late binding",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The idea of dynamic typing: types attached to values, not to variables.",
+   "Duck typing and how it enables flexible, reusable code.",
+   "Early (static) binding versus late (dynamic) binding of operations.",
+   "How virtual dispatch and virtual tables implement late binding.",
+   "Benefits, costs and appropriate uses of dynamic typing and late binding."
+  ],
+  "body": [
+   "Dynamic typing is the approach in which the type is a property of the value at run time rather than of the variable at compile time. In Python a single name may refer to an integer on one line and to a list on the next, because the name is only a label and the type travels with the object it currently points to. The interpreter checks, at the moment of each operation, whether the value actually supports what is being asked of it.",
+   "This contrasts with static typing, where the variable itself carries a fixed type declared in the source and the compiler rejects any assignment or operation that violates it. The dynamic model trades the compiler's early guarantees for flexibility: code can be written that manipulates values whose exact types are not known until the program runs, which is powerful for scripting, data processing and rapid prototyping.",
+   "A natural companion of dynamic typing is duck typing, summed up by the phrase 'if it walks like a duck and quacks like a duck, treat it as a duck'. A Python function that calls value.area() does not care whether value is a Circle, a Square or any other class; it works with any object that provides an area method. The suitability of an object is judged by the operations it supports, not by a declared type or an inheritance relationship.",
+   "Binding is the separate but related question of when the connection between a call and the actual code that runs is decided. Early binding, also called static binding, resolves this at compile time: the compiler knows exactly which function will be invoked. Late binding, also called dynamic binding, defers the decision until run time, when the actual type of the object is known, and only then selects the implementation to execute.",
+   "Late binding is the mechanism that makes polymorphism work in object-oriented languages. When a base-class reference calls a virtual method, the runtime looks at the real object behind the reference and dispatches to that object's overriding version. A variable typed as Shape may hold a Circle, and shape.draw() runs Circle's draw at run time, even though the compiler saw only the type Shape. Without late binding, overriding would have no effect.",
+   "In statically typed OOP languages, late binding is opt-in and controlled. In Java every non-final, non-static method is virtual by default, so overriding just works. In C# and C++ the programmer marks a method virtual and the override with override to signal that late binding is intended; a non-virtual method is bound early. This explicit choice lets the designer decide exactly where flexibility is granted and where it is not.",
+   "Under the hood, late binding in compiled languages is usually implemented with a virtual method table, or vtable. Each class with virtual methods has a table of function pointers, and each object carries a hidden pointer to its class's table. A virtual call becomes an indirect jump through that table, so the cost is a small, constant extra step compared with a direct call. This clever mechanism turns run-time polymorphism into a very cheap operation.",
+   "Dynamic languages take late binding further, resolving even attribute and method names at run time by looking them up in the object's or class's dictionary. This is why Python can add or replace methods on objects while a program runs, and why frameworks can build behaviour dynamically. The same lookup that gives this power is also what makes each call a little slower than a statically bound one.",
+   "The benefits of dynamic typing and late binding are flexibility and expressiveness. Generic containers, plug-in architectures, dependency injection and many testing techniques rely on deciding at run time which concrete object will fill a role. Mock objects in unit tests, for instance, work precisely because a late-bound call will accept any object that presents the right interface, without the tested code needing to know it is a mock.",
+   "The costs are equally real. Errors that a static compiler would catch, such as calling a method that does not exist, surface only when the offending line runs, so dynamic programs need broader test coverage. Every dynamic dispatch and name lookup adds a small run-time overhead, and the absence of declared types can make large programs harder to navigate and refactor safely without good tooling.",
+   "Because of this balance, many teams blend the styles. They use dynamic typing for the outer, changeable layers of a system and add static guarantees where correctness is critical, through Python type hints, TypeScript, or by confining virtual dispatch to well-defined interfaces. The aim is to keep the flexibility of late binding while recovering some of the safety and speed of early binding where it matters most.",
+   "For the object-oriented designer, the key insight is that late binding is what separates the interface an object presents from the implementation it runs. Programming to an interface and letting the runtime choose the implementation is the foundation of extensible design: new subtypes can be added later, and existing code that calls through the base type will use them automatically, thanks to dynamic dispatch.",
+   "Thus, dynamic typing attaches types to values at run time and, together with late binding, defers both the checking of operations and the selection of the code to execute until the real type is known; this pairing gives object-oriented and scripting languages their flexibility and polymorphism, at the price of later error detection and a small run-time overhead."
+  ],
+  "questions": [
+   "In dynamic typing, to what is the type attached, and how does this differ from static typing?",
+   "What is duck typing, and how does it let a function work with many unrelated classes?",
+   "What is the difference between early (static) binding and late (dynamic) binding of a method call?",
+   "How does a virtual method table implement late binding, and why is its cost small?",
+   "What are the main benefits and the main costs of relying on dynamic typing and late binding?"
+  ]
+ },
+ {
+  "code": "10.3.21",
+  "title": "Generic programming and templates",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The motivation for generic programming: writing algorithms independent of concrete types.",
+   "Generics in Java and C# versus templates in C++.",
+   "Type parameters, bounds and constraints.",
+   "Compile-time instantiation versus type erasure.",
+   "Benefits for reuse and type safety, and the limits of generic code."
+  ],
+  "body": [
+   "Generic programming is the practice of writing code that is parameterised by type, so that a single algorithm or data structure can work with many different types while remaining type-safe. Instead of writing a separate list class for integers, another for strings and another for orders, the programmer writes one List<T>, where T is a placeholder that the user fills in with a concrete type when the list is used.",
+   "The motivation is to remove a painful trade-off that older languages forced. Without generics, a programmer could either duplicate code for every type, which is wasteful and error-prone, or store everything as a common base type such as Object, which loses type information and requires unsafe casts on every retrieval. Generics give the reuse of the second approach with the safety of the first, checked by the compiler.",
+   "In Java and C# the feature is called generics, and it is used pervasively in the collection libraries. A declaration such as List<Customer> in C# or ArrayList<Customer> in Java means a list that can only contain Customer objects; the compiler rejects the insertion of anything else and guarantees that every element read back is a Customer, with no cast required. The type parameter turns a run-time risk into a compile-time certainty.",
+   "A generic type or method may declare more than one parameter and may constrain them. C# uses a where clause, as in where T : IComparable, to require that the type argument implement a particular interface, while Java uses bounded wildcards such as <T extends Comparable<T>>. These bounds let the generic code call methods on the type parameter, because the compiler now knows that every permitted type provides them. Without a bound, the code may only use the operations that every object supports.",
+   "C++ approaches the same goal with templates, which are more powerful and work somewhat differently. A template<typename T> function or class is not compiled once; instead the compiler generates a fresh, specialised version for each concrete type actually used, a process called instantiation. This means std::vector<int> and std::vector<std::string> become genuinely separate, fully optimised types in the compiled program.",
+   "This difference in mechanism has visible consequences. Because C++ instantiates templates per type, it can inline aggressively and produce code as fast as hand-written type-specific code, and template arguments may even be constant values, not only types, enabling techniques such as compile-time computation. The cost is longer compilation, larger binaries when many instantiations exist, and famously cryptic error messages when a type does not satisfy the operations a template silently requires.",
+   "Java, by contrast, implements generics through type erasure. The type parameters exist for the compiler's checking but are removed from the compiled bytecode, so at run time an ArrayList<String> and an ArrayList<Integer> are the same raw ArrayList. Erasure keeps generics compatible with older non-generic code and avoids code bloat, but it also forbids operations such as creating an array of a type parameter or asking, at run time, what T actually was.",
+   "C# takes a middle path with reified generics: the type information is preserved at run time by the common language runtime, so a List<int> really is a distinct type and can be inspected by reflection. C# can also specialise generics over value types without boxing, giving performance closer to C++ for those cases, while still checking everything at compile time as Java does.",
+   "The central benefit of all these systems is the combination of reuse and safety. One well-written generic component, such as a balanced tree or a sorting routine, serves every suitable type, and the compiler proves that each use is consistent. This eliminates a whole category of casting errors and makes standard libraries both compact and reliable, which is why generic collections are the default tool in modern Java and C#.",
+   "Generic programming also encourages a valuable design habit: thinking about algorithms in terms of the operations a type must support rather than the specific types themselves. A generic sort needs only that elements can be compared; a generic container needs only that elements can be stored and copied. Expressing these minimal requirements as bounds or constraints produces components that are widely applicable yet still precisely checked.",
+   "There are limits and pitfalls. Overusing generics can make signatures hard to read, with long chains of type parameters and constraints. Java's erasure surprises programmers who expect run-time type information, and C++ templates can explode compilation time and produce daunting diagnostics. The skill lies in using generics where genuine reuse across types exists, and not turning every class into a maze of parameters for its own sake.",
+   "Generics also interact with inheritance in a subtle way called variance. A List<Circle> is not automatically a List<Shape>, even though a Circle is a Shape, because allowing it could let unsafe insertions through. Languages provide controlled variance, such as Java's wildcards ? extends and ? super or C# in and out modifiers, so that programmers can express when substitution is safe. Understanding variance is part of using generics correctly in an object-oriented setting.",
+   "Thus, generic programming lets one algorithm or data structure serve many types without sacrificing type safety; Java and C# achieve this with generics using erasure or reification, while C++ uses templates instantiated per type, and in every case the payoff is reusable, statically checked components at the cost of some complexity in the type system."
+  ],
+  "questions": [
+   "What problem does generic programming solve compared with duplicating code or using a common Object type?",
+   "What is a type parameter, and why are bounds or constraints such as where T : IComparable often needed?",
+   "How does C++ template instantiation differ from Java's type erasure?",
+   "What are the practical consequences of erasure in Java and of per-type instantiation in C++?",
+   "What is variance, and why is a List<Circle> not automatically a List<Shape>?"
+  ]
+ },
+ {
+  "code": "10.3.22",
+  "title": "Objects and classes in different programming languages",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The universal concepts of class and object and how they relate.",
+   "Class-based models in Java and C# versus C++'s multiple-inheritance model.",
+   "Python's object model: everything is an object, dynamic attributes.",
+   "Prototype-based objects in JavaScript.",
+   "Common threads: encapsulation, identity, state and behaviour across languages."
+  ],
+  "body": [
+   "A class is a blueprint that describes the structure and behaviour of a category of things, while an object is a concrete instance created from that blueprint. The class defines fields to hold state and methods to provide behaviour; the object is a particular bundle of state that responds to those methods. Almost every object-oriented language shares this basic pair, but the details of how classes and objects are declared and created differ significantly from one language to another.",
+   "In Java the model is strictly class-based and single-rooted. Every class ultimately derives from Object, a class may extend exactly one superclass but implement many interfaces, and objects are always created with new and always live on the heap, accessed through references. This uniformity, together with automatic memory management, makes Java's object model simple to teach and predictable to use, at the cost of some flexibility.",
+   "C# follows a very similar class-based design but adds distinctions Java lacks. It separates reference types (class) from value types (struct), so a small object such as a point can be stored inline without heap allocation. It also offers properties, which look like fields but run getter and setter code, and modern features such as records for concise immutable data types. The result is a richer object model aimed at both performance and expressiveness.",
+   "C++ gives the programmer the most control and the most responsibility. An object can be created on the stack, on the heap with new, or as a member of another object, and the programmer decides its lifetime explicitly, aided by constructors and destructors. C++ also supports multiple inheritance, allowing a class to derive from several bases at once, which is powerful but introduces complications such as the diamond problem, solved with virtual inheritance. There is no universal base class and no garbage collector by default.",
+   "Python treats objects as first-class and pervasive: integers, functions, classes and modules are all objects. A class is created with the class keyword, but classes are themselves objects produced at run time, and instances store their attributes in a dictionary that can be modified while the program runs. This means one can add an attribute to a single object that other instances of the same class do not have, a flexibility that class-based static languages deliberately forbid.",
+   "Python's dynamic nature shapes how encapsulation is expressed. There are no truly private fields; instead a leading underscore is a convention meaning 'internal', and a double underscore triggers name mangling to avoid accidental clashes. Behaviour is customised through special methods such as __init__ for construction and __str__ for string conversion, so the language builds object features from a small set of overridable hooks rather than from many keywords.",
+   "JavaScript represents a different family altogether: it is prototype-based rather than class-based. An object can inherit directly from another object, its prototype, and looking up a property that an object lacks follows a chain of prototypes until it is found. The class syntax added in modern JavaScript is convenient sugar over this prototype mechanism; underneath, there are still only objects linking to other objects, which is a fundamentally different model from Java's blueprints.",
+   "Despite these differences, several ideas recur in every model. Encapsulation, the bundling of state with the operations that act on it and the hiding of internal detail, appears everywhere, whether enforced by private keywords in Java and C++ or by convention in Python. It is the mechanism that lets an object present a stable interface while freely changing how it works inside.",
+   "Object identity is another universal concept. Every object is distinct from every other, even if their contents are equal, and languages provide ways to distinguish identity from equality: == versus equals in Java, == versus Equals or ReferenceEquals in C#, and == versus is in Python. Confusing 'the same object' with 'an equal object' is a frequent source of bugs, so knowing how each language draws the line is essential.",
+   "The pairing of state and behaviour is the heart of the object concept in all these languages. State is the data an object holds at a given moment; behaviour is what it can do in response to messages. An object combines the two so that it is responsible for keeping its own data valid, which is why methods, not outside code, should be the ones that change an object's internal fields.",
+   "Construction and destruction also appear in every model, though handled differently. Java, C# and Python construct objects and rely on a garbage collector to reclaim them, offering finalisers or dispose patterns for cleanup of external resources. C++ ties destruction to scope through destructors, giving deterministic cleanup that the managed languages approximate with using and try-with-resources. Knowing when and how an object is created and destroyed is part of understanding any object model.",
+   "For a developer moving between languages, the practical lesson is to learn the specific object model rather than to assume the habits of one language transfer to another. The same word, class, means a heap-allocated reference type in Java, possibly a value type in C#, a manually managed entity in C++, a mutable run-time object in Python, and mere sugar over prototypes in JavaScript. Mastering these variations prevents subtle errors and lets a programmer choose the right tool for a task.",
+   "Thus, while class and object are near-universal ideas built on encapsulation, identity, state and behaviour, languages realise them very differently, from Java's strict single-rooted classes and C++'s manually managed multiple inheritance to Python's mutable dynamic objects and JavaScript's prototype chains, and understanding these models is key to writing correct code in each."
+  ],
+  "questions": [
+   "What is the difference between a class and an object, and which one holds state at run time?",
+   "How does the object model of Java differ from that of C++ regarding inheritance and memory management?",
+   "In what sense is 'everything an object' in Python, and how does its handling of attributes and privacy differ from Java?",
+   "What does it mean that JavaScript is prototype-based rather than class-based?",
+   "Which concepts recur across all object models, and why is distinguishing object identity from equality important?"
+  ]
+ },
+ {
+  "code": "10.3.23",
+  "title": "Designing classes and objects in software development",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Identifying classes and responsibilities from the problem domain.",
+   "Cohesion, the single-responsibility principle and good class boundaries.",
+   "Encapsulation, invariants and designing a clear public interface.",
+   "Relationships between classes: association, composition, aggregation and inheritance.",
+   "Coupling, abstraction and designing for change and testability."
+  ],
+  "body": [
+   "Designing classes is the activity of deciding which objects will exist in a program, what each one is responsible for, and how they will collaborate. It sits between understanding the problem and writing the code, and it has more influence on the long-term quality of a system than almost any other decision. Good class design produces software that is easy to read, to extend and to test; poor class design produces a tangle that resists every change.",
+   "A common starting point is to look at the problem domain for the nouns and verbs. The nouns, such as Customer, Order and Invoice, suggest candidate classes, and the verbs, such as place, cancel and total, suggest behaviours those classes might provide. This is only a first sketch, because not every noun deserves a class and some important concepts have no obvious noun, but it grounds the design in the language of the people who will use the system.",
+   "The most important quality of a well-designed class is high cohesion: everything in the class should relate to a single, clear purpose. The single-responsibility principle expresses this as the rule that a class should have only one reason to change. A class that mixes unrelated duties, such as computing prices and also formatting reports and also talking to the database, is hard to understand and breaks whenever any of those concerns changes. Splitting such a class into focused ones is a routine and valuable refactoring.",
+   "Encapsulation is the designer's chief tool for controlling complexity. Fields should generally be private, and access to them should go through methods that keep the object's data valid. An invariant, a condition that must always hold, such as an account balance never being negative, can then be enforced in one place. When state can only change through controlled methods, the object protects its own correctness and callers cannot leave it in an impossible state.",
+   "Designing the public interface of a class is a distinct skill from implementing it. The interface is the set of methods other code will call, and it should be small, meaningful and expressed in the vocabulary of the problem, not the implementation. A method named transfer(amount, target) tells the reader what happens; a method named setBalance that forces callers to compute the arithmetic themselves leaks the implementation and invites errors. A good interface makes correct use easy and incorrect use difficult.",
+   "Objects rarely work alone, so the designer must choose the relationships between classes. Association is a general 'uses' or 'knows about' link. Composition is a strong 'part-of' relationship in which the part cannot exist without the whole, such as an Order and its OrderLines. Aggregation is a weaker whole-part link where the parts can live independently, such as a Team and its Players. Naming these relationships correctly clarifies ownership and lifetime.",
+   "Inheritance is a fourth relationship, an 'is-a' link, and it must be used with care. A subclass should be a genuine specialisation that can stand in for its base class wherever the base is expected. When the relationship is really 'has-a' or 'is-implemented-using', composition is usually the better choice. Experienced designers follow the guideline 'favour composition over inheritance', reserving inheritance for true, stable specialisation hierarchies.",
+   "A central goal of design is low coupling, meaning that classes depend on one another as little as possible and only through clear interfaces. Tightly coupled classes must change together, so a modification ripples across the system; loosely coupled classes can evolve independently. Depending on an abstraction, such as an interface, rather than on a concrete class is the main technique for reducing coupling and is the essence of the dependency-inversion idea.",
+   "Abstraction guides which details a class exposes and which it hides. A well-abstracted class presents the essential concept and conceals the machinery, so that users think about what it does, not how. Choosing the right abstraction is difficult because it requires understanding both the problem and the likely directions of change; the reward is that the interface stays stable even when the implementation is rewritten.",
+   "Designing for change means anticipating where a system is likely to vary and placing flexibility exactly there, without over-engineering everywhere else. If new payment methods are expected, a Payment interface with interchangeable implementations pays off; if the number of coordinates in a point will never change, a simple struct is enough. The art is to keep the design simple while leaving seams at the points that experience says will move.",
+   "Testability is both a consequence and a guide of good design. Classes with a single responsibility, a clear interface and dependencies passed in rather than created internally are easy to test in isolation, often by substituting a test double for a collaborator. If a class is hard to test, that difficulty is usually a signal of a design flaw, such as hidden dependencies or too many responsibilities, and improving the testability improves the design as well.",
+   "Design is iterative, not a single act performed before coding. Initial classes are refined as understanding grows, and continuous refactoring, supported by tests, keeps the structure healthy as requirements change. Tools such as UML class diagrams and CRC cards help teams reason about responsibilities and relationships before and during implementation, but the design ultimately lives in the code and must be maintained there.",
+   "Thus, designing classes and objects means assigning clear, cohesive responsibilities, protecting state through encapsulation and invariants, exposing small meaningful interfaces, choosing the right relationships between classes, and keeping coupling low so that the resulting software is understandable, testable and ready to change.",
+   "These principles are not academic ideals but daily working tools; a developer who applies them consistently turns a vague requirement into a set of collaborating objects whose responsibilities and boundaries a future reader, including the developer, can quickly understand and safely modify."
+  ],
+  "questions": [
+   "How can the nouns and verbs of a problem domain help in identifying candidate classes and their behaviour?",
+   "What is the single-responsibility principle, and why is high cohesion desirable in a class?",
+   "How do encapsulation and invariants help a class protect its own correctness?",
+   "What is the difference between composition, aggregation and inheritance as relationships between classes?",
+   "Why does low coupling, achieved by depending on abstractions, make software easier to change and test?"
+  ]
+ },
+ {
+  "code": "10.3.24",
+  "title": "Comparison of object-oriented, functional and procedural programming",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in solving the same problem using procedural, object-oriented and functional styles and in evaluating the strengths and weaknesses of each paradigm.",
+  "theory": [
+   "Procedural programming structures a program as a sequence of procedures, or functions, that operate on data passed to them. Data and behaviour are kept separate: data lives in structures or variables, and functions transform it. This style, exemplified by C, is straightforward and maps closely to how the machine executes instructions, which makes it clear for small programs and for performance-critical code, but it can become hard to manage as data and the functions that touch it grow numerous and interdependent.",
+   "Object-oriented programming groups data together with the operations that act on it into objects, and uses encapsulation, inheritance and polymorphism to model a problem as collaborating entities. This organisation scales well to large systems because each object is responsible for its own state and presents a stable interface. Functional programming, by contrast, treats computation as the evaluation of pure functions without side effects, favouring immutable data, higher-order functions and expressions over statements; languages such as Haskell embody it fully, while Python, C# and Java now support it partially.",
+   "No paradigm is universally best; each fits certain problems. Procedural code suits simple, linear tasks and low-level work. Object-oriented design suits large systems with rich domain models and changing requirements. Functional style suits data transformation, concurrency and situations where avoiding shared mutable state prevents whole classes of bugs. Modern languages are deliberately multi-paradigm, letting a developer combine the styles, so the practical skill is choosing the right one for each part of a program."
+  ],
+  "materials": [
+   "A development environment for a multi-paradigm language such as Python, C# or Java.",
+   "A single specification for a small problem, for example computing statistics over a list of transactions.",
+   "A reference table of paradigm characteristics (state handling, reuse mechanism, typical strengths and weaknesses).",
+   "A report form for comparing the three implementations on readability, reuse and testability."
+  ],
+  "procedure": [
+   "Implement the given problem in a procedural style, using standalone functions that take data as parameters and return results, with no objects and no reliance on shared mutable state where avoidable.",
+   "Reimplement the same problem in an object-oriented style, defining classes that hold the data and expose methods, and using polymorphism if the problem has variant behaviour.",
+   "Reimplement it again in a functional style, using pure functions, immutable data and higher-order functions such as map, filter and reduce.",
+   "Measure and note the length, readability and duplication of each version.",
+   "Introduce a small change to the requirements and record how much each version had to be modified to accommodate it.",
+   "Summarise in the report which paradigm handled the change most easily and why, referring to state handling and reuse."
+  ],
+  "tasks": [
+   "Write procedural, object-oriented and functional versions of a routine that filters and aggregates a collection, and present all three side by side.",
+   "For each version, identify where mutable state exists and explain how that state is managed or avoided.",
+   "Recommend, with justification, which paradigm you would choose if the same feature had to grow into a large maintained system, and which you would choose for a one-off script."
+  ],
+  "conclusion": "As a result of the work, the student is able to implement one problem in procedural, object-oriented and functional styles and to justify the choice of paradigm based on state management, reuse and maintainability.",
+  "questions": [
+   "How does procedural programming separate data from behaviour, and where does this style work well?",
+   "What three pillars does object-oriented programming add on top of grouping data with behaviour?",
+   "What does it mean for a function to be pure, and why does functional programming favour immutable data?",
+   "For what kinds of problems is each of the three paradigms best suited?",
+   "Why are most modern languages deliberately multi-paradigm rather than committed to a single style?"
+  ]
+ },
+ {
+  "code": "10.3.25",
+  "title": "Modern paradigms and the evolution of the object-oriented approach (SOLID, Clean Code, DDD)",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Why OOP practice evolved beyond raw inheritance and encapsulation.",
+   "The five SOLID principles and what each prevents.",
+   "Clean Code: readability, naming, small functions and low duplication.",
+   "Domain-Driven Design: modelling software around the business domain.",
+   "How these ideas fit together in modern professional development."
+  ],
+  "body": [
+   "Object-oriented programming matured over decades, and experience revealed that classes, inheritance and encapsulation alone do not guarantee good software. Large systems built with careless object-oriented code became just as tangled as procedural ones. In response, the community developed principles and practices, most notably SOLID, Clean Code and Domain-Driven Design, that describe how to apply object-oriented tools well rather than merely correctly.",
+   "SOLID is an acronym for five design principles that together aim to make object-oriented systems easier to change. They are not laws but guidelines distilled from painful experience, and each one addresses a specific way that designs tend to rot. Learning them gives a developer a shared vocabulary for discussing why one design is more maintainable than another.",
+   "The single-responsibility principle states that a class should have only one reason to change. When a class does several unrelated things, a change to one concern risks breaking the others, and the class becomes a bottleneck that many developers must edit at once. Keeping each class focused on one responsibility limits the reach of any change and keeps the code understandable.",
+   "The open-closed principle states that software entities should be open for extension but closed for modification. New behaviour should be added by writing new code, typically a new subclass or a new implementation of an interface, rather than by editing existing, tested code. Polymorphism is the usual mechanism: a system that dispatches through an interface can gain new variants without the calling code being touched.",
+   "The Liskov substitution principle states that objects of a subclass must be usable anywhere the base class is expected without breaking the program. If a subclass weakens a guarantee its base makes, for instance a Square subclass that violates behaviour code expected of a Rectangle, then polymorphism becomes a trap. This principle keeps inheritance honest and is the deeper reason behind the advice to favour composition when a true 'is-a' relationship does not hold.",
+   "The interface-segregation principle states that clients should not be forced to depend on methods they do not use. A large, general interface should be split into smaller, role-specific ones, so that each class implements only what is relevant to it. This keeps implementations focused and prevents the ripple of changes that occurs when an oversized interface is altered.",
+   "The dependency-inversion principle states that high-level modules should not depend on low-level modules; both should depend on abstractions. Instead of a business rule calling a specific database class directly, it should call an interface, and the concrete database implementation is supplied from outside, often through dependency injection. This inversion decouples policy from detail and is what makes code testable and adaptable.",
+   "Clean Code, popularised by Robert Martin, shifts attention from architecture to the craft of writing code that humans can read. Its core claim is that code is read far more often than it is written, so clarity is a first-class goal. Practices include choosing intention-revealing names, keeping functions short and doing one thing, minimising the number of arguments, avoiding duplication, and writing comments only where the code cannot explain itself.",
+   "Clean Code also stresses that tests are part of the codebase and deserve the same care as production code, and that small, continuous refactoring keeps a system healthy. The 'boy scout rule', leave the code cleaner than you found it, captures the attitude: quality is maintained by many small improvements rather than by occasional heroic rewrites. These habits complement SOLID by ensuring that well-structured designs are also easy to read line by line.",
+   "Domain-Driven Design, introduced by Eric Evans, addresses the largest scale: how to model complex business domains in software. Its central idea is the ubiquitous language, a shared vocabulary used identically by developers and domain experts and reflected directly in the code, so that a class named Shipment or Policy means exactly what the business means. This alignment reduces the costly translation errors that occur when technical and business people use different words.",
+   "DDD supplies tactical patterns that build on object-oriented concepts: entities that have identity over time, value objects that are defined only by their attributes, aggregates that group objects under a single consistency boundary, repositories that hide storage, and domain services for operations that do not belong to a single entity. It also introduces strategic patterns such as bounded contexts, which divide a large domain into parts, each with its own consistent model, so that huge systems remain comprehensible.",
+   "These three bodies of practice reinforce one another. SOLID shapes the relationships between classes, Clean Code governs the quality of the code that implements them, and DDD ensures that the whole structure faithfully models the business. A professional developer uses them together, applying judgement rather than dogma, because over-applying any principle, such as creating needless abstractions in the name of open-closed, can harm a design as much as ignoring it.",
+   "The broader lesson is that the object-oriented approach continues to evolve, absorbing ideas from functional programming, from agile practice and from decades of hard-won experience. The goal has remained constant even as the guidance has grown richer: to build software that can be understood and changed safely by teams over long periods, which is the true measure of quality in professional development.",
+   "Thus, SOLID, Clean Code and Domain-Driven Design represent the maturation of object-oriented practice from raw language features into disciplined design, readable craftsmanship and faithful domain modelling, and mastering them is what separates code that merely works today from code that a team can maintain for years."
+  ],
+  "questions": [
+   "Why were principles such as SOLID needed when object-oriented languages already provided classes and inheritance?",
+   "State the five SOLID principles and briefly explain what problem each one prevents.",
+   "What are the main ideas of Clean Code, and why does it treat readability as a primary goal?",
+   "What is the ubiquitous language in Domain-Driven Design, and why does it reduce errors?",
+   "How do entities, value objects, aggregates and bounded contexts help model a complex domain?"
+  ]
+ },
+ {
+  "code": "10.3.26",
+  "title": "Fundamentals of inheritance and its role in object-oriented programming",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of inheritance and the 'is-a' relationship.",
+   "Base and derived classes: inheriting fields and methods.",
+   "Overriding, extension and constructor chaining.",
+   "Inheritance as a vehicle for polymorphism and code reuse.",
+   "Access control and syntax of inheritance across languages."
+  ],
+  "body": [
+   "Inheritance is a mechanism by which a new class, called the derived or child class, acquires the fields and methods of an existing class, called the base or parent class, and may then add to or modify them. It expresses an 'is-a' relationship: if a Dog inherits from Animal, then every Dog is an Animal and automatically possesses whatever Animal defines. Inheritance is one of the three pillars of object-oriented programming, alongside encapsulation and polymorphism.",
+   "The immediate benefit is reuse. Behaviour and data that are common to a family of related types can be written once in a base class and shared by all its descendants, rather than being copied into each. If several kinds of employees all have a name and an identifier and a method to display them, those members can live in an Employee base class and be inherited by Manager, Engineer and Salesperson without duplication.",
+   "A derived class receives the accessible members of its base and can use them as if they were its own. In Java the keyword extends establishes the relationship, in C# it is a colon, and in C++ it is a colon with an access specifier such as public. Python lists the base class in parentheses after the class name. Despite the syntactic differences, the meaning is the same: the child begins with everything the parent offers and builds upon it.",
+   "The child can extend the parent in two ways. It may add entirely new members that the parent does not have, specialising the type with extra state and behaviour, and it may override inherited methods, replacing the parent's implementation with its own. Overriding is what lets a Circle and a Square each provide their own area calculation while both being treated as Shapes, and it is the foundation on which polymorphism is built.",
+   "Overriding must be distinguished from overloading and from hiding. Overriding replaces a base method with a new implementation that has the same signature, and it is resolved at run time by the actual type of the object. C# and C++ require the base method to be marked virtual and the override to be marked accordingly, while Java makes methods overridable by default and offers the @Override annotation as a safeguard. Getting these markers right is essential, or a method may hide rather than override, producing subtle bugs.",
+   "Construction in an inheritance hierarchy follows a chain. When a derived object is created, the base class part must be initialised first, so the base constructor runs before the derived constructor's body. Languages provide a way to pass arguments up this chain, super(...) in Java, base(...) in C#, and an initialiser list in C++. Understanding constructor chaining prevents the common error of a partially initialised base class.",
+   "Inheritance and polymorphism are tightly linked, and this link is where inheritance earns its central place in OOP. Because a Dog is an Animal, a variable of type Animal may refer to a Dog, and calling a virtual method on that variable runs the Dog's version. This lets code be written against the general base type while behaving correctly for each specific subtype, so new subtypes can be added without changing the code that uses them.",
+   "Access control interacts closely with inheritance. Members marked private are inherited but not directly accessible in the child, which preserves the parent's encapsulation. A special protected level exists precisely for inheritance: protected members are hidden from unrelated code but available to derived classes. Choosing between private and protected is a design decision about how much of a base class its descendants are allowed to rely on.",
+   "Languages differ in how many parents a class may have. Java, C# and Python (for classes) largely follow single inheritance of implementation, allowing one base class but many interfaces, which keeps hierarchies simple. C++ permits multiple inheritance, letting a class derive from several bases, which is powerful for combining independent capabilities but introduces the diamond problem when two paths lead back to a common ancestor, addressed with virtual inheritance.",
+   "It is important to see inheritance as one tool among several for reuse, not the only one. Composition, in which an object holds and delegates to other objects, achieves reuse through a 'has-a' relationship and is often more flexible because it can be changed at run time and does not lock a class into a rigid hierarchy. The mature guideline 'favour composition over inheritance' warns against reaching for inheritance whenever any code seems shareable.",
+   "The chief danger of inheritance is that it creates a strong, permanent coupling between parent and child. The child depends on the parent's internal behaviour, so a change to the base class can silently break every subclass, a problem known as the fragile base class. For this reason inheritance is best reserved for genuine, stable 'is-a' relationships where the subclass truly can substitute for the base in every context, satisfying the Liskov substitution principle.",
+   "Used well, inheritance produces clear, extensible designs: a well-chosen base class captures a real abstraction, its subclasses represent honest specialisations, and polymorphism lets the whole family be handled uniformly. Used carelessly, to share incidental code or to model 'has-a' as 'is-a', it produces brittle hierarchies that are hard to change. Judgement about when the 'is-a' relationship genuinely holds is the key skill.",
+   "Thus, inheritance lets a derived class acquire and extend the members of a base class to express an 'is-a' relationship, providing both code reuse and the substitutability that powers polymorphism, and it must be applied only where a true, stable specialisation exists to avoid the tight coupling and fragility that misuse creates."
+  ],
+  "questions": [
+   "What relationship does inheritance express, and what does a derived class acquire from its base class?",
+   "What is the difference between adding new members and overriding inherited methods in a derived class?",
+   "Why must a base class constructor run before the derived constructor, and how is data passed up the chain?",
+   "How does inheritance enable polymorphism through a base-class reference to a derived object?",
+   "Why is the guideline 'favour composition over inheritance' given, and when is inheritance nonetheless the right choice?"
+  ]
+ },
+ {
+  "code": "10.3.27",
+  "title": "Ancestor and descendant classes: the inheritance hierarchy",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Ancestors, descendants and the tree structure of a class hierarchy.",
+   "Single versus multiple inheritance and the diamond problem.",
+   "Abstract classes and the root of a hierarchy.",
+   "Method resolution order and how calls travel up the hierarchy.",
+   "Designing shallow, meaningful hierarchies rather than deep ones."
+  ],
+  "body": [
+   "An inheritance hierarchy is the structure formed when classes inherit from one another across several levels. A class that another derives from is an ancestor; a class that derives from another is a descendant. Just as a family tree links generations, a class hierarchy links a general concept at the top to increasingly specific concepts below it, and a descendant inherits from every ancestor along the path back to the root, not only from its immediate parent.",
+   "Consider a hierarchy in which Vehicle is the base, LandVehicle and WaterVehicle derive from it, and Car and Truck derive from LandVehicle. Here Car's direct parent is LandVehicle, but its ancestors also include Vehicle, so a Car is simultaneously a LandVehicle and a Vehicle. Every member defined anywhere along that ancestral chain is available to Car unless access rules forbid it, which is how general behaviour accumulates from the top down.",
+   "In most mainstream languages the hierarchy of classes is a tree, because each class has exactly one direct parent. Java, C# and Python's class model use single inheritance of implementation, giving a clean tree in which there is one unambiguous path from any class up to the root. This simplicity makes reasoning about which method will run much easier, which is a major reason those languages chose single inheritance.",
+   "C++ allows a class to have several direct parents, turning the hierarchy from a tree into a more general graph. This multiple inheritance can be useful for combining independent capabilities, but it introduces the diamond problem: if class D inherits from both B and C, and both B and C inherit from a common base A, then D could receive two copies of A's members and it becomes ambiguous which to use. C++ resolves this with virtual inheritance, which ensures a single shared copy of the common ancestor.",
+   "Languages that forbid multiple inheritance of classes still allow a class to implement several interfaces, which provides much of the benefit without the ambiguity. An interface declares behaviour but usually no state, so implementing many interfaces cannot produce conflicting copies of fields. This is why a Java class can be a single kind of thing in its class hierarchy yet fulfil many roles through interfaces, a clean compromise between flexibility and simplicity.",
+   "Near the top of many hierarchies sit abstract classes, which define a common interface and perhaps some shared implementation but cannot themselves be instantiated. An abstract Shape class might declare an abstract area method that every concrete subclass must implement, while providing a concrete method to describe itself. Abstract classes let a hierarchy express 'every shape has an area, but there is no such thing as a generic shape object', capturing an abstraction precisely.",
+   "Some languages give every class a single ultimate ancestor. In Java and C# that root is Object, from which all classes descend, so every object shares a small set of universal methods such as toString or ToString and equals or Equals. A single-rooted hierarchy guarantees that any object can be treated in a minimal common way, which underpins general-purpose collections and reflection. C++, by contrast, has no universal base class.",
+   "When a method is called, the runtime searches the hierarchy to find the implementation to use, a process governed by the method resolution order. In single-inheritance languages the search is simple: start at the object's actual class and move up through its ancestors until a matching method is found. Python, which permits multiple inheritance, uses a defined algorithm called the C3 linearisation to produce a consistent order even when the hierarchy is a graph.",
+   "This upward search is also how a subclass can build on its parent rather than replacing it entirely. By calling super in Java or Python, or base in C#, an overriding method can invoke the ancestor's version and then add its own work. This cooperative overriding lets each level of the hierarchy contribute its part, for example a base save method persisting common fields and a subclass extending it to persist additional ones.",
+   "Designing a hierarchy well is as important as understanding how it behaves. A good hierarchy is usually shallow and broad rather than deep and narrow, because every additional level increases coupling and makes the behaviour of the leaf classes harder to predict. Deep hierarchies, where a class inherits through five or six ancestors, are notoriously difficult to understand and change, and are often a sign that composition would have served better.",
+   "Each level of a hierarchy should represent a genuine, meaningful specialisation, and every descendant should honestly be substitutable for its ancestors. If a proposed subclass would have to disable or contradict inherited behaviour, the hierarchy is wrong and should be restructured. The Liskov substitution principle is the test: a descendant must be usable wherever any of its ancestors is expected, without surprising the code that relies on the ancestor's contract.",
+   "In practice, hierarchies evolve, and refactoring them is normal. Common behaviour discovered across sibling classes may be pulled up into a shared ancestor, and behaviour that turns out to belong to only some descendants may be pushed down. Keeping a hierarchy meaningful over time requires the same care as designing it initially, and modern tools support these 'pull up' and 'push down' refactorings directly.",
+   "Thus, an inheritance hierarchy arranges classes from general ancestors to specific descendants, with single inheritance forming a clean tree and multiple inheritance a more complex graph that risks the diamond problem; understanding how calls resolve up the hierarchy, and keeping it shallow, meaningful and substitutable, is essential to designing hierarchies that remain clear and maintainable."
+  ],
+  "questions": [
+   "What is the difference between an ancestor and a descendant class, and what does a descendant inherit along its ancestral chain?",
+   "What is the diamond problem, why does it arise under multiple inheritance, and how does C++ address it?",
+   "How do interfaces let single-inheritance languages gain flexibility without the diamond problem?",
+   "What is an abstract class, and why can it not be instantiated?",
+   "Why are shallow hierarchies generally preferred over deep ones, and what test decides whether a subclass belongs in a hierarchy?"
+  ]
+ },
+ {
+  "code": "10.3.28",
+  "title": "Advantages and disadvantages of inheritance in program development",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The advantages: reuse, polymorphism, extensibility and clear modelling.",
+   "The disadvantages: tight coupling and the fragile base class problem.",
+   "Inheritance breaking encapsulation and creating rigid hierarchies.",
+   "Composition as an alternative and the guideline to favour it.",
+   "Practical criteria for deciding when to use inheritance."
+  ],
+  "body": [
+   "Inheritance is a powerful feature, but like every powerful tool it brings both real benefits and real dangers. A competent developer must be able to weigh them, because the decision to use inheritance is one of the most consequential in object-oriented design, shaping how a system can grow and how safely it can be changed for years afterwards. This lesson examines both sides so that the choice can be made deliberately.",
+   "The first and most obvious advantage is code reuse. Members common to a family of types are written once in a base class and inherited by all descendants, eliminating duplication and its attendant risk that copies drift out of step. When a shared behaviour must be corrected, fixing it in the base class corrects it everywhere at once, which is far safer than editing many near-identical copies scattered through the codebase.",
+   "The second advantage is polymorphism. Because a descendant is a kind of its ancestor, code written against the ancestor type automatically works with every descendant, and virtual dispatch selects the right behaviour at run time. This is what makes systems extensible: new subtypes can be introduced and existing code will use them without modification, satisfying the open-closed principle and letting a program grow gracefully.",
+   "The third advantage is clear modelling. When a problem genuinely contains an 'is-a' hierarchy, such as different kinds of accounts or shapes or documents, inheritance lets the code mirror that structure directly, so the design reads like the domain it represents. A hierarchy that reflects real relationships makes the program easier to understand for anyone who knows the problem area.",
+   "Against these benefits stand serious disadvantages, the first being tight coupling between ancestor and descendant. A subclass depends not only on its parent's public interface but often on its internal behaviour, so the two are bound together far more tightly than two collaborating but independent classes. This coupling is permanent and cannot be reconfigured at run time, which limits flexibility.",
+   "This coupling leads directly to the fragile base class problem. A seemingly harmless change to a base class, such as altering the order in which it calls its own methods, can silently break subclasses that relied on the old behaviour, even though those subclasses were not touched. In a large hierarchy the author of a base class cannot easily know how every descendant depends on it, so changes become risky and are made timidly, which slows the system's evolution.",
+   "Inheritance can also weaken encapsulation. To let subclasses build on it, a base class often exposes protected members, revealing more of its internals than a purely public interface would. Descendants then depend on those exposed details, so the base class loses the freedom to change them. In effect, inheritance opens a second, wider interface aimed at subclasses, and that interface is easy to leak too much through.",
+   "A further disadvantage is rigidity. A class's place in a hierarchy is fixed at compile time and a single-inheritance language allows only one parent, so if an object needs to combine capabilities from two unrelated hierarchies, inheritance cannot express it directly. Deep hierarchies compound the problem, because the behaviour of a leaf class is scattered across many ancestors and becomes hard to trace and to change.",
+   "Misusing inheritance to share incidental code is a common and damaging error. When a class inherits from another merely because it happens to contain useful code, rather than because it is genuinely a kind of that class, the 'is-a' relationship is false. Such misuse violates the Liskov substitution principle, produces surprising behaviour when the subclass is used where the base is expected, and creates coupling with no conceptual justification.",
+   "The principal alternative is composition, in which a class holds instances of other classes as fields and delegates work to them, expressing a 'has-a' relationship. Composition avoids the fragile base class problem because the enclosing class depends only on the public interfaces of its parts, and it is more flexible because the parts can be swapped, even at run time, and combined freely from any source. This is why the well-known guideline advises developers to favour composition over inheritance.",
+   "Composition is not free of cost either: it can require more code, since the enclosing class must forward calls to its parts, and it does not by itself provide the automatic subtype polymorphism that inheritance gives. The modern answer is to combine composition with interfaces: a class implements an interface for polymorphism and composes helper objects for reuse, gaining flexibility and substitutability without the tight coupling of implementation inheritance.",
+   "In practice a developer can apply clear criteria. Use inheritance only when there is a true, stable 'is-a' relationship, when the subclass can substitute for the base everywhere without surprises, and when the base class was designed to be extended. Prefer composition when the relationship is 'has-a' or 'is-implemented-using', when behaviour must be combined from several sources, or when flexibility to change collaborators at run time is valuable. Applying these tests turns the choice from habit into engineering.",
+   "Thus, inheritance offers genuine advantages of reuse, polymorphism and faithful modelling, but it carries the costs of tight coupling, fragile base classes, weakened encapsulation and rigidity; a skilled developer uses it only for true, stable 'is-a' relationships and otherwise favours composition with interfaces, choosing deliberately rather than by reflex."
+  ],
+  "questions": [
+   "What are the main advantages of inheritance for reuse, polymorphism and modelling?",
+   "What is the fragile base class problem, and how does tight coupling between parent and child cause it?",
+   "In what way can inheritance weaken the encapsulation of a base class?",
+   "Why does misusing inheritance to share incidental code violate the Liskov substitution principle?",
+   "What criteria help a developer decide between inheritance and composition for a given relationship?"
+  ]
+ }
+]

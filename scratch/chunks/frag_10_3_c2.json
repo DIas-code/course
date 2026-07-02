@@ -1,0 +1,91 @@
+{
+ "lo_id": "10.3",
+ "chunk": 2,
+ "out_file": "umkd_gen/frag_10_3_c2.json",
+ "topics": [
+  {
+   "pos": 15,
+   "title_ru": "Утечки памяти и их предотвращение.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 16,
+   "title_ru": "Типизация данных и её значение в ООП.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 17,
+   "title_ru": "Сильная и слабая типизация.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 18,
+   "title_ru": "Переменные и их типы в языках программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 19,
+   "title_ru": "Контроль типов и проверка типов данных.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 20,
+   "title_ru": "Динамическая типизация и позднее связывание.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 21,
+   "title_ru": "Обобщенное программирование и шаблоны.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 22,
+   "title_ru": "Объекты и классы в различных языках программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 23,
+   "title_ru": "Проектирование классов и объектов в разработке ПО.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 24,
+   "title_ru": "Сравнение ООП, функционального и процедурного программирования",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 25,
+   "title_ru": "Современные парадигмы и развитие объектно-ориентированного подхода (SOLID, Clean Code, DDD)",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 26,
+   "title_ru": "Основы наследования и его роль в объектно-ориентированном программировании.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 27,
+   "title_ru": "Классы-предки и классы-потомки: иерархия наследования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 28,
+   "title_ru": "Преимущества и недостатки наследования в разработке программ.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

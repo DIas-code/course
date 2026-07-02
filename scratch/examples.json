@@ -1,0 +1,90 @@
+{
+ "lecture_example": {
+  "code": "1.1",
+  "title": "Fundamentals of electrical safety",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of electrical safety and the effect of electric current on the human body.",
+   "Factors that determine the severity of electric shock.",
+   "Classification of premises by the degree of electric-shock hazard.",
+   "Basic protective measures: earthing, insulation, RCD and personal protective equipment."
+  ],
+  "body": [
+   "Electrical safety is a system of organizational and technical measures and means that protect people from the harmful and dangerous effects of electric current, electric arc, electromagnetic field and static electricity. For an information-systems technician, electrical safety is a basic professional competency, because all work with computer and server equipment is connected with the operation of devices powered by mains voltage.",
+   "Electric current passing through the human body produces thermal, electrolytic, mechanical and biological effects. The thermal effect causes burns of the skin and internal tissues; the electrolytic effect decomposes blood and other body fluids; the mechanical effect leads to ruptures of tissues; and the biological effect disturbs the work of the nervous system, the heart and the respiratory organs.",
+   "The severity of an electric shock depends on a number of factors: the magnitude of the current, the type and frequency of the current, the duration of its action, the path of the current through the body, and the individual physiological state of the person. The current value is considered the main factor. A current of about 1 mA is the threshold of perception; a current of 10–15 mA is the threshold of non-let-go, at which a person can no longer release the current-carrying part on their own; a current of 100 mA and above is, as a rule, fatal.",
+   "The voltage and the resistance of the human body determine the value of the current according to Ohm's law. The resistance of the body is not constant: it depends on the condition of the skin (dry or wet), the area and tightness of contact, and the duration of the current. Damp skin, sweat and metal jewellery sharply reduce resistance and increase the danger.",
+   "Alternating current of industrial frequency (50 Hz) is more dangerous for a person than direct current of the same value, because it causes more severe muscle contractions and is more likely to cause fibrillation of the heart. With increasing frequency the danger of electric shock decreases, but the danger of burns remains.",
+   "The path of the current through the body is of great importance. The most dangerous paths are those in which the current passes through the heart and respiratory organs — for example, 'hand–hand' and 'hand–legs'. Such loops cover the vital organs and most often lead to a fatal outcome.",
+   "According to the degree of danger of electric shock, all premises are divided into three classes. Premises without increased danger have no factors that increase the risk. Premises with increased danger are characterized by one of the following factors: dampness, conductive dust, conductive floors, high temperature, or the possibility of simultaneous contact with the earthed metal parts of equipment and the metal housings of electrical devices. Especially dangerous premises are characterized by two or more such factors at the same time, or by a chemically active environment.",
+   "Most computer classrooms and server rooms belong to the category of premises without increased danger or with increased danger, depending on the conditions. The technician must be able to determine the class of a room, because the permissible voltages of portable lamps and tools and the requirements for protective measures depend on it.",
+   "The main collective protective measures against electric shock include protective earthing, protective neutral bonding (zeroing), protective disconnection (RCD), the use of low (safe) voltage, electrical separation of networks, insulation of current-carrying parts, fencing and signalling, and safety signs.",
+   "Protective earthing is an intentional electrical connection of the metal non-current-carrying parts of equipment, which may become energized, to the earth or its equivalent. In the event of a breakdown of the insulation, the earthing reduces the touch voltage to a safe value and ensures that the protection operates.",
+   "A residual current device (RCD) continuously compares the current flowing into a load with the current returning from it. If a leakage (residual) current appears — for example, because a person touched a faulty housing — the RCD detects the difference and disconnects the supply within tens of milliseconds, preventing dangerous consequences.",
+   "Personal protective equipment is used when collective measures cannot fully eliminate the danger. Basic electrical-protective equipment (dielectric gloves, insulating tools, voltage indicators) can withstand the operating voltage of the installation and allows work on live parts. Additional equipment (dielectric galoshes, mats, insulating stands) by itself does not provide protection but reinforces the action of the basic equipment.",
+   "When servicing computer equipment, the technician must always de-energize the device before opening the case, check the absence of voltage, discharge capacitors of power supplies and monitors, use a serviceable, earthed tool, and never work on a live installation alone. Compliance with these rules is the foundation of safe professional activity.",
+   "Thus, electrical safety combines knowledge of the physical action of current on the body, the ability to assess the danger of a particular room and operation, and the practical mastery of protective measures and equipment. These skills are mandatory for everyone who maintains and repairs computer and office equipment."
+  ],
+  "questions": [
+   "What types of effects does electric current have on the human body?",
+   "Which factors determine the severity of an electric shock, and why is the magnitude of the current considered the main one?",
+   "Into which classes are premises divided according to the degree of electric-shock danger, and by what features?",
+   "How do protective earthing and a residual current device (RCD) protect a person?",
+   "What is the difference between basic and additional personal electrical-protective equipment?"
+  ]
+ },
+ "practical_example": {
+  "code": "1.5",
+  "title": "Prevention and treatment of occupational diseases among IT specialists",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in identifying the risk factors of occupational diseases of IT specialists and in developing a set of preventive measures for a specific workplace.",
+  "theory": [
+   "Prolonged work at a computer is associated with a number of harmful factors that can lead to occupational and work-related diseases. The main groups of such diseases are visual disorders (computer vision syndrome), diseases of the musculoskeletal system (osteochondrosis, carpal tunnel syndrome), and neuro-emotional and cardiovascular disorders caused by stress and a sedentary lifestyle.",
+   "Computer vision syndrome manifests itself as eye fatigue, dryness, redness, blurred vision and headache. It is caused by the prolonged focusing of the eyes on the screen, insufficient blinking, glare and incorrect placement of the monitor. Carpal tunnel syndrome is caused by the monotonous load on the hand when working with the keyboard and the mouse.",
+   "Prevention of occupational diseases is based on the organization of the workplace according to ergonomic requirements, on the observance of the work-and-rest regime with regulated breaks, on performing gymnastics for the eyes and the body, and on maintaining physical activity outside working hours."
+  ],
+  "materials": [
+   "A computer workstation (desk, chair, monitor, keyboard, mouse).",
+   "A measuring tape and a level for assessing the geometry of the workplace.",
+   "A lux meter (or a smartphone application) for assessing illumination.",
+   "An assessment checklist and report form."
+  ],
+  "procedure": [
+   "Study the main occupational diseases of IT specialists and the factors that cause them; fill in a table 'factor – disease – preventive measure'.",
+   "Examine the provided (or your own) workstation and assess its conformity with ergonomic requirements: the height of the desk and chair, the placement of the monitor, the position of the keyboard and the mouse.",
+   "Measure the illumination of the working surface with a lux meter and compare the result with the recommended value of 300–500 lux.",
+   "Perform a set of exercises for the eyes and for the musculoskeletal system, and describe in the report how often and at what intervals they should be carried out.",
+   "Develop a regulated work-and-rest regime for an IT specialist, indicating the duration of continuous work and the frequency and duration of breaks.",
+   "Formulate a list of recommendations for the prevention of occupational diseases for the examined workplace."
+  ],
+  "tasks": [
+   "Compile a table of at least five occupational diseases of IT specialists with their causes and methods of prevention.",
+   "Prepare a memo 'Workplace gymnastics for an IT specialist' with a description of exercises for the eyes, hands, neck and back.",
+   "Propose measures to bring the examined workplace into conformity with ergonomic requirements."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of identifying the risk factors of occupational diseases and of developing a comprehensive program for their prevention at the workplace of an IT specialist.",
+  "questions": [
+   "What are the main occupational diseases that arise from prolonged work at a computer?",
+   "What causes computer vision syndrome and how can it be prevented?",
+   "What ergonomic measures help to prevent diseases of the musculoskeletal system?",
+   "What work-and-rest regime is recommended when working at a computer?",
+   "What exercises are included in workplace gymnastics for an IT specialist?"
+  ]
+ },
+ "glossary_sample": [
+  [
+   "Earthing (grounding)",
+   "Intentional electrical connection of equipment housings to the ground, used to protect people from electric shock if the insulation fails."
+  ],
+  [
+   "Electrical safety",
+   "A system of organizational and technical measures and means that protect people from the harmful and dangerous effects of electric current, electric arc and static electricity."
+  ],
+  [
+   "ESD (electrostatic discharge)",
+   "A sudden flow of electricity between two charged objects; it is one of the main causes of latent damage to electronic components."
+  ]
+ ]
+}

@@ -1,0 +1,409 @@
+[
+ {
+  "code": "10.3.56",
+  "title": "Developing test scenarios and unit tests for debugging",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The relationship between testing and debugging: tests as a diagnostic instrument.",
+   "Anatomy of a unit test and the Arrange-Act-Assert pattern.",
+   "Designing test scenarios from a defect report and reproducing a bug as a failing test.",
+   "Boundary values, equivalence classes and negative scenarios.",
+   "Regression tests and test-driven debugging."
+  ],
+  "body": [
+   "Testing and debugging are two closely connected but distinct activities. Testing answers the question 'does the program behave as required?' by executing it against known inputs and comparing the observed result with the expected one. Debugging answers the question 'why does the program not behave as required?' by locating and correcting the specific defect. A well-written test does not fix anything by itself, but it turns a vague complaint about wrong behaviour into a precise, repeatable signal that points the developer toward the fault.",
+   "A unit test is a small, automated program that exercises one unit of code — usually a single function, method or class — in isolation from the rest of the system. Because the unit is tested alone, a failing unit test localizes the defect far more sharply than a report about the whole application failing. This localization is exactly what makes unit tests such a powerful debugging aid: the smaller the tested unit, the smaller the region of code in which the bug can hide.",
+   "The classical structure of a unit test follows the Arrange-Act-Assert pattern. In the Arrange step the test prepares the input data and the object under test; in the Act step it calls the method being verified; in the Assert step it checks that the returned value or the resulting state matches the expectation. For example, a test for a function divide(a, b) would arrange a = 10 and b = 2, act by calling result = divide(10, 2), and assert that result == 5. Keeping these three phases visually separate makes the intent of every test obvious.",
+   "The most effective debugging technique offered by testing is to reproduce a reported bug as a failing test before touching the production code. Suppose users report that an order total is computed incorrectly when a discount coupon is applied. The developer writes a test that arranges an order with that coupon, acts by computing the total, and asserts the correct amount. The test fails, confirming that the bug has been captured. Only after this failing test exists does the developer begin to fix the code; when the test turns green, the fix is proven and the bug can never silently return unnoticed.",
+   "Good test scenarios are derived systematically rather than invented at random. The technique of equivalence partitioning divides the input space into classes that the program is expected to treat the same way, so that testing one representative value from each class gives broad coverage with few tests. For a function that validates an age between 18 and 65, the classes are 'below 18', 'within range' and 'above 65'.",
+   "Boundary-value analysis complements equivalence partitioning by focusing on the edges of these classes, because defects cluster at boundaries. For the age example, the critical values are 17, 18, 65 and 66. Off-by-one errors — using '<' where '<=' was intended — are among the most common defects in all software, and boundary tests catch them directly.",
+   "Negative scenarios verify that the program behaves correctly when given invalid or unexpected input. A robust function must not only return the right answer for valid data but also reject nulls, empty strings, negative counts and out-of-range values in a defined way, whether by throwing an exception or returning an error code. Many production bugs are in fact missing negative-path handling, so tests that deliberately supply bad input often expose the deepest defects.",
+   "Test scenarios should also cover state and sequence, not only single calls. A shopping cart that behaves correctly when one item is added may fail when the same item is added twice, or when an item is added and then removed to leave an empty cart. Scenario tests that model realistic sequences of operations reproduce the interaction bugs that isolated single-call tests miss.",
+   "A regression test is a test that guards previously correct behaviour against being broken by future changes. Every bug that is fixed should leave behind a regression test that would fail if the bug reappeared. Over time the accumulated suite becomes an executable specification of everything the system is known to do correctly, and running it after each change gives the developer confidence that a fix in one place has not damaged something elsewhere.",
+   "Test doubles — stubs, mocks and fakes — allow a unit to be tested even when it depends on slow, unpredictable or unavailable collaborators such as a database, a network service or the system clock. A stub returns a fixed canned answer; a mock additionally records how it was called so the test can assert on the interaction; a fake is a lightweight working implementation, such as an in-memory database. By replacing real dependencies with doubles, the test isolates the unit and makes failures deterministic and reproducible.",
+   "Meaningful assertion messages turn a failing test into a debugging report. Instead of a bare assertEquals(expected, actual), a message such as 'discounted total for coupon SAVE10 should be 90 but was 100' tells the developer immediately what scenario failed and by how much. Descriptive test names that state the scenario and the expected outcome, such as should_apply_ten_percent_discount_for_valid_coupon, serve the same purpose at the level of the whole test.",
+   "It is important not to confuse coverage with correctness. A high line-coverage percentage means only that most statements were executed at least once, not that their behaviour was actually verified. A test that runs code but asserts nothing gives false confidence. During debugging, the developer should measure whether the failing path is covered by an assertion, and add scenarios until the defective behaviour is genuinely pinned down.",
+   "Unit tests must be fast, independent and repeatable. Tests that depend on the order in which they run, on leftover data from a previous test, or on the current date will fail intermittently and become worse than useless, because developers learn to ignore them. Each test should set up its own state, clean up after itself, and produce the same result every time it is run in isolation. This discipline is what makes the suite trustworthy as a debugging tool.",
+   "In the workflow known as test-driven debugging, the failing test drives the entire investigation. The developer runs the test under the debugger, sets a breakpoint at the point of failure, inspects the state that the Arrange step created, and steps through the Act step until the moment the actual result diverges from the expected one. Because the scenario is fully automated, this cycle can be repeated instantly after every code change, dramatically shortening the loop between hypothesis and confirmation.",
+   "Thus, developing precise test scenarios and unit tests transforms debugging from an unstructured hunt into a disciplined, repeatable process: the bug is first captured as a failing test, then localized through isolation and boundary analysis, then fixed until the test passes, and finally frozen as a regression test that protects the correction forever."
+  ],
+  "questions": [
+   "How do testing and debugging differ, and how does a unit test help to localize a defect?",
+   "Describe the Arrange-Act-Assert structure of a unit test using a concrete example.",
+   "Why should a reported bug be reproduced as a failing test before the code is fixed?",
+   "What are equivalence partitioning and boundary-value analysis, and what kinds of defects do they reveal?",
+   "What is a regression test, and why must tests be fast, independent and repeatable?"
+  ]
+ },
+ {
+  "code": "10.3.57",
+  "title": "Tips and practices for organizing an effective debugging process",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Debugging as a scientific method: observe, hypothesize, test, conclude.",
+   "Reliable reproduction and reduction to a minimal example.",
+   "Systematic localization: binary search, bisection and logging.",
+   "Common cognitive traps and how to avoid them.",
+   "Fix verification, root-cause analysis and prevention."
+  ],
+  "body": [
+   "Effective debugging is not a matter of talent or luck but of method. The most productive developers approach a defect the way a scientist approaches an unexplained phenomenon: they observe the symptom carefully, form a specific hypothesis about the cause, design an experiment that would confirm or refute that hypothesis, and draw a conclusion from the result. Each cycle narrows the space of possible causes until the true fault is isolated. Undisciplined 'changing things until it works' is slower and, worse, often masks the real defect rather than removing it.",
+   "The first practical rule is that a bug must be reproduced before it can be fixed. A defect that cannot be triggered reliably cannot be studied, and a fix for it cannot be verified. The developer should determine the exact input, configuration, environment and sequence of actions that make the bug appear every time. Writing this reproduction down — as a script, a failing test or a numbered list of steps — protects against the frustrating situation where the bug 'disappears' and later returns unexplained.",
+   "Once the bug reproduces, the next step is to reduce the situation to a minimal example. The developer removes everything that is not necessary to trigger the fault: unrelated features, extra data, additional modules. Each removal that leaves the bug intact shrinks the search space; each removal that makes the bug vanish points directly at the removed element. A minimal reproduction is both the fastest path to the cause and the clearest artefact to share with colleagues or attach to a bug report.",
+   "Systematic localization is the heart of debugging. The binary-search or bisection strategy repeatedly divides the suspect region in half: the developer checks the program state at a point roughly in the middle of the flow between 'known good' and 'known bad'. If the state is still correct there, the fault lies in the second half; if it is already wrong, the fault lies in the first half. A handful of such checks can pinpoint the exact line even in a very large body of code.",
+   "The same bisection idea applies to history through the tool git bisect. When a feature that used to work has broken, the developer marks a known-good old commit and a known-bad recent commit; the tool then checks out commits in between and asks whether each is good or bad, converging in logarithmic time on the exact commit that introduced the regression. Reading that single commit usually reveals the cause immediately.",
+   "Logging and tracing are indispensable when interactive debugging is impractical, for instance in production, in concurrent code, or in timing-sensitive systems where a breakpoint would distort behaviour. Well-placed log statements that record key variable values and the path taken through the code let the developer reconstruct what happened after the fact. Structured logs with levels, timestamps and correlation identifiers are far more useful than scattered print statements, and they can be left permanently in place at a low verbosity level.",
+   "A crucial discipline is to change only one thing at a time. When several modifications are made together and the behaviour changes, it is impossible to know which one was responsible, and a new bug may be introduced while chasing the old one. The developer should form one hypothesis, make the single change that tests it, observe the result, and record it before proceeding. This turns debugging into a controlled experiment rather than a gamble.",
+   "Reading the error message and the stack trace completely is a habit that saves enormous amounts of time. The exception type, its message and the top frames of the stack usually name the failing operation and the line, and often the immediate cause. Beginners frequently skim past this information and start guessing; experienced developers treat the stack trace as the primary clue and follow it from the point of failure back toward the origin of the bad data.",
+   "Several cognitive traps regularly mislead debuggers. Confirmation bias makes a developer see only evidence that supports a favourite theory; the antidote is to actively try to disprove the current hypothesis. The assumption that 'this part surely cannot be wrong' hides bugs in trusted code, in the standard library and in one's own recent change — so the guiding maxim is to question assumptions and verify rather than believe. Tunnel vision on one file blinds the developer to the possibility that the real cause is data, configuration or a different module entirely.",
+   "The technique known as rubber-duck debugging exploits the fact that explaining a problem out loud forces it into a coherent narrative. By describing the code line by line to a colleague — or even to an inanimate object — the developer is compelled to articulate assumptions that turn out to be false, and the contradiction that reveals the bug often surfaces mid-sentence. Stepping away for a short break has a similar effect, because fresh attention breaks a fixed but wrong mental model.",
+   "Managing the debugging session itself matters. The developer should keep a short written log of hypotheses tried and their outcomes, so that dead ends are not revisited and progress is visible. Timeboxing prevents unproductive fixation: if an hour of investigation yields nothing, it is often better to add more instrumentation, ask for help, or attack the problem from a completely different angle than to keep pushing the same failing approach.",
+   "A fix is not finished when the symptom disappears; it is finished when its correctness is verified and its root cause understood. The developer should confirm that the original reproduction no longer triggers the fault, run the surrounding tests to ensure nothing else broke, and consider whether the same underlying mistake exists elsewhere. Treating a symptom — for example, wrapping a crash in a broad catch that swallows the exception — while leaving the cause in place merely relocates the bug to a later, harder-to-find failure.",
+   "The final and most valuable practice is prevention. Every non-trivial bug should be captured as a regression test, and its root cause should prompt a small reflection: was there a missing validation, an unclear interface, an unsafe default, a gap in the tests? Feeding these lessons back into coding standards, code review checklists and automated linters gradually raises the quality of the whole codebase and reduces the number of future defects. Debugging is thus not only a repair activity but a source of continuous improvement.",
+   "Thus, an effective debugging process is a repeatable engineering discipline: reproduce the fault reliably, reduce it to a minimal case, localize it by systematic bisection and logging while changing one variable at a time, guard against cognitive bias, verify the fix against its reproduction, and finally convert the lesson learned into a test and a preventive practice."
+  ],
+  "questions": [
+   "Why is reliable reproduction a precondition for both studying and fixing a bug?",
+   "Explain how binary search and git bisect localize a defect in code and in history.",
+   "Why should a developer change only one thing at a time during debugging?",
+   "Name two cognitive traps in debugging and describe how to counter each of them.",
+   "What steps distinguish a truly finished fix from merely making the symptom disappear?"
+  ]
+ },
+ {
+  "code": "10.3.58",
+  "title": "Debugging in a team environment and collaborative development",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Why debugging changes when many developers share one codebase.",
+   "Version control, bisection and blame as collaborative diagnostic tools.",
+   "Reproducing bugs across different machines and environments.",
+   "Bug tracking, triage and communication of defects.",
+   "Pair debugging, code review and shared ownership of quality."
+  ],
+  "body": [
+   "In individual work the developer knows the whole codebase and every recent change, but in a team the code is written, modified and deployed by many people, often across different time zones and areas of expertise. This changes the nature of debugging: a defect may originate in code the current developer has never read, may depend on another team's service, and may only appear on a colleague's machine. Effective collaborative debugging therefore relies as much on communication and shared tooling as on technical skill.",
+   "Version control is the backbone of team debugging. A well-maintained history of small, focused commits with clear messages lets any developer understand what changed and why. When a regression appears, git bisect can identify the exact commit that introduced it even if dozens of contributors touched the code, and the commit's author and message immediately provide context. Large, mixed commits that bundle unrelated changes destroy this ability and make regressions far harder to trace.",
+   "The blame or annotate feature of a version-control system shows, line by line, which commit and author last modified each line. During debugging this answers the crucial question 'who wrote this and in what context?' — not to assign fault, but to find the person who holds the design knowledge behind a suspicious line and to read the reasoning recorded in the original commit. Used constructively, blame is a knowledge-routing tool, not an accusation.",
+   "A recurring difficulty in teams is the bug that appears on one machine but not another. The cause is almost always a difference in environment: library versions, operating system, configuration, locale, time zone, or leftover local data. Teams reduce these 'works on my machine' problems by pinning dependency versions in a lockfile, sharing a single reproducible environment through containers, and recording the exact steps and environment in the bug report so a colleague can recreate the conditions faithfully.",
+   "A shared bug-tracking system is essential once more than one person is involved. Each defect becomes a ticket that records the reproduction steps, expected and actual behaviour, environment, severity, and the current owner. This prevents bugs from being forgotten, avoids two developers fixing the same issue simultaneously, and creates a searchable history so that a recurring defect is recognized rather than re-investigated from scratch. A ticket also provides the single place where investigation notes and the eventual fix are linked.",
+   "Writing a good bug report is a professional skill in itself. A useful report separates fact from interpretation: it states exactly what was done, what was expected and what actually happened, includes the precise error message and stack trace, specifies the version and environment, and attaches a minimal reproduction. Vague reports such as 'the app is broken' waste hours; a precise report often lets another developer diagnose the problem without ever seeing the reporter's machine.",
+   "Triage is the process by which a team decides which bugs to address and in what order. Not every defect can be fixed immediately, so bugs are prioritized by severity — how badly they affect users — and by frequency and business impact. A crash affecting all users on login outranks a cosmetic misalignment seen rarely. Clear severity levels and a regular triage meeting keep the team focused on the defects that matter most and prevent the backlog from becoming an undifferentiated pile.",
+   "When a bug crosses module or team boundaries, the developer must resist the temptation to fix code they do not fully understand. The correct move is often to isolate the failing behaviour to a specific component and hand a clear, minimal reproduction to the team that owns it, while documenting the interaction. Debugging across a service boundary also requires correlation: a request identifier passed through logs of each service lets the team follow a single failing transaction across the whole distributed system.",
+   "Pair debugging is one of the most effective collaborative techniques. Two developers at one screen combine complementary knowledge and, more importantly, continuously challenge each other's assumptions, which is exactly what breaks the confirmation bias that traps a lone debugger. One person drives while the other observes, questions and suggests hypotheses; they trade roles as fresh ideas arise. Difficult, long-standing bugs are frequently solved in minutes once a second perspective is added.",
+   "Code review is debugging performed before the bug reaches users. A reviewer reading a change with fresh eyes catches off-by-one errors, missing null checks, unhandled edge cases and unclear logic that the author, immersed in the code, no longer sees. Reviews also spread knowledge across the team, so that fewer parts of the system are understood by only one person — a situation that would make future debugging depend on a single individual's availability.",
+   "Shared conventions dramatically reduce debugging friction. When the whole team follows the same formatting, naming, error-handling and logging standards, any member can read any file without first decoding a personal style, and automated linters and formatters catch a class of defects before they are ever committed. Continuous integration that runs the full test suite on every change ensures that a bug introduced by one developer is detected within minutes rather than surfacing days later in someone else's work.",
+   "A healthy team culture treats bugs as system problems rather than personal failures. Blameless post-mortems for serious defects ask 'what in our process allowed this to happen and how do we prevent it?' rather than 'whose fault was it?'. This encourages developers to report their own mistakes early, to share reproductions openly, and to invest in preventive measures such as tests and better interfaces, all of which make the whole team faster at both preventing and resolving defects.",
+   "Communication discipline ties everything together. When a developer is investigating a shared defect, a short status note on the ticket — what has been ruled out, what is still suspected, what help is needed — keeps others from duplicating work and invites relevant knowledge. When the fix lands, linking the commit to the ticket and adding a regression test closes the loop, so the team's collective memory of the defect and its resolution is permanently preserved.",
+   "Thus, debugging in a team is a socio-technical activity in which version control, bug tracking, reproducible environments and shared conventions provide the tooling, while clear bug reports, disciplined triage, pair debugging, code review and a blameless culture provide the human coordination that lets many developers diagnose and fix defects in a codebase none of them owns alone."
+  ],
+  "questions": [
+   "How do focused commits and git bisect support debugging in a large team?",
+   "What information must a good bug report contain, and why is precision so valuable?",
+   "Why do 'works on my machine' bugs occur, and how can a team reduce them?",
+   "What is triage, and on what basis are defects prioritized?",
+   "How do pair debugging and code review each reduce defects, and why is a blameless culture important?"
+  ]
+ },
+ {
+  "code": "10.3.59",
+  "title": "Debugging code that uses third-party libraries and frameworks",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in diagnosing defects in applications that depend on external libraries and frameworks, distinguishing bugs in one's own code from misuse of the library and from bugs in the library itself.",
+  "theory": [
+   "Modern applications are assembled from many third-party libraries and frameworks, so a large part of the code that runs is not written by the developer. When something fails, the defect may lie in the developer's own code, in the way the library is being used, in a version incompatibility between dependencies, or, less often, in the library itself. Effective debugging in this setting begins with correctly attributing the fault, because the fix is completely different in each case.",
+   "The most valuable resources for library debugging are the official documentation, the change log and the public issue tracker of the project. A stack trace that descends into library code should be read carefully: the boundary line where the trace crosses from the developer's own code into the library usually marks the point where the library received bad input or was called incorrectly. Enabling the library's own debug logging, reading its source (most open-source libraries ship readable source), and searching its issue tracker for the exact error message are standard techniques.",
+   "Dependency management is central. A lockfile that pins exact versions makes builds reproducible, and inspecting the resolved dependency tree reveals transitive conflicts, where two libraries require incompatible versions of a third. Many mysterious failures after an update are regressions introduced by a new library version, which the change log will document and which can be confirmed by temporarily downgrading."
+  ],
+  "materials": [
+   "A development machine with a language runtime and a package manager (for example npm, pip or Maven).",
+   "A small sample application that depends on at least one external library or framework.",
+   "An IDE or editor with a step debugger and the ability to step into library source.",
+   "Internet access to the libraries' documentation, change logs and issue trackers."
+  ],
+  "procedure": [
+   "Take the sample application, run it, and reproduce the reported failure, capturing the full stack trace and any library log output.",
+   "Read the stack trace and identify the exact frame where control passes from your own code into the library, forming a hypothesis about which side is at fault.",
+   "Inspect the resolved dependency tree with the package manager and note the exact versions of the failing library and its transitive dependencies.",
+   "Consult the library's documentation and change log for the relevant version, and search its issue tracker for the error message to see whether it is a known problem.",
+   "Use the debugger to step from your call into the library, inspecting the arguments you pass, to determine whether the input is valid and whether the library is being used as documented.",
+   "Apply the appropriate remedy — correct your usage, pin or change the dependency version, or add a workaround — then re-run to confirm the failure is gone and document the conclusion."
+  ],
+  "tasks": [
+   "Given an application that crashes inside a library call, determine from the stack trace and argument inspection whether the defect is in your own usage or in the library, and justify the conclusion in writing.",
+   "Reproduce a failure caused by upgrading a dependency, use the change log and version pinning to confirm the cause, and produce a corrected lockfile.",
+   "Find and resolve a transitive version conflict in the dependency tree, describing which two dependencies conflicted and how you resolved it."
+  ],
+  "conclusion": "As a result of the work, the student is able to diagnose failures in applications built on third-party libraries and frameworks, correctly attribute the fault, and resolve it through corrected usage or dependency management.",
+  "questions": [
+   "How can a stack trace help you decide whether a defect lies in your code or in a library?",
+   "What is a transitive dependency conflict, and how can it be detected and resolved?",
+   "Why are change logs and issue trackers important resources when debugging library-related failures?",
+   "What is the purpose of a lockfile, and how does it help reproduce and diagnose bugs?",
+   "What steps would you take before concluding that a bug is in the library rather than in your own code?"
+  ]
+ },
+ {
+  "code": "10.3.60",
+  "title": "Failure scenarios and reproducing problems for debugging",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in constructing failure scenarios and in achieving reliable, minimal reproduction of defects as the foundation for diagnosis.",
+  "theory": [
+   "A defect can only be studied and fixed with confidence if it can be reproduced on demand. Many bugs are reported with insufficient detail — 'it crashed sometimes' — and the developer's first task is to convert this into a deterministic scenario: an exact sequence of inputs, actions, configuration and environment that triggers the fault every time. Reproduction turns an anecdote into an experiment.",
+   "Failures fall into recognizable categories: input-dependent failures (specific data or boundary values), state-dependent failures (a particular sequence of prior operations), environment-dependent failures (version, locale, time, platform), and concurrency- or timing-dependent failures (race conditions that appear only under load). Intermittent bugs are usually state, environment or timing dependent, and reproducing them requires controlling the hidden variable — fixing the random seed, pinning the clock, forcing a particular thread interleaving, or replaying recorded inputs.",
+   "Once a bug reproduces, it should be reduced to a minimal example by progressively removing everything not required to trigger it. The minimal reproduction both speeds diagnosis and, when attached to a bug report or written as a failing test, communicates the problem unambiguously to others. Capturing the reproduction as an automated test also guarantees the fix can later be verified and protected against regression."
+  ],
+  "materials": [
+   "A sample application containing several seeded defects of different categories.",
+   "An IDE with a debugger and a unit-testing framework.",
+   "A means of controlling environment variables such as locale, time zone and random seed.",
+   "A bug-report template and a place to record reproduction steps."
+  ],
+  "procedure": [
+   "Select a reported defect and attempt to trigger it, recording every input and action until you find a sequence that reproduces it reliably.",
+   "Classify the failure as input-, state-, environment- or timing-dependent, and identify the hidden variable that controls its appearance.",
+   "Stabilize an intermittent bug by controlling that variable — for example by fixing the random seed, pinning the clock or forcing a specific data state.",
+   "Reduce the scenario to a minimal reproduction by removing unrelated steps and data while confirming the bug still occurs after each removal.",
+   "Encode the minimal reproduction as an automated failing test using the Arrange-Act-Assert structure.",
+   "Write a complete bug report with the reproduction steps, expected and actual behaviour, environment details and the failing test, then verify a colleague could reproduce it."
+  ],
+  "tasks": [
+   "Take an intermittent, environment-dependent bug, identify the hidden variable, and produce a deterministic reproduction.",
+   "Reduce a large reproduction scenario to its minimal form and record which removed elements were and were not necessary to trigger the fault.",
+   "Convert a manual reproduction into an automated failing unit test and demonstrate that it fails before the fix and passes after."
+  ],
+  "conclusion": "As a result of the work, the student is able to classify failures, achieve reliable and minimal reproduction of defects, and encode them as automated tests that drive diagnosis and prevent regression.",
+  "questions": [
+   "Why is reliable reproduction a precondition for diagnosing and fixing a defect?",
+   "Into what categories can failures be classified, and how does the category guide reproduction?",
+   "How can an intermittent, timing- or environment-dependent bug be made deterministic?",
+   "What is a minimal reproduction, and what are its two main benefits?",
+   "Why is it valuable to encode a reproduction as an automated failing test?"
+  ]
+ },
+ {
+  "code": "10.3.61",
+  "title": "Specialized debugging tools and plugins",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in selecting and applying specialized debugging tools and IDE plugins beyond the basic step debugger, matching the tool to the class of defect.",
+  "theory": [
+   "The step debugger is only one instrument in a broad toolkit. Different classes of defect call for specialized tools: memory errors are found with memory analyzers and sanitizers (for example Valgrind or AddressSanitizer), performance defects with profilers and flame graphs, memory leaks in managed languages with heap analyzers, and network or protocol problems with packet inspectors and HTTP proxies such as browser developer tools, Wireshark or a debugging proxy.",
+   "IDE plugins extend everyday debugging. Static-analysis and linter plugins flag suspicious code before it runs; conditional and logpoint features let the developer break or log only when a specific condition holds, which is essential inside loops that run millions of times; and language-specific extensions add features such as async-aware call stacks or database query inspection. Choosing the right plugin turns a tedious manual search into a targeted query.",
+   "The skill being developed is diagnosis-driven tool selection: reading the symptom, forming a hypothesis about the class of defect, and reaching for the instrument that reveals that class most directly. Using a step debugger to hunt a memory leak, or reading logs to find a performance bottleneck, wastes time that the correct specialized tool would save."
+  ],
+  "materials": [
+   "A development machine with an IDE and its plugin marketplace.",
+   "Sample programs each exhibiting a different defect class: a memory error, a performance bottleneck, a memory leak and a network problem.",
+   "A memory analyzer or sanitizer, a profiler, and a network-inspection tool (browser dev tools or a packet capture utility).",
+   "A worksheet mapping symptoms to appropriate tools."
+  ],
+  "procedure": [
+   "For each sample program, observe the symptom and hypothesize the class of defect it represents.",
+   "Run the memory-error sample under a memory analyzer or sanitizer and interpret the report to locate the invalid access or uninitialized read.",
+   "Profile the performance sample, read the resulting flame graph or hot-spot list, and identify the function consuming the most time.",
+   "Analyze the leaking sample with a heap analyzer, take two snapshots, compare them, and identify the objects that are accumulating.",
+   "Capture the traffic of the network sample with a proxy or packet inspector and locate the malformed or failing request or response.",
+   "Configure a conditional breakpoint or logpoint in the IDE to observe a defect that occurs only on a specific iteration, and record which tool was most effective for each defect class."
+  ],
+  "tasks": [
+   "Use a memory analyzer or sanitizer to locate and describe an invalid-memory access in the provided program.",
+   "Profile the provided application, identify the performance hot spot, and explain how the flame graph led you to it.",
+   "Set a conditional breakpoint that stops only when a chosen variable reaches a specific value inside a large loop, and demonstrate it in operation."
+  ],
+  "conclusion": "As a result of the work, the student is able to match a defect class to the appropriate specialized tool or plugin and to interpret the output of memory analyzers, profilers, heap tools and network inspectors.",
+  "questions": [
+   "Which specialized tool would you choose for a suspected memory leak, and how does it help?",
+   "What information does a profiler provide, and how is a flame graph read?",
+   "How does a conditional breakpoint or logpoint differ from an ordinary breakpoint, and when is it essential?",
+   "Which tools are appropriate for diagnosing network or protocol problems?",
+   "Why is diagnosis-driven tool selection more efficient than relying on the step debugger alone?"
+  ]
+ },
+ {
+  "code": "10.3.62",
+  "title": "Real-time debugging and hot reload",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The edit-compile-restart cycle and why its length hurts productivity.",
+   "Hot reload, hot swap and live reload: definitions and differences.",
+   "How code and state are updated in a running process.",
+   "Limitations of hot reload and when a full restart is required.",
+   "Real-time debugging techniques for live and time-sensitive systems."
+  ],
+  "body": [
+   "In traditional development the cycle of changing code, rebuilding, restarting the application and navigating back to the state where the change matters can take from many seconds to several minutes. For interactive user interfaces and long-running services this cost is paid dozens or hundreds of times a day, and it fragments the developer's concentration. Real-time debugging and hot-reload technologies exist to collapse this cycle so that the effect of a change is seen almost instantly, keeping the developer in a tight, focused feedback loop.",
+   "It is useful to distinguish three related terms. Live reload watches source files and, when one changes, automatically reloads or restarts the whole application — fast but state is lost. Hot reload (or hot module replacement) updates only the changed modules inside the running process while preserving as much of the current application state as possible. Hot swap, in languages such as Java, replaces the bytecode of methods in a running virtual machine during a debugging session. The common goal is to apply a change without a full restart.",
+   "The value of hot reload is clearest in user-interface development. Consider editing the styling of a form that appears only after logging in and filling several fields. With a full restart, the developer must repeat that navigation after every tweak. With hot reload, the changed component is re-rendered in place while the login session and the entered data remain intact, so the visual result of each adjustment appears immediately on the same screen.",
+   "Technically, hot reload works by keeping the runtime under the control of a development server or agent that can inject new code. When a module changes, the tool recompiles just that module, sends the new definition into the running process, and asks the framework to swap the old implementation for the new one and re-render the affected parts. Because the surrounding process is never torn down, variables, open connections and navigation state that live outside the replaced module survive the update.",
+   "Preserving state across a code change is the central challenge, and it is why hot reload is not always possible. Replacing the body of a function is usually safe. But changing the shape of a data structure, altering the fields of a class, modifying code that runs once at startup, or changing the signature of a method may leave existing objects inconsistent with the new code. In such cases the tool cannot safely reconcile old state with new definitions and must fall back to a full reload, and the developer must understand why the shortcut sometimes fails.",
+   "Modern front-end frameworks implement hot module replacement through their build tooling. A development server watches the file system, rebuilds only the affected modules, and pushes them to the browser over a socket connection, where the framework's runtime patches the component tree without a page reload. Component-level state is often retained through a fast-refresh mechanism that re-runs the render logic while keeping the component's stored values, so the interface updates without losing what the user had done.",
+   "Mobile development offers a well-known example in cross-platform frameworks whose hot reload injects updated source into the running virtual machine and rebuilds the widget tree from the existing application state. A related, stronger operation, hot restart, rebuilds the whole widget tree from scratch but keeps the app process alive, which is used when a change to initialization logic makes a plain hot reload insufficient. The developer chooses between them according to what was changed.",
+   "On the server side, some runtimes and platforms support hot code reloading so that a service can be updated without dropping active connections. Certain environments even allow updating code in a running production system, which is powerful but demands great care, because a faulty hot update can corrupt the live state of a system that cannot simply be restarted. In most server projects, development-time automatic restart on file change is used instead, trading state preservation for simplicity and safety.",
+   "Real-time debugging refers more broadly to observing and influencing a program while it continues to run, especially systems that cannot be paused. For time-sensitive code — games, audio processing, control systems, high-frequency services — stopping at a breakpoint distorts or destroys the very behaviour under study, because timing relationships are broken. Here the developer relies on non-stopping techniques: low-overhead logging, in-memory ring buffers, live metrics, and tracepoints that record data without halting execution.",
+   "A key concept for such systems is the observer effect: the act of observing changes the behaviour observed. A verbose log statement inside a tight loop can slow it enough to hide a race condition or create a new timing problem. Effective real-time debugging therefore favours instrumentation with minimal and predictable overhead, sampling rather than logging every event, and analysis of the collected data after the fact rather than interactive stepping during the sensitive phase.",
+   "Live dashboards and time-travel debugging extend real-time observation. State-management tools that record every state transition let the developer scrub backward and forward through the history of an application's state, effectively replaying what happened without re-running the program. Combined with hot reload, this allows a developer to change the code, replay the recorded sequence of actions, and see how the new code would have behaved — a very fast diagnostic loop for interactive applications.",
+   "These technologies bring trade-offs that a competent developer must weigh. Hot reload accelerates iteration but can leave the running application in a state that differs subtly from a clean start, occasionally producing behaviour that a fresh launch would not — so a suspicious result should always be confirmed with a full restart before it is trusted. Real-time instrumentation must be built to be switched off or reduced to negligible cost in production, lest the debugging aid itself become a performance defect.",
+   "Used well, real-time and hot-reload debugging change the character of development from a series of long waits into a continuous conversation with the running program: a change is typed, its effect appears at once, and the developer refines it immediately while the mental context is still fresh. This tight loop not only saves time but encourages more experimentation, which in turn surfaces defects earlier and improves the final quality of the software.",
+   "Thus, real-time debugging and hot reload compress the feedback loop by updating code in a live process and observing behaviour without a disruptive restart, while the developer must understand their limits — state incompatibilities that force a full reload and the observer effect in timing-sensitive systems — to use them safely and to know when a clean restart is still required."
+  ],
+  "questions": [
+   "What is the difference between live reload, hot reload and hot swap?",
+   "Why is preserving application state the central challenge of hot reload, and when does it force a full restart?",
+   "How does hot module replacement update a running front-end application without a page reload?",
+   "What is the observer effect, and how does it shape debugging of timing-sensitive systems?",
+   "What trade-offs must a developer weigh when relying on hot reload and real-time instrumentation?"
+  ]
+ },
+ {
+  "code": "10.3.63",
+  "title": "Debugging using containers, virtual machines and emulators",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Environment-dependent bugs and the goal of reproducible environments.",
+   "Virtual machines, containers and emulators compared.",
+   "Debugging a process running inside a container.",
+   "Emulators and simulators for mobile and embedded targets.",
+   "Reproducing production defects by recreating the environment."
+  ],
+  "body": [
+   "A large fraction of hard-to-solve bugs are environment-dependent: the code is correct in itself but behaves differently because of the operating system, installed library versions, configuration, locale, file-system layout or available resources. The frustrating 'works on my machine' report is the classic symptom. Virtual machines, containers and emulators are the primary tools for eliminating this class of problem, because they let the developer create and share a precisely defined environment in which a bug either always reproduces or is proven absent.",
+   "A virtual machine emulates a complete computer, including its own operating-system kernel, running on top of a hypervisor. It offers strong isolation and can run an operating system entirely different from the host, which makes it ideal for reproducing a bug that occurs only on a particular OS. The cost is weight: a VM consumes significant memory and disk and takes time to boot, so iterating on a defect inside a full VM is comparatively slow.",
+   "A container, by contrast, shares the host operating-system kernel and packages only the application together with its libraries and configuration. Containers start in a fraction of a second and are small, so a developer can spin up an exact copy of the production environment almost instantly. Because a container image pins the operating-system libraries, the runtime and the dependencies, running the failing application inside the same image the production system uses removes environment differences as a variable and often reproduces a previously elusive bug on the first try.",
+   "An emulator imitates hardware or a platform different from the host — for example an ARM mobile device on an x86 development machine, or a microcontroller on a desktop. A simulator, strictly speaking, models the behaviour of a system without imitating its hardware, and is usually faster but less faithful. Both let a developer run and debug code for a target device that is inconvenient or impossible to attach directly, which is essential for mobile and embedded work.",
+   "The central practical skill is debugging a process that runs inside a container while controlling it from the developer's own tools. The common approach is remote debugging: the application inside the container is started with a debug agent listening on a network port, that port is published to the host, and the IDE on the host attaches to it over the network. From that moment the developer sets breakpoints, inspects variables and steps through code exactly as if the program ran locally, even though it executes inside the isolated container.",
+   "Making this work requires attention to a few container-specific details. The debug port must be exposed and mapped from the container to the host; the source code the IDE shows must correspond exactly to the code built into the image, or breakpoints will bind to the wrong lines; and path mappings must translate between the file locations inside the container and those in the developer's workspace. When these align, the container becomes a transparent execution environment rather than an obstacle.",
+   "Containers also make it easy to debug multi-service systems. A tool such as Docker Compose can bring up an application together with its database, cache and dependent services as a coordinated set, reproducing the topology of production on one machine. The developer can then attach to any one service, inspect the logs of all of them together, and observe how a request flows across the services — reproducing integration bugs that never appear when a single service is run alone.",
+   "For mobile development, emulators and simulators are the everyday debugging environment. An Android emulator runs a full virtual device on which the app is installed and debugged through the platform's tooling, allowing the developer to inspect variables, view logs and simulate conditions such as low battery, poor network, incoming calls, different screen sizes and locales. An iOS simulator provides a comparable environment on macOS. These let a single developer test behaviour across many device configurations without owning the physical hardware.",
+   "Emulators are especially valuable for reproducing conditions that are awkward to create on a real device: a specific slow network profile, a particular OS version that users still run, an unusual locale that reveals a date- or number-formatting bug, or a constrained-memory situation. By scripting the emulator into a known state, the developer turns an intermittent field report into a repeatable local scenario. It must be remembered, however, that an emulator is an approximation, and some hardware-specific defects appear only on real devices.",
+   "In embedded work, emulators and simulators allow firmware to be developed and debugged before the physical board exists or when attaching a hardware debugger is impractical. A CPU emulator such as QEMU can run the firmware image and expose a debug interface to which a source-level debugger attaches, so the developer steps through embedded code on the desktop. This shortens the development loop dramatically, though final validation must still occur on the real hardware because emulators seldom model every peripheral and timing detail faithfully.",
+   "The most powerful use of these technologies is reproducing a production defect by recreating the production environment locally. When a bug occurs only in production, the developer pulls the same container image, the same configuration and a sanitized copy of the relevant data, and runs it on the workstation under a debugger. Because the environment matches, the bug that was invisible in local development often appears immediately, and it can be investigated interactively without any risk to the live system.",
+   "These tools also underpin clean, disposable debugging. Because a container or VM can be created from an image and destroyed in seconds, the developer can experiment aggressively — installing packages, corrupting data, changing configuration — knowing that a pristine environment is one command away. This removes the fear of 'polluting' one's machine and encourages the kind of bold experimentation that often reveals a defect's cause quickly.",
+   "The trade-off is complexity. Working across a container or VM boundary adds layers — port mappings, path mappings, image rebuilds, and slower emulated execution — that themselves can go wrong and must be understood. A developer who does not grasp how the layers fit together may mistake a misconfigured debug connection for a bug in the code. Competence therefore means understanding both the isolation these tools provide and the plumbing required to see through it.",
+   "Thus, virtual machines, containers and emulators let developers define, share and reproduce precise execution environments, so that environment-dependent and production-only defects become reliably reproducible; the essential skill is to run the failing software inside the matching environment and attach one's debugging tools across the boundary through correct port and path mappings, while remembering that emulated environments remain approximations of real hardware."
+  ],
+  "questions": [
+   "How do virtual machines, containers and emulators differ, and what are the strengths of each?",
+   "Why does running an application inside its production container image often reproduce an elusive environment-dependent bug?",
+   "Describe how remote debugging is used to step through a process running inside a container.",
+   "What conditions can a mobile emulator simulate that are hard to create on a real device, and what is its main limitation?",
+   "How are containers and emulators used to reproduce a production-only defect safely and locally?"
+  ]
+ },
+ {
+  "code": "10.3.64",
+  "title": "Live debugging and real-time remote debugging",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What live and remote debugging are, and why they are needed.",
+   "The architecture of a remote debug session: agent, protocol and client.",
+   "Attaching to a running process versus launching under a debugger.",
+   "Debugging production safely: non-breaking snapshots and observability.",
+   "Security, performance and risk considerations."
+  ],
+  "body": [
+   "Live debugging means investigating a program while it is actually running, rather than after it has crashed or from a recorded log. Remote debugging extends this to a program that runs on a different machine from the developer's — a server in a data centre, a device in the field, a container in a cluster, or an embedded board on a bench. Together they address the common situation in which a defect appears only in a real, running deployment that cannot be reproduced on the developer's own computer.",
+   "The need arises because many defects are bound to their environment and their live state. A service may fail only under production traffic, only with real customer data, only after days of uptime, or only on a specific device configuration. In such cases post-mortem logs may be too coarse to reveal the cause, and local reproduction may be impossible. The ability to inspect the actual running system — its variables, its call stacks, its threads — becomes the fastest and sometimes the only route to the truth.",
+   "A remote debug session has three parts. Inside the running program, a debug agent (built into the language runtime or loaded as a library) exposes the program's internal state and accepts commands. A debug protocol carries messages between that agent and the developer's tool over a network connection. On the developer's machine, a debug client — usually the IDE — sends commands such as 'set breakpoint' and 'read variable' and displays the responses. The developer experiences the remote program almost as if it were local.",
+   "There are two ways to begin a session. In launch mode the debugger starts the program itself, which is typical during development. In attach mode the program is already running and the debugger connects to its existing debug agent, which is the usual approach for live and remote debugging because the interesting process is one that is already deployed and misbehaving. Attaching to a live process lets the developer catch a fault in the very instance where it is occurring, without restarting and losing the state that produced it.",
+   "For a remote session the target process must be started so that its debug agent listens on a known network port; that port is then made reachable to the developer, often through a secure tunnel or by mapping it out of a container or VM. The IDE connects to that host and port and, provided the source code on the developer's side matches the binary running remotely, breakpoints bind to the correct lines. Mismatched sources are a frequent cause of confusion, because breakpoints then appear to fire on the wrong statements.",
+   "The great danger of live debugging is that a conventional breakpoint halts the program. Pausing a shared production server at a breakpoint freezes it for every user connected to that instance, potentially causing timeouts, dropped requests or cascading failures across dependent systems. For this reason, stopping breakpoints must never be used casually on live shared systems; doing so can transform a minor bug into an outage far worse than the defect being investigated.",
+   "Modern production debugging therefore favours non-breaking techniques. Snapshot or dynamic-log debuggers let a developer place a virtual breakpoint that, instead of halting the process, captures a snapshot of the local variables and the call stack the next time that line executes and streams it to the developer, while the program continues serving traffic. This delivers most of the diagnostic value of a breakpoint — a view of the state at a chosen line — without the cost of stopping the system.",
+   "Observability tooling complements live debugging for systems that must never be paused. Structured logging, metrics and distributed tracing let the developer follow a single request across many services using a correlation identifier, measure where time is spent, and see error rates in real time. Dynamic instrumentation frameworks can even inject new tracepoints into a running process on demand, so that additional data can be gathered from a live system without redeploying it. These approaches trade the interactivity of stepping for safety at scale.",
+   "Remote debugging is essential far beyond servers. Mobile apps are debugged live on a device or emulator connected over a debug bridge; embedded firmware is debugged through a hardware debug probe (for example a JTAG or SWD interface) that connects the desktop debugger to the chip; browser front-end code is debugged remotely on a phone through the desktop browser's developer tools. In every case the same architecture applies: an agent on the target, a protocol over a link, and a client on the developer's machine.",
+   "Security is a first-order concern whenever a debug interface is exposed. A debug agent grants deep control over a process — reading memory, altering variables, executing code — so an open, unauthenticated debug port is a severe vulnerability. Debug ports must never be exposed to the public internet; connections should be tunnelled over an encrypted, authenticated channel, restricted to trusted networks, and disabled entirely in normal production operation, being enabled only for the duration of a supervised investigation.",
+   "Performance and correctness overhead must also be considered. Running with a debug agent attached can slow a process and change its timing, which may mask or alter the very defect under study, an instance of the observer effect. Snapshot capture and dynamic tracing are designed to be low-overhead, but even they add cost, so the developer should enable the minimum instrumentation needed and remove it promptly once the data is collected.",
+   "Discipline and procedure surround live production debugging in professional practice. Access is typically restricted, actions are logged, and a second engineer often observes, because a mistake on a live system has real consequences for users. The developer should prepare in advance — knowing exactly which line to inspect and what data is needed — so that the live session is short and focused rather than an open-ended exploration on a system that is serving real customers.",
+   "Thus, live and remote debugging let a developer inspect the actual running system where a defect truly occurs, through an agent-protocol-client architecture and an attach-mode connection; but on shared and production systems the halting breakpoint must give way to non-breaking snapshots and observability, and the exposed debug interface must be tightly secured, because the power to see and change a live process carries a matching power to disrupt it."
+  ],
+  "questions": [
+   "What distinguishes live debugging and remote debugging, and in what situations are they necessary?",
+   "Describe the agent-protocol-client architecture of a remote debug session and the difference between launch and attach modes.",
+   "Why is a conventional halting breakpoint dangerous on a shared production server, and what technique replaces it?",
+   "How does observability tooling complement live debugging for systems that must not be paused?",
+   "What security and performance precautions must accompany the use of a remote debug interface?"
+  ]
+ },
+ {
+  "code": "10.3.65",
+  "title": "Backup and code recovery during debugging errors",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Why debugging itself endangers working code and data.",
+   "Version control as the primary safety net: commits, branches and stashes.",
+   "Recovering lost work: reflog, revert and reset.",
+   "Protecting and restoring data and state, not only source code.",
+   "A disciplined workflow for safe experimentation."
+  ],
+  "body": [
+   "Debugging is inherently destructive to the working state of a project. To find a fault the developer adds temporary logging, comments out sections, changes values, deletes suspect code, alters configuration and mutates data. Any of these experiments can break code that previously worked or destroy information that is hard to regenerate. A professional therefore treats backup and recovery not as an afterthought but as the framework within which all debugging experimentation takes place, so that no experiment can cause irreversible loss.",
+   "Version control is the primary safety net for source code. By committing working code before beginning an investigation, the developer creates a known-good checkpoint to which the project can always be restored. During debugging, frequent small commits — even messy, temporary ones on a scratch branch — record each intermediate state, so that a promising line of investigation can be kept and a mistaken one discarded without affecting the rest. The golden rule is to start from a clean, committed state so that every later change is visible and reversible.",
+   "Branches make experimentation safe by isolating it. Creating a dedicated debug branch means the developer can rewrite, delete and rearrange code freely while the stable main branch remains untouched. If the experiment succeeds, the useful change is merged back; if it fails, the branch is simply abandoned and the main line is unaffected. This isolation removes the fear that motivates developers to avoid bold experiments, and bold experiments are often what reveal a stubborn defect.",
+   "For quick, temporary set-asides, the stash mechanism lets a developer store uncommitted changes and return to a clean working tree in a single step, then restore them later. This is invaluable when, in the middle of debugging, one must switch to reproduce the bug against unmodified code, or check whether the current changes are even related to the fault. The stash preserves the in-progress experiment without the ceremony of a full commit.",
+   "When work does seem lost, several recovery tools apply. The reflog in Git records every movement of the branch pointers, so even commits that appear to have been discarded — by a reset, a rebase or a deleted branch — can usually be found and restored by their recorded reference. Understanding that committed work is almost never truly gone, only unreferenced, transforms a panic-inducing situation into a routine lookup, and it is one of the most reassuring facts a developer can internalize.",
+   "The tools for undoing changes must be understood precisely, because they differ in safety. Revert creates a new commit that reverses a previous one, preserving history and being safe on shared branches. Reset moves the branch pointer backward and, in its hard form, discards subsequent commits and working changes — powerful but dangerous, because a hard reset can erase uncommitted work that no reflog can recover. Knowing which command modifies only history and which destroys working files is essential to avoid turning a recovery attempt into a fresh disaster.",
+   "A particular hazard is that a hard reset and a checkout of a file discard uncommitted local modifications permanently. Uncommitted changes live only in the working directory and are not tracked by any history mechanism, so if they are overwritten they cannot be recovered through version control at all. This is precisely why the discipline of committing or stashing before running any destructive command is so important: the safety net only catches what has been committed to it.",
+   "Backup must extend beyond source code to data and state, which version control usually does not manage. Debugging frequently involves running destructive operations against a development database, editing configuration files, or mutating stored state to reproduce a bug. Before such operations the developer should snapshot the database, copy the configuration, or export the relevant data, so that the environment can be restored to its known state. A container or virtual-machine snapshot can capture an entire environment in one step for exactly this purpose.",
+   "Reproducibility is a subtler form of backup. If the environment is defined declaratively — dependencies pinned in a lockfile, infrastructure described as code, the environment built from a container image — then a broken environment can be rebuilt from scratch rather than repaired. In this model the ability to recreate the environment reliably is worth more than any single backup of it, because it guarantees a clean, known state on demand no matter how badly an experiment corrupted the previous one.",
+   "The recovery strategy must match how catastrophic a mistake could be. For an ordinary source edit, an uncommitted-change stash or a single commit is enough. For an experiment that touches shared data or a production-like system, a full snapshot and a documented restore procedure are warranted. Judging the level of protection appropriate to the risk of the operation is part of professional competence, as is never running an irreversible command against important data without a tested way back.",
+   "Automation and habit make these protections reliable. Editors and IDEs keep local history of recent edits that can rescue changes made since the last commit; periodic automatic commits on a work-in-progress branch capture progress without conscious effort; and pre-operation snapshots can be scripted so they are never forgotten under the pressure of chasing a bug. The goal is that the safety net is in place by default, not created hastily only after something has already gone wrong.",
+   "There is also a communication dimension in team settings. Rewriting shared history — force-pushing a rebased branch that others have based work on — can destroy colleagues' work as surely as a local reset destroys one's own. Recovery discipline therefore includes never rewriting published history that others depend on, and, when a shared branch must be corrected, doing so with a safe revert and clear communication rather than a destructive rewrite.",
+   "Thus, safe debugging rests on a layered recovery framework: commit or stash working code before experimenting, isolate risky changes on a branch, understand exactly which undo commands preserve and which destroy uncommitted work, extend backup to data and environment through snapshots and reproducible definitions, and rely on the reflog and revert to recover from mistakes — so that no debugging experiment, however aggressive, can cause irreversible loss."
+  ],
+  "questions": [
+   "Why is debugging inherently dangerous to working code and data, and how does committing before investigating help?",
+   "How do branches and the stash mechanism make experimentation safe?",
+   "What is the difference between revert and hard reset, and why can a hard reset cause unrecoverable loss?",
+   "What does the reflog record, and why does it mean committed work is almost never truly lost?",
+   "Why must backup extend beyond source code, and how do snapshots and reproducible environment definitions provide this protection?"
+  ]
+ },
+ {
+  "code": "10.3.66",
+  "title": "Testing and confidence in correct operation after debugging",
+  "type_en": "Comprehensive assessment of knowledge",
+  "kind": "practical",
+  "objective": "To form practical skills in verifying that a fix is correct and complete, and in building justified confidence that the software works after debugging through systematic post-fix testing.",
+  "theory": [
+   "Fixing the symptom of a bug is not the end of the work; the developer must prove that the fix actually resolves the defect, that it addresses the root cause rather than masking it, and that it has not broken anything else. Confidence after debugging is not a feeling but a conclusion drawn from evidence: the original reproduction no longer fails, a regression test captures the defect permanently, and the surrounding test suite still passes.",
+   "Verification proceeds in layers. First, the failing test written to reproduce the bug must now pass, confirming the specific defect is gone. Second, the full suite of unit and integration tests must be run to detect regressions — new defects introduced by the fix. Third, boundary and negative cases around the fixed code should be tested, because a fix often shifts a bug to an adjacent edge. Finally, for user-visible changes, manual or exploratory testing confirms the behaviour is correct in context.",
+   "A fix should always leave behind a regression test so the defect can never silently return, and root-cause analysis should ask whether the same underlying mistake exists elsewhere in the code. Measuring that the fixed path is actually covered by an assertion, rather than merely executed, distinguishes genuine verification from false confidence. Only when these checks pass is it justified to declare the software working."
+  ],
+  "materials": [
+   "A project with a fixed defect and its accompanying automated test suite.",
+   "A unit- and integration-testing framework with a test runner.",
+   "A code-coverage tool.",
+   "A checklist for post-fix verification and a report form."
+  ],
+  "procedure": [
+   "Run the failing test that reproduced the bug and confirm it now passes, verifying the specific defect is resolved.",
+   "Run the complete unit and integration test suite and confirm no other tests have regressed as a result of the fix.",
+   "Add boundary and negative test cases around the corrected code and confirm the behaviour is correct at the edges.",
+   "Use the coverage tool to verify that the fixed code path is exercised by an assertion, not merely executed.",
+   "Search the codebase for other places where the same root-cause mistake could occur and record whether any were found.",
+   "Complete the verification checklist and write a short confidence report stating the evidence that justifies declaring the software correct."
+  ],
+  "tasks": [
+   "For a given fix, produce the regression test that would fail if the bug returned, and demonstrate it passing after the fix and failing against the pre-fix code.",
+   "Run the full test suite and coverage report, and document with evidence that the fix introduced no regressions and that the fixed path is covered.",
+   "Perform a root-cause review, identify at least one place where the same class of defect could exist, and recommend a preventive measure."
+  ],
+  "conclusion": "As a result of the work, the student is able to verify a fix through layered testing, guard it with a regression test, confirm the absence of regressions, and justify confidence in the software's correct operation with concrete evidence.",
+  "questions": [
+   "Why is making the symptom disappear insufficient to consider a bug fixed?",
+   "What are the layers of post-fix verification, and what does each one confirm?",
+   "Why must a fix be accompanied by a regression test, and what should that test demonstrate?",
+   "Why is it necessary to run the full test suite after a fix rather than only the reproducing test?",
+   "How does code coverage help distinguish genuine verification from false confidence?"
+  ]
+ }
+]

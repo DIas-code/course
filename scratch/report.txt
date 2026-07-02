@@ -1,0 +1,8 @@
+DISTINCT TYPES:
+  113  Изучение нового материала
+   35  Урок совершенствования ЗУН
+    3  Урок комплексной оценки знаний
+
+10.1: 48 lessons (36 lecture / 12 practical) = 96 h
+10.2: 36 lessons (28 lecture / 8 practical) = 72 h
+10.3: 66 lessons (48 lecture / 18 practical) = 132 h

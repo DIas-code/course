@@ -1,0 +1,79 @@
+{
+ "lo_id": "10.2",
+ "chunk": 1,
+ "out_file": "umkd_gen/frag_10_2_c1.json",
+ "topics": [
+  {
+   "pos": 1,
+   "title_ru": "Процесс разработки программного кода по спецификациям требований.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 2,
+   "title_ru": "Интерпретация и анализ требований к программному обеспечению.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 3,
+   "title_ru": "Выбор языка программирования и технологий разработки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 4,
+   "title_ru": "Проектирование архитектуры программного решения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 5,
+   "title_ru": "Разработка пользовательского интерфейса по требованиям.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 6,
+   "title_ru": "Разработка бизнес-логики приложения согласно требованиям.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 7,
+   "title_ru": "Создание тестовых случаев на основе спецификаций.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 8,
+   "title_ru": "Работа с базами данных в соответствии с требованиями.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 9,
+   "title_ru": "Управление и обработка исключений в коде.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 10,
+   "title_ru": "Обеспечение безопасности и защиты данных в программе.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 11,
+   "title_ru": "Локализация и интернационализация программного обеспечения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 12,
+   "title_ru": "Оптимизация производительности и эффективности кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

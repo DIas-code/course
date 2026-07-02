@@ -1,0 +1,79 @@
+{
+ "lo_id": "10.1",
+ "chunk": 3,
+ "out_file": "umkd_gen/frag_10_1_c3.json",
+ "topics": [
+  {
+   "pos": 25,
+   "title_ru": "Оптимизация кода: идентификация и устранение узких мест.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 26,
+   "title_ru": "Тестирование и отладка: как обеспечить качество программного кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 27,
+   "title_ru": "Архитектурные паттерны: использование MVC, MVVM и других.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 28,
+   "title_ru": "Разработка многопоточных приложений и параллельного программирования.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 29,
+   "title_ru": "Разработка кода для обработки и хранения больших объемов данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 30,
+   "title_ru": "Использование структур данных: списки, массивы, хэш-таблицы.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 31,
+   "title_ru": "Создание и использование объектов и классов в объектно-ориентированном программировании.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 32,
+   "title_ru": "Работа с базами данных: SQL и ORM-технологии.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 33,
+   "title_ru": "Интеграция и взаимодействие между компонентами программного обеспечения.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 34,
+   "title_ru": "Разработка веб-приложений: клиентская и серверная стороны.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 35,
+   "title_ru": "Разработка мобильных приложений: iOS, Android и кросс-платформенные решения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 36,
+   "title_ru": "Создание алгоритмов машинного обучения и их интеграция в приложения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

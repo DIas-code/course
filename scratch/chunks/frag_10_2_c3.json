@@ -1,0 +1,79 @@
+{
+ "lo_id": "10.2",
+ "chunk": 3,
+ "out_file": "umkd_gen/frag_10_2_c3.json",
+ "topics": [
+  {
+   "pos": 25,
+   "title_ru": "Создание кода для интернета вещей (IoT) и встроенных систем.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 26,
+   "title_ru": "Разработка кода для автономных роботов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 27,
+   "title_ru": "Создание алгоритмов машинного обучения и интеграция их в приложения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 28,
+   "title_ru": "Соблюдение стандартов и регуляторных требований в коде.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 29,
+   "title_ru": "Эффективная отладка и рефакторинг согласно требованиям.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 30,
+   "title_ru": "Анализ и оптимизация алгоритмов при разработке кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 31,
+   "title_ru": "Использование асинхронного программирования и обработка событий",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 32,
+   "title_ru": "Работа с системами управления базами данных и ORM-технологиями.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 33,
+   "title_ru": "Разработка кода для сетевого программирования и обмена данными.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 34,
+   "title_ru": "Управление процессом сборки и развертывания приложений.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 35,
+   "title_ru": "Оценка и улучшение процесса разработки кода в соответствии с требованиями.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 36,
+   "title_ru": "Разработка и документирование API по требованиям",
+   "type_en": "Comprehensive assessment of knowledge",
+   "kind": "practical"
+  }
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "lo_id": "10.1",
+ "chunk": 4,
+ "out_file": "umkd_gen/frag_10_1_c4.json",
+ "topics": [
+  {
+   "pos": 37,
+   "title_ru": "Разработка кода для робототехники и автоматизации.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 38,
+   "title_ru": "Использование алгоритмов и структур данных в игровой разработке.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 39,
+   "title_ru": "Безопасность программного кода: защита от атак и уязвимостей.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 40,
+   "title_ru": "Создание графического интерфейса: GUI-дизайн и событийная модель.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 41,
+   "title_ru": "Автоматизация процесса сборки и развертывания приложений.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 42,
+   "title_ru": "Управление версиями и совместной разработкой: Git и системы управления версиями.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 43,
+   "title_ru": "Разработка кода для облачных вычислений и микросервисов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 44,
+   "title_ru": "Интеграция и использование открытых API и библиотек.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 45,
+   "title_ru": "Управление проектами разработки программного кода: методологии и инструменты.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 46,
+   "title_ru": "Разработка кода для встроенных систем и IoT-устройств.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 47,
+   "title_ru": "Работа с большими объемами данных: биг-дата и анализ данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 48,
+   "title_ru": "Создание кода для машинного зрения и распознавания образов.",
+   "type_en": "Comprehensive assessment of knowledge",
+   "kind": "practical"
+  }
+ ]
+}

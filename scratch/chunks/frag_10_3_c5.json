@@ -1,0 +1,73 @@
+{
+ "lo_id": "10.3",
+ "chunk": 5,
+ "out_file": "umkd_gen/frag_10_3_c5.json",
+ "topics": [
+  {
+   "pos": 56,
+   "title_ru": "Разработка тестовых сценариев и модульных тестов для отладки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 57,
+   "title_ru": "Советы и практики по организации эффективного процесса отладки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 58,
+   "title_ru": "Отладка в командной среде и коллективной разработке.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 59,
+   "title_ru": "Отладка кода с использованием сторонних библиотек и фреймворков.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 60,
+   "title_ru": "Сценарии сбоя и воспроизведение проблем для отладки.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 61,
+   "title_ru": "Специализированные инструменты и плагины для отладки.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 62,
+   "title_ru": "Отладка кода в реальном времени и \"горячее\" обновление.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 63,
+   "title_ru": "Отладка с использованием контейнеров, виртуальных машин и эмуляторов",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 64,
+   "title_ru": "Live debugging и удалённая отладка в реальном времени",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 65,
+   "title_ru": "Резервное копирование и восстановление кода при ошибках в отладке.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 66,
+   "title_ru": "Тестирование и уверенность в работоспособности после отладки.",
+   "type_en": "Comprehensive assessment of knowledge",
+   "kind": "practical"
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "lo_id": "10.3",
+ "chunk": 1,
+ "out_file": "umkd_gen/frag_10_3_c1.json",
+ "topics": [
+  {
+   "pos": 1,
+   "title_ru": "Основные понятия объектной технологии: классы, объекты, управление памятью, типизация.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 2,
+   "title_ru": "Механизмы наследования, полиморфизма.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 3,
+   "title_ru": "Принципы объектно-ориентированного программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 4,
+   "title_ru": "Введение в объектно-ориентированное программирование (ООП).",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 5,
+   "title_ru": "Основные принципы ООП: инкапсуляция, наследование, полиморфизм.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 6,
+   "title_ru": "Классы как основные строительные блоки ООП.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 7,
+   "title_ru": "Описание классов: поля, методы, конструкторы и деструкторы.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 8,
+   "title_ru": "Создание объектов на основе классов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 9,
+   "title_ru": "Инстанцирование и инициализация объектов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 10,
+   "title_ru": "Операции с объектами: чтение и изменение полей, вызов методов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 11,
+   "title_ru": "Наследование и его роль в ООП.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 12,
+   "title_ru": "Полиморфизм: виртуальные методы и интерфейсы.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 13,
+   "title_ru": "Управление памятью в объектно-ориентированных языках",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 14,
+   "title_ru": "Сборка мусора и управление памятью в современных языках (Java, C#, Python)",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

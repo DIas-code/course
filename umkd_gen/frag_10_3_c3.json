@@ -1,0 +1,507 @@
+[
+ {
+  "code": "10.3.29",
+  "title": "Abstract classes and methods: common features and specifics",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of an abstract class and its purpose in an object model.",
+   "Abstract methods: declaration without implementation and the obligation to override.",
+   "Differences between abstract classes and concrete classes.",
+   "Abstract classes in Java, C#, C++ and Python.",
+   "When to choose an abstract class over an interface or a concrete base class."
+  ],
+  "body": [
+   "An abstract class is a class that is deliberately incomplete: it is designed to be a base for other classes and cannot itself be instantiated directly. Its role is to capture what a whole family of related types has in common — shared fields, shared implemented methods, and a contract of operations that every descendant must provide. In object-oriented design an abstract class expresses the idea 'this is a general concept that only becomes concrete in its subclasses', for example a general Shape that becomes a Circle or a Rectangle.",
+   "The central building block of an abstract class is the abstract method. An abstract method is declared with a name, parameters and a return type, but with no body: it states that an operation exists and must be supported, while leaving the actual code to each descendant. In Java it is written as 'abstract double area();', in C# as 'public abstract double Area();', in C++ as a pure virtual function 'virtual double area() = 0;', and in Python by decorating a method with '@abstractmethod' inside a class derived from ABC.",
+   "The rule that ties abstract classes and abstract methods together is simple: if a class contains at least one abstract method, the class itself must be abstract, and any concrete (instantiable) descendant must provide an implementation for every inherited abstract method. If a descendant fails to implement even one of them, that descendant remains abstract and also cannot be instantiated. This is exactly the mechanism that forces subclasses to fill in the missing behaviour.",
+   "Unlike a pure interface, an abstract class is allowed to contain state and fully implemented methods alongside its abstract ones. This is its distinguishing strength: it can provide a partial, ready-made implementation and leave only the truly variable parts open. A base class AbstractAccount might store a 'balance' field and implement 'deposit' concretely, while declaring 'withdraw' abstract because the withdrawal rules differ between a savings account and a credit account.",
+   "In Java a class is marked with the 'abstract' keyword; it may have constructors, instance fields, static members and normal methods, but the compiler forbids 'new AbstractClass()'. The constructor of an abstract class is still useful — it runs during the construction of a descendant to initialise the inherited fields. C# follows almost the same model with the 'abstract' modifier on both the class and its unfinished methods, and the same prohibition on direct instantiation.",
+   "In C++ the notion of an abstract class is expressed through pure virtual functions. A class that declares at least one pure virtual function (using the '= 0' syntax) becomes an abstract base class, and the compiler will refuse to create objects of that type. Descendants become concrete only when they override every pure virtual function; otherwise they too remain abstract. C++ deliberately has no separate 'abstract' keyword, because the pure virtual function already carries that meaning.",
+   "Python approaches abstraction through the 'abc' module. A class inherits from 'ABC' (or sets 'metaclass=ABCMeta') and marks the required methods with '@abstractmethod'. Because Python is dynamically typed, the restriction is enforced at instantiation time: attempting to create an object of a class that still has unimplemented abstract methods raises a TypeError. This gives Python the same guarantee as compiled languages, only checked at run time rather than at compile time.",
+   "A frequent point of confusion is the difference between an abstract method and an empty method. An empty method has a body — even if that body does nothing — so a subclass is free to ignore it. An abstract method has no body at all and therefore obliges the subclass to supply one. Choosing the abstract form when the operation genuinely has no sensible default is a way of turning a design intention into a compiler-checked rule.",
+   "An abstract class can also declare abstract properties or abstract accessors, not only methods. In C# an abstract read-only property 'public abstract string Name { get; }' forces every descendant to expose a Name value while leaving the storage strategy to the subclass. This lets the base class describe the shape of the data without committing to how it is stored.",
+   "Abstract classes participate fully in polymorphism. Client code can hold a reference of the abstract type, for example a variable of type Shape, and call 'area()' on it; at run time the call is dispatched to the concrete descendant's implementation. In this way the abstract class defines a stable interface for callers while allowing an open-ended set of concrete implementations behind it.",
+   "The main design trade-off is that a class can extend only one abstract class in single-inheritance languages such as Java and C#. Committing a type to a particular abstract base therefore consumes its single inheritance slot. This is why abstract classes are best used when descendants genuinely share code and state; when only a contract is needed without shared implementation, an interface is usually the better tool.",
+   "A practical guideline for choosing an abstract class is: use it when you have a clear 'is-a' relationship, when several subclasses will share fields and concrete helper methods, and when you want to prevent the base concept from being instantiated on its own. Examples include AbstractList in the Java collections framework and Stream in the .NET class library, both of which supply substantial shared behaviour while leaving key operations abstract.",
+   "Common mistakes with abstract classes include declaring a method abstract but then providing a trivial default in every subclass (a sign that a concrete method with an overridable default was wanted), forgetting that an abstract class still needs its fields initialised through a constructor, and trying to instantiate the abstract type directly. Understanding that an abstract class is 'concrete infrastructure plus deferred decisions' prevents most of these errors.",
+   "Thus, an abstract class is a partially implemented base type that cannot be instantiated and that uses abstract methods to compel its descendants to complete the missing behaviour; it combines shared state and ready code with an enforced contract, and across Java, C#, C++ and Python it is the standard tool for modelling a general concept whose concrete forms are defined only in its subclasses."
+  ],
+  "questions": [
+   "What is an abstract class and why can it not be instantiated directly?",
+   "What is an abstract method, and what obligation does it place on a concrete descendant?",
+   "How does an abstract class differ from an interface in terms of state and implemented methods?",
+   "How is abstraction expressed in C++ (pure virtual functions) and in Python (the abc module)?",
+   "In what situations should a developer prefer an abstract class over a concrete base class?"
+  ]
+ },
+ {
+  "code": "10.3.30",
+  "title": "Interfaces and implementation: multiple inheritance",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of an interface as a pure contract of behaviour.",
+   "Implementing one or several interfaces in a class.",
+   "Multiple inheritance of implementation and the diamond problem.",
+   "How Java, C#, C++ and Python handle multiple inheritance.",
+   "Interfaces versus abstract classes: choosing the right abstraction."
+  ],
+  "body": [
+   "An interface defines a contract: a set of operations that an implementing type promises to provide, without saying how those operations are carried out. It answers the question 'what can this type do?' rather than 'what is this type?'. A type that implements the interface Comparable promises that any two of its instances can be ordered, regardless of what the type actually represents.",
+   "The classic form of an interface contains only method signatures — names, parameters and return types — and no fields with state and no method bodies. A class that implements the interface must supply a body for each declared method. In Java a class uses 'implements Printable', in C# 'class Report : IPrintable', and the compiler then checks that every method of the interface is present in the class.",
+   "The decisive advantage of interfaces is that a class may implement many of them at once. A single class Document can implement Printable, Serializable and Comparable simultaneously, gaining three independent contracts. This is how single-inheritance languages obtain the flexibility of multiple typing: a class has one parent for shared code but can satisfy any number of behavioural contracts.",
+   "Multiple inheritance of implementation — inheriting actual code and state from more than one base class — is a harder problem. Its central difficulty is the 'diamond problem': if class D inherits from both B and C, and both B and C inherit from a common ancestor A, then it is ambiguous which version of an inherited member D should use, and A's state might be duplicated. Different languages resolve this in very different ways.",
+   "C++ permits full multiple inheritance of classes. To solve the diamond problem it offers virtual inheritance: declaring the intermediate classes as 'virtual public A' ensures that only one shared subobject of A exists in D. Without virtual inheritance, D would contain two separate A subobjects and every access to an A member would have to be disambiguated explicitly. This power is real but demands careful design.",
+   "Java and C# deliberately forbid multiple inheritance of classes and allow multiple inheritance only of interfaces. A class extends exactly one base class but may implement many interfaces. Because a classic interface carries no state and no implementation, combining several of them creates no ambiguity about which field or which code to inherit — there is nothing to duplicate.",
+   "Modern Java and C# blurred this line by adding default (or default-implemented) methods to interfaces. Since Java 8 an interface may declare a 'default' method with a body, and since C# 8 an interface may contain a default implementation. This lets library authors add new methods to an interface without breaking existing implementers, but it reintroduces a limited diamond problem: if two interfaces provide the same default method, the implementing class is required to override it and resolve the conflict explicitly.",
+   "Python supports genuine multiple inheritance of classes and resolves ambiguity with the Method Resolution Order (MRO), computed by the C3 linearisation algorithm. When a method is called, Python searches the classes in a well-defined, deterministic order, so 'super()' follows the MRO chain rather than a single parent. This makes cooperative multiple inheritance possible, though it requires disciplined use of 'super()' in every class of the hierarchy.",
+   "Interfaces enable an important design style based on small, focused contracts. Instead of one large interface, designers prefer several narrow ones — for example Readable and Writable rather than a single ReadWrite — so that a class implements only what it truly supports. This is the essence of the Interface Segregation Principle from SOLID: clients should not be forced to depend on methods they do not use.",
+   "Programming to an interface rather than to a concrete class is a foundational practice. A method that accepts a parameter of interface type List works with any implementation — ArrayList, LinkedList or a custom one — which decouples the caller from the concrete class and makes the code testable and extensible. Dependency injection frameworks rely heavily on this idea, wiring concrete implementations into code that only ever names interfaces.",
+   "Choosing between an interface and an abstract class comes down to what is being shared. An abstract class shares both a contract and an implementation, and models an 'is-a' relationship in a single-inheritance slot. An interface shares only a contract and models a 'can-do' capability that any number of unrelated types may satisfy. A common approach is to define an interface for the contract and provide an optional abstract base class that implements the tedious parts of it, as with Java's Collection interface and its AbstractCollection helper.",
+   "In statically typed languages interfaces are also the primary mechanism for expressing capability-based polymorphism in a type-safe way. A parameter declared as an interface guarantees at compile time that the supplied object provides the required operations, while still allowing the exact type to be chosen at run time. This is safer than duck typing yet just as flexible in practice.",
+   "A practical rule for avoiding the pitfalls of multiple inheritance is to keep inherited implementation single and inherited contracts multiple: extend at most one class for code reuse, and implement as many interfaces as needed for capabilities. Where a language does allow multiple implementation inheritance, prefer composition — holding other objects as members and delegating to them — over deep inheritance chains, because composition avoids diamond ambiguity altogether.",
+   "Thus, an interface is a pure contract that many classes can implement and that a single class can implement many times, giving single-inheritance languages the flexibility they need; multiple inheritance of implementation, by contrast, is powerful but prone to the diamond problem, which C++ solves with virtual inheritance and Python with the method resolution order, while Java and C# avoid it by allowing multiple inheritance only of interfaces."
+  ],
+  "questions": [
+   "What is the difference between an interface and a class, and what does a class promise when it implements an interface?",
+   "Why can a class implement several interfaces but, in Java and C#, extend only one class?",
+   "What is the diamond problem, and how do C++ and Python each resolve it?",
+   "How did default methods in interfaces change the relationship between interfaces and abstract classes?",
+   "When should a developer choose an interface rather than an abstract class?"
+  ]
+ },
+ {
+  "code": "10.3.31",
+  "title": "Virtual methods and polymorphism: common methods with different implementations",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Virtual methods and the idea of overriding behaviour in descendants.",
+   "How a virtual call is dispatched to the actual object's type.",
+   "The virtual method table and the cost of dynamic dispatch.",
+   "Virtual methods in C++, C#, Java and Python.",
+   "Common pitfalls: hiding versus overriding and the fragile base class."
+  ],
+  "body": [
+   "A virtual method is a method whose actual implementation is chosen based on the real (run-time) type of the object, not on the declared (compile-time) type of the reference used to call it. This single mechanism is what makes subtype polymorphism work: a base-type reference can point to any descendant, and calling a virtual method through that reference invokes the descendant's version.",
+   "The purpose of virtual methods is to define a common operation at the base level and let each descendant supply its own implementation. A base class Shape can declare a virtual method 'draw()'; the descendants Circle, Rectangle and Triangle each override 'draw()' with their own drawing code. Client code iterates over a collection of Shape references and calls 'draw()' on each, and every object draws itself correctly without the client knowing its concrete type.",
+   "Overriding is the act of a descendant replacing the inherited virtual method with a new implementation that has the same signature. Overriding is different from overloading: overloading provides several methods with the same name but different parameter lists, resolved at compile time, whereas overriding provides one method with an identical signature in a subclass, resolved at run time. Confusing the two is a common source of bugs.",
+   "The technical foundation of virtual calls in compiled languages is the virtual method table, or vtable. Each class with virtual methods has a table of pointers to its method implementations, and each object carries a hidden pointer to its class's vtable. A virtual call is compiled into 'look up the method's slot in the object's vtable and jump to the address stored there', which is why the correct override is reached even through a base-type reference.",
+   "This indirection has a small cost: a virtual call requires one extra memory lookup compared with a direct call and usually cannot be inlined by the compiler as easily. In most applications the cost is negligible, but in performance-critical inner loops it can matter, which is one reason C++ makes methods non-virtual by default and asks the developer to opt in with the 'virtual' keyword.",
+   "C++ is explicit about virtuality: only methods declared 'virtual' participate in dynamic dispatch, and a call through a base-class pointer or reference then reaches the derived override. Calling a virtual method through an object by value, however, causes 'slicing' and dispatches statically, so polymorphism in C++ works only through pointers or references to the base type. The 'override' keyword, added in C++11, lets the compiler verify that a method really does override a base virtual method.",
+   "Java takes the opposite default: every non-static, non-private, non-final method is virtual automatically, so overriding is the normal case and no keyword is needed to enable it. To prevent overriding, a method or class is marked 'final'. C# is a hybrid: methods are non-virtual by default, are made overridable with 'virtual', and are overridden with an explicit 'override' keyword, which makes the intent visible at both ends of the relationship.",
+   "Python, being dynamically typed, treats essentially all methods as virtual. When a method is called on an object, the interpreter looks it up on the object's class and then along the method resolution order, so a subclass method always shadows the base one. There is no separate 'virtual' concept because dynamic attribute lookup already provides run-time dispatch by nature.",
+   "Virtual methods interact closely with abstract methods. A pure virtual function in C++ or an abstract method in Java and C# is a virtual method with no implementation in the base class; it defines the slot in the vtable but requires a descendant to fill it. This is how an abstract base class can call 'this.draw()' in its own concrete code and have the call routed to a descendant implementation that does not yet exist when the base class is written — the template method pattern.",
+   "A subtle and dangerous pitfall is method hiding, which looks like overriding but is not. In C# a method in a derived class with the same signature as a non-virtual base method, declared with 'new' instead of 'override', hides rather than overrides the base method; the version invoked then depends on the reference type, not the object type. Similarly, in C++ redefining a non-virtual method in a derived class hides the base version. Such hidden methods break the polymorphic behaviour a caller expects.",
+   "Calling virtual methods from within a constructor is another well-known trap. While a base-class constructor runs, the derived part of the object is not yet initialised, yet in Java and C# a virtual call from the base constructor already dispatches to the derived override, which may then read uninitialised fields. C++ avoids the surprise by dispatching such calls to the base version during construction, but the general advice is not to call overridable methods from constructors.",
+   "The 'fragile base class' problem shows the design responsibility that virtual methods bring. Because subclasses can override behaviour and base classes can call their own virtual methods internally, a seemingly harmless change to the base class can silently alter the behaviour of every subclass. Careful documentation of which methods are meant to be overridden, and marking others as final or sealed, keeps a class hierarchy robust.",
+   "Access to the overridden base implementation is provided by 'super' in Java and Python and by 'base' in C#. A descendant's override often extends rather than replaces the inherited behaviour by first calling the base version — for example 'super().draw()' followed by additional drawing code — which is the standard way to build cooperative, layered behaviour along an inheritance chain.",
+   "Thus, virtual methods are the engine of subtype polymorphism: they let a base class declare a common operation while each descendant supplies its own implementation, and a run-time dispatch mechanism such as the virtual method table ensures that a call through a base-type reference always reaches the correct override; used carefully — distinguishing overriding from hiding and avoiding virtual calls in constructors — they make class hierarchies both flexible and predictable."
+  ],
+  "questions": [
+   "What determines which implementation of a virtual method is executed at run time?",
+   "How does a virtual method table make dynamic dispatch possible, and what is its cost?",
+   "How do the defaults for virtual methods differ between C++, Java and C#?",
+   "What is the difference between overriding a method and hiding it, and why is hiding dangerous?",
+   "Why is it risky to call a virtual method from within a constructor?"
+  ]
+ },
+ {
+  "code": "10.3.32",
+  "title": "Late binding and dynamic polymorphism",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in implementing dynamic polymorphism through virtual methods and observing how late binding selects the correct implementation at run time.",
+  "theory": [
+   "Binding is the association of a method call in the source code with the concrete piece of code that will run. Early (static) binding resolves this association at compile time from the declared type of the reference, while late (dynamic) binding defers it to run time and resolves it from the actual type of the object. Late binding is the mechanism that makes dynamic polymorphism possible: a call written against a base type is dispatched to the descendant's overriding implementation.",
+   "Dynamic polymorphism is normally realised through virtual methods and a base-type reference or pointer. A collection of base-type references may hold objects of many descendant classes, and calling a virtual method on each element invokes the version belonging to that element's real class. The calling code stays completely unaware of the concrete types, which is what allows new descendants to be added without changing the caller.",
+   "Different languages expose late binding differently: C++ requires the 'virtual' keyword and dispatches only through pointers or references, C# uses 'virtual' and 'override', Java makes overridable methods virtual by default, and Python resolves every method dynamically along its method resolution order. Understanding these differences is essential when moving polymorphic designs between languages."
+  ],
+  "materials": [
+   "A computer with a configured development environment for at least two languages (for example Java with the JDK and Python 3, or C# with .NET and C++ with a modern compiler).",
+   "An IDE or code editor with a compiler/interpreter and an integrated debugger.",
+   "A short reference sheet on virtual methods, overriding and binding in the chosen languages.",
+   "A report template for recording code, output and observations."
+  ],
+  "procedure": [
+   "Define a base type with at least one virtual (overridable) method, for example a Shape with a virtual 'area()' method, and create two or three descendant classes that each override it with a different formula.",
+   "Create a collection of base-type references that actually hold objects of the different descendants, then loop over it calling the virtual method, and record which implementation runs for each element.",
+   "Add a non-virtual (or hidden) method to the same hierarchy, call it through a base-type reference, and observe that early binding now selects the base version regardless of the real object type.",
+   "Use the debugger to step into a virtual call and confirm that execution jumps into the descendant's override, contrasting this with stepping into the non-virtual call.",
+   "Introduce a new descendant class without modifying the loop that calls the virtual method, and demonstrate that the existing code handles the new type correctly — evidence of the open/closed benefit of dynamic polymorphism.",
+   "Repeat the core experiment in a second language and compare how each language enables or disables late binding, then summarise the differences in the report."
+  ],
+  "tasks": [
+   "Implement a Shape hierarchy (base plus at least three descendants) in which 'area()' is virtual, and write a loop that prints the area of a mixed collection, proving that late binding selects each descendant's implementation.",
+   "Construct a demonstration that clearly shows the difference between a virtual call and a non-virtual (statically bound) call producing different results for the same object accessed through a base-type reference.",
+   "Reimplement the same polymorphic behaviour in a second language of your choice and write a short comparison of how binding is controlled in the two languages."
+  ],
+  "conclusion": "As a result of the work, the student has formed practical skills in implementing dynamic polymorphism with virtual methods and in demonstrating experimentally how late binding dispatches a call to the object's actual type at run time.",
+  "questions": [
+   "What is the difference between early (static) binding and late (dynamic) binding?",
+   "Why is late binding required for dynamic polymorphism to work?",
+   "How can you demonstrate that a non-virtual method is bound statically while a virtual method is bound dynamically?",
+   "Why can a new descendant class be added without changing code that calls the virtual method?",
+   "How is late binding enabled or controlled in the two languages you used?"
+  ]
+ },
+ {
+  "code": "10.3.33",
+  "title": "Polymorphism in statically typed and dynamically typed languages",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Static versus dynamic typing and how each checks types.",
+   "Subtype polymorphism in statically typed languages.",
+   "Duck typing as polymorphism in dynamically typed languages.",
+   "Generics and parametric polymorphism as a middle ground.",
+   "Trade-offs in safety, flexibility and performance."
+  ],
+  "body": [
+   "The way a language handles types shapes the way it expresses polymorphism. In a statically typed language such as Java, C#, C++ or Go, the type of every variable is known and checked at compile time; in a dynamically typed language such as Python, Ruby or JavaScript, types are associated with values at run time and checked as the program executes. Polymorphism exists in both worlds, but it is achieved and guaranteed by different means.",
+   "In statically typed languages the dominant form is subtype polymorphism based on an explicit type hierarchy. A variable of a base type or an interface type may refer to any of its subtypes, and the compiler verifies at build time that the requested operations are declared on that base type. A method taking a parameter of type Shape is guaranteed by the compiler to receive something that provides an 'area()' method, and a virtual call then dispatches to the concrete implementation at run time.",
+   "The key property here is that the contract is checked before the program runs. If a class fails to implement a required method, or a caller uses a method the declared type does not have, compilation fails. This catches a large class of errors early and lets tools provide reliable autocompletion and refactoring, at the price of requiring the relationship between types to be declared explicitly.",
+   "Dynamically typed languages achieve polymorphism through 'duck typing': the principle that if an object walks like a duck and quacks like a duck, it may be treated as a duck. What matters is not the object's declared type — it has none at compile time — but whether it actually possesses the attributes and methods being used at the moment they are used. Any object that has an 'area()' method can be passed to code that calls 'area()', with no shared base class or interface required.",
+   "Duck typing gives great flexibility: unrelated classes from unrelated libraries can be used interchangeably as long as they expose the expected methods, and there is no need to retrofit a common interface onto existing types. Python's file-like objects illustrate this: any object with 'read()' and 'write()' methods can stand in for a file, whether it is a real file, an in-memory buffer or a network stream.",
+   "The cost of duck typing is that mismatches are discovered only at run time. Calling a method that an object does not actually have raises an error such as AttributeError in Python during execution, possibly deep inside a rarely exercised branch. This shifts a whole category of type errors from compile time to test time, which is why dynamically typed languages rely heavily on comprehensive automated testing.",
+   "A third, orthogonal form is parametric polymorphism, provided by generics in statically typed languages. Generics let a single piece of code operate over many types while remaining type-safe: a List<T> or a method '<T> T max(List<T>)' works for any type T, with the compiler substituting the concrete type at each use. This delivers reuse without giving up static checking and without duck typing's run-time surprises.",
+   "Generics are implemented differently across languages, and the difference affects behaviour. C++ templates and C# generics are reified — the compiler or runtime produces specialised code that knows the concrete type. Java generics use type erasure — the type parameter exists only at compile time and is removed afterwards, so at run time a List<String> and a List<Integer> are the same raw List. This is why Java cannot, for instance, create 'new T[]' inside a generic class.",
+   "Overloading, sometimes called ad-hoc polymorphism, is another compile-time form found mainly in statically typed languages. Several methods share a name but differ in parameter types, and the compiler chooses the appropriate one for each call site. Dynamically typed languages usually do not support classic overloading, because there are no static parameter types to distinguish the versions; instead they use default and variable arguments or inspect argument types at run time.",
+   "Modern languages increasingly blend the two philosophies. Python added optional type hints and static analysers such as mypy, allowing duck-typed code to be checked ahead of time when desired, and introduced Protocols to describe duck-typed contracts formally ('structural subtyping'). TypeScript brings static, structural typing to JavaScript. Conversely, C# offers the 'dynamic' type to opt into run-time binding within a statically typed language. The categories are practical defaults rather than rigid walls.",
+   "Structural typing is a useful way to understand this convergence. In nominal typing, used by Java and C#, a type is compatible only if it explicitly declares that it implements an interface. In structural typing, used by Go interfaces, TypeScript and Python Protocols, a type is compatible if it simply has the required members — duck typing verified statically. This offers much of duck typing's flexibility together with compile-time safety.",
+   "The practical consequences guide language and design choices. Static typing favours large, long-lived codebases where early error detection, tooling and performance matter most, since dispatch can often be optimised and inlined. Dynamic typing favours rapid prototyping, scripting and highly generic 'glue' code, where flexibility and brevity outweigh the risk of late-discovered type errors. A skilled developer chooses the form of polymorphism that fits the problem rather than treating one style as universally superior.",
+   "Thus, polymorphism is universal but its expression depends on the type system: statically typed languages achieve it through checked type hierarchies, generics and overloading, catching mismatches at compile time, whereas dynamically typed languages achieve it through duck typing, catching mismatches at run time; modern languages increasingly combine both through optional typing, structural typing and protocols, letting developers trade safety for flexibility as each situation requires."
+  ],
+  "questions": [
+   "How does the point at which types are checked differ between statically and dynamically typed languages?",
+   "What is duck typing, and what are its advantages and disadvantages compared with subtype polymorphism?",
+   "What is parametric polymorphism, and how do reified generics differ from Java's type erasure?",
+   "What is the difference between nominal and structural typing, and which languages use each?",
+   "How do features such as Python type hints, Protocols and C#'s 'dynamic' type blur the boundary between the two styles?"
+  ]
+ },
+ {
+  "code": "10.3.34",
+  "title": "Polymorphism in the context of abstract classes and interfaces",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in building polymorphic code on top of abstract classes and interfaces so that a single client can operate uniformly over many concrete implementations.",
+  "theory": [
+   "Abstract classes and interfaces are the two standard foundations for polymorphism in object-oriented languages. Both define a common type through which a variety of concrete objects can be accessed uniformly: the abstract class or interface declares the operations, and each concrete implementation supplies its own behaviour. Client code depends only on the abstraction and therefore works with any current or future implementation.",
+   "The difference in emphasis is important in practice. An abstract class can provide shared state and partial implementation and is inherited by types that are variations of one concept, while an interface provides only a contract that any number of unrelated types can implement. A common and powerful pattern combines them: an interface declares the capability, an abstract class implements the common parts, and concrete classes finish the specific parts.",
+   "Programming against the abstraction rather than the concrete type is the practical goal. When a method's parameters, collections and fields are declared in terms of an interface or abstract base, the same code drives every implementation, and adding a new implementation requires no change to the client — the open/closed principle applied through polymorphism."
+  ],
+  "materials": [
+   "A computer with a configured object-oriented development environment (Java, C#, C++ or Python).",
+   "An IDE with a compiler/interpreter and an integrated debugger.",
+   "A reference sheet on abstract classes, interfaces and overriding in the chosen language.",
+   "A report template for code listings, program output and conclusions."
+  ],
+  "procedure": [
+   "Design a small domain with one clear operation, for example a payment system where every payment method must implement a 'pay(amount)' operation, and decide whether the abstraction should be an interface, an abstract class or both.",
+   "Define the abstraction: declare an interface (or abstract class) with the required method signatures and, where appropriate, an abstract class that implements the shared parts.",
+   "Implement at least three concrete classes (for example CardPayment, CashPayment and WalletPayment) that each provide their own version of the abstract operation.",
+   "Write client code that stores the objects in a collection of the abstract type and processes them uniformly through a single loop, without referring to any concrete class name.",
+   "Add a fourth implementation and confirm that the client code runs unchanged, then use the debugger to verify that each call dispatches to the correct concrete method.",
+   "Record the code, the output and a short analysis of how the abstraction decoupled the client from the implementations, and note where an abstract class would have been preferable to an interface or vice versa."
+  ],
+  "tasks": [
+   "Implement a polymorphic system based on an interface (or abstract class) with at least three concrete implementations, driven by a single client loop that names no concrete type.",
+   "Extend the system with a new implementation and demonstrate, with output, that the existing client code required no modification.",
+   "Refactor part of the hierarchy so that an abstract class provides a shared implemented method used by all descendants, and explain in the report why this reduced code duplication."
+  ],
+  "conclusion": "As a result of the work, the student has formed practical skills in designing polymorphic systems around abstract classes and interfaces so that a single client can process many implementations uniformly and be extended without modification.",
+  "questions": [
+   "Why do abstract classes and interfaces serve as the foundation for polymorphism?",
+   "What does it mean to 'program to an interface', and how did it decouple your client from the implementations?",
+   "In your task, why did you choose an interface, an abstract class, or a combination of both?",
+   "How did adding a new implementation without changing the client demonstrate the open/closed principle?",
+   "How did the debugger confirm that each polymorphic call reached the correct concrete method?"
+  ]
+ },
+ {
+  "code": "10.3.35",
+  "title": "Polymorphism and method overloading",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Overloading as ad-hoc, compile-time polymorphism.",
+   "How the compiler resolves an overloaded call by signature.",
+   "Overloading versus overriding: static versus dynamic dispatch.",
+   "Overloading across languages and its interaction with type promotion.",
+   "Best practices and common pitfalls of overloading."
+  ],
+  "body": [
+   "Method overloading is the ability to define several methods with the same name in the same scope, distinguished by their parameter lists — the number, types or order of parameters. It is classified as ad-hoc polymorphism because one name stands for several distinct behaviours, chosen according to the arguments supplied. A single name such as 'print' can serve 'print(int)', 'print(String)' and 'print(double)'.",
+   "The defining feature of overloading is that the selection among the candidates happens at compile time, based on the static types of the arguments at the call site. This is called static dispatch or early binding. The compiler examines the argument types, finds the most specific matching signature and hard-wires the call to that method; nothing about this decision depends on run-time values.",
+   "The return type is not part of the signature for the purpose of overload resolution in Java, C# and C++. Two methods that differ only in return type are not valid overloads and will be rejected by the compiler, because a call such as 'print(x)' used purely as a statement would give no information to choose between them. Overloads must differ in their parameter lists.",
+   "Overload resolution can be subtle when arguments do not match a signature exactly. The compiler applies a ranked set of conversions: an exact match is preferred, then widening (promotion) such as int to long or float to double, then boxing or autoboxing, and finally variable-argument (varargs) forms. Because of this ranking, calling 'f(5)' when both 'f(int)' and 'f(double)' exist selects 'f(int)', since the exact match outranks the widening conversion.",
+   "Overloading is fundamentally different from overriding, and mixing them up is a frequent error. Overloading gives several methods with different signatures resolved at compile time within one class; overriding gives one method with an identical signature redefined in a subclass and resolved at run time. Overloading is 'same name, different parameters'; overriding is 'same name, same parameters, different class'. The first is ad-hoc polymorphism, the second is subtype polymorphism.",
+   "A revealing consequence appears when the two are combined. Suppose a base class has 'process(Object)' and a subclass adds 'process(String)'. A call 'process(someString)' where 'someString' is declared as Object binds at compile time to 'process(Object)', because overload resolution uses the static type Object, not the run-time type String. Overloading looks at declared types; only overriding looks at actual object types.",
+   "Java, C# and C++ all support overloading with broadly similar rules, though the corner cases differ. C++ additionally allows overloading of operators and interacts with implicit conversions and templates, which can make overload resolution complex. C# supports named and optional arguments, which participate in resolution and can interact with overloading in ways that require care to keep call sites unambiguous.",
+   "Dynamically typed languages generally do not offer classic overloading. In Python, defining two methods with the same name simply means the second definition replaces the first, because a name binds to a single function object. The idiomatic substitutes are default parameter values, variable-length arguments '*args' and '**kwargs', and explicit run-time inspection of argument types, sometimes formalised through 'functools.singledispatch', which selects an implementation based on the type of the first argument at run time.",
+   "Constructors are commonly overloaded to offer several ways of creating an object — for example a Rectangle with no arguments, with a width and height, or with another Rectangle to copy. To avoid duplicating logic, one constructor typically delegates to another (using 'this(...)' in Java or ': this(...)' in C#), concentrating the real initialisation in a single place.",
+   "Overloading improves the readability and usability of an interface when it lets related operations share one intuitive name, as the many overloads of 'System.out.println' or of mathematical functions demonstrate. Callers do not need to remember separate names such as 'printInt' and 'printString'; they simply call 'print' with whatever they have, and the compiler routes the call.",
+   "Overloading can also harm clarity when overused or when overloads behave inconsistently. If different overloads of the same name do conceptually different things, or if subtle conversion rules make it hard to predict which overload runs, readers are misled. A safe guideline is that all overloads of a method should perform the same conceptual operation and should not differ only in ways that force the reader to reason about implicit conversions.",
+   "Ambiguity errors are a practical hazard. When two overloads are equally good matches for a call after applying conversions — for example 'f(int, long)' and 'f(long, int)' called with 'f(1, 2)' — the compiler cannot choose and reports an ambiguous-call error. The remedy is to make the call unambiguous with explicit casts or to redesign the overload set so that no call can match two candidates equally.",
+   "Thus, method overloading is compile-time, ad-hoc polymorphism in which several methods share a name but differ in their parameter lists, and the compiler selects among them using the static types of the arguments and a ranked set of conversions; it is fundamentally distinct from run-time overriding, is largely absent from dynamically typed languages, and should be used so that all overloads represent the same operation and no call site becomes ambiguous."
+  ],
+  "questions": [
+   "What is method overloading, and why is it classified as ad-hoc polymorphism?",
+   "At what point, and based on what information, does the compiler resolve an overloaded call?",
+   "Why is the return type not sufficient to distinguish two overloads?",
+   "How does overloading differ from overriding, and what happens when a base and subclass method combine the two?",
+   "Why do dynamically typed languages such as Python lack classic overloading, and what do they use instead?"
+  ]
+ },
+ {
+  "code": "10.3.36",
+  "title": "Polymorphism and operators in programming languages",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Operator polymorphism: the same operator with many meanings.",
+   "Built-in operator overloading and language-defined behaviour.",
+   "User-defined operator overloading in C++, C# and Python.",
+   "Languages without operator overloading and their rationale.",
+   "Guidelines for defining operators that preserve intuition."
+  ],
+  "body": [
+   "Operators such as '+', '-', '*', '==' and '<' are, in most languages, already polymorphic in a built-in way: the same symbol denotes different machine operations depending on the operand types. The expression '2 + 3' performs integer addition, '2.0 + 3.0' performs floating-point addition, and in many languages '\"ab\" + \"cd\"' performs string concatenation. One symbol, several implementations chosen by operand type — this is ad-hoc polymorphism applied to operators.",
+   "Operator overloading is the language feature that lets programmers extend this idea to their own types, defining what an operator means for objects of a class. Its purpose is expressiveness: writing 'a + b' for two Vector or Complex objects, or 'a == b' for two Money values, is clearer and closer to mathematical notation than 'a.add(b)' or 'a.equals(b)'. For numeric and algebraic types this can greatly improve readability.",
+   "In C++ operator overloading is a first-class feature. Operators are functions with special names, written as 'operator+', 'operator==', 'operator[]' and so on, and may be defined as member functions or as free functions. C++ allows overloading of arithmetic, comparison, subscript, function-call, stream-insertion and even assignment operators, which is why the standard library can write 'cout << value' and 'v[i]' for user-defined types. A few operators, such as '::', '.', '.*' and '?:', cannot be overloaded.",
+   "C# supports operator overloading through static methods declared with the 'operator' keyword, for example 'public static Complex operator +(Complex a, Complex b)'. The language imposes discipline: certain operators must be overloaded in logical pairs — if '==' is defined, '!=' must be too, and overriding 'Equals' and 'GetHashCode' is expected — so that the overloaded semantics remain consistent with the rest of the type system.",
+   "Python implements operator overloading through special ('dunder') methods on a class. Defining '__add__' gives meaning to '+', '__eq__' to '==', '__lt__' to '<', '__getitem__' to indexing and '__len__' to the built-in 'len'. When the interpreter evaluates 'a + b', it calls 'a.__add__(b)', and if that is not implemented it tries the reflected method 'b.__radd__(a)'. This is how NumPy arrays and many other libraries make natural mathematical expressions possible.",
+   "Not every language allows user-defined operator overloading, and this is a deliberate design decision. Java, for example, has built-in operator polymorphism (including '+' for String) but does not let programmers overload operators for their own classes; developers must write named methods such as 'add' or 'compareTo'. The Java designers considered operator overloading a frequent source of obscure, hard-to-read code and chose predictability over expressiveness. Go makes the same choice.",
+   "The central risk of operator overloading is exactly the readability it is meant to improve: an operator carries strong expectations, and if a class redefines '+' to do something surprising, readers are misled. Overloading '+' to mean 'send over the network' or '<' to mean something unrelated to ordering produces code that looks familiar but behaves unexpectedly, which is harder to debug than an explicit method call would have been.",
+   "Consistency among related operators is essential. If '==' is defined it should be reflexive, symmetric and transitive and should agree with any hash function used for the type; if '<' is defined it should impose a consistent total or partial order so that sorting behaves sensibly. Defining '+' usually implies that '+=' should behave compatibly. Languages like C# enforce some of these pairings precisely because inconsistent operators break collections and algorithms that rely on them.",
+   "Comparison operators deserve special mention because they interact with library machinery. Overriding 'equals'/'==' incorrectly can silently break hash-based collections, and defining ordering operators inconsistently can break sorting and search. C++20 introduced the three-way comparison operator '<=>' (the 'spaceship' operator) precisely to let a type define its ordering once and have the individual comparison operators derived automatically and consistently.",
+   "Operator overloading also interacts with implicit conversions and overload resolution. In C++ an overloaded operator combined with an implicit conversion constructor can lead to surprising conversions and ambiguities, which is why the 'explicit' keyword is often applied to single-argument constructors. Understanding how operator functions participate in normal overload resolution is necessary to avoid these traps.",
+   "The accepted best practice is to overload operators only when the type genuinely models a mathematical or algebraic concept where the operator's conventional meaning applies — vectors, matrices, complex numbers, big integers, money, dates and durations. For such types, 'a + b' and 'a < b' mean exactly what a reader expects. For types where the meaning would be figurative or surprising, a clearly named method is the better choice.",
+   "It is useful to see operator overloading as one more facet of the same polymorphism principle that underlies methods: a single notation expressing many concrete behaviours selected by operand type. Whether the notation is a method name resolved by overloading, a virtual method resolved by overriding, or an operator symbol resolved by its operands, the goal is the same — writing general code and expressions that adapt correctly to the specific types involved.",
+   "Thus, operators are inherently polymorphic through their built-in behaviour, and operator overloading extends this to user-defined types in languages such as C++, C# and Python, greatly improving the expressiveness of numeric and algebraic code; but because operators carry strong expectations, they must be overloaded only when their conventional meaning applies and kept consistent with related operators, which is precisely why some languages such as Java deliberately omit the feature."
+  ],
+  "questions": [
+   "In what sense are built-in operators already polymorphic before any overloading is added?",
+   "How is operator overloading expressed in C++, C# and Python respectively?",
+   "Why do languages such as Java deliberately not allow user-defined operator overloading?",
+   "Why must related operators such as '==' and '!=', or '<' and ordering, be kept consistent?",
+   "For what kinds of types is operator overloading appropriate, and when should a named method be used instead?"
+  ]
+ },
+ {
+  "code": "10.3.37",
+  "title": "Fundamentals of debugging and its role in software development",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What debugging is and how it differs from testing.",
+   "Categories of defects: syntax, runtime and logic errors.",
+   "The systematic debugging process from reproduction to fix.",
+   "The scientific method and hypothesis-driven debugging.",
+   "The cost of defects and the role of debugging in the development life cycle."
+  ],
+  "body": [
+   "Debugging is the systematic process of finding, understanding and removing defects — 'bugs' — from a program so that its behaviour matches its specification. It begins after a problem has been observed and aims to answer three questions: what is actually happening, why is it happening, and how can it be corrected without introducing new faults. Debugging is a core professional skill, because writing code that never needs correction is, in practice, impossible.",
+   "It is important to distinguish debugging from testing, since the two are often confused. Testing is the activity of detecting the presence of defects by exercising the program and comparing actual behaviour with expected behaviour; it tells you that something is wrong. Debugging is the activity of locating and fixing the cause of a defect that testing (or a user) has revealed; it tells you why it is wrong and repairs it. Testing finds the symptom, debugging finds and removes the cause.",
+   "Defects fall into three broad categories. Syntax errors violate the grammar of the language and are caught by the compiler or interpreter before the program runs, such as a missing semicolon or an unbalanced bracket; they are usually the easiest to fix. Runtime errors occur while the program executes, such as division by zero, dereferencing a null reference or accessing an array out of bounds, and typically stop the program or raise an exception. Logic errors are the hardest: the program runs without complaint but produces the wrong result, because the algorithm or its implementation is incorrect.",
+   "The terms 'error', 'defect' (or 'fault') and 'failure' describe a causal chain that debugging follows in reverse. A human makes an error while writing the code; this introduces a defect into the source; when that defect is executed under the right conditions it causes a failure — an observable deviation from correct behaviour. The debugger's task is to work back from the visible failure to the underlying defect and, ideally, to understand the error that produced it so that similar mistakes can be avoided.",
+   "A disciplined debugging process follows recognisable steps. First, reproduce the failure reliably, because a bug that cannot be reproduced cannot be confirmed fixed. Second, localise it — narrow down the region of code responsible. Third, understand the root cause rather than the surface symptom. Fourth, correct the defect. Fifth, verify that the fix resolves the failure and, crucially, does not break anything else. Skipping the 'understand' step and merely patching symptoms is the source of many recurring bugs.",
+   "Effective debugging is essentially the scientific method applied to code. The developer observes the faulty behaviour, forms a hypothesis about its cause, designs an experiment — often by inspecting a value, adding a check or setting a breakpoint — that would confirm or refute the hypothesis, runs it, and revises the hypothesis in light of the result. Proceeding by disciplined hypotheses rather than by random changes is what separates efficient debugging from guesswork.",
+   "Reproducing a bug reliably is frequently the hardest and most valuable step. Intermittent bugs — those that appear only sometimes — usually stem from uncontrolled variables such as timing, concurrency, uninitialised memory, external input or environment differences. Capturing the exact inputs, configuration and sequence of events that trigger the failure turns an elusive problem into a repeatable one that can be attacked methodically.",
+   "A powerful localisation technique is systematic narrowing, closely related to binary search. By checking the program state at a point roughly halfway through the suspect path, the developer determines whether the fault lies before or after that point, then repeats in the narrowed region. Each check halves the search space, so even a large program can be reduced to the offending statement in a handful of steps. This is far more efficient than reading code linearly from the top.",
+   "The economic case for debugging skill is strong: the cost of fixing a defect rises sharply the later it is found. A fault caught while coding may cost minutes; the same fault found in testing costs more; found in production it can cost many times as much, including downtime, data corruption and loss of user trust. Well-known incidents — from the Ariane 5 launch failure to the Mars Climate Orbiter loss — show how a single undetected defect can have enormous consequences.",
+   "Certain habits make debugging dramatically easier and are part of good engineering discipline. Reading error messages and stack traces carefully — they usually name the file, line and type of failure — saves enormous time. Reproducing on the smallest possible input isolates the cause. Changing one thing at a time keeps cause and effect clear. Using version control to compare against a last-known-good state, or to bisect through history, pinpoints when a regression was introduced.",
+   "Several classic anti-patterns waste time and should be avoided. 'Shotgun debugging' — changing many things at once in the hope that something helps — obscures which change mattered and often introduces new bugs. Assuming rather than verifying where the fault lies leads to fixing the wrong code. Ignoring or suppressing warnings hides real problems. Editing code before understanding the cause, or removing an error message without understanding it, tends to convert a visible bug into a hidden one.",
+   "Debugging is not only reactive; it is intertwined with preventive practices across the whole life cycle. Defensive programming, input validation, assertions, meaningful logging, code review, automated tests and clear error handling all reduce how many defects reach the debugging stage and make those that do easier to find. A program written with debugging in mind — with observable state and clear failure messages — is far cheaper to maintain than one that fails silently.",
+   "Thus, debugging is the systematic, hypothesis-driven process of reproducing, localising, understanding, correcting and verifying the removal of defects, distinct from testing which merely reveals that defects exist; because the cost of a defect grows the later it is caught, disciplined debugging supported by good tools and preventive practices is one of the most valuable skills a software developer can possess."
+  ],
+  "questions": [
+   "How does debugging differ from testing in the software development process?",
+   "What are the three main categories of defects, and how does each typically manifest?",
+   "What are the main steps of a systematic debugging process, and why should the 'understand the cause' step never be skipped?",
+   "How is the scientific method applied to debugging, and how does binary-search narrowing help localise a fault?",
+   "Why does the cost of fixing a defect increase the later it is discovered in the life cycle?"
+  ]
+ },
+ {
+  "code": "10.3.38",
+  "title": "Debugging tools and development environments",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The range of debugging tools from print statements to interactive debuggers.",
+   "Interactive debuggers integrated into IDEs.",
+   "Command-line and standalone debuggers.",
+   "Specialised tools: profilers, memory checkers and loggers.",
+   "Choosing the right tool for a given class of defect."
+  ],
+  "body": [
+   "Debugging tools span a wide spectrum, from the simplest print statement to sophisticated interactive debuggers and analysers. Every developer should be comfortable across this spectrum, because different classes of problems are best attacked with different tools, and knowing which tool fits a situation is itself an important skill.",
+   "The simplest and most universal technique is print (or trace) debugging: inserting statements that output the value of variables and the flow of execution to the console or a log. Despite its humbleness it remains widely used because it requires no special setup, works everywhere including remote and production environments, and gives a persistent record of what happened. Its drawbacks are that it clutters the code, must be removed afterwards, and requires editing and re-running the program for each new question.",
+   "The interactive debugger is the central professional tool. It lets the developer pause a running program at chosen points, inspect and modify variables, examine the call stack, and advance execution step by step. Rather than guessing at values by adding prints, the developer observes the live state of the program directly, which is far faster and more flexible for anything but the simplest bug.",
+   "Modern integrated development environments embed powerful graphical debuggers. Visual Studio (for C#, C++ and more), IntelliJ IDEA and Eclipse (for Java), PyCharm and VS Code (for Python and many languages), and Xcode all provide breakpoints set by clicking in the margin, panels showing variables and the call stack, hover-to-inspect on any expression, and controls for stepping through code. The graphical presentation makes complex program state easy to explore visually.",
+   "Underneath many of these graphical front-ends are classic command-line debuggers. GDB is the standard debugger for C and C++ on Unix-like systems; LLDB fills the same role in the LLVM ecosystem; Python ships with the built-in 'pdb' module; and the JVM provides 'jdb'. These tools offer the full range of debugging operations through typed commands and are essential when no graphical environment is available, such as on a remote server accessed over SSH.",
+   "A crucial capability of a good debugger is remote and attach debugging. Instead of launching the program from the IDE, the developer can attach the debugger to an already-running process — including one running on another machine, inside a container, or on a mobile device. This is indispensable for diagnosing problems that appear only in a staging or production-like environment that cannot easily be reproduced on the developer's own machine.",
+   "Beyond general debuggers, specialised analysis tools target specific defect categories. Profilers such as those built into Visual Studio and IntelliJ, or standalone tools like perf and py-spy, measure where time and memory are spent, which is the right tool for performance problems rather than correctness bugs. They reveal hot paths and bottlenecks that no amount of stepping through code would make obvious.",
+   "Memory and concurrency analysers address defects that ordinary debuggers struggle with. Valgrind and AddressSanitizer detect memory leaks, buffer overruns and use-after-free errors in C and C++; ThreadSanitizer detects data races in concurrent code. These tools instrument the program to catch violations at the exact moment they occur, turning otherwise invisible corruption into a precise report with a location.",
+   "Logging frameworks form a complementary category oriented toward diagnosing problems over time and in production. Tools such as Log4j and SLF4J for Java, Serilog for .NET, and Python's 'logging' module let developers record structured, levelled messages (debug, info, warning, error) that can be enabled or disabled without changing code. Unlike ad-hoc prints, logs are a designed, persistent diagnostic surface that is invaluable when a failure cannot be reproduced interactively.",
+   "Static analysis tools and linters catch a whole class of defects before the program ever runs. Compiler warnings, linters such as ESLint or Pylint, and static analysers such as SonarQube, Clang-Tidy or the .NET analyzers inspect the source for suspicious patterns — unused variables, possible null dereferences, resource leaks — and report them early. They shift defect detection left, reducing how much interactive debugging is needed later.",
+   "For the most difficult failures, advanced tooling exists. Post-mortem debugging analyses a crash dump (a 'core dump') captured at the moment of failure, letting the developer inspect the program's final state even though the process has ended. Time-travel or reverse debuggers, such as GDB's record mode and rr, record an execution so it can be replayed and stepped backwards, which is transformative for intermittent and hard-to-reproduce bugs.",
+   "Selecting the right tool depends on the kind of defect. A logic error in a function is best pursued with an interactive debugger and breakpoints; a performance problem calls for a profiler; a memory corruption in C++ calls for a memory checker; an intermittent production failure calls for good logging and possibly a crash dump; a data race calls for a concurrency analyser. Matching tool to problem, rather than forcing every bug through the same technique, is what makes debugging efficient.",
+   "Thus, debugging tools range from simple print statements and logging through interactive graphical and command-line debuggers to specialised profilers, memory and concurrency analysers, static analysers and time-travel debuggers; a competent developer knows the strengths of each and chooses the tool that matches the class of defect, since the right instrument can reduce a day of investigation to a few minutes."
+  ],
+  "questions": [
+   "What are the advantages and disadvantages of print (trace) debugging compared with an interactive debugger?",
+   "What core capabilities does an interactive debugger provide, and how do IDEs present them?",
+   "What are command-line debuggers such as GDB and pdb used for, and when are they preferable to a graphical debugger?",
+   "Which specialised tools address performance, memory and concurrency defects, and why can a general debugger not replace them?",
+   "How should a developer choose a debugging tool according to the class of defect being investigated?"
+  ]
+ },
+ {
+  "code": "10.3.39",
+  "title": "Approaches to debugging: incremental, step-by-step, conditional",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in applying incremental, step-by-step and conditional debugging strategies to locate and fix defects in a program efficiently.",
+  "theory": [
+   "Incremental debugging is a preventive, build-as-you-go strategy: code is written and verified in small increments, so that when a failure appears it can almost certainly be attributed to the most recent change. Combined with version control, it allows a developer to compare against a last-known-good state and even to bisect through the commit history to find exactly when a regression was introduced, dramatically narrowing the search space.",
+   "Step-by-step (single-step) debugging uses an interactive debugger to execute a program one statement at a time, observing how the state evolves. By stepping into, over and out of function calls, the developer follows the actual path of execution and watches variables change, which makes it possible to see the precise statement at which reality diverges from expectation. It is the most direct way to understand a logic error inside a specific region of code.",
+   "Conditional debugging avoids stopping on every iteration by attaching a condition to a breakpoint so that execution pauses only when a particular situation arises — for example only when a loop index equals a suspect value, or when a variable becomes negative. This is essential when a fault appears only on, say, the ten-thousandth iteration or only for a specific input, where plain stepping would be impractically slow."
+  ],
+  "materials": [
+   "A computer with an IDE that provides an interactive debugger with conditional breakpoints (for example Visual Studio, IntelliJ IDEA, PyCharm or VS Code).",
+   "A version-control system (Git) for demonstrating incremental and bisection-based debugging.",
+   "A prepared program containing at least one logic defect that manifests only under specific conditions.",
+   "A report template for recording the defect, the strategy used, and the fix."
+  ],
+  "procedure": [
+   "Take (or write) a small program containing a logic error inside a loop, run it, and record the incorrect output together with the expected output.",
+   "Apply incremental reasoning: identify the most recent change or section responsible, and if using Git, use 'git bisect' or comparison with an earlier commit to narrow the suspect region.",
+   "Set an ordinary breakpoint at the start of the suspect region and single-step through the code, watching the relevant variables change and noting the exact statement where the state first becomes wrong.",
+   "Replace the plain breakpoint with a conditional breakpoint that triggers only when the fault condition holds (for example when a value goes out of range), rerun, and confirm the debugger stops precisely at the problematic moment.",
+   "Form a hypothesis about the root cause, apply a fix, and rerun with the same inputs to verify that the failure is gone and that other cases still behave correctly.",
+   "Document in the report which of the three strategies was most effective for this defect and why, comparing the effort each required."
+  ],
+  "tasks": [
+   "Locate and fix a logic defect using step-by-step debugging, and describe in the report the exact statement where the program state first became incorrect.",
+   "Set a conditional breakpoint that stops execution only when a specified condition is true, and demonstrate that it fires at the intended moment rather than on every iteration.",
+   "Demonstrate an incremental or bisection-based approach (for example with 'git bisect' or by reverting changes) that identifies the change which introduced a defect."
+  ],
+  "conclusion": "As a result of the work, the student has formed practical skills in applying incremental, step-by-step and conditional debugging strategies and in selecting the most efficient approach for a given defect.",
+  "questions": [
+   "What is incremental debugging, and how does version control support it?",
+   "When is step-by-step debugging the most appropriate strategy?",
+   "What problem do conditional breakpoints solve that ordinary breakpoints do not?",
+   "How does 'git bisect' help locate the change that introduced a regression?",
+   "Which of the three strategies was most effective for your defect, and why?"
+  ]
+ },
+ {
+  "code": "10.3.40",
+  "title": "Setting breakpoints and using them",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What a breakpoint is and how the debugger implements it.",
+   "Line breakpoints and how to set, disable and remove them.",
+   "Conditional and hit-count breakpoints.",
+   "Function, exception, data and logpoint breakpoints.",
+   "Effective practices for placing and managing breakpoints."
+  ],
+  "body": [
+   "A breakpoint is a marker placed on a line of code that instructs the debugger to pause the program's execution when control reaches that line. When the program hits the breakpoint it stops before executing that statement, transferring control to the developer, who can then inspect variables, examine the call stack and step through the following code. Breakpoints are the primary way of gaining control over a running program without modifying its source.",
+   "Technically a software breakpoint is implemented by the debugger temporarily replacing the machine instruction at the target address with a special trap instruction (on many processors the INT 3 interrupt). When the CPU executes the trap, control passes to the debugger, which restores the original instruction, lets the developer inspect the state, and reinstates the trap before resuming. Hardware breakpoints, by contrast, use dedicated debug registers in the processor and can also watch memory addresses without altering code.",
+   "The most common form is the line breakpoint, set simply by clicking in the left margin (the gutter) of the editor next to a line, or through a keyboard shortcut such as F9 in Visual Studio. A filled marker appears, and the program will halt there on every visit. Breakpoints can be disabled without being removed — leaving the marker in place but inactive — which is convenient when the same points may be needed again later.",
+   "A conditional breakpoint pauses only when an associated boolean expression evaluates to true, for example 'i == 500' or 'balance < 0'. This is invaluable when a statement executes thousands of times but misbehaves only in a particular case: instead of stepping through every iteration, the developer lets the program run full speed until exactly the interesting condition occurs. The condition is written in the language of the program and can reference any variables in scope.",
+   "Closely related is the hit-count breakpoint, which pauses only after the line has been reached a specified number of times — for instance on the 100th hit, or every 10th hit. This helps when a fault is known to occur on a particular occurrence rather than under a value-based condition, such as the third time a recursive function is entered or the last iteration before a crash.",
+   "A function (or method) breakpoint pauses whenever a named function is entered, regardless of where it is called from. This is useful when many call sites exist or when the source line is not conveniently available, and it lets the developer catch every entry into a routine of interest. Some debuggers allow the function to be specified by name even before the code is loaded.",
+   "An exception breakpoint pauses the program at the point where an exception is thrown, rather than after it has propagated. This is extremely valuable because by the time an exception surfaces in a handler far away, the original context is lost; stopping at the throw site preserves the exact state and call stack that produced the error. Debuggers typically allow this to be enabled for all exceptions or only for uncaught ones, and often per exception type.",
+   "Data breakpoints, also called watchpoints, pause execution when the value at a particular memory location or the contents of a specific variable change, no matter which line of code performs the change. They are the ideal tool for the frustrating problem of a variable being modified unexpectedly by code you have not identified, and they usually rely on hardware debug registers for efficiency.",
+   "A newer and increasingly popular kind is the logpoint (or tracepoint): instead of pausing, it prints a message — optionally including variable values — and lets execution continue. A logpoint gives the benefit of print debugging without editing and recompiling the source, and without stopping the program, which is especially useful for timing-sensitive or high-throughput code where halting would change behaviour.",
+   "Breakpoints in debuggers are typically managed centrally through a breakpoints window that lists every breakpoint, its location, its condition and its enabled state. From there the developer can enable, disable, edit or delete breakpoints in bulk, and temporarily 'mute' all of them to let the program run to completion. Keeping this list tidy prevents the confusion of forgotten breakpoints firing during unrelated sessions.",
+   "Placing breakpoints effectively is a skill in itself. Rather than scattering many breakpoints, an experienced developer places a few at strategic points — at the entry to a suspect function, just before a computation believed to be wrong, and inside error branches — and uses conditions and stepping to zero in. Combining a conditional breakpoint at a loop with subsequent single-stepping is a particularly efficient pattern for iteration bugs.",
+   "Breakpoints do have limitations to keep in mind. In optimised release builds the compiler may reorder or eliminate code, so a breakpoint may not map cleanly to a source line or may not be hit at all; debugging is therefore usually done on unoptimised debug builds. Breakpoints in heavily concurrent code can also alter timing enough to hide or change race conditions — the 'observer effect' — which is another reason logpoints are sometimes preferred there.",
+   "Thus, a breakpoint is a controllable pause point that hands the running program over to the developer for inspection; beyond the basic line breakpoint, debuggers offer conditional, hit-count, function, exception, data and logpoint variants, each suited to a particular investigative need, and mastering their use — placing them strategically and managing them cleanly — is fundamental to efficient interactive debugging."
+  ],
+  "questions": [
+   "What is a breakpoint, and how does a debugger implement a software breakpoint at the machine level?",
+   "How does a conditional breakpoint differ from a hit-count breakpoint, and when is each useful?",
+   "Why is an exception breakpoint valuable for diagnosing where an error originates?",
+   "What problem does a data breakpoint (watchpoint) solve, and how does a logpoint differ from an ordinary breakpoint?",
+   "Why are breakpoints usually used on debug rather than optimised release builds?"
+  ]
+ },
+ {
+  "code": "10.3.41",
+  "title": "Inspecting variables and program state at run time",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The variables, watch and locals windows.",
+   "Inspecting the call stack and the scope of each frame.",
+   "Evaluating expressions and modifying values during a pause.",
+   "Inspecting complex data: objects, collections and pointers.",
+   "Inspecting threads, and interpreting state to test hypotheses."
+  ],
+  "body": [
+   "Once a program is paused at a breakpoint, the real work of debugging is inspecting its state — the current values of variables, the chain of active function calls, and the data structures in memory — to understand what the program is actually doing as opposed to what the developer assumed it would do. The interactive debugger turns the program's otherwise invisible internal state into something concrete and examinable.",
+   "The most immediate tools are the automatic variable windows. A 'Locals' (or 'Variables') panel automatically lists all variables in the current scope together with their current values and types, updating as execution proceeds. Many IDEs also provide an 'Autos' view showing the variables used near the current line. Simply hovering the mouse over a variable in the source usually pops up its current value, the fastest way to check a single item.",
+   "The watch window complements the automatic views by letting the developer explicitly track chosen variables or expressions across the whole session, even as scope changes. Adding 'order.total * 1.2' or 'items.size()' to the watch list keeps that value visible and continuously re-evaluated at every stop, which is ideal for monitoring a specific quantity that the developer suspects is going wrong.",
+   "The call stack window shows the sequence of function calls that led to the current point, from the innermost frame where execution is paused out to the program's entry point. This answers 'how did we get here?' — often the key question for a bug — and reveals the arguments passed at each level. Reading a stack trace after a crash is the printed form of the same information.",
+   "Crucially, the developer can select any frame in the call stack and inspect the local variables and parameters of that frame, not just the innermost one. This lets one walk back up the chain of callers to see, for example, what argument a caller passed that led to a bad value deeper down. Switching frames changes the scope the variable and watch windows display, so the whole state of any active call becomes visible.",
+   "Most debuggers include an expression evaluator that can compute arbitrary expressions in the current context — an 'Immediate' or 'Evaluate' window, or the console of a command-line debugger such as pdb's prompt. The developer can type 'account.getBalance() - fee' or call a method to test what it returns, using the live program as an interactive laboratory. Care is needed, however, because evaluating expressions that have side effects can change the program's state.",
+   "Many debuggers also allow variables to be modified while the program is paused. Setting a variable to a different value and then continuing lets the developer test a 'what if' scenario — for instance forcing a flag true to see whether a suspected branch then behaves correctly — without editing and recompiling the source. This is a powerful way to confirm a hypothesis quickly, though changes must be reasoned about carefully.",
+   "Inspecting complex data requires the debugger's structured views. Objects can be expanded in a tree to reveal their fields, which can themselves be expanded recursively; collections such as lists, arrays, maps and sets are shown with their elements and sizes; and dictionaries display their key–value pairs. This structured presentation makes it possible to verify, for example, that a list has the expected length and contents at a given moment.",
+   "In languages with pointers and references, inspection extends to following indirection. A debugger can show the address a pointer holds and dereference it to display the pointed-to value, distinguishing a null pointer from a valid one and revealing whether two references point to the same object. In C and C++, examining pointers and memory is often central to diagnosing corruption, and debuggers offer memory views for raw inspection.",
+   "To make inspection more readable, modern debuggers support custom value formatting. Debugger visualizers, C#'s DebuggerDisplay attribute, GDB pretty-printers and IDE-specific formatters present complex or opaque objects in a meaningful form — showing a date object as a readable date, or a tree as a nested structure — instead of a wall of internal fields. Well-configured formatting can turn an unreadable dump into an immediately understandable value.",
+   "In multithreaded programs the debugger provides a threads window listing all active threads and lets the developer switch between them, each with its own call stack and locals. This is essential for concurrency bugs, where the interaction of several threads' states must be examined together; freezing and thawing individual threads can help reproduce and study race conditions and deadlocks in a controlled way.",
+   "Inspection is not an end in itself but the means of testing hypotheses. The disciplined developer stops at a breakpoint with a specific question — 'is this value what I expect here?' — reads exactly the state needed to answer it, and uses the answer to confirm or refute a theory about the cause, then moves the investigation forward. Aimlessly staring at all the variables is far less effective than inspecting the few that a hypothesis predicts should be wrong.",
+   "Thus, inspecting run-time state through the locals, watch, call-stack, expression-evaluation and threads facilities of a debugger turns a program's hidden internals into concrete, examinable data; by reading the values a hypothesis predicts, walking the call stack to see how they arose, and even modifying values to test 'what if', the developer converts guesswork about a defect into direct, evidence-based understanding."
+  ],
+  "questions": [
+   "What is the difference between the locals/variables window and the watch window?",
+   "What does the call stack show, and why is being able to select a different frame important?",
+   "How can evaluating expressions and modifying variables during a pause help test a hypothesis, and what is the associated risk?",
+   "How does a debugger help inspect complex data such as objects, collections and pointers?",
+   "Why is a threads window necessary when debugging concurrent programs?"
+  ]
+ },
+ {
+  "code": "10.3.42",
+  "title": "Using debugger commands: continue, stop, step forward",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Execution-control commands as the way to drive a paused program.",
+   "Continue (resume) and run-to-cursor.",
+   "Step over, step into and step out.",
+   "Stopping, pausing, restarting and detaching.",
+   "Advanced control: set-next-statement and reverse execution."
+  ],
+  "body": [
+   "Once a debugger has paused a program, execution-control commands are how the developer drives it forward in a controlled way, deciding how much code runs before the next pause. Mastering this small set of commands — continue, the several kinds of step, and stop — is what turns a static pause into an active investigation of how the program behaves statement by statement.",
+   "The 'continue' (or 'resume') command tells the program to run at full speed until it either hits the next breakpoint, throws an exception, or terminates. It is used after the developer has finished inspecting one pause point and wants to reach the next area of interest without walking through the intervening code. In command-line debuggers it is typically 'c' or 'continue'; in IDEs it is a play button, often bound to F5.",
+   "A close relative is 'run to cursor', which continues execution until it reaches the line where the text cursor is currently placed, effectively setting a one-shot temporary breakpoint. This saves the trouble of creating and later removing a breakpoint when the developer just wants to skip ahead to a specific spot once.",
+   "The stepping commands are the heart of fine-grained control, and the distinction among them is essential. 'Step over' executes the current line completely and pauses on the next line in the same function; if the current line contains a function call, that entire call runs without pausing inside it. Step over is the right choice when the developer trusts a called function and only wants to follow the flow of the current routine. It is usually bound to F10.",
+   "'Step into' also executes the current line, but if that line contains a function call, the debugger pauses at the first line inside the called function, letting the developer descend into it and examine its execution. Step into is used when the suspect logic may lie within the called function. It is typically bound to F11. Choosing correctly between step over and step into at each call is what keeps a debugging session focused rather than wandering into irrelevant library code.",
+   "'Step out' (or 'finish') runs the rest of the current function at full speed and pauses as soon as it returns to its caller, at the line following the call. It is the complement of step into: when a developer has stepped into a function and confirmed that the interesting part is elsewhere, step out escapes back to the calling context without single-stepping through the remainder. It is often bound to Shift+F11.",
+   "Stopping the debugging session is done with a 'stop' or 'terminate' command, which ends the program's execution entirely and closes the debugging session. This is distinct from 'detach', which disconnects the debugger but leaves the process running — important when debugging a live server that should not be killed. Understanding the difference prevents accidentally shutting down a production process one only meant to observe.",
+   "Several debuggers also offer a 'pause' (or 'break all') command that interrupts a program that is currently running, as opposed to one already stopped at a breakpoint. This is how a developer regains control of a program stuck in an apparent infinite loop or a hang: pausing it reveals, through the call stack, exactly where it is spending its time, which often immediately identifies the offending loop or blocking call.",
+   "A 'restart' command stops the current session and launches it again from the beginning in one action, which is convenient when the developer realises a breakpoint should have been set earlier or wants to retry with adjustments. In command-line debuggers this corresponds to the 'run' command issued again, sometimes with different arguments.",
+   "More advanced control commands give still finer power. 'Set next statement' (move the execution pointer) lets the developer change which line will execute next within the current function — skipping over code or re-running a block — without actually executing the code in between. This is useful for testing but dangerous, because it can leave the program in an inconsistent state, so it must be used with a clear understanding of what is being bypassed.",
+   "Reverse or time-travel debugging extends the model backwards. In debuggers that support it, such as GDB in record mode, rr, or Visual Studio's IntelliTrace and snapshot features, commands like 'step back' and 'reverse-continue' undo execution to a previous state. This is extraordinarily helpful when a developer steps one line too far past the moment a value went wrong, since normally the only recourse would be to restart and try again.",
+   "These commands are almost always available both as IDE buttons with standard function-key shortcuts and as typed commands in command-line debuggers, and their meanings are consistent across tools: continue, step over, step into, step out and stop behave the same in Visual Studio, GDB, LLDB and pdb. Learning the concepts once therefore transfers directly to any debugger, and learning the keyboard shortcuts makes stepping fast enough to keep pace with one's reasoning.",
+   "Thus, the debugger's execution-control commands — continue and run-to-cursor to move between regions, step over, step into and step out to navigate calls at the right granularity, pause to seize a running program, and stop or detach to end a session — are the vocabulary with which a developer drives a paused program; used deliberately, and augmented where available by set-next-statement and reverse execution, they let the developer follow a defect to its exact origin one controlled move at a time."
+  ],
+  "questions": [
+   "What does the 'continue' command do, and how does 'run to cursor' relate to it?",
+   "What is the difference between 'step over', 'step into' and 'step out', and when is each appropriate?",
+   "How does stopping a debugging session differ from detaching from the process, and why does the distinction matter?",
+   "How can the 'pause' (break all) command help diagnose a program stuck in an infinite loop?",
+   "What does 'set next statement' do, why is it risky, and what advantage does reverse (time-travel) debugging provide?"
+  ]
+ }
+]

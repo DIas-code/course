@@ -1,0 +1,22 @@
+{
+  "id": "10.1",
+  "title": "Use methods and techniques of formalization and algorithmization of software program-code tasks",
+  "weight": "19%",
+  "hours": "96 hours",
+  "glossary": [
+    ["Abstraction", "The principle of hiding implementation details and exposing only the essential properties and behavior of a data model or algorithm, so that complex problems can be reasoned about at a higher level."],
+    ["Algorithm", "A finite, ordered sequence of unambiguous instructions that transforms input data into a required result in a finite number of steps."],
+    ["Big-O notation", "A mathematical notation that describes the asymptotic upper bound of an algorithm's running time or memory use as a function of the input size n."],
+    ["Binary search", "A search algorithm that repeatedly halves a sorted array to locate a target value in O(log n) time."],
+    ["Data structure", "A way of organizing and storing data in memory (array, list, stack, queue, tree, graph, hash table) so that it can be accessed and modified efficiently."],
+    ["Dynamic programming", "A method of solving problems by breaking them into overlapping subproblems, solving each once and storing the results to avoid recomputation."],
+    ["Graph", "A data structure consisting of a set of vertices (nodes) and a set of edges connecting them, used to model relationships and networks."],
+    ["Hash table", "A data structure that maps keys to values using a hash function, providing average O(1) insertion, deletion and lookup."],
+    ["Heap", "A specialized tree-based structure that satisfies the heap property and provides efficient access to the minimum or maximum element; the basis of a priority queue."],
+    ["Priority queue", "An abstract data type in which each element has a priority and elements are served in order of priority rather than order of arrival."],
+    ["Recursion", "A technique in which a function solves a problem by calling itself on smaller instances of the same problem until a base case is reached."],
+    ["Stack", "A last-in, first-out (LIFO) linear data structure that supports push and pop operations at one end."],
+    ["Tree", "A hierarchical data structure of nodes with a single root, in which each node has zero or more child nodes and there are no cycles."]
+  ],
+  "lessons": []
+}

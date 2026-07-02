@@ -1,0 +1,91 @@
+{
+ "lo_id": "10.3",
+ "chunk": 3,
+ "out_file": "umkd_gen/frag_10_3_c3.json",
+ "topics": [
+  {
+   "pos": 29,
+   "title_ru": "Абстрактные классы и методы: общие черты и особенности.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 30,
+   "title_ru": "Интерфейсы и реализация: множественное наследование.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 31,
+   "title_ru": "Виртуальные методы и полиморфизм: общие методы и различные реализации.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 32,
+   "title_ru": "Позднее связывание и динамический полиморфизм.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 33,
+   "title_ru": "Полиморфизм в статически типизированных и динамически типизированных языках.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 34,
+   "title_ru": "Полиморфизм в контексте абстрактных классов и интерфейсов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 35,
+   "title_ru": "Полиморфизм и перегрузка методов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 36,
+   "title_ru": "Полиморфизм и операторы в языках программирования",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 37,
+   "title_ru": "Основы отладки и её роль в разработке программного обеспечения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 38,
+   "title_ru": "Отладочные инструменты и среды разработки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 39,
+   "title_ru": "Подходы к отладке: инкрементальная, пошаговая, условная.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 40,
+   "title_ru": "Установка точек останова (breakpoints) и их использование.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 41,
+   "title_ru": "Инспектирование переменных и состояния программы во время выполнения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 42,
+   "title_ru": "Использование команд отладчика: продолжить, стоп, шаг вперёд.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

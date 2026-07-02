@@ -1,0 +1,21 @@
+{
+  "id": "10.2",
+  "title": "Develop software program code according to ready specifications of software requirements",
+  "weight": "15%",
+  "hours": "72 hours",
+  "glossary": [
+    ["API (Application Programming Interface)", "A defined set of methods, protocols and data formats through which software components or external systems interact with one another."],
+    ["Business logic", "The part of a program that encodes the real-world rules and computations of the application domain, separate from the user interface and data storage."],
+    ["Design pattern", "A reusable, proven solution to a commonly occurring problem in software design, such as Singleton, Factory, Observer or Strategy."],
+    ["Exception handling", "A mechanism for detecting, signaling and responding to runtime errors in a controlled way using constructs such as try, catch/except and finally."],
+    ["Framework", "A reusable software platform that provides a skeleton of ready components and control flow on which an application is built."],
+    ["Localization (l10n)", "The adaptation of software to a particular language, region and cultural conventions, including translation, formats of date, number and currency."],
+    ["ORM (Object-Relational Mapping)", "A technique that maps objects in code to rows in relational database tables, allowing data to be manipulated through objects rather than SQL."],
+    ["Refactoring", "The disciplined process of restructuring existing code to improve its readability and internal design without changing its external behavior."],
+    ["Requirement specification", "A structured document that describes the functional and non-functional requirements a software product must satisfy."],
+    ["Test case", "A set of input data, execution conditions and expected results used to verify that a piece of software behaves according to its requirements."],
+    ["User interface (UI)", "The part of a system through which users interact with the program, including screens, controls, layout and interaction flow."],
+    ["Version control", "A system such as Git that records changes to source code over time and supports collaboration, branching and merging."]
+  ],
+  "lessons": []
+}

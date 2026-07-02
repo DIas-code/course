@@ -1,0 +1,433 @@
+[
+ {
+  "code": "10.1.13",
+  "title": "Minimum spanning tree: Prim's and Kruskal's algorithms",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of a spanning tree and a minimum spanning tree (MST) of a weighted graph.",
+   "Kruskal's algorithm: edge sorting and the union-find (disjoint-set) structure.",
+   "Prim's algorithm: growing a tree from a single vertex with a priority queue.",
+   "Complexity of both algorithms and the choice of data structures.",
+   "Practical applications of the MST in networks and infrastructure design."
+  ],
+  "body": [
+   "A spanning tree of a connected undirected graph is a subgraph that includes all the vertices of the graph and is a tree, that is, it is connected and contains no cycles. If the graph has n vertices, any spanning tree has exactly n minus one edges. When the edges carry weights (for example, distances or costs), a graph usually has many different spanning trees, and each has its own total weight equal to the sum of the weights of its edges.",
+   "A minimum spanning tree (MST) is a spanning tree whose total edge weight is the smallest among all possible spanning trees of the graph. If all edge weights are distinct, the MST is unique; if some weights are equal, several minimum spanning trees may exist, but all of them have the same total weight. The problem of finding an MST arises whenever we need to connect a set of points with the least possible total cost, without redundant links.",
+   "Two classical greedy algorithms solve this problem: Kruskal's algorithm and Prim's algorithm. Both are greedy, meaning that at each step they make a locally optimal choice, and both are proven to produce a globally optimal result because of a property called the cut property: for any partition of the vertices into two groups, the lightest edge crossing between the groups belongs to some minimum spanning tree.",
+   "Kruskal's algorithm considers edges rather than vertices. First it sorts all edges of the graph in non-decreasing order of weight. Then it examines edges one by one, from the lightest to the heaviest, and adds an edge to the growing forest only if it connects two vertices that are not yet in the same component, that is, only if it does not create a cycle. The process stops when n minus one edges have been added.",
+   "To test efficiently whether two vertices already belong to the same component, Kruskal's algorithm uses the disjoint-set (union-find) data structure. This structure supports two operations: find, which returns a representative of the set containing a given element, and union, which merges two sets. With the optimizations of union by rank and path compression, each operation runs in almost constant amortized time, described by the inverse Ackermann function.",
+   "The overall running time of Kruskal's algorithm is dominated by the sorting of the edges, which takes O(E log E) time, where E is the number of edges. Since E is at most n squared, log E is O(log n), so the complexity is often written as O(E log n). The union-find operations add only a near-linear factor and do not change the asymptotic bound. Kruskal's algorithm is especially convenient for sparse graphs and for graphs whose edges are already available as a list.",
+   "Prim's algorithm, in contrast, grows a single tree from an arbitrary starting vertex. It maintains a set of vertices already included in the tree and repeatedly adds the cheapest edge that connects a vertex inside the tree to a vertex outside it. In this way the tree expands by one vertex at each step until all vertices are included.",
+   "The efficiency of Prim's algorithm depends on how the cheapest crossing edge is found at each step. A naive implementation that scans all edges every time runs in O(V squared) time, which is acceptable for dense graphs. Using a binary heap as a priority queue that stores, for each outside vertex, the minimum known edge weight to the tree, the complexity becomes O(E log V). With a Fibonacci heap the bound improves to O(E plus V log V), which is theoretically optimal for dense graphs but rarely used in practice because of large constant factors.",
+   "The two algorithms illustrate two different greedy strategies applied to the same problem. Kruskal's algorithm builds the forest globally, merging separate components until they form one tree, and is naturally suited to a list-of-edges representation. Prim's algorithm builds one connected fragment locally and is naturally suited to an adjacency-list representation with a priority queue. On dense graphs the array-based Prim's algorithm with O(V squared) is often faster than Kruskal's algorithm, whereas on sparse graphs Kruskal's algorithm is usually preferred.",
+   "A subtle but important point is that both algorithms require the graph to be connected in order to produce a spanning tree. If the graph is not connected, Kruskal's algorithm produces a minimum spanning forest, one tree per connected component, while Prim's algorithm, starting from one vertex, produces the MST of only that vertex's component. In practice one first checks connectivity, or treats each component separately.",
+   "Correctness of both algorithms rests on the exchange argument built on the cut property. Suppose a greedy choice adds edge e, the lightest edge crossing a certain cut. If some optimal tree did not contain e, adding e to that tree would create a cycle passing through the cut; that cycle must contain another crossing edge that is at least as heavy as e. Replacing the heavier edge by e yields a spanning tree of no greater weight, proving that the greedy edge is safe.",
+   "The minimum spanning tree has many practical applications. In telecommunications and computer networks it is used to lay cables or to design a backbone that connects all nodes at minimum cost. In electrical grids and road planning it minimizes the total length of connections. It also appears as a subroutine in approximation algorithms for the travelling salesman problem and in clustering methods, where removing the heaviest edges of the MST separates the data into natural groups.",
+   "When implementing either algorithm, a technician must pay attention to representation and data types. Edge weights should be stored in a type that avoids overflow when summed, the graph representation (edge list versus adjacency list) should match the chosen algorithm, and the union-find or priority-queue structure must be initialized correctly. Careful handling of ties and of parallel edges prevents subtle errors in the resulting tree.",
+   "Thus, the minimum spanning tree problem is solved efficiently by two greedy algorithms that embody the same underlying principle expressed through different data structures: Kruskal's algorithm sorts edges and merges components with union-find, while Prim's algorithm expands a single tree with a priority queue, and mastery of both, together with their complexities and applications, is a core skill in graph algorithm design."
+  ],
+  "questions": [
+   "What is a minimum spanning tree, and how many edges does it contain for a graph with n vertices?",
+   "How does Kruskal's algorithm use the union-find structure to avoid creating cycles?",
+   "How does Prim's algorithm select the next edge to add, and what data structure makes this efficient?",
+   "What are the time complexities of Kruskal's and Prim's algorithms, and for which kinds of graphs is each preferred?",
+   "State the cut property and explain why it guarantees the correctness of both greedy algorithms."
+  ]
+ },
+ {
+  "code": "10.1.14",
+  "title": "Network analysis and graph coloring: the Ford-Fulkerson, Edmonds-Karp and greedy coloring algorithms",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Flow networks: source, sink, capacities and the maximum-flow problem.",
+   "The Ford-Fulkerson method: augmenting paths and the residual graph.",
+   "The Edmonds-Karp algorithm as a BFS-based refinement with a polynomial bound.",
+   "The max-flow min-cut theorem and its meaning.",
+   "Graph coloring and the greedy coloring algorithm with its limitations."
+  ],
+  "body": [
+   "A flow network is a directed graph in which each edge has a non-negative capacity, and two special vertices are distinguished: the source s, which produces flow, and the sink t, which consumes it. A flow assigns to each edge a value not exceeding its capacity, and at every vertex except the source and the sink the total incoming flow equals the total outgoing flow. This last requirement is called conservation of flow. The value of a flow is the net amount leaving the source, which equals the net amount entering the sink.",
+   "The maximum-flow problem asks for a flow of the greatest possible value from source to sink subject to the capacity and conservation constraints. It models many real situations: the throughput of a pipeline system, the capacity of a road or communication network, and, through clever reductions, problems of matching and scheduling that at first sight have nothing to do with flow.",
+   "The Ford-Fulkerson method solves the maximum-flow problem by repeatedly finding an augmenting path: a path from the source to the sink along which additional flow can be pushed. The key concept is the residual graph, which records the remaining capacity of each edge and also includes reverse edges that allow flow to be cancelled. The residual capacity of a forward edge is its capacity minus the current flow, and each unit of flow on an edge creates a reverse residual edge of equal amount, so that previously routed flow can be redirected.",
+   "In each iteration the method searches for any path from s to t in the residual graph. If such a path exists, it finds the minimum residual capacity along the path, called the bottleneck, and augments the flow by that amount, decreasing forward residual capacities and increasing reverse ones. When no augmenting path remains, the current flow is maximum. This describes a method rather than a single algorithm, because it does not specify how the augmenting path is chosen.",
+   "The choice of augmenting path affects both correctness in practice and running time. If capacities are integers, Ford-Fulkerson always terminates, because each augmentation increases the flow by at least one unit; its running time is O(E times f), where f is the value of the maximum flow. With irrational capacities and a poor choice of paths the method may fail to terminate, which shows that the path-selection strategy is not a mere detail.",
+   "The Edmonds-Karp algorithm removes this weakness by specifying that the augmenting path must always be a shortest path in terms of the number of edges, found with breadth-first search. This simple rule guarantees a running time of O(V times E squared), independent of the capacity values, because the shortest-path distance from the source to each vertex never decreases during the run, and each edge can become the bottleneck only a limited number of times. Edmonds-Karp is thus a concrete, polynomial-time implementation of the Ford-Fulkerson method.",
+   "The deep result that underlies all these algorithms is the max-flow min-cut theorem. A cut is a partition of the vertices into two sets, one containing the source and the other the sink; the capacity of the cut is the sum of the capacities of the edges going from the source's side to the sink's side. The theorem states that the value of the maximum flow equals the capacity of the minimum cut. When the algorithm stops, the vertices reachable from the source in the residual graph form exactly the source side of a minimum cut.",
+   "The min-cut interpretation is very useful in practice. It identifies the bottleneck of a network, the set of edges whose total capacity limits the throughput, and therefore shows which links should be upgraded to increase capacity. The same theorem connects flow problems to combinatorial problems such as finding the maximum number of edge-disjoint paths and the maximum matching in a bipartite graph.",
+   "Graph coloring is a different but equally important topic in network analysis. A proper vertex coloring assigns a color to each vertex so that no two adjacent vertices share the same color. The chromatic number of a graph is the minimum number of colors needed for a proper coloring. Deciding whether a graph can be colored with a given number of colors, for three or more colors, is NP-complete, so no efficient exact algorithm is known for the general case.",
+   "The greedy coloring algorithm is a fast heuristic for this hard problem. It processes the vertices in some fixed order and assigns to each vertex the smallest color index not already used by its neighbors that have been colored so far. This always produces a proper coloring, and the number of colors it uses is at most one more than the maximum vertex degree of the graph, which gives a simple upper bound on the chromatic number.",
+   "However, greedy coloring does not in general use the minimum number of colors, and its result depends heavily on the order in which vertices are processed. For every graph there exists an ordering for which greedy coloring uses exactly the chromatic number, but finding that ordering is itself difficult. Practical orderings, such as processing vertices in order of decreasing degree (the Welsh-Powell heuristic) or using saturation degree (DSATUR), often give good, though not always optimal, results.",
+   "Coloring has many applications that make its practical value clear. It models register allocation in compilers, where variables that are simultaneously alive must receive different registers; scheduling of examinations or tasks so that conflicting events do not overlap; and frequency assignment in wireless networks so that nearby transmitters do not interfere. In each case the colors represent a limited resource, and adjacency represents a conflict that forbids sharing that resource.",
+   "When implementing these algorithms, a technician must handle the data structures carefully: the residual graph is usually stored so that each edge and its reverse are paired, breadth-first search must reconstruct the augmenting path, and the greedy coloring routine must scan the colors of neighbors efficiently. Attention to integer capacities, to the termination condition, and to the vertex ordering determines both correctness and quality of the result.",
+   "Thus, network flow and graph coloring show two faces of graph analysis: the maximum-flow problem is solved exactly and efficiently by the Ford-Fulkerson method and its Edmonds-Karp refinement, grounded in the max-flow min-cut theorem, whereas optimal graph coloring is computationally hard and is addressed in practice by fast greedy heuristics whose quality depends on the processing order."
+  ],
+  "questions": [
+   "What is a flow network, and what two conditions must a valid flow satisfy?",
+   "What is a residual graph, and why does the Ford-Fulkerson method add reverse edges?",
+   "How does the Edmonds-Karp algorithm choose augmenting paths, and what running time does this guarantee?",
+   "State the max-flow min-cut theorem and explain its practical significance.",
+   "How does the greedy coloring algorithm work, and why does it not always use the minimum number of colors?"
+  ]
+ },
+ {
+  "code": "10.1.15",
+  "title": "Cycle detection in graphs: finding connected components and topological sorting",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in detecting cycles in directed and undirected graphs, in finding connected components, and in producing a topological ordering of a directed acyclic graph.",
+  "theory": [
+   "A cycle in a graph is a path that starts and ends at the same vertex without repeating edges. In an undirected graph a cycle can be detected during depth-first search: if the search reaches an already visited vertex that is not the immediate parent of the current vertex, a cycle exists. The same idea, applied with the union-find structure while adding edges, detects a cycle whenever an edge joins two vertices already in the same set.",
+   "In a directed graph, cycle detection requires distinguishing three states of a vertex during depth-first search: unvisited (white), currently on the recursion stack (gray), and completely processed (black). If the search encounters an edge leading to a gray vertex, that edge is a back edge and the graph contains a directed cycle. A directed graph without any cycle is called a directed acyclic graph, or DAG.",
+   "Connected components of an undirected graph are its maximal connected pieces; they are found by running a traversal (BFS or DFS) from every not-yet-visited vertex and labelling all reachable vertices with the same component number. For a DAG, a topological sort produces a linear ordering of the vertices such that every directed edge goes from an earlier vertex to a later one; it can be obtained by Kahn's algorithm using in-degrees, or by ordering vertices by decreasing DFS finishing time. A topological order exists if and only if the graph has no directed cycle."
+  ],
+  "materials": [
+   "A computer with a programming environment (for example Python, C++ or Java).",
+   "A prepared set of sample graphs given as adjacency lists, including both cyclic and acyclic cases.",
+   "Paper and pencil for drawing graphs and tracing the traversal by hand.",
+   "A report template with tables for component numbers and topological order."
+  ],
+  "procedure": [
+   "Represent the given sample graphs in memory as adjacency lists, distinguishing clearly between directed and undirected graphs.",
+   "Implement depth-first search for an undirected graph that detects a cycle by checking for a visited neighbor other than the parent, and test it on cyclic and acyclic examples.",
+   "Implement a component-labelling routine that repeatedly starts a traversal from each unvisited vertex, assigns a component number, and reports the total number of connected components.",
+   "Implement directed-cycle detection using the three-color (white-gray-black) scheme and verify that it reports a cycle exactly for the graphs that contain one.",
+   "Implement topological sorting with Kahn's algorithm: compute in-degrees, place all zero-in-degree vertices in a queue, and repeatedly remove a vertex and decrease the in-degrees of its successors.",
+   "Record for each sample graph whether a cycle was found, the list of connected components, and the resulting topological order or the reason no order exists, and summarize the results in the report."
+  ],
+  "tasks": [
+   "Given an undirected graph as an adjacency list, write a program that prints the number of connected components and the vertices in each component.",
+   "Given a directed graph, write a program that reports whether it contains a cycle, using the white-gray-black coloring during depth-first search.",
+   "For a directed acyclic graph, produce a valid topological ordering with Kahn's algorithm and explain why the ordering fails to complete if a cycle is introduced."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of detecting cycles in directed and undirected graphs, of identifying connected components, and of constructing a topological ordering of a directed acyclic graph.",
+  "questions": [
+   "How can a cycle in an undirected graph be detected during depth-first search, and why must the parent vertex be excluded?",
+   "What do the white, gray and black states mean, and which edge indicates a directed cycle?",
+   "How are the connected components of an undirected graph found using repeated traversals?",
+   "Describe the steps of Kahn's algorithm for topological sorting.",
+   "Why does a topological order exist only for a directed acyclic graph?"
+  ]
+ },
+ {
+  "code": "10.1.16",
+  "title": "Weighted-graph algorithms: finding the shortest path in a weighted graph",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The shortest-path problem in weighted graphs and its variants.",
+   "Dijkstra's algorithm for non-negative weights with a priority queue.",
+   "The Bellman-Ford algorithm and the handling of negative edges.",
+   "The Floyd-Warshall algorithm for all-pairs shortest paths.",
+   "Choosing the right algorithm and typical applications."
+  ],
+  "body": [
+   "In a weighted graph each edge carries a numeric weight that usually represents a distance, a cost or a time. The shortest-path problem asks for a path between two vertices whose total weight, the sum of the weights of its edges, is as small as possible. Several variants exist: the single-source problem finds shortest paths from one starting vertex to all others; the single-pair problem seeks the shortest path between two given vertices; and the all-pairs problem finds shortest paths between every pair of vertices.",
+   "The properties of the weights determine which algorithm can be used. When all weights are non-negative, Dijkstra's algorithm is the standard choice. When some weights are negative, Dijkstra's algorithm may fail, and the Bellman-Ford algorithm is required. When a shortest path with negative total weight can be traversed repeatedly, a negative cycle exists and the shortest-path value becomes undefined, because each additional loop reduces the total further without bound.",
+   "Dijkstra's algorithm maintains a tentative distance for every vertex, initially zero for the source and infinity for all others. It repeatedly selects the unprocessed vertex with the smallest tentative distance, marks it as final, and relaxes each of its outgoing edges: if the distance to the source plus the edge weight is smaller than the neighbor's current tentative distance, the neighbor's distance is updated. Once a vertex is selected, its distance is final, which is why the algorithm requires non-negative weights.",
+   "The efficiency of Dijkstra's algorithm depends on how the minimum-distance vertex is found. With a simple array scan the complexity is O(V squared), suitable for dense graphs. With a binary-heap priority queue the complexity is O(E log V), which is far better for sparse graphs, and with a Fibonacci heap it improves to O(E plus V log V). In practice a binary heap is used almost everywhere because it is simple and fast for typical inputs.",
+   "Relaxation is the fundamental operation of all shortest-path algorithms. To relax an edge from u to v means to test whether the currently known distance to v can be improved by going through u, and if so, to update it and to record u as the predecessor of v. By storing predecessors, the algorithm can reconstruct the actual shortest path, not only its length, by following the predecessor links backward from the destination to the source.",
+   "The Bellman-Ford algorithm handles graphs with negative edge weights. It does not require choosing a minimum each step; instead it relaxes every edge of the graph repeatedly. After V minus one full passes over all edges, all shortest distances are correct, because any shortest path contains at most V minus one edges. Its running time is O(V times E), which is slower than Dijkstra's but more general.",
+   "A valuable feature of Bellman-Ford is its ability to detect negative cycles. After the V minus one passes, one more pass is performed; if any edge can still be relaxed, a negative cycle is reachable and the algorithm reports that shortest paths are undefined. This makes Bellman-Ford useful not only for computing distances but also for validating that a weighted graph is well-behaved before other computations rely on it.",
+   "The Floyd-Warshall algorithm solves the all-pairs shortest-path problem with a compact dynamic-programming formulation. It maintains a matrix of distances and, for each intermediate vertex k in turn, checks for every pair (i, j) whether going from i to j through k is shorter than the best distance known so far. Its running time is O(V cubed) and its memory use is O(V squared), which makes it well suited to dense graphs of moderate size and to problems where distances between all pairs are needed.",
+   "Floyd-Warshall also detects negative cycles: after the algorithm finishes, a negative value on the diagonal of the distance matrix, that is, a negative distance from a vertex to itself, indicates that the vertex lies on a negative cycle. The algorithm handles negative edges correctly as long as no negative cycle is present, which extends its usefulness beyond simple positive-weight graphs.",
+   "Choosing the correct algorithm is a matter of matching the problem to the input. For a single source with non-negative weights, use Dijkstra's algorithm. For a single source with possible negative weights or for negative-cycle detection, use Bellman-Ford. For all pairs of vertices in a reasonably small dense graph, use Floyd-Warshall; for all pairs in a large sparse graph, running Dijkstra's algorithm from every vertex is often faster than a single O(V cubed) computation.",
+   "An important special case deserves mention. If the graph is unweighted, or all weights are equal, breadth-first search already computes shortest paths in O(V plus E) time, which is faster than any weighted algorithm. If edge weights are small non-negative integers with only two distinct values, a technique called 0-1 BFS using a double-ended queue solves the problem in linear time. Recognizing such special structure avoids unnecessary work.",
+   "Shortest-path algorithms are among the most widely used in software. They power navigation and mapping systems, routing of data packets in computer networks, planning of movement in games and robotics, and many optimization tasks where the goal is expressed as the least total cost along a sequence of decisions. Because of this ubiquity, understanding their assumptions, especially the treatment of negative weights, is essential to using them correctly.",
+   "Thus, the shortest-path problem in weighted graphs is solved by a family of algorithms distinguished by the sign of the weights and by whether one source or all pairs are needed: Dijkstra's algorithm for non-negative single-source problems, Bellman-Ford for negative weights and cycle detection, and Floyd-Warshall for all-pairs distances, all built upon the common operation of edge relaxation."
+  ],
+  "questions": [
+   "What is the difference between the single-source, single-pair and all-pairs shortest-path problems?",
+   "Why does Dijkstra's algorithm require non-negative edge weights, and what running time does it achieve with a binary heap?",
+   "How does the Bellman-Ford algorithm detect the presence of a negative cycle?",
+   "How does the Floyd-Warshall algorithm use intermediate vertices, and what is its time complexity?",
+   "In what situations should breadth-first search be used instead of a weighted shortest-path algorithm?"
+  ]
+ },
+ {
+  "code": "10.1.17",
+  "title": "Fundamentals of algorithmization: data structures and control constructs",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of an algorithm and its defining properties.",
+   "Ways of describing algorithms: natural language, flowcharts and pseudocode.",
+   "The three basic control constructs: sequence, selection and repetition.",
+   "Fundamental data structures: arrays, lists, stacks, queues and their uses.",
+   "The connection between data structures, control constructs and program correctness."
+  ],
+  "body": [
+   "An algorithm is a finite, precisely defined sequence of instructions that transforms input data into a desired result. Algorithmization is the activity of designing such sequences for a given problem. Before any program can be written in a specific language, the underlying algorithm must be worked out, because the program is only a concrete expression of the algorithm in the syntax that a computer can execute.",
+   "An algorithm must possess several properties. It must be finite, meaning that it terminates after a limited number of steps; deterministic, meaning that each step is unambiguously defined; effective, meaning that every step can actually be carried out; and general, meaning that it works for a whole class of inputs, not just one particular case. It must also have well-defined input and output. An instruction set that lacks any of these properties is not a valid algorithm.",
+   "Algorithms can be described in several ways. Natural language is easy to read but often imprecise and ambiguous. Flowcharts use standardized graphical symbols, rectangles for actions, diamonds for decisions and arrows for the flow of control, and give a clear visual picture of the logic. Pseudocode is a language-independent, structured notation that reads like a programming language but ignores syntactic details, and it is the most common way to communicate algorithms among programmers.",
+   "The structured-programming theorem states that any computable algorithm can be expressed using only three basic control constructs. This result is fundamental, because it means that programmers do not need arbitrary jumps to write any program; three well-understood constructs are sufficient, and using only them makes programs far easier to read, test and prove correct.",
+   "The first construct is the sequence: instructions are executed one after another in the order they are written. Although simple, sequence is the backbone of every algorithm, and the correct ordering of steps, for example initializing a variable before using it, is a frequent source of both correctness and error.",
+   "The second construct is selection, which chooses between alternative actions depending on a condition. It appears as the if statement, the if-else statement, and the multi-way switch or case statement. Selection gives an algorithm the ability to react differently to different data, and the careful formulation of conditions, including their boundary values, is essential to correct behavior.",
+   "The third construct is repetition, or iteration, which executes a group of instructions multiple times. It appears as the while loop, which tests its condition before each iteration; the do-while loop, which tests after; and the for loop, which is convenient when the number of repetitions is known in advance. Every loop must make progress toward a condition that eventually stops it, otherwise it becomes an infinite loop.",
+   "Data structures are the organized ways in which data is stored so that it can be used efficiently. The choice of data structure is as important as the choice of control constructs, because it determines how quickly the required operations, such as insertion, deletion and search, can be performed. A poorly chosen structure can make an otherwise good algorithm hopelessly slow.",
+   "The array is the most basic structure: a contiguous block of elements accessed by an integer index. It provides constant-time access to any element by its position, which makes it ideal for random access, but inserting or deleting an element in the middle requires shifting the others, which takes linear time. The array's fixed size in many languages is another limitation that dynamic arrays address by reallocating when full.",
+   "The linked list stores each element in a node together with a reference to the next node, and possibly to the previous one in a doubly linked list. It allows insertion and deletion in constant time once the position is known, because only references are updated, but it does not support fast access by index, since reaching the k-th element requires following k references. The list trades random access for flexible, dynamic size.",
+   "The stack and the queue are restricted structures defined by their access discipline. A stack works on the last-in-first-out principle: the element added most recently is the first to be removed, using push and pop operations. It underlies function-call management, expression evaluation and undo mechanisms. A queue works on the first-in-first-out principle, using enqueue and dequeue, and models waiting lines, buffering and breadth-first traversal.",
+   "Data structures and control constructs are inseparable in practice. A loop is used to traverse an array or a list; a stack or queue is manipulated inside loops and selections; a search algorithm combines iteration over a structure with conditional tests. Learning to combine the right structure with the right control flow is the essence of algorithmization and the foundation of all later, more advanced topics such as trees, hash tables and graphs.",
+   "Correctness and clarity depend on disciplined use of these fundamentals. Every variable should be initialized before use, every loop should have a clear termination condition, every branch of a selection should be considered including the default case, and the data structure should match the operations the algorithm performs most often. Neglecting any of these leads to bugs that are hard to find later.",
+   "Thus, algorithmization rests on two pillars: the three basic control constructs of sequence, selection and repetition, which express the logic of any computation, and the fundamental data structures such as arrays, lists, stacks and queues, which organize the data on which that logic operates, and the skill of the programmer lies in combining them correctly and efficiently."
+  ],
+  "questions": [
+   "What properties must a sequence of instructions have in order to be called an algorithm?",
+   "What are the three basic control constructs, and why are they sufficient to express any algorithm?",
+   "What is the difference between a while loop and a do-while loop?",
+   "Compare an array and a linked list in terms of access by index and insertion cost.",
+   "How do a stack and a queue differ in the order in which elements are removed?"
+  ]
+ },
+ {
+  "code": "10.1.18",
+  "title": "Methods of algorithm development: iteration and recursion",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Iteration as a way of repeating computations with loops.",
+   "Recursion: base case, recursive case and the call stack.",
+   "Comparison of iterative and recursive solutions.",
+   "Costs of recursion and the role of tail recursion.",
+   "Choosing between iteration and recursion in practice."
+  ],
+  "body": [
+   "Iteration and recursion are the two fundamental techniques for expressing repeated computation in algorithms. Both allow the same block of logic to be applied many times, but they organize the repetition differently: iteration uses explicit loops that update variables, while recursion expresses a problem in terms of smaller instances of itself. Mastery of both, and of the ability to convert between them, is a key skill in algorithm design.",
+   "Iteration performs repetition through loop constructs such as for, while and do-while. An iterative algorithm typically maintains one or more state variables, for example a running sum or a counter, and updates them on each pass until a termination condition is met. The classic example is computing a factorial by multiplying the numbers from one up to n in a loop, accumulating the product in a single variable.",
+   "Recursion solves a problem by having a function call itself on a smaller subproblem. Every correct recursive definition has two essential parts. The base case handles the smallest inputs directly, without further recursion, and stops the process. The recursive case reduces the problem toward the base case and combines the result of the smaller call with additional work. Omitting or misformulating the base case leads to infinite recursion.",
+   "The factorial function illustrates recursion clearly: the factorial of zero is defined as one, which is the base case, and the factorial of n is defined as n multiplied by the factorial of n minus one, which is the recursive case. Each call postpones its multiplication until the smaller call returns, and the results unwind from the base case back up to the original call.",
+   "Recursion is supported by the call stack, a region of memory that stores information about each active function call, including its local variables and the point to which it must return. Each recursive call pushes a new frame onto the stack, and each return pops one off. The depth of recursion therefore determines how much stack memory is used, and excessive depth causes a stack overflow error.",
+   "The equivalence of iteration and recursion is an important theoretical fact: any iterative algorithm can be rewritten recursively, and any recursive algorithm can be rewritten iteratively, if necessary by using an explicit stack to imitate the call stack. This means the choice between them is a matter of clarity and efficiency rather than of expressive power.",
+   "Recursion excels when a problem is naturally defined in terms of smaller versions of itself. Traversing trees, exploring graphs with depth-first search, generating permutations, and divide-and-conquer algorithms such as merge sort and quicksort are far simpler and clearer when written recursively. In these cases the recursive structure of the code mirrors the recursive structure of the data or the problem.",
+   "Iteration is usually preferable when the repetition is simple and linear, such as summing the elements of an array or scanning a list, because it avoids the overhead of function calls and the risk of stack overflow. Iterative code tends to use less memory, since it keeps its state in a few variables rather than in a growing stack of frames, and it is often faster for the same reason.",
+   "A naive recursive algorithm can be dramatically inefficient if it recomputes the same subproblems repeatedly. The classic warning example is the recursive computation of Fibonacci numbers: computing the n-th number by adding the two previous recursive calls leads to an exponential number of calls, because the same values are recomputed many times. An iterative version, or a recursive version with memoization, computes the same result in linear time.",
+   "Tail recursion is a special form in which the recursive call is the very last action of the function, with no further computation after it returns. Some compilers and interpreters optimize tail recursion into a loop, reusing a single stack frame and thereby eliminating the risk of stack overflow. Where such optimization is available, tail-recursive code can be as efficient as iterative code while remaining more readable.",
+   "Converting recursion to iteration is a practical skill. Simple linear recursion, such as factorial, converts directly into a loop. More complex recursion that branches, such as tree traversal, converts by maintaining an explicit stack data structure that plays the role of the call stack, pushing subproblems to be processed and popping them in the required order. This conversion is used when recursion depth would be too large for the system stack.",
+   "In choosing between the two techniques, the programmer weighs clarity against cost. If a recursive solution is much clearer and the recursion depth is safely bounded, recursion is a good choice. If performance or memory is critical, or the depth may be large, iteration or an explicitly managed stack is safer. Understanding both approaches, and the trade-offs between them, allows the programmer to select the most appropriate one for each situation.",
+   "Thus, iteration and recursion are two equivalent yet complementary methods of expressing repetition: iteration repeats through loops and updated state, recursion expresses a problem through smaller instances of itself with a base case and a call stack, and the competent programmer chooses between them according to the natural structure of the problem and the constraints of memory and performance."
+  ],
+  "questions": [
+   "What two essential parts must every correct recursive definition contain, and what happens if the base case is missing?",
+   "How does the call stack support recursion, and what error results from excessive recursion depth?",
+   "Why can a naive recursive computation of Fibonacci numbers be extremely inefficient, and how can this be fixed?",
+   "What is tail recursion, and why can it sometimes be optimized to run like a loop?",
+   "In what situations is iteration preferable to recursion, and vice versa?"
+  ]
+ },
+ {
+  "code": "10.1.19",
+  "title": "Analysis of algorithm complexity: Big-O notation and its application",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Why algorithm efficiency is analyzed independently of hardware.",
+   "Time and space complexity and the idea of growth rate.",
+   "Big-O notation and the asymptotic notations O, Omega and Theta.",
+   "Common complexity classes and their practical meaning.",
+   "Worst, best and average cases and rules for analyzing code."
+  ],
+  "body": [
+   "When several algorithms solve the same problem, we need an objective way to compare their efficiency. Measuring the running time on a particular computer is unreliable, because it depends on the processor speed, the programming language, the compiler and the current load of the machine. Complexity analysis solves this by describing how the resource consumption of an algorithm grows as the size of the input grows, independently of any specific hardware.",
+   "Two resources are usually analyzed. Time complexity describes how the number of basic operations grows with the input size n; space complexity describes how the amount of additional memory grows with n. The input size n is problem-dependent: it may be the number of elements in an array, the number of vertices and edges in a graph, or the number of digits in a number. The central idea is the growth rate, that is, how the cost scales as n becomes large.",
+   "Big-O notation is the standard tool for expressing growth rate. Writing that an algorithm runs in O(f(n)) time means that, for sufficiently large n, its running time is bounded above by a constant multiple of f(n). Big-O therefore describes an upper bound on the growth and deliberately ignores constant factors and lower-order terms, because these are dominated by the highest-order term as n grows. For example, 3n squared plus 5n plus 7 is simply O(n squared).",
+   "Two related notations complete the picture. Big-Omega, written Omega(f(n)), expresses a lower bound: the running time grows at least as fast as f(n). Big-Theta, written Theta(f(n)), expresses a tight bound: the running time grows exactly at the rate of f(n), being bounded both above and below by constant multiples of it. In everyday practice Big-O is used most often, but it is important to know that it is only an upper bound.",
+   "Several complexity classes appear repeatedly and should be recognized instantly. Constant time O(1) means the cost does not depend on the input size, as in accessing an array element by index. Logarithmic time O(log n) grows very slowly and is typical of binary search, which halves the search space each step. Linear time O(n) grows in proportion to the input, as in scanning an array once.",
+   "The class O(n log n) is characteristic of the efficient comparison-based sorting algorithms such as merge sort and heap sort, and it is provably the best possible for sorting by comparisons. Quadratic time O(n squared) arises from nested loops over the data, as in simple sorting algorithms like bubble sort or insertion sort; it is acceptable for small inputs but becomes slow quickly. Cubic time O(n cubed) appears in algorithms such as Floyd-Warshall on graphs.",
+   "The most expensive common classes are exponential time O(2 to the power n) and factorial time O(n factorial). These arise in brute-force solutions that examine all subsets or all permutations, such as a naive solution of the travelling salesman problem. Algorithms in these classes become impractical even for moderate input sizes, which is why problems that seem to require them are the subject of intensive research into better methods.",
+   "The difference between complexity classes is enormous for large inputs and easy to underestimate. For an input of one million elements, a linear algorithm performs about a million operations, an O(n log n) algorithm about twenty million, but a quadratic algorithm performs a trillion, which is completely impractical. This is why choosing an algorithm of a better complexity class usually matters far more than micro-optimizing the constant factors of a poor one.",
+   "Analysis must distinguish the best, worst and average cases, because an algorithm may behave very differently on different inputs. The worst case gives an upper bound on the time for any input of size n and is the most commonly reported, because it guarantees performance. The best case is the most favorable input, and the average case describes typical behavior under some assumption about the distribution of inputs. For example, quicksort has an average case of O(n log n) but a worst case of O(n squared).",
+   "Analyzing the complexity of code follows simple rules. Consecutive statements add their complexities, so the largest dominates. A loop that runs n times, containing constant-time work, contributes O(n); nested loops multiply, so two nested loops over n elements give O(n squared). A loop that repeatedly halves or doubles a value contributes a logarithmic factor. The complexity of the whole program is then simplified by keeping only the dominant term.",
+   "Space complexity is analyzed similarly, counting the extra memory an algorithm allocates beyond its input. An in-place algorithm uses only O(1) additional memory, while an algorithm that copies its data or builds auxiliary structures may use O(n) or more. There is often a trade-off between time and space, as in memoization, where extra memory is spent to save recomputation and thereby reduce time.",
+   "Complexity analysis guides real engineering decisions. It tells the developer whether an algorithm will scale to the expected data size, which of two candidate solutions to prefer, and where the performance bottleneck of a program is likely to lie. It also warns when a seemingly correct solution will be far too slow in production, allowing the problem to be redesigned before implementation rather than after failure.",
+   "Thus, the analysis of algorithm complexity, expressed through Big-O and the related asymptotic notations, provides a hardware-independent measure of how time and memory requirements grow with input size, and knowing the common complexity classes and the rules for deriving them enables a programmer to choose algorithms that will perform well as the data grows large."
+  ],
+  "questions": [
+   "Why is complexity analysis preferred over measuring the actual running time on a specific computer?",
+   "What does the statement that an algorithm runs in O(f(n)) time mean, and why are constants and lower-order terms ignored?",
+   "How do the notations Big-O, Big-Omega and Big-Theta differ?",
+   "List the common complexity classes in order from fastest-growing to slowest-growing and give an example of each.",
+   "What is the difference between the worst-case and average-case complexity, illustrated by quicksort?"
+  ]
+ },
+ {
+  "code": "10.1.20",
+  "title": "Principles of problem formalization: identifying input and output data",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What formalization means and why it precedes coding.",
+   "Identifying and describing the input data and its constraints.",
+   "Defining the required output and the relation between input and output.",
+   "Constraints, edge cases and assumptions in a specification.",
+   "Building a formal model that leads to an algorithm."
+  ],
+  "body": [
+   "Formalization is the process of turning a vague, informally stated problem into a precise, unambiguous specification that can be solved by an algorithm. Real problems are usually described in everyday language, which is full of gaps and hidden assumptions. Before writing any code, the programmer must translate this description into exact statements about what data is given, what result is required, and how the result depends on the data. This step is often the most difficult and the most important part of solving a problem.",
+   "The first task of formalization is to identify the input data: what information the algorithm receives. For each piece of input the programmer must state its type, for example integer, real number, string or a collection such as an array; its meaning, that is, what it represents in the problem; and its structure, for example whether the numbers form a sorted sequence or a matrix. A clear description of the input removes the ambiguity present in the original wording.",
+   "Equally important are the constraints on the input, which describe the range and properties of the values. Constraints state, for example, that a quantity is a positive integer not exceeding one million, that a list contains at most a certain number of elements, or that coordinates are non-negative. These bounds are not mere formalities: they determine which algorithms are fast enough and reveal the special cases the algorithm must handle correctly.",
+   "The second task is to define the output data: what result the algorithm must produce. As with the input, the output must be specified by its type, its meaning and its format. It is essential to state precisely what is being asked, for example whether the answer is a single number, a yes-or-no decision, a list of items, or all solutions, and in what form and order they should be presented.",
+   "The heart of formalization is describing the relationship between input and output, that is, the exact condition that the output must satisfy given the input. This is the precise statement of what it means for an answer to be correct. For instance, the formalization of a sorting problem states that the output is a permutation of the input in which every element is not greater than the next; the formalization of a search problem states the exact condition the returned element must satisfy.",
+   "A complete specification also records assumptions and handles edge cases, the unusual or boundary inputs that are easy to overlook. Typical edge cases include empty input, a single element, the smallest and largest allowed values, duplicate values, and inputs that have no valid answer. Deciding in advance how the algorithm should behave in these situations, for example what to return for an empty list, prevents a large class of later errors.",
+   "Formalization often introduces a formal model, a mathematical or structural abstraction of the real situation. A road map becomes a weighted graph; a schedule becomes a set of intervals; a text becomes a sequence of characters. Choosing an appropriate model is a creative act that determines which known algorithms and data structures can be applied, and a good model exposes the structure of the problem that a good algorithm will exploit.",
+   "A useful technique during formalization is to work through concrete examples by hand. Taking a specific input and determining the correct output clarifies the exact meaning of the problem, reveals hidden assumptions, and often suggests the shape of the solution. These worked examples later become test cases that verify the finished program against the original specification.",
+   "Ambiguity in the original problem statement must be resolved explicitly. If the problem does not say what to do when several answers are equally good, or how ties should be broken, or whether the input is guaranteed to be valid, the programmer must either clarify these points with the person who posed the problem or state clear assumptions. Undocumented assumptions are a frequent source of misunderstanding between a customer and a developer.",
+   "Formalization connects directly to complexity analysis through the input constraints. Knowing that the input can be as large as, say, one hundred thousand elements immediately rules out quadratic algorithms and directs the programmer toward solutions of O(n log n) or better. In this way the formal specification of the input size is not only a description of the problem but also a guide to which algorithmic approach is feasible.",
+   "The output of the formalization stage is a written specification that serves as a contract for the implementation. It states the inputs and their constraints, the outputs and their format, the correctness condition, and the treatment of edge cases. From this contract the programmer can design an algorithm with confidence that it solves the right problem, and can later verify the program against it rather than against a vague memory of the original request.",
+   "Formalization is a skill that improves with practice and pays off throughout a project. A problem that is well formalized is often already half solved, because the structure needed for the algorithm has been made explicit. Conversely, jumping straight to coding from an informal description frequently leads to solving the wrong problem, to missed edge cases, and to costly rework once the misunderstanding is discovered.",
+   "Thus, the formalization of a problem, centered on the precise identification of input data with its constraints, of output data with its format, and of the correctness condition that links them, transforms an informal request into an exact specification, and this specification is the essential bridge between understanding a problem and designing a correct and efficient algorithm for it."
+  ],
+  "questions": [
+   "What does it mean to formalize a problem, and why must this be done before writing code?",
+   "What must be specified about each item of input data, and why are input constraints important?",
+   "Why is describing the relationship between input and output the heart of a specification?",
+   "What are edge cases, and give three typical examples that a specification should address.",
+   "How do input constraints established during formalization influence the choice of algorithm?"
+  ]
+ },
+ {
+  "code": "10.1.21",
+  "title": "Data model and abstraction: how they help in creating code",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of a data model as a structured view of information.",
+   "Abstraction and the separation of what from how.",
+   "Abstract data types and their relation to concrete implementations.",
+   "Layers of abstraction and information hiding (encapsulation).",
+   "How data models and abstraction improve the quality of code."
+  ],
+  "body": [
+   "A data model is a structured description of the information a program works with: what entities exist, what attributes they have, and how they relate to one another. Before writing code, a developer builds a data model that captures the essential objects of the problem domain, for example students, courses and grades in an academic system, together with the relationships between them. A good data model reflects the real structure of the problem and makes the subsequent code natural to write and to understand.",
+   "Abstraction is the mental technique of focusing on the essential features of something while deliberately ignoring irrelevant details. In programming, abstraction lets us think about what a component does without being distracted by how it does it. When we use a list, we think in terms of adding and removing elements, not in terms of the memory addresses and pointers that make this possible. Abstraction is what allows humans to manage the enormous complexity of software.",
+   "The separation of what from how is the central benefit of abstraction. The specification of a component, its interface, describes what operations it offers and what they mean; the implementation describes how those operations are carried out. As long as the interface stays the same, the implementation can be changed, improved or replaced without affecting the code that uses it. This separation is the foundation of maintainable, evolvable software.",
+   "An abstract data type, or ADT, is a data model defined purely by its behavior: the set of operations it supports and the rules those operations obey, independent of any particular implementation. A stack, for example, is defined by the operations push, pop and the last-in-first-out rule; it is an abstract concept. Whether it is implemented with an array or a linked list is an implementation detail that its users need not know.",
+   "The distinction between an abstract data type and its concrete implementation is fundamental. The same ADT can have several implementations with different performance characteristics. A list ADT can be implemented as an array, giving fast access by index but slow insertion, or as a linked list, giving slow access but fast insertion. Choosing the implementation is a separate decision from choosing the abstraction, and it can be made or changed based on performance needs.",
+   "Software is organized into layers of abstraction, each built on the one below. The hardware is abstracted by the operating system, which is abstracted by system libraries, which are abstracted by application frameworks, and so on. At each layer, a programmer works with the concepts of that layer without needing to understand the layers beneath. This layering is what makes it possible to build very large systems that no single person could hold entirely in mind.",
+   "Encapsulation, also called information hiding, is the mechanism that enforces abstraction in code. It bundles data together with the operations that act on it and hides the internal representation behind a well-defined interface, exposing only the operations. Because the internal data cannot be manipulated directly from outside, it can only change through controlled operations that maintain its consistency, which greatly reduces the opportunity for errors.",
+   "Abstraction supports the crucial software principle of managing dependencies. When one part of a program depends only on the interface of another, and not on its internal details, the two parts are loosely coupled and can be developed, tested and modified independently. Tight coupling to internal details, by contrast, makes any change ripple unpredictably through the whole program and is a hallmark of code that is hard to maintain.",
+   "Choosing the right level of abstraction is a matter of judgment. Too little abstraction leaves the code cluttered with low-level details and hard to reason about; too much abstraction adds layers of indirection that obscure what the program actually does and can hurt performance. The goal is to introduce abstractions that correspond to meaningful concepts in the problem domain, so that the code reads as a description of the problem rather than of the machine.",
+   "Data models and abstraction directly improve several qualities of code. They improve readability, because well-named abstractions communicate intent; reusability, because a well-defined abstract component can be used in many contexts; testability, because a component with a clear interface can be tested in isolation; and maintainability, because changes are localized behind interfaces. These qualities are what distinguish professional software from a fragile collection of scripts.",
+   "Modern programming paradigms are built on these ideas. Object-oriented programming groups data and behavior into objects that encapsulate their state and expose methods, directly realizing abstract data types. The design of clean interfaces, the definition of clear data models, and the use of encapsulation are not optional refinements but the core practices that make it possible to build and evolve realistic software systems over time.",
+   "A well-chosen data model and appropriate abstractions also make the connection between a problem and its solution explicit and durable. When the structure of the code mirrors the structure of the problem domain, new requirements usually map onto small, localized changes, and new team members can understand the system by understanding the domain. This alignment between model and reality is one of the strongest indicators of good design.",
+   "Thus, a data model gives a structured representation of the information a program handles, while abstraction and encapsulation separate what a component does from how it does it and hide unnecessary detail behind clear interfaces, and together these ideas control complexity and are the foundation of code that is readable, reusable, testable and maintainable."
+  ],
+  "questions": [
+   "What is a data model, and what does it describe about the information a program uses?",
+   "What is the difference between what a component does and how it does it, and why does separating them help?",
+   "What is an abstract data type, and how does it relate to its concrete implementation?",
+   "What is encapsulation (information hiding), and how does it reduce the chance of errors?",
+   "Name several qualities of code that are improved by good use of data models and abstraction."
+  ]
+ },
+ {
+  "code": "10.1.22",
+  "title": "Designing algorithms for sorting and searching data",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in designing, implementing and comparing basic sorting and searching algorithms and in choosing the appropriate one according to the properties of the data.",
+  "theory": [
+   "Sorting arranges the elements of a collection into a defined order, most often non-decreasing. Simple algorithms such as bubble sort, selection sort and insertion sort are easy to write and run in O(n squared) time, which is acceptable only for small inputs. Efficient algorithms such as merge sort and quicksort run in O(n log n) time on average; merge sort guarantees this bound and is stable but needs extra memory, while quicksort is usually faster in practice but degrades to O(n squared) in the worst case if pivots are chosen poorly.",
+   "Searching locates an element or determines that it is absent. Linear search scans the collection from start to end in O(n) time and works on any data, sorted or not. Binary search works only on sorted data: it repeatedly compares the target with the middle element and discards half of the remaining range, achieving O(log n) time. The requirement that the data be sorted is what links searching to sorting: sorting once enables many fast binary searches afterwards.",
+   "The choice of algorithm depends on the properties of the data and the task: the size of the input, whether the data is already partially sorted, whether stability (preserving the relative order of equal elements) is required, and how much additional memory is available. Understanding these trade-offs, rather than memorizing a single algorithm, is what allows a programmer to design an efficient solution for each concrete situation."
+  ],
+  "materials": [
+   "A computer with a programming environment (for example Python, C++ or Java).",
+   "Prepared data sets of different sizes, including random, already-sorted and reverse-sorted arrays.",
+   "A stopwatch or a built-in timing function for measuring running time.",
+   "A report template with tables for comparison counts and running times."
+  ],
+  "procedure": [
+   "Implement two simple sorting algorithms, for example bubble sort and insertion sort, and verify their correctness on small hand-checked arrays.",
+   "Implement one efficient sorting algorithm, either merge sort or quicksort, and verify it on the same test arrays.",
+   "Add counters that record the number of comparisons and swaps performed by each algorithm during sorting.",
+   "Run all algorithms on the prepared data sets of increasing size and record the running time and the operation counts for each.",
+   "Implement linear search and binary search, confirm that binary search is applied only to a sorted array, and test both on present and absent targets.",
+   "Summarize the measurements in a table, plot or describe how the running time grows with input size, and draw conclusions about which algorithm suits which situation."
+  ],
+  "tasks": [
+   "Implement and compare bubble sort and merge sort on random arrays of sizes 100, 1000 and 10000, and tabulate the number of comparisons and the running time.",
+   "Implement binary search on a sorted array and demonstrate on several examples how the search range is halved at each step until the target is found or the range is empty.",
+   "Investigate quicksort on an already-sorted array with a naive first-element pivot, explain why its performance degrades to O(n squared), and propose a pivot-selection strategy that avoids this."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of designing and implementing basic sorting and searching algorithms, of measuring and comparing their efficiency, and of choosing an appropriate algorithm based on the properties of the data.",
+  "questions": [
+   "What is the difference in time complexity between simple sorts such as bubble sort and efficient sorts such as merge sort?",
+   "What does it mean for a sorting algorithm to be stable, and when does stability matter?",
+   "Why does binary search require the data to be sorted, and what is its time complexity?",
+   "Under what condition does quicksort degrade to O(n squared), and how can this be avoided?",
+   "How would you choose between merge sort and quicksort when memory is limited?"
+  ]
+ },
+ {
+  "code": "10.1.23",
+  "title": "Dynamic programming algorithms and their application",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The idea of dynamic programming and the problems it solves.",
+   "Optimal substructure and overlapping subproblems.",
+   "Memoization (top-down) and tabulation (bottom-up) approaches.",
+   "Classic examples: Fibonacci, knapsack, longest common subsequence.",
+   "Advantages, limitations and comparison with other techniques."
+  ],
+  "body": [
+   "Dynamic programming, often abbreviated DP, is a method for solving complex problems by breaking them into simpler subproblems, solving each subproblem only once, and storing its result for reuse. It applies to optimization problems, where we seek the best solution, and to counting problems, where we count the number of ways something can happen. Its power comes from avoiding the repeated recomputation that makes naive recursive solutions exponentially slow.",
+   "For dynamic programming to apply, a problem must have two properties. The first is optimal substructure: an optimal solution to the whole problem can be constructed from optimal solutions to its subproblems. The second is overlapping subproblems: the same subproblems are solved many times when the problem is expanded recursively. When both hold, storing subproblem results turns an exponential computation into a polynomial one.",
+   "Optimal substructure distinguishes dynamic programming from problems that lack it. In the shortest-path problem, for example, a shortest path from A to C through B contains a shortest path from A to B, so the property holds. When optimal substructure is present, the problem can be expressed by a recurrence relation that defines the answer for a given state in terms of the answers for smaller states.",
+   "The presence of overlapping subproblems is what makes storing results worthwhile. The naive recursive computation of the n-th Fibonacci number recomputes the same smaller Fibonacci numbers an exponential number of times. Dynamic programming computes each of the n values once, reducing the running time from exponential to linear. Where subproblems do not overlap, as in a pure divide-and-conquer algorithm such as merge sort, dynamic programming offers no advantage.",
+   "There are two ways to implement dynamic programming. The top-down approach, called memoization, keeps the natural recursive structure but stores the result of each subproblem in a table the first time it is computed; subsequent calls with the same arguments return the stored value instead of recomputing it. It is easy to derive from a recursive definition and computes only the subproblems that are actually needed.",
+   "The bottom-up approach, called tabulation, works in the opposite direction. It identifies the order in which subproblems depend on one another and fills a table starting from the smallest subproblems up to the desired one, without recursion. Tabulation avoids the overhead of recursive calls and makes the order of computation explicit, which sometimes allows the memory used to be reduced by keeping only the most recent rows of the table.",
+   "The knapsack problem is a classic illustration. Given items with weights and values and a bag of limited capacity, we seek the most valuable subset that fits. The dynamic-programming solution defines the best value achievable using the first i items with capacity c, and builds a table over items and capacities. Its running time is proportional to the number of items times the capacity, which is efficient when the capacity is not too large.",
+   "The longest common subsequence problem is another standard example, used in file-comparison tools and in bioinformatics. Given two sequences, we seek the longest sequence that appears, in order but not necessarily contiguously, in both. The dynamic-programming solution fills a two-dimensional table indexed by the prefixes of the two sequences, and each cell is computed from a few neighboring cells in O(1) time, giving an overall O(m times n) algorithm.",
+   "Other well-known problems solved by dynamic programming include computing the minimum edit distance between two strings, matrix-chain multiplication, coin-change problems, and, as seen earlier, the Floyd-Warshall all-pairs shortest-path algorithm. Recognizing that a problem fits the dynamic-programming pattern, and formulating the correct recurrence and the definition of a state, is the essential and often the hardest skill.",
+   "Designing a dynamic-programming solution follows a systematic recipe. First, define the state, the set of parameters that uniquely describe a subproblem. Second, write the recurrence that relates a state to smaller states, together with the base cases. Third, decide the order of computation and choose memoization or tabulation. Fourth, read the final answer from the table, and, if the actual solution is needed and not only its value, reconstruct it by tracing back through the choices recorded in the table.",
+   "Dynamic programming is not free of costs. It typically uses additional memory proportional to the number of distinct subproblems, which can be large, and formulating the correct recurrence requires care and insight. When a problem has optimal substructure but a greedy choice can be proven correct, a greedy algorithm is simpler and uses less memory; dynamic programming is needed precisely when no such greedy choice works and all relevant subproblems must be considered.",
+   "It is useful to compare dynamic programming with related techniques. Divide-and-conquer also splits a problem into subproblems but does not reuse overlapping ones. Greedy algorithms make one locally optimal choice at each step without revisiting subproblems and are correct only for a restricted class of problems. Dynamic programming sits between brute force and these faster techniques, systematically exploring the space of subproblems while avoiding redundant work.",
+   "Thus, dynamic programming solves problems that have optimal substructure and overlapping subproblems by computing each subproblem only once and reusing the stored result, implemented either top-down with memoization or bottom-up with tabulation, and mastering the definition of states and recurrences allows a programmer to turn many exponential problems, such as knapsack and longest common subsequence, into efficient polynomial ones."
+  ],
+  "questions": [
+   "What two properties must a problem have for dynamic programming to be applicable?",
+   "What is the difference between the top-down (memoization) and bottom-up (tabulation) approaches?",
+   "Why does dynamic programming make the computation of Fibonacci numbers efficient, whereas naive recursion is exponential?",
+   "Describe the state and the recurrence used in the dynamic-programming solution of the knapsack problem.",
+   "When is a greedy algorithm preferable to dynamic programming, and why?"
+  ]
+ },
+ {
+  "code": "10.1.24",
+  "title": "Software development methodology: the waterfall and agile approaches",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What a software development methodology is and why it is needed.",
+   "The waterfall model: sequential phases and their characteristics.",
+   "Strengths and weaknesses of the waterfall approach.",
+   "The agile approach: values, iterations and incremental delivery.",
+   "Comparison of the two approaches and the choice between them."
+  ],
+  "body": [
+   "A software development methodology is an organized set of principles, phases and practices that guide the process of creating software from an initial idea to a working, maintained product. Writing code is only one part of building software; a methodology also covers gathering requirements, designing the system, testing, deployment and maintenance, and it defines how the people involved coordinate their work. Choosing an appropriate methodology strongly affects the quality, cost and timeliness of the result.",
+   "The software development life cycle describes the stages that a software product passes through: requirements analysis, design, implementation, testing, deployment and maintenance. Different methodologies organize these same stages in different ways, some running them strictly one after another, others repeating them in short cycles. Understanding the life cycle is the basis for understanding any particular methodology.",
+   "The waterfall model is the classical, sequential methodology. It divides the project into distinct phases that are carried out in a fixed order, each phase completed and documented before the next begins, so that progress flows steadily downward like a waterfall. The typical phases are requirements, design, implementation, testing, deployment and maintenance, with the output of each phase serving as the input to the next.",
+   "The waterfall model relies heavily on thorough documentation and on fixing the requirements at the very beginning. Its central assumption is that the requirements can be fully understood and specified before design and coding start, and that they will not change substantially afterwards. Because of this, a great deal of effort is spent on producing detailed specification and design documents early in the project.",
+   "The waterfall approach has real strengths. Its structure is simple to understand and to manage; the clear phases and milestones make progress easy to track; the emphasis on documentation supports maintenance and the transfer of knowledge; and it works well for projects whose requirements are stable and well understood, such as certain systems with strict regulatory or safety requirements where everything must be specified in advance.",
+   "The waterfall approach also has serious weaknesses. Because working software appears only late, in the testing and deployment phases, errors in the early requirements or design may remain hidden until they are expensive to fix. The model reacts poorly to changing requirements, since going back to an earlier phase is costly and disruptive. For projects where the requirements are uncertain or likely to evolve, the rigidity of the waterfall model is a major drawback.",
+   "The agile approach emerged as a response to these weaknesses. It is not a single process but a family of methods sharing the values expressed in the Agile Manifesto, which favors individuals and interactions over processes and tools, working software over comprehensive documentation, customer collaboration over contract negotiation, and responding to change over following a fixed plan. The emphasis is on flexibility and on delivering value continuously.",
+   "In an agile process the work is divided into short iterations, often called sprints and typically lasting one to four weeks. Each iteration passes through all the activities of the life cycle, planning, design, implementation and testing, and ends with a small but working increment of the product. This iterative and incremental style means that usable software exists from early in the project and grows steadily with each iteration.",
+   "Agile methods place the customer, or a representative of the customer, close to the development team and encourage frequent feedback. After each iteration the increment is reviewed, and the plan for the next iteration is adjusted according to what has been learned and to any change in requirements. This continuous feedback loop allows the product to adapt to evolving needs and reduces the risk of building the wrong thing.",
+   "Several concrete frameworks realize the agile values. Scrum organizes work into sprints with defined roles, such as the product owner and the scrum master, and regular events such as the daily stand-up meeting, the sprint review and the retrospective. Kanban visualizes the flow of work on a board and limits the amount of work in progress to improve throughput. These frameworks give the abstract agile principles a practical structure.",
+   "The two approaches differ most in how they handle change and delivery. Waterfall fixes the requirements early and delivers the whole product at the end, which suits stable, well-defined projects and gives predictability. Agile embraces changing requirements and delivers in small increments, which suits projects with uncertain or evolving needs and gives flexibility and early value, at the cost of less up-front certainty about the final scope and schedule.",
+   "The choice between them, and between the many intermediate and hybrid models, depends on the nature of the project: the stability of the requirements, the size of the team, the tolerance for risk, and the need for early delivery or for exhaustive documentation. Many organizations combine elements of both, and a skilled developer understands that the methodology is a tool to be selected and adapted to the situation, not a rigid dogma to be followed blindly.",
+   "Thus, a software development methodology organizes the whole life cycle of a product, and the two principal approaches embody opposite philosophies: the waterfall model proceeds through fixed sequential phases with heavy documentation and stable requirements, while the agile approach delivers working software in short iterations with continuous feedback and openness to change, and the right choice depends on the characteristics of the project at hand."
+  ],
+  "questions": [
+   "What is a software development methodology, and which activities besides coding does it cover?",
+   "What are the phases of the waterfall model, and what is the key assumption on which it relies?",
+   "What are the main strengths and weaknesses of the waterfall approach?",
+   "What are the core values of the agile approach, and how does the use of short iterations support them?",
+   "On what factors does the choice between the waterfall and agile approaches depend?"
+  ]
+ }
+]

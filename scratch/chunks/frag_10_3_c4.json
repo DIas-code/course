@@ -1,0 +1,85 @@
+{
+ "lo_id": "10.3",
+ "chunk": 4,
+ "out_file": "umkd_gen/frag_10_3_c4.json",
+ "topics": [
+  {
+   "pos": 43,
+   "title_ru": "Тестирование и отладка кода на уровне отдельных функций и методов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 44,
+   "title_ru": "Работа с логами и журналами событий для отслеживания ошибок.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 45,
+   "title_ru": "Идентификация и исправление ошибок в коде.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 46,
+   "title_ru": "Обработка исключений и ошибок в отладочном режиме.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 47,
+   "title_ru": "Отладка многопоточных и асинхронных программ",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 48,
+   "title_ru": "Отладка сетевых и распределенных систем.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 49,
+   "title_ru": "Оптимизация производительности в процессе отладки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 50,
+   "title_ru": "Профилирование кода для выявления узких мест.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 51,
+   "title_ru": "Тестирование и отладка кода в веб-приложениях.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 52,
+   "title_ru": "Отладка мобильных приложений (Android Studio, Xcode)",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 53,
+   "title_ru": "Инструменты для отладки IoT-устройств и микроконтроллеров",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 54,
+   "title_ru": "Отладка кода в среде разработки для встроенных систем.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 55,
+   "title_ru": "Отладка кода на уровне системного программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  }
+ ]
+}

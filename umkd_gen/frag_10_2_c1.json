@@ -1,0 +1,443 @@
+[
+ {
+  "code": "10.2.1",
+  "title": "The process of developing program code from requirement specifications",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The place of coding in the software development life cycle.",
+   "What a requirement specification contains and how it drives development.",
+   "The sequence of developer actions from a specification to working code.",
+   "Traceability between requirements, code and tests.",
+   "Quality criteria and completion of the development stage."
+  ],
+  "body": [
+   "The development of program code from a requirement specification is the stage of the software life cycle at which formalized requirements are transformed into an executable product. The developer receives a document that describes what the system must do, and their task is not to invent the functionality but to implement it accurately, completely and without arbitrary deviations. This distinguishes disciplined industrial development from amateur programming, where the programmer simultaneously decides what to build and how to build it.",
+   "A requirement specification is the result of the preceding analysis and design stages. It usually contains functional requirements (what the system does), non-functional requirements (how well it does it — performance, reliability, security), constraints (platform, budget, standards) and acceptance criteria. For the coder, the specification is both the source of the task and the standard against which the finished result will be checked.",
+   "Functional requirements are most often written in the form of use cases, user stories or numbered statements of the type 'the system shall...'. Each such statement should be verifiable: it must be possible to demonstrate by a test whether the requirement is satisfied. A well-written requirement is unambiguous, complete, consistent with the others and feasible within the given constraints.",
+   "Before writing a single line of code, the developer studies the specification as a whole, not fragment by fragment. This global reading reveals dependencies between requirements, shared data, and contradictions that must be clarified with the analyst or customer before implementation begins. Coding started on a misunderstood requirement is the most expensive kind of error, because it is discovered late and forces rework.",
+   "The typical sequence of actions is as follows: analyze and interpret the requirement, agree on any ambiguities, design the data structures and the flow of control, choose the algorithms, write the code, cover it with tests derived from the acceptance criteria, and finally verify that the behaviour matches the specification. Each requirement thus travels a path from text to a tested, working piece of the program.",
+   "An important principle is traceability — the ability to link every requirement to the code that implements it and to the tests that verify it. In practice this is achieved through a traceability matrix, meaningful commit messages that reference requirement numbers, and comments in the code. Traceability guarantees that no requirement is forgotten and that no code exists without a reason in the specification.",
+   "Development from specifications does not exclude engineering decisions; it constrains them. The developer freely chooses names, internal structure, patterns and algorithms, but the observable behaviour of the program — its inputs, outputs and reactions — must strictly correspond to the requirements. Any desire to 'improve' the behaviour beyond the specification must be turned into a change request, not silently coded.",
+   "Modern development is iterative. Even when a full specification exists, the code is built in small increments: a requirement or a group of related requirements is implemented, tested and demonstrated, after which the next portion is taken. Short iterations reduce risk, because errors of interpretation are caught early and the customer sees progress on real functionality rather than on promises.",
+   "The developer works within a version-control system, committing small logically complete changes. A commit that implements requirement F-14 should be self-contained and accompanied by the tests for that requirement. This makes the history of the project readable and allows any change to be reviewed, reverted or attributed to a specific requirement.",
+   "Coding from specifications is inseparable from code review and static analysis. A reviewer checks not only that the code compiles and runs, but that it actually implements the stated requirement and does not add undocumented behaviour. Automated tools check style, common defects and security issues, freeing the reviewer to concentrate on correctness with respect to the specification.",
+   "Non-functional requirements shape the code just as strongly as functional ones, although less visibly. A requirement 'the search must return results within one second for a catalogue of one million records' dictates the choice of data structures, indexing and possibly caching. Ignoring non-functional requirements produces software that passes functional tests but fails in real operation.",
+   "The development stage is considered complete for a given requirement when the code implements it, all derived tests pass, the code has been reviewed and merged, and the corresponding entry in the traceability matrix is closed. Completion is defined by objective evidence, not by the developer's subjective feeling that the work is 'done'.",
+   "Typical mistakes at this stage are: starting to code before fully understanding the requirement, implementing what the developer imagines instead of what is written, adding features 'for the future' that no one requested, and neglecting the acceptance criteria until the very end. Each of these mistakes breaks the connection between the specification and the product.",
+   "Thus, developing program code from a requirement specification is a disciplined transformation of formal requirements into tested, traceable code, in which the specification governs the observable behaviour of the program, engineering freedom is confined to the internal implementation, and the completion of every requirement is confirmed by objective evidence."
+  ],
+  "questions": [
+   "What is the difference between developing code from a specification and developing without one?",
+   "What information does a requirement specification typically contain?",
+   "What sequence of actions does a developer follow to turn a requirement into working code?",
+   "What is traceability and how is it achieved in practice?",
+   "Why must desired improvements beyond the specification be handled as change requests rather than coded silently?"
+  ]
+ },
+ {
+  "code": "10.2.2",
+  "title": "Interpretation and analysis of software requirements",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Categories of requirements: functional, non-functional, constraints.",
+   "Properties of a good requirement and typical defects.",
+   "Techniques for reading and interpreting requirements correctly.",
+   "Detecting ambiguity, contradiction and incompleteness.",
+   "From requirement to a plan of implementation and tests."
+  ],
+  "body": [
+   "Interpretation and analysis of software requirements is the mental work that precedes coding: the developer must understand precisely what each requirement demands before deciding how to implement it. A requirement is a statement about a property or behaviour that the system must possess. The quality of the whole product depends directly on how correctly these statements are understood.",
+   "Requirements are divided into functional and non-functional. Functional requirements describe the actions and reactions of the system — what it computes, stores, displays and validates. Non-functional requirements describe qualities — performance, reliability, usability, security, maintainability, portability. Constraints are a special group: they fix the technology, the platform, standards or budget within which the solution must fit.",
+   "A good requirement possesses several properties. It is unambiguous, meaning it allows only one interpretation. It is complete, containing all the information needed to implement and verify it. It is consistent, not contradicting other requirements. It is verifiable, so that a test can confirm its fulfilment. And it is feasible within the given constraints. When one of these properties is missing, the requirement is defective and must be corrected before coding.",
+   "The most frequent defect is ambiguity. Words such as 'fast', 'user-friendly', 'approximately', 'and/or', and undefined pronouns leave room for several readings. The developer's task is to detect such words and replace vague notions with measurable ones — for example, to turn 'the report must be generated quickly' into 'the report must be generated within three seconds for up to ten thousand records'.",
+   "Incompleteness appears when a requirement describes the normal case but says nothing about boundary conditions and errors. If a requirement states that the system accepts a date of birth, the analyst-minded developer immediately asks: what about an empty field, a future date, an impossible date, a wrong format? These questions must be answered in the specification, not guessed during coding.",
+   "Contradictions arise when two requirements cannot both be satisfied — for instance, one demands that all data be encrypted at rest while another demands full-text search over the same data without a defined searchable index. Detecting contradictions requires reading the requirements as a connected system rather than as isolated sentences, and resolving them with the customer.",
+   "A powerful interpretation technique is to restate each requirement in one's own words and in the form of concrete examples. If the developer can produce several specific input-output examples that illustrate the requirement, the understanding is probably correct. If the examples contradict one another or cannot be produced, the requirement is not yet understood and needs clarification.",
+   "Another technique is to identify the actors, the data and the rules hidden in the text. Actors are who initiates and who receives the action; data are the entities and their attributes; rules are the conditions and calculations. Extracting these elements turns a paragraph of prose into a structured picture that maps almost directly onto classes, functions and validations.",
+   "Requirements should be analyzed for their acceptance criteria — the observable conditions under which the requirement is considered fulfilled. Acceptance criteria are the bridge between analysis and testing: each criterion becomes at least one test case. If a requirement has no acceptance criteria, the developer must derive them and confirm them with the stakeholders.",
+   "Non-functional requirements deserve special analytical attention because they are easy to overlook and expensive to add later. A performance target influences the choice of algorithms and data storage; a security requirement influences authentication, validation and logging; a portability requirement influences the choice of libraries. The developer should trace how each non-functional requirement will affect concrete technical decisions.",
+   "Prioritization is part of analysis. Not all requirements have equal importance; techniques such as MoSCoW (must have, should have, could have, won't have) help order the work so that the essential functionality is implemented first. In iterative development, high-priority and high-risk requirements are usually addressed early to reduce uncertainty.",
+   "The output of requirement analysis is a set of clarified, prioritized requirements, each accompanied by concrete examples and acceptance criteria, together with a list of questions raised and answered. This output becomes the immediate input to design and coding, and it forms the basis of the test plan and the traceability matrix.",
+   "Communication is central: when a requirement cannot be interpreted with confidence, the correct action is to ask the analyst or the customer, not to invent an answer. A short clarifying question at the analysis stage prevents hours of rework at the coding and testing stages. Documenting the answer keeps the whole team aligned.",
+   "Thus, interpretation and analysis of requirements is the systematic work of understanding, questioning and clarifying every statement in the specification, detecting ambiguity, incompleteness and contradiction, extracting the actors, data and rules, and producing clarified requirements with concrete examples and acceptance criteria that can be turned directly into design, code and tests."
+  ],
+  "questions": [
+   "How do functional requirements differ from non-functional requirements and constraints?",
+   "What properties characterize a well-formed requirement?",
+   "How can a developer detect and resolve ambiguity in a requirement?",
+   "Why is it important to consider boundary and error conditions during analysis?",
+   "What is the role of acceptance criteria in linking analysis to testing?"
+  ]
+ },
+ {
+  "code": "10.2.3",
+  "title": "Choosing the programming language and development technologies",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Why technology choice must follow from requirements, not habit.",
+   "Criteria for selecting a programming language.",
+   "Selecting frameworks, libraries and the runtime platform.",
+   "Data storage, tooling and the surrounding ecosystem.",
+   "Balancing technical fit with team competence and long-term support."
+  ],
+  "body": [
+   "Choosing the programming language and development technologies is an engineering decision that should be derived from the requirements and constraints, not from the personal preferences or habits of the developer. A wrong choice made at the beginning is difficult and costly to reverse, because it affects the architecture, the available libraries, the hiring of developers and the maintenance of the product for years.",
+   "The first source of criteria is the specification itself. Constraints often name a mandatory platform (web, mobile, embedded, desktop), a required integration (a specific database, an external service), or a standard that must be met. These hard constraints immediately narrow the range of suitable languages and technologies before any preference is considered.",
+   "A programming language is evaluated against several criteria: suitability for the problem domain, performance characteristics, the maturity and richness of its ecosystem, the availability of qualified developers, the quality of tooling, and the licensing and cost model. No language is best for everything; the goal is the best fit for the particular set of requirements and constraints.",
+   "Suitability for the domain is decisive. Systems programming and high-performance components favour languages such as C, C++ or Rust; enterprise back-ends and Android applications favour Java or Kotlin; data science and automation favour Python; web front-ends require JavaScript or TypeScript running in the browser. Choosing a language that naturally expresses the problem reduces the amount of code and the number of defects.",
+   "Performance and resource requirements, which come from the non-functional part of the specification, influence the choice strongly. A language with manual or deterministic memory management and compilation to native code suits real-time or resource-constrained targets, while a managed, garbage-collected language accelerates development of business applications where raw speed is less critical than reliability and time to market.",
+   "After the language, the framework and libraries are selected. A framework provides a ready structure and common services — routing, data access, security, testing — so that the team does not reinvent them. Frameworks are judged by their fit to the requirements, their maturity, the size and activity of their community, the quality of documentation and the frequency of security updates.",
+   "The runtime platform and deployment target must match the operating environment described in the requirements. A choice between running on a specific operating system, inside containers, on a particular cloud, or on embedded hardware constrains the languages and frameworks that are practical. Portability requirements may push the choice toward cross-platform runtimes.",
+   "Data storage technology is chosen together with the language. Relational databases suit structured, transactional data with strong consistency requirements; document or key-value stores suit flexible schemas and high write throughput; specialized stores serve full-text search, time series or caching. The storage decision must satisfy the data volume, consistency and query requirements from the specification.",
+   "The surrounding ecosystem matters as much as the language core. Build tools, package managers, testing frameworks, debuggers, profilers, continuous-integration support and static analyzers determine how productively the team can work and how reliably quality can be enforced. A technically elegant language with weak tooling can be less effective than a plainer one with a mature ecosystem.",
+   "Team competence is a legitimate and important criterion. A technology that is theoretically optimal but unknown to the team introduces risk: slow development, more defects and difficult maintenance. The decision must weigh the cost of learning against the benefits, and sometimes the pragmatic choice is the technology the team already masters, provided it satisfies the requirements.",
+   "Long-term factors must be considered: the maturity and stability of the technology, the vendor or community behind it, the licensing terms, the ease of hiring, and the availability of security updates. Choosing an abandoned or niche technology may create a maintenance burden and a security liability long after the initial development is finished.",
+   "In practice the decision is documented and justified, often in an architecture decision record that states the requirements considered, the options compared, the criteria applied and the reasons for the final choice. This documentation makes the decision transparent, allows it to be reviewed, and preserves the rationale for future maintainers.",
+   "A common error is to choose technology by fashion — adopting whatever is currently popular — or by inertia, always using the same stack regardless of the task. Both errors ignore the requirements. The mature developer treats technology selection as a comparison of options against explicit criteria, accepting that trade-offs are unavoidable.",
+   "Thus, choosing the programming language and development technologies is a requirement-driven comparison of options against explicit criteria — domain fit, performance, ecosystem, tooling, team competence and long-term support — culminating in a documented, justified decision rather than a choice made by habit or fashion."
+  ],
+  "questions": [
+   "Why should technology choice be derived from requirements rather than personal preference?",
+   "What criteria are used to evaluate a programming language for a project?",
+   "How do non-functional requirements influence the choice of language and platform?",
+   "What factors are considered when selecting a framework and a data storage technology?",
+   "Why are team competence and long-term support important in the decision?"
+  ]
+ },
+ {
+  "code": "10.2.4",
+  "title": "Designing the architecture of the software solution",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What software architecture is and why it is designed before coding.",
+   "Decomposition into components and definition of their responsibilities.",
+   "Common architectural styles and patterns.",
+   "Quality attributes and their influence on architectural decisions.",
+   "Documenting and validating the architecture."
+  ],
+  "body": [
+   "Software architecture is the set of fundamental structures of a system and the discipline of creating them. It describes the components into which the system is divided, the responsibilities of each component, the connections and data flows between them, and the principles that govern their interaction. Architecture is designed before detailed coding because it fixes the most costly-to-change decisions of the whole project.",
+   "The purpose of architectural design is to translate the requirements — especially the non-functional ones — into a structure that can satisfy them. Functional requirements determine what components must exist; non-functional requirements such as performance, scalability, security and maintainability determine how these components are organized, distributed and connected. A good architecture makes the required qualities achievable and future change affordable.",
+   "The central technique is decomposition: dividing the system into parts that are small enough to be understood and developed independently. Each part is given a clear, single responsibility. Well-designed components exhibit high cohesion, meaning everything inside a component belongs together, and low coupling, meaning components depend on one another as little as possible and only through defined interfaces.",
+   "Interfaces are the contracts between components. By programming to interfaces rather than to concrete implementations, the architect allows components to be developed, tested and replaced independently. A stable interface hides the internal details of a component and protects the rest of the system from changes to those details — the principle of information hiding.",
+   "Layered architecture is one of the most common styles: the system is divided into layers such as presentation, business logic and data access, where each layer depends only on the layer beneath it. Layering separates concerns, makes the code easier to understand and allows, for example, the user interface to change without touching the business rules.",
+   "Other widely used styles include client-server, in which clients request services from a central server; the model-view-controller pattern, which separates data, presentation and control flow in interactive applications; microservices, in which the system is split into small independently deployable services communicating over the network; and event-driven architecture, in which components react to events rather than calling each other directly. Each style has strengths and costs, and the choice follows from the requirements.",
+   "Architectural patterns are reusable solutions to recurring structural problems. Beyond the styles above, patterns such as repository for data access, dependency injection for wiring components, and publish-subscribe for decoupled communication provide proven ways to organize code. Applying known patterns reduces risk because their consequences are well understood.",
+   "Quality attributes drive many architectural decisions. Scalability may lead to stateless components and horizontal partitioning; availability may lead to redundancy and failover; security may lead to a clear trust boundary and centralized authentication; maintainability may lead to modularization and strict separation of concerns. The architect explicitly reasons about which attributes matter most and designs accordingly.",
+   "Every architectural decision is a trade-off. Splitting a system into microservices improves independent deployment and scaling but adds network latency, operational complexity and the difficulty of distributed data consistency. A monolith is simpler to develop and deploy but harder to scale selectively. The architect chooses consciously, documenting what is gained and what is sacrificed.",
+   "Data is a first-class architectural concern. The architect decides where data lives, how it is partitioned, how consistency is maintained, and how components share or isolate it. Decisions about the database, caching, and the direction of data flow are as structural as the decomposition of behaviour, and they strongly affect performance and reliability.",
+   "Cross-cutting concerns — logging, error handling, security, transactions, configuration — affect many components at once. The architecture must provide a consistent, centralized way to handle them so that they are not implemented differently in every component. Handling cross-cutting concerns well keeps the code uniform and reduces defects.",
+   "Architecture must be documented so that developers can implement it consistently. Common documentation includes component diagrams, sequence diagrams for key scenarios, a description of the interfaces, and architecture decision records that capture the reasoning behind major choices. The documentation is a living reference, updated as the architecture evolves.",
+   "Finally, the architecture is validated against the requirements before large-scale coding, for example by walking through the critical scenarios and checking that the structure supports them, or by building a small prototype to test a risky decision. Validating early is far cheaper than discovering an architectural flaw after most of the code has been written on top of it.",
+   "Thus, designing the architecture of a software solution is the disciplined translation of functional and non-functional requirements into a structure of cohesive, loosely coupled components communicating through defined interfaces, guided by proven styles and patterns, shaped by conscious trade-offs among quality attributes, and captured in documentation that is validated before detailed coding begins."
+  ],
+  "questions": [
+   "What does software architecture describe, and why is it designed before detailed coding?",
+   "What do high cohesion and low coupling mean, and why are they desirable?",
+   "Name several architectural styles and state a situation in which each is appropriate.",
+   "How do quality attributes such as scalability and security influence architectural decisions?",
+   "Why is every architectural decision considered a trade-off, and how are such decisions documented?"
+  ]
+ },
+ {
+  "code": "10.2.5",
+  "title": "Developing the user interface according to requirements",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The role of the user interface and the difference between UI and UX.",
+   "Deriving interface elements from functional requirements.",
+   "Principles of usability and interface design.",
+   "Input validation, feedback and error presentation.",
+   "Accessibility, responsiveness and separation of UI from logic."
+  ],
+  "body": [
+   "The user interface is the part of the software through which the user perceives the system and controls it. Developing a user interface from requirements means building the screens, controls and interactions so that the user can perform exactly the tasks described in the specification, conveniently and without error. The interface is where the quality of the whole product becomes visible to the customer.",
+   "It is useful to distinguish the user interface (UI) — the concrete visual elements and controls — from the user experience (UX) — the overall impression and ease of achieving goals. The developer implements the UI, but must keep the UX in mind, because a technically correct interface that is confusing or tiring to use fails to satisfy the real intent behind the requirements.",
+   "Interface elements are derived systematically from the functional requirements. Each user task in the specification implies a screen or a section; each piece of data the user enters implies an input control with a suitable type; each action implies a button or command; each result implies an area where output is displayed. Mapping requirements to elements ensures that the interface offers everything the specification demands and nothing arbitrary.",
+   "Interface design follows established usability principles. Consistency means similar things look and behave similarly throughout the application. Visibility of system status means the interface always tells the user what is happening. Recognition rather than recall means the user sees available options instead of having to remember them. A clear match between the interface and the user's real-world concepts reduces the effort of learning.",
+   "Layout and visual hierarchy guide the user's attention. Grouping related controls, aligning elements, using whitespace, and emphasizing the most important actions help the user understand the screen at a glance. The interface should reflect the natural order of the task, leading the user step by step through the workflow described in the requirements.",
+   "Input validation is an essential part of interface development. The interface should prevent invalid input where possible — for example by offering a date picker instead of a free-text date field — and validate the remaining input as early as possible, giving immediate, specific messages. Client-side validation improves convenience, but it never replaces validation in the business logic, because the client can be bypassed.",
+   "Feedback closes the loop between action and result. When the user submits a form, starts a long operation or triggers an error, the interface must respond promptly and clearly: a confirmation, a progress indicator, or a precise error message. Silent interfaces leave users uncertain whether their action succeeded and lead to repeated, erroneous actions.",
+   "Error presentation deserves particular care. Error messages should be written in the user's language, explain what went wrong and how to correct it, and appear next to the element that caused the problem. Blaming the user, showing raw technical exceptions, or hiding errors are all failures that violate both usability principles and, often, explicit requirements.",
+   "Accessibility means the interface can be used by people with different abilities and by assistive technologies. Sufficient colour contrast, keyboard navigation, meaningful labels for controls, and text alternatives for images make the software usable by more people and are increasingly mandated by standards and by the requirements themselves. Accessibility benefits all users, not only those with disabilities.",
+   "Responsiveness and adaptability address the variety of devices and screen sizes on which the software runs. A responsive interface rearranges its layout to remain usable on a small phone and a large monitor alike. When the requirements specify multiple target devices, the interface must be designed and tested for each of them rather than assuming a single fixed resolution.",
+   "A fundamental engineering principle is the separation of the interface from the business logic. The interface should be responsible only for displaying data and capturing user actions, delegating all rules and computations to the underlying layers. This separation, embodied in patterns such as model-view-controller or model-view-viewmodel, allows the interface and the logic to change independently and makes both easier to test.",
+   "The interface is validated against the requirements and against real users. Prototypes and mock-ups are reviewed with stakeholders before full implementation; usability testing observes real users performing the specified tasks and reveals problems that the developer, who knows the system too well, cannot see. Feedback from these activities is fed back into the design.",
+   "Common mistakes in interface development include overloading screens with too many options, using inconsistent terminology, ignoring error and empty states, hard-coding text and dimensions, and mixing business rules into the interface code. Each mistake reduces usability or maintainability and moves the product away from the intent of the requirements.",
+   "Thus, developing the user interface according to requirements is the systematic construction of screens, controls and interactions that map directly onto the specified tasks, follow established usability and accessibility principles, validate input and give clear feedback, adapt to different devices, and remain cleanly separated from the business logic, all validated with real users against the specification."
+  ],
+  "questions": [
+   "What is the difference between UI and UX, and why must the developer consider both?",
+   "How are interface elements derived from functional requirements?",
+   "Which usability principles guide the design of a good interface?",
+   "Why must client-side validation be complemented by validation in the business logic?",
+   "Why is separating the interface from the business logic important, and how is it achieved?"
+  ]
+ },
+ {
+  "code": "10.2.6",
+  "title": "Developing the application business logic according to requirements",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in implementing the business logic of an application strictly according to functional requirements, separating it from the interface and covering it with tests.",
+  "theory": [
+   "Business logic is the part of an application that encodes the rules, calculations and workflows of the problem domain — what the system decides and computes, independently of how the data is displayed or stored. It is the core of the application, and its correctness with respect to the requirements determines the value of the whole product.",
+   "Business logic should be isolated in its own layer, free of interface and database code, so that it can be understood, tested and changed on its own. Each business rule from the specification is implemented as a function or method with clear inputs and outputs, and validated against the acceptance criteria. Rules should be expressed explicitly rather than scattered and duplicated across the code.",
+   "Because business rules are the requirements made executable, they must be traceable: each rule in the code should correspond to a numbered requirement, and each requirement should be covered by tests. Boundary conditions and invalid inputs are part of the logic, not afterthoughts, and the logic must reject invalid states rather than silently producing wrong results."
+  ],
+  "materials": [
+   "A computer with an installed development environment and a compiler or interpreter for the chosen language.",
+   "A short requirement specification with several functional requirements and their acceptance criteria (provided by the teacher).",
+   "A unit-testing framework for the chosen language.",
+   "A version-control client and a report template."
+  ],
+  "procedure": [
+   "Read the provided specification and extract the business rules, listing for each one its inputs, outputs, conditions and boundary cases.",
+   "Design the domain entities and the signatures of the functions or methods that will implement the rules, keeping them independent of any interface or database.",
+   "Implement the business logic in a separate module or layer, writing each rule as a self-contained function with explicit validation of inputs.",
+   "Write unit tests derived from the acceptance criteria, including normal cases, boundary values and invalid inputs, and run them until all pass.",
+   "Record the correspondence between each requirement, the code that implements it and the tests that verify it in a small traceability table.",
+   "Commit the work in logically complete increments with messages that reference the requirement numbers, and summarize the results in the report."
+  ],
+  "tasks": [
+   "Implement a set of at least three business rules from the given specification as an isolated logic module, with full input validation.",
+   "Write unit tests that cover the normal case, at least two boundary cases and at least two invalid-input cases for these rules.",
+   "Build a traceability table linking each implemented rule to its requirement number and its tests, and note any ambiguity that required clarification."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of implementing application business logic strictly according to functional requirements, isolating it from the interface and data layers, and confirming its correctness with tests derived from the acceptance criteria.",
+  "questions": [
+   "What is business logic and why is it separated from the interface and the database?",
+   "How is each business rule derived from the requirement specification?",
+   "Why must boundary conditions and invalid inputs be part of the business logic?",
+   "How are unit tests derived from the acceptance criteria of a requirement?",
+   "How is traceability between requirements, business-logic code and tests maintained?"
+  ]
+ },
+ {
+  "code": "10.2.7",
+  "title": "Creating test cases based on specifications",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in designing test cases directly from requirement specifications using systematic black-box test-design techniques.",
+  "theory": [
+   "A test case is a set of preconditions, inputs, actions and expected results that checks whether a specific requirement is satisfied. Test cases are derived from the specification, not from the code, so that they verify what the system must do rather than what it happens to do. Each acceptance criterion in the specification should give rise to one or more test cases.",
+   "Systematic techniques make testing efficient by selecting a small but representative set of inputs. Equivalence partitioning divides the input space into classes that the system should treat the same, so that one value per class is enough. Boundary-value analysis adds tests at the edges of these classes, where defects cluster most. A decision table captures combinations of conditions and their expected outcomes for complex rules.",
+   "A good test case is specific, repeatable and has an unambiguous expected result taken from the specification. Test cases must cover not only the normal 'happy path' but also boundary values, invalid inputs and error conditions. Together the test cases form the objective evidence that a requirement has been implemented correctly."
+  ],
+  "materials": [
+   "A requirement specification with functional requirements and acceptance criteria (provided by the teacher).",
+   "A computer with a spreadsheet or a test-management tool for recording test cases.",
+   "A test-case template with fields for identifier, requirement reference, preconditions, inputs, steps and expected result.",
+   "Optionally, a unit-testing framework to automate part of the test cases."
+  ],
+  "procedure": [
+   "Study the specification and list the requirements to be tested together with their acceptance criteria.",
+   "For each requirement, apply equivalence partitioning to identify valid and invalid input classes.",
+   "Apply boundary-value analysis to add test cases at the edges of the identified classes.",
+   "For requirements with combinations of conditions, build a decision table and derive a test case for each meaningful combination.",
+   "Write each test case in the template with a unique identifier, a reference to the requirement, clear steps and the expected result taken from the specification.",
+   "Review the set of test cases for coverage and, where appropriate, automate several of them and run them to confirm they behave as designed."
+  ],
+  "tasks": [
+   "Design a complete set of test cases for one input-validation requirement using equivalence partitioning and boundary-value analysis.",
+   "Build a decision table for a requirement that combines at least two conditions and derive the corresponding test cases.",
+   "Prepare a traceability table showing that every acceptance criterion of the assigned requirements is covered by at least one test case."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of designing systematic, traceable test cases directly from requirement specifications using equivalence partitioning, boundary-value analysis and decision tables.",
+  "questions": [
+   "What is a test case and why is it derived from the specification rather than from the code?",
+   "How does equivalence partitioning reduce the number of test cases needed?",
+   "Why does boundary-value analysis focus on the edges of input classes?",
+   "When is a decision table an appropriate test-design technique?",
+   "How is coverage of the acceptance criteria by test cases demonstrated?"
+  ]
+ },
+ {
+  "code": "10.2.8",
+  "title": "Working with databases according to requirements",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in designing a database schema from data requirements and implementing correct, safe access to it from application code.",
+  "theory": [
+   "Working with databases according to requirements begins with translating the data described in the specification into a schema. Entities become tables, attributes become columns with appropriate data types and constraints, and relationships become primary and foreign keys. Normalization removes redundancy and update anomalies, while indexes support the queries required by the specification.",
+   "Application code accesses the database through structured query language or through an abstraction such as an object-relational mapper. Parameterized queries must always be used instead of building queries by string concatenation, because concatenation opens the door to SQL injection. Transactions group related operations so that they either all succeed or all fail, preserving the consistency demanded by the requirements.",
+   "Data-access code should be isolated in its own layer, often behind a repository interface, so that the business logic does not depend on the details of the storage technology. Constraints such as uniqueness, referential integrity and not-null are declared in the database itself, so that the data remain correct even if a bug exists in the application code."
+  ],
+  "materials": [
+   "A computer with an installed database management system and a query client.",
+   "A specification describing the required entities, attributes, relationships and queries (provided by the teacher).",
+   "A development environment with a database driver or object-relational mapper for the chosen language.",
+   "A report template for the schema, queries and results."
+  ],
+  "procedure": [
+   "Analyze the specification and identify the entities, their attributes, the relationships between them and the required queries.",
+   "Design a normalized schema with primary keys, foreign keys and the necessary constraints, and create the tables in the database.",
+   "Add indexes that support the queries required by the specification and populate the tables with representative test data.",
+   "Implement create, read, update and delete operations from the application using parameterized queries within an isolated data-access layer.",
+   "Wrap related operations in transactions and verify that a failure in the middle leaves the data in a consistent state.",
+   "Test the queries against the acceptance criteria and record the schema, the queries and the results in the report."
+  ],
+  "tasks": [
+   "Design and create a normalized schema for the entities and relationships given in the specification, with all required keys and constraints.",
+   "Implement the full set of create, read, update and delete operations using parameterized queries in a separate data-access layer.",
+   "Demonstrate a transaction that keeps the database consistent when one of its operations fails, and describe the result in the report."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of designing a database schema from data requirements and implementing safe, transactional and correctly isolated access to it from application code.",
+  "questions": [
+   "How are the entities, attributes and relationships from a specification translated into a database schema?",
+   "Why must parameterized queries be used instead of string concatenation?",
+   "What is the purpose of transactions, and when should operations be grouped into one?",
+   "Why is the data-access code isolated in its own layer behind an interface?",
+   "How do database constraints protect data integrity independently of the application code?"
+  ]
+ },
+ {
+  "code": "10.2.9",
+  "title": "Management and handling of exceptions in code",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Errors, exceptions and the difference between them.",
+   "The exception-handling mechanism: throwing, catching and propagating.",
+   "Strategies for handling: recover, propagate, translate, log.",
+   "Resource cleanup and the finally block.",
+   "Principles of robust exception handling and common anti-patterns."
+  ],
+  "body": [
+   "An exception is an event that disrupts the normal flow of a program — an attempt to open a missing file, to divide by zero, to reach an unavailable network service, or to violate a business rule. Exception handling is the mechanism by which a program detects such events and reacts to them in a controlled way instead of crashing or producing wrong results. Robust exception handling is what separates fragile prototypes from dependable software.",
+   "It is useful to distinguish errors, which are typically unrecoverable conditions such as running out of memory, from exceptions, which represent conditions the program can often anticipate and handle. Exceptions themselves are commonly divided into those caused by invalid external input or environment (which should be handled) and those caused by programming defects (which should be fixed rather than hidden).",
+   "The exception mechanism works through three operations. When an operation cannot fulfil its contract, it throws an exception object that carries information about the problem. The exception then propagates up the call stack until it reaches a handler that catches it. A try block encloses the code that may fail, and one or more catch blocks specify which types of exception they handle and what to do about them.",
+   "Handling an exception means choosing one of several strategies. The program may recover — for example, by retrying an operation or using a default value; it may propagate the exception to a higher level that has enough context to decide; it may translate a low-level exception into a domain-specific one that is meaningful to the caller; or it may simply log the exception and continue. The correct strategy depends on where in the system enough information exists to make a sensible decision.",
+   "A key principle is to catch exceptions at the level where they can actually be handled meaningfully, not necessarily where they occur. Low-level code that reads a file usually cannot decide what the user should see; it should let the exception propagate to a layer that can. Catching an exception too early, only to be unable to do anything useful, leads to swallowed errors and hidden failures.",
+   "Exceptions carry diagnostic information — a message, a type and a stack trace — that is essential for locating the cause of a failure. This information must be preserved when an exception is caught and re-thrown or translated; wrapping the original exception as the 'cause' of a new one keeps the full chain. Losing the original stack trace makes debugging much harder.",
+   "Resources such as files, network connections, database handles and locks must be released whether or not an exception occurs. The finally block, or language constructs such as try-with-resources or using statements, guarantees that cleanup code runs on every path out of the protected region. Failing to release resources leads to leaks that degrade and eventually crash long-running systems.",
+   "Exceptions should be used for exceptional conditions, not for ordinary control flow. Using exceptions to implement normal branching makes code slow and hard to read. Conversely, foreseeable situations — such as a user entering an invalid value — are often better expressed with explicit validation and result values than with exceptions, reserving exceptions for genuinely abnormal events.",
+   "The design of a program should distinguish between exceptions the caller is expected to handle and those that signal programming defects. For expected conditions, the interface makes the possibility explicit so that callers are prompted to handle them. For defects, the best response is usually to fail fast — to stop clearly at the point of the bug — so that the defect is discovered and fixed rather than masked.",
+   "Logging is an integral part of exception handling. When an exception is handled, the system should record enough context — what operation failed, with which inputs, and the full exception chain — to allow later diagnosis, while taking care not to log sensitive data such as passwords. Logs are often the only evidence available when a failure occurs in production.",
+   "User-facing error handling differs from internal handling. The end user should receive a clear, non-technical message that explains what happened and what to do, never a raw stack trace, which is both confusing and a security risk because it can reveal internal structure. The technical details belong in the logs, not on the user's screen.",
+   "Several anti-patterns must be avoided: catching a generic exception and ignoring it, which hides failures; catching and re-throwing without adding value; using exceptions for control flow; and letting an exception in a background operation pass unnoticed. Each of these turns a detectable problem into a silent, hard-to-diagnose one.",
+   "A robust exception-handling strategy is designed at the architectural level, not improvised in each function. It defines a hierarchy of domain exceptions, a consistent way of logging, a global handler that turns any uncaught exception into a controlled response, and clear rules about which layer handles which kind of failure. Consistency across the codebase makes failures predictable and recoverable.",
+   "Thus, management and handling of exceptions is the discipline of detecting abnormal events, propagating them to the level where they can be handled meaningfully, preserving their diagnostic information, guaranteeing resource cleanup, logging appropriately and presenting safe messages to users, all governed by a consistent, architecture-level strategy rather than by ad-hoc reactions."
+  ],
+  "questions": [
+   "What is an exception, and how does it differ from an error?",
+   "Describe the throw, propagate and catch operations of the exception mechanism.",
+   "What strategies exist for handling an exception, and how is the appropriate one chosen?",
+   "Why must resources be released in a finally block or an equivalent construct?",
+   "What are the main anti-patterns of exception handling and why are they harmful?"
+  ]
+ },
+ {
+  "code": "10.2.10",
+  "title": "Ensuring security and data protection in the program",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Goals of security: confidentiality, integrity, availability.",
+   "Input validation and protection against injection attacks.",
+   "Authentication, authorization and session management.",
+   "Protecting data at rest and in transit.",
+   "Secure development practices and defence in depth."
+  ],
+  "body": [
+   "Ensuring security and data protection means designing and writing a program so that it protects information and continues to function correctly in the presence of accidental errors and deliberate attacks. Security is not a feature added at the end but a property that must be built into every stage of development, because a single overlooked weakness can compromise the entire system and the data of its users.",
+   "The classical goals of information security are confidentiality, integrity and availability, often called the CIA triad. Confidentiality means that data are disclosed only to those authorized to see them; integrity means that data cannot be altered without authorization or detection; availability means that the system and its data remain accessible to legitimate users when needed. Security requirements in a specification are ultimately expressed in terms of these three goals.",
+   "The most fundamental defensive practice is to treat all input as untrusted and to validate it rigorously. Input validation checks that data conform to the expected type, length, format and range before they are used, rejecting or sanitizing anything that does not. Because attackers deliberately craft malicious input, validation must occur on the server side, where it cannot be bypassed, even if client-side checks also exist for convenience.",
+   "Injection attacks are among the most dangerous and common. SQL injection occurs when untrusted input is concatenated into a database query, allowing an attacker to change its meaning; the defence is parameterized queries that separate code from data. Similarly, cross-site scripting occurs when untrusted input is written into a web page without encoding, allowing an attacker's script to run in another user's browser; the defence is to encode output according to its context.",
+   "Authentication verifies the identity of a user, while authorization determines what an authenticated user is allowed to do. Passwords must never be stored in plain text; they are stored as salted hashes produced by a slow, purpose-built algorithm so that a stolen database does not reveal them. Multi-factor authentication strengthens identity verification, and the principle of least privilege ensures each user and component has only the access it truly needs.",
+   "Session management protects the continuity of an authenticated session. Session identifiers must be long, random and unpredictable, transmitted only over secure channels, regenerated after login, and invalidated on logout and after inactivity. Weak session handling allows attackers to hijack or fix sessions and impersonate legitimate users.",
+   "Sensitive data must be protected both in transit and at rest. Data in transit are protected by transport encryption such as TLS, which prevents eavesdropping and tampering on the network. Data at rest — in databases, files and backups — are protected by encryption and by strict access controls, so that even physical or administrative access to the storage does not automatically expose the information.",
+   "Cryptography must be used correctly, which in practice means relying on well-vetted standard libraries and algorithms rather than inventing one's own. Keys must be generated securely, stored separately from the data they protect, rotated periodically, and never embedded in source code. Misusing strong cryptography — for example, using a weak mode or a hard-coded key — can be as insecure as using no cryptography at all.",
+   "Error handling and logging have a security dimension. Detailed technical errors must not be shown to users, because they can reveal internal structure useful to an attacker; instead they are logged internally. At the same time, logs must not record sensitive data such as passwords or full card numbers, and security-relevant events such as failed logins must be recorded to support detection and investigation of attacks.",
+   "The principle of defence in depth holds that security should not rely on a single control. Multiple independent layers — network protection, input validation, authorization checks, encryption and monitoring — ensure that the failure of one control does not lead to a full breach. Complementary to this is the principle of least privilege and the practice of failing securely, so that when something goes wrong the system denies access rather than granting it.",
+   "Software depends on third-party libraries, which may themselves contain vulnerabilities. Managing this supply-chain risk means keeping dependencies up to date, monitoring published vulnerabilities, and removing unused components. A large part of real-world breaches exploits known, unpatched flaws in dependencies rather than flaws in the application's own code.",
+   "Data protection also has a legal and ethical dimension. Personal data must be collected and processed in accordance with applicable regulations and the principle of data minimization — collecting only what is necessary and keeping it only as long as needed. Users' privacy must be respected, and the handling of their data must be transparent and consistent with the stated purpose.",
+   "Security is verified, not assumed. Practices such as code review with a security focus, static and dynamic analysis, dependency scanning and, for critical systems, penetration testing, are used to find weaknesses before attackers do. Threat modelling during design helps anticipate how the system might be attacked and which defences are most important.",
+   "Thus, ensuring security and data protection is a pervasive discipline that pursues confidentiality, integrity and availability through rigorous input validation, safe handling of queries and output, sound authentication and authorization, encryption of data in transit and at rest, careful use of cryptography, secure error handling, and defence in depth, all verified continuously throughout development rather than added as an afterthought."
+  ],
+  "questions": [
+   "What are the three goals of the CIA triad, and what does each mean?",
+   "Why must input be validated on the server side, and how does this prevent injection attacks?",
+   "How should passwords be stored, and what is the difference between authentication and authorization?",
+   "How are sensitive data protected in transit and at rest?",
+   "What does the principle of defence in depth mean, and why is it important?"
+  ]
+ },
+ {
+  "code": "10.2.11",
+  "title": "Localization and internationalization of software",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concepts of internationalization (i18n) and localization (l10n).",
+   "Separating translatable text from code with resource files.",
+   "Locale-dependent formatting of numbers, dates and currencies.",
+   "Character encoding, text direction and layout adaptation.",
+   "The localization process and its testing."
+  ],
+  "body": [
+   "Internationalization and localization make software usable by people who speak different languages and live in different cultural regions. Internationalization, abbreviated i18n, is the engineering work of designing and building a program so that it can be adapted to various languages and regions without changing its code. Localization, abbreviated l10n, is the subsequent work of adapting an internationalized program to a specific language and region.",
+   "The two are complementary and ordered: internationalization is done once, during development, and localization is done many times, once per target locale. If a program is not internationalized from the start, adding support for a new language later requires modifying the source code everywhere text and formatting appear, which is expensive and error-prone. Building i18n in from the beginning is far cheaper than retrofitting it.",
+   "A locale identifies a language together with a region and cultural conventions, for example English as used in the United States or Russian as used in Kazakhstan. The locale determines not only the language of the text but also how numbers, dates, times, currencies and names are formatted, how strings are sorted, and sometimes the direction in which text is written. The program reads the user's locale and behaves accordingly.",
+   "The foundational technique of internationalization is to separate all user-visible text from the program logic. Instead of embedding literal strings in the code, the developer places them in external resource files, one per locale, and refers to them by a key. At run time the program looks up the key in the resource file for the current locale, so the same code displays the appropriate language without modification.",
+   "Formatting of numbers, dates, times and currencies is locale-dependent and must never be hard-coded. Different regions use different decimal and thousands separators, different date orders, different currency symbols and positions, and different calendars. Standard internationalization libraries provide locale-aware formatting and parsing functions, and the developer must use them consistently instead of assembling formatted values by hand.",
+   "Text presents subtle challenges beyond translation. Sorting order depends on the language, so alphabetical ordering must use locale-aware collation. Case conversion, plural rules and grammatical agreement vary between languages; a message that simply appends a number to a word may be grammatically wrong in another language, which is why proper plural handling uses the rules provided by the locale rather than naive concatenation.",
+   "Character encoding underpins all text handling. Using a universal encoding such as UTF-8 throughout the application — in source files, storage, transport and display — allows the program to represent the characters of virtually every language. Mixing encodings leads to corrupted text, so a single, consistent encoding must be enforced from input to output.",
+   "Layout must adapt to translated text. Translations can be much longer or shorter than the original, so interfaces must not assume fixed widths; buttons and labels must resize or wrap. Some languages, such as Arabic and Hebrew, are written right to left, which requires mirroring the entire layout. Designing flexible layouts from the start prevents truncated or overlapping text after translation.",
+   "Not everything should be extracted for translation. Cultural elements such as icons, colours, images and examples may carry meanings that differ between regions and may need adaptation as part of localization. Conversely, technical identifiers, log messages meant only for developers, and protocol constants should remain untranslated. Deciding what is translatable is part of good internationalization.",
+   "The localization process itself is a workflow. Developers extract the translatable resources; translators, who are usually not programmers, translate them, ideally with contextual information and screenshots so they understand where each string appears; the translated resources are integrated back into the application; and the result is reviewed. Tools and translation-management systems support this cycle and keep translations synchronized with code changes.",
+   "Localization must be tested. Pseudo-localization, which replaces text with lengthened, accented versions, reveals hard-coded strings, truncation and encoding problems even before real translations exist. After translation, linguistic and functional testing in each locale checks that text fits, formatting is correct, and the application behaves properly, including in right-to-left layouts.",
+   "Localization is increasingly a requirement rather than a luxury, especially for public and commercial software in multilingual countries. In the context of Kazakhstan, an application may need to support Kazakh, Russian and English, with correct formatting and encoding for each, so internationalization must be planned from the earliest design decisions to satisfy such requirements economically.",
+   "Common mistakes include concatenating sentence fragments to build messages, which breaks in languages with different word order; hard-coding formats and separators; assuming a fixed text length; forgetting encoding consistency; and treating localization as a final add-on. Each mistake either corrupts the localized output or makes future language support disproportionately expensive.",
+   "Thus, localization and internationalization together enable software to serve users across languages and regions: internationalization builds the capability into the code by separating translatable resources and using locale-aware formatting and universal encoding, while localization adapts the product to each specific locale, and both are planned from the start and verified by dedicated testing."
+  ],
+  "questions": [
+   "What is the difference between internationalization (i18n) and localization (l10n)?",
+   "Why should user-visible text be stored in resource files instead of being embedded in the code?",
+   "What kinds of data are formatted differently depending on the locale?",
+   "Why is a consistent character encoding such as UTF-8 important, and how does text direction affect layout?",
+   "What steps make up the localization process, and how is localization tested?"
+  ]
+ },
+ {
+  "code": "10.2.12",
+  "title": "Optimization of code performance and efficiency",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What performance optimization is and when to apply it.",
+   "Measuring before optimizing: profiling and metrics.",
+   "Algorithmic complexity as the main lever of efficiency.",
+   "Optimizing memory, input-output and concurrency.",
+   "Trade-offs, caching and validating the effect of optimization."
+  ],
+  "body": [
+   "Optimization of code performance and efficiency is the activity of making a program use time, memory and other resources more effectively while preserving its correct behaviour. Performance is a non-functional requirement: a specification may state maximum response times, minimum throughput or resource limits, and optimization is the work of meeting these targets. Efficiency matters not only for user satisfaction but also for cost, scalability and energy consumption.",
+   "The first and most important principle is to optimize only what needs optimizing, and only after correct behaviour is achieved. Premature optimization — complicating code before there is evidence of a problem — wastes effort, introduces bugs and reduces readability. The disciplined approach is to write clear, correct code first, then measure, and optimize only the parts that measurement proves to be too slow.",
+   "Measurement precedes optimization because intuition about where a program spends its time is usually wrong. A profiler measures how much time is spent in each function and how much memory is allocated, revealing the real bottlenecks. Benchmarks measure the performance of specific operations under controlled conditions. Without measurement, optimization is guesswork that often improves code that was never the problem.",
+   "It is essential to define what is being optimized and against which target. Common performance metrics include response time or latency, throughput, memory footprint, and resource utilization. The specification's non-functional requirements provide the targets; optimization continues until the measured metric meets the target, and then stops, because effort spent beyond the requirement yields no value.",
+   "The single most powerful lever of efficiency is algorithmic complexity, expressed in big-O notation, which describes how the resource use of an algorithm grows with the size of the input. Replacing an algorithm that grows quadratically with one that grows linearly or logarithmically can improve performance by orders of magnitude for large inputs — far more than any low-level tweak. Choosing the right algorithm and data structure is therefore the first place to look.",
+   "Data structures are inseparable from algorithms. Using a hash-based structure for fast lookup instead of scanning a list, an indexed structure for ordered access, or an appropriate collection to avoid repeated copying can transform performance. The developer must understand the cost of the operations each data structure supports and choose the structure whose costs match the program's access patterns.",
+   "Memory efficiency is a second dimension of optimization. Excessive allocation, retaining objects longer than necessary, and memory leaks degrade performance, especially in long-running systems and in managed languages where garbage collection adds overhead. Reusing buffers, freeing resources promptly, and choosing compact representations reduce memory pressure and the pauses it can cause.",
+   "Input-output operations — disk access, database queries and network calls — are typically far slower than in-memory computation, so they are frequent bottlenecks. Optimization here means reducing the number of round trips, fetching data in batches instead of one item at a time, avoiding repeated work, and performing input-output asynchronously so that the program does useful work while waiting. A single inefficient database query can dominate the response time of an entire request.",
+   "Caching is a powerful technique that stores the result of an expensive computation or query so that subsequent requests can reuse it instead of recomputing it. Effective caching can dramatically improve performance, but it introduces the difficult problem of invalidation — ensuring the cache does not serve stale data. Caching must therefore be applied deliberately, with a clear policy for when cached data expire or are refreshed.",
+   "Concurrency and parallelism can improve throughput by using multiple cores or by overlapping waiting with work, but they add complexity and risk. Race conditions, deadlocks and the overhead of synchronization can make a naive parallel program slower and less reliable than a sequential one. Concurrency should be introduced where measurement shows it helps and where the correctness of shared data can be guaranteed.",
+   "Optimization almost always involves trade-offs. Speed may be bought with more memory, as in caching or precomputation; clarity may be sacrificed for performance; and generality may be traded for a specialized fast path. The developer must weigh these trade-offs against the requirements and against maintainability, avoiding micro-optimizations that harm readability for gains too small to matter.",
+   "Modern compilers, runtimes and databases perform many optimizations automatically, and their optimizers are often better than hand-tuning. The developer's job is to write code that the tools can optimize well, to enable the appropriate optimization settings, and to let the database query planner and the language runtime do their work rather than fighting them with obscure manual tricks.",
+   "Every optimization must be validated by measuring again and by re-running the tests. The developer confirms that the change actually improved the target metric — sometimes an intended optimization has no effect or even makes things worse — and that it did not break correct behaviour. An optimization that speeds up the code but changes its results, or that is not confirmed by measurement, must not be kept.",
+   "Thus, optimization of code performance and efficiency is a measured, requirement-driven activity that starts from correct code, uses profiling to find real bottlenecks, applies the powerful lever of better algorithms and data structures before low-level tweaks, addresses memory, input-output and concurrency where the data justify it, manages the accompanying trade-offs consciously, and validates every change against both the performance target and the program's correctness."
+  ],
+  "questions": [
+   "Why should optimization be performed only after correct behaviour is achieved and only where measurement shows a problem?",
+   "What role do profilers and benchmarks play in optimization?",
+   "Why is algorithmic complexity the most powerful lever of efficiency?",
+   "How can input-output operations and caching affect the performance of a program?",
+   "What trade-offs accompany optimization, and how is the effect of an optimization validated?"
+  ]
+ }
+]

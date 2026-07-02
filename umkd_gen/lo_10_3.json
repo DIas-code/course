@@ -1,0 +1,21 @@
+{
+  "id": "10.3",
+  "title": "Debug software program code at the level of program modules",
+  "weight": "26%",
+  "hours": "132 hours",
+  "glossary": [
+    ["Abstract class", "A class that cannot be instantiated on its own and is intended to be a base class, often declaring abstract methods that derived classes must implement."],
+    ["Breakpoint", "A marker set in the source code that tells the debugger to pause program execution at that line so the program state can be inspected."],
+    ["Class", "A blueprint that defines the fields (state) and methods (behavior) of the objects created from it in object-oriented programming."],
+    ["Debugger", "A tool that controls the execution of a program, allowing step-by-step execution, breakpoints and inspection of variables to locate defects."],
+    ["Encapsulation", "The OOP principle of bundling data with the methods that operate on it and restricting direct access to an object's internal state."],
+    ["Garbage collection", "Automatic reclamation of memory occupied by objects that are no longer reachable, as implemented in languages such as Java, C# and Python."],
+    ["Inheritance", "A mechanism by which a class (descendant) acquires the fields and methods of another class (ancestor), enabling code reuse and hierarchies."],
+    ["Interface", "A contract that declares a set of methods a class must implement, supporting polymorphism and, in many languages, a form of multiple inheritance."],
+    ["Object", "A concrete instance of a class that holds its own state in fields and responds to messages through its methods."],
+    ["Polymorphism", "The ability of a single interface or method call to operate on objects of different classes, resolved through overriding or overloading."],
+    ["Stack trace", "A report of the active stack frames at the moment an exception or breakpoint occurs, used to trace the sequence of calls that led to an error."],
+    ["Unit test", "An automated test that verifies the correct behavior of a single, isolated unit of code such as a function, method or class."]
+  ],
+  "lessons": []
+}

@@ -1,0 +1,908 @@
+{
+ "10.1": [
+  {
+   "pos": 1,
+   "title_ru": "Алгоритмы сортировки в теории множеств: сравнение и оптимизация",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 2,
+   "title_ru": "Интерсекция и объединение множеств: алгоритмы и их применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 3,
+   "title_ru": "Алгоритмы поиска в теории множеств: бинарный поиск",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 4,
+   "title_ru": "Алгоритмы сортировки в теории множеств и их применение в базах данных",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 5,
+   "title_ru": "Графы: типы, алгоритмы и применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 6,
+   "title_ru": "Деревья: бинарные, AVL, B-деревья и их применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 7,
+   "title_ru": "Стек и очередь: алгоритмы и применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 8,
+   "title_ru": "Приоритетные очереди и кучи: реализация и использование",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 9,
+   "title_ru": "Графовые алгоритмы: поиск в ширину, поиск в глубину и другие",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 10,
+   "title_ru": "Оптимизация и сложность структур данных",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 11,
+   "title_ru": "Алгоритмы поиска в ширину и в глубину: принципы и применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 12,
+   "title_ru": "Кратчайшие пути в графах: алгоритмы Дейкстры и Флойда-Уоршалла",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 13,
+   "title_ru": "Минимальное остовное дерево: алгоритмы Прима и Краскала",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 14,
+   "title_ru": "Сетевой анализ и раскраска графов: алгоритмы Форда-Фалкерсона, Эдмондса-Карпа и жадного раскрашивания",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 15,
+   "title_ru": "Алгоритмы обнаружения циклов в графах: поиск компонент связности и топологическая сортировка",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 16,
+   "title_ru": "Алгоритмы взвешенных графов: поиск кратчайшего пути во взвешенном графе",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 17,
+   "title_ru": "Основы алгоритмизации: структуры данных и контрольные конструкции.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 18,
+   "title_ru": "Методы разработки алгоритмов: итерация и рекурсия.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 19,
+   "title_ru": "Анализ сложности алгоритмов: O-большое и его применение.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 20,
+   "title_ru": "Принципы формализации задач: выделение входных и выходных данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 21,
+   "title_ru": "Модель данных и абстракция: как они помогают при создании кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 22,
+   "title_ru": "Проектирование алгоритмов для сортировки и поиска данных.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 23,
+   "title_ru": "Алгоритмы динамического программирования и их применение.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 24,
+   "title_ru": "Методология разработки программного кода: waterfall и agile подходы.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 25,
+   "title_ru": "Оптимизация кода: идентификация и устранение узких мест.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 26,
+   "title_ru": "Тестирование и отладка: как обеспечить качество программного кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 27,
+   "title_ru": "Архитектурные паттерны: использование MVC, MVVM и других.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 28,
+   "title_ru": "Разработка многопоточных приложений и параллельного программирования.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 29,
+   "title_ru": "Разработка кода для обработки и хранения больших объемов данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 30,
+   "title_ru": "Использование структур данных: списки, массивы, хэш-таблицы.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 31,
+   "title_ru": "Создание и использование объектов и классов в объектно-ориентированном программировании.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 32,
+   "title_ru": "Работа с базами данных: SQL и ORM-технологии.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 33,
+   "title_ru": "Интеграция и взаимодействие между компонентами программного обеспечения.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 34,
+   "title_ru": "Разработка веб-приложений: клиентская и серверная стороны.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 35,
+   "title_ru": "Разработка мобильных приложений: iOS, Android и кросс-платформенные решения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 36,
+   "title_ru": "Создание алгоритмов машинного обучения и их интеграция в приложения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 37,
+   "title_ru": "Разработка кода для робототехники и автоматизации.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 38,
+   "title_ru": "Использование алгоритмов и структур данных в игровой разработке.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 39,
+   "title_ru": "Безопасность программного кода: защита от атак и уязвимостей.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 40,
+   "title_ru": "Создание графического интерфейса: GUI-дизайн и событийная модель.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 41,
+   "title_ru": "Автоматизация процесса сборки и развертывания приложений.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 42,
+   "title_ru": "Управление версиями и совместной разработкой: Git и системы управления версиями.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 43,
+   "title_ru": "Разработка кода для облачных вычислений и микросервисов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 44,
+   "title_ru": "Интеграция и использование открытых API и библиотек.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 45,
+   "title_ru": "Управление проектами разработки программного кода: методологии и инструменты.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 46,
+   "title_ru": "Разработка кода для встроенных систем и IoT-устройств.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 47,
+   "title_ru": "Работа с большими объемами данных: биг-дата и анализ данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 48,
+   "title_ru": "Создание кода для машинного зрения и распознавания образов.",
+   "type_en": "Comprehensive assessment of knowledge",
+   "kind": "practical"
+  }
+ ],
+ "10.2": [
+  {
+   "pos": 1,
+   "title_ru": "Процесс разработки программного кода по спецификациям требований.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 2,
+   "title_ru": "Интерпретация и анализ требований к программному обеспечению.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 3,
+   "title_ru": "Выбор языка программирования и технологий разработки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 4,
+   "title_ru": "Проектирование архитектуры программного решения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 5,
+   "title_ru": "Разработка пользовательского интерфейса по требованиям.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 6,
+   "title_ru": "Разработка бизнес-логики приложения согласно требованиям.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 7,
+   "title_ru": "Создание тестовых случаев на основе спецификаций.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 8,
+   "title_ru": "Работа с базами данных в соответствии с требованиями.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 9,
+   "title_ru": "Управление и обработка исключений в коде.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 10,
+   "title_ru": "Обеспечение безопасности и защиты данных в программе.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 11,
+   "title_ru": "Локализация и интернационализация программного обеспечения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 12,
+   "title_ru": "Оптимизация производительности и эффективности кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 13,
+   "title_ru": "Интеграция с внешними системами и API по требованиям.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 14,
+   "title_ru": "Разработка многопоточных и параллельных приложений.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 15,
+   "title_ru": "Автоматизация тестирования и отладки по требованиям.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 16,
+   "title_ru": "Документирование кода и комментирование.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 17,
+   "title_ru": "Управление версиями и совместная разработка кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 18,
+   "title_ru": "Соблюдение архитектурных и дизайн-принципов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 19,
+   "title_ru": "Применение паттернов проектирования при разработке кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 20,
+   "title_ru": "Использование фреймворков и библиотек согласно требованиям.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 21,
+   "title_ru": "Разработка мобильных приложений на платформах Android и iOS.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 22,
+   "title_ru": "Создание веб-приложений и разработка серверной части.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 23,
+   "title_ru": "Интеграция и использование искусственного интеллекта в коде.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 24,
+   "title_ru": "Разработка кода для обработки больших данных и анализа данных.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 25,
+   "title_ru": "Создание кода для интернета вещей (IoT) и встроенных систем.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 26,
+   "title_ru": "Разработка кода для автономных роботов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 27,
+   "title_ru": "Создание алгоритмов машинного обучения и интеграция их в приложения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 28,
+   "title_ru": "Соблюдение стандартов и регуляторных требований в коде.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 29,
+   "title_ru": "Эффективная отладка и рефакторинг согласно требованиям.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 30,
+   "title_ru": "Анализ и оптимизация алгоритмов при разработке кода.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 31,
+   "title_ru": "Использование асинхронного программирования и обработка событий",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 32,
+   "title_ru": "Работа с системами управления базами данных и ORM-технологиями.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 33,
+   "title_ru": "Разработка кода для сетевого программирования и обмена данными.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 34,
+   "title_ru": "Управление процессом сборки и развертывания приложений.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 35,
+   "title_ru": "Оценка и улучшение процесса разработки кода в соответствии с требованиями.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 36,
+   "title_ru": "Разработка и документирование API по требованиям",
+   "type_en": "Comprehensive assessment of knowledge",
+   "kind": "practical"
+  }
+ ],
+ "10.3": [
+  {
+   "pos": 1,
+   "title_ru": "Основные понятия объектной технологии: классы, объекты, управление памятью, типизация.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 2,
+   "title_ru": "Механизмы наследования, полиморфизма.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 3,
+   "title_ru": "Принципы объектно-ориентированного программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 4,
+   "title_ru": "Введение в объектно-ориентированное программирование (ООП).",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 5,
+   "title_ru": "Основные принципы ООП: инкапсуляция, наследование, полиморфизм.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 6,
+   "title_ru": "Классы как основные строительные блоки ООП.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 7,
+   "title_ru": "Описание классов: поля, методы, конструкторы и деструкторы.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 8,
+   "title_ru": "Создание объектов на основе классов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 9,
+   "title_ru": "Инстанцирование и инициализация объектов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 10,
+   "title_ru": "Операции с объектами: чтение и изменение полей, вызов методов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 11,
+   "title_ru": "Наследование и его роль в ООП.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 12,
+   "title_ru": "Полиморфизм: виртуальные методы и интерфейсы.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 13,
+   "title_ru": "Управление памятью в объектно-ориентированных языках",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 14,
+   "title_ru": "Сборка мусора и управление памятью в современных языках (Java, C#, Python)",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 15,
+   "title_ru": "Утечки памяти и их предотвращение.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 16,
+   "title_ru": "Типизация данных и её значение в ООП.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 17,
+   "title_ru": "Сильная и слабая типизация.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 18,
+   "title_ru": "Переменные и их типы в языках программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 19,
+   "title_ru": "Контроль типов и проверка типов данных.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 20,
+   "title_ru": "Динамическая типизация и позднее связывание.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 21,
+   "title_ru": "Обобщенное программирование и шаблоны.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 22,
+   "title_ru": "Объекты и классы в различных языках программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 23,
+   "title_ru": "Проектирование классов и объектов в разработке ПО.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 24,
+   "title_ru": "Сравнение ООП, функционального и процедурного программирования",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 25,
+   "title_ru": "Современные парадигмы и развитие объектно-ориентированного подхода (SOLID, Clean Code, DDD)",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 26,
+   "title_ru": "Основы наследования и его роль в объектно-ориентированном программировании.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 27,
+   "title_ru": "Классы-предки и классы-потомки: иерархия наследования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 28,
+   "title_ru": "Преимущества и недостатки наследования в разработке программ.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 29,
+   "title_ru": "Абстрактные классы и методы: общие черты и особенности.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 30,
+   "title_ru": "Интерфейсы и реализация: множественное наследование.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 31,
+   "title_ru": "Виртуальные методы и полиморфизм: общие методы и различные реализации.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 32,
+   "title_ru": "Позднее связывание и динамический полиморфизм.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 33,
+   "title_ru": "Полиморфизм в статически типизированных и динамически типизированных языках.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 34,
+   "title_ru": "Полиморфизм в контексте абстрактных классов и интерфейсов.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 35,
+   "title_ru": "Полиморфизм и перегрузка методов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 36,
+   "title_ru": "Полиморфизм и операторы в языках программирования",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 37,
+   "title_ru": "Основы отладки и её роль в разработке программного обеспечения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 38,
+   "title_ru": "Отладочные инструменты и среды разработки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 39,
+   "title_ru": "Подходы к отладке: инкрементальная, пошаговая, условная.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 40,
+   "title_ru": "Установка точек останова (breakpoints) и их использование.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 41,
+   "title_ru": "Инспектирование переменных и состояния программы во время выполнения.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 42,
+   "title_ru": "Использование команд отладчика: продолжить, стоп, шаг вперёд.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 43,
+   "title_ru": "Тестирование и отладка кода на уровне отдельных функций и методов.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 44,
+   "title_ru": "Работа с логами и журналами событий для отслеживания ошибок.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 45,
+   "title_ru": "Идентификация и исправление ошибок в коде.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 46,
+   "title_ru": "Обработка исключений и ошибок в отладочном режиме.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 47,
+   "title_ru": "Отладка многопоточных и асинхронных программ",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 48,
+   "title_ru": "Отладка сетевых и распределенных систем.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 49,
+   "title_ru": "Оптимизация производительности в процессе отладки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 50,
+   "title_ru": "Профилирование кода для выявления узких мест.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 51,
+   "title_ru": "Тестирование и отладка кода в веб-приложениях.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 52,
+   "title_ru": "Отладка мобильных приложений (Android Studio, Xcode)",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 53,
+   "title_ru": "Инструменты для отладки IoT-устройств и микроконтроллеров",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 54,
+   "title_ru": "Отладка кода в среде разработки для встроенных систем.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 55,
+   "title_ru": "Отладка кода на уровне системного программирования.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 56,
+   "title_ru": "Разработка тестовых сценариев и модульных тестов для отладки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 57,
+   "title_ru": "Советы и практики по организации эффективного процесса отладки.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 58,
+   "title_ru": "Отладка в командной среде и коллективной разработке.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 59,
+   "title_ru": "Отладка кода с использованием сторонних библиотек и фреймворков.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 60,
+   "title_ru": "Сценарии сбоя и воспроизведение проблем для отладки.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 61,
+   "title_ru": "Специализированные инструменты и плагины для отладки.",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 62,
+   "title_ru": "Отладка кода в реальном времени и \"горячее\" обновление.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 63,
+   "title_ru": "Отладка с использованием контейнеров, виртуальных машин и эмуляторов",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 64,
+   "title_ru": "Live debugging и удалённая отладка в реальном времени",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 65,
+   "title_ru": "Резервное копирование и восстановление кода при ошибках в отладке.",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 66,
+   "title_ru": "Тестирование и уверенность в работоспособности после отладки.",
+   "type_en": "Comprehensive assessment of knowledge",
+   "kind": "practical"
+  }
+ ]
+}

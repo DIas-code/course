@@ -1,0 +1,433 @@
+[
+ {
+  "code": "10.1.1",
+  "title": "Sorting algorithms in set theory: comparison and optimization",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Why ordering matters when representing and processing sets.",
+   "Comparison-based sorting algorithms and their behavior.",
+   "Time and space complexity, stability and in-place properties.",
+   "Non-comparison sorts and lower bounds.",
+   "Choosing and optimizing a sort for a concrete task."
+  ],
+  "body": [
+   "A set in the mathematical sense is an unordered collection of distinct elements, but in a computer a set is almost always stored in some concrete data structure — an array, a list, a hash table or a balanced tree. As soon as we want to display the elements, deduplicate them, compare two sets or perform a fast search, the physical order of the stored elements becomes important. Sorting is the operation that imposes a total order on the elements according to a comparison rule, and it is one of the most studied problems in computer science precisely because so many other algorithms depend on ordered data.",
+   "The classic sorting algorithms are comparison-based: they decide the relative order of two elements only by comparing them with an operator such as 'less than'. Bubble sort, insertion sort and selection sort are the simplest examples. Bubble sort repeatedly swaps adjacent out-of-order pairs; insertion sort builds the sorted part one element at a time by shifting larger elements to the right; selection sort repeatedly finds the minimum of the unsorted part and places it at the front. All three run in O(n^2) time in the average and worst cases, which makes them suitable only for small or nearly sorted inputs.",
+   "Insertion sort deserves special attention because it is adaptive: on data that is already almost sorted it approaches O(n) time, and it is stable and in-place. For this reason production sorting libraries often switch to insertion sort for small subarrays even when the overall algorithm is asymptotically faster.",
+   "Merge sort follows the divide-and-conquer strategy: it splits the array into two halves, sorts each half recursively, and then merges the two sorted halves in linear time. Its running time is O(n log n) in the best, average and worst cases, and it is stable. The price is O(n) extra memory for the temporary merge buffer, which matters when the data set is very large.",
+   "Quicksort also uses divide-and-conquer, but it partitions the array around a chosen pivot so that smaller elements go to the left and larger to the right, then sorts the two partitions recursively. Its average running time is O(n log n) with small constant factors, which makes it the fastest general-purpose sort in practice. However, a poor choice of pivot on already sorted or adversarial data degrades it to O(n^2). Randomized pivot selection or the median-of-three rule makes this worst case very unlikely.",
+   "Heapsort builds a binary heap from the array and then repeatedly extracts the maximum, giving guaranteed O(n log n) time and O(1) extra space. It is not stable, and its constant factors and cache behavior are usually worse than quicksort, so it is chosen mainly when a strict worst-case guarantee combined with in-place operation is required.",
+   "Two properties are used to describe every sort. Stability means that elements comparing equal keep their original relative order; this is essential when sorting records by a secondary key after a primary one. In-place means the algorithm uses only O(1) or O(log n) auxiliary memory beyond the input. Merge sort is stable but not in-place; heapsort is in-place but not stable; quicksort is in-place but not stable in its usual form.",
+   "There is a proven lower bound for comparison-based sorting: any algorithm that orders elements only by comparisons must perform at least on the order of n log n comparisons in the worst case. This follows from the decision-tree argument — there are n! possible orderings, and a binary decision tree distinguishing all of them must have height at least log2(n!), which is proportional to n log n. Therefore no comparison sort can beat O(n log n) asymptotically.",
+   "Non-comparison sorts escape this bound by exploiting the structure of the keys instead of comparing them. Counting sort counts how many times each key value occurs and reconstructs the output directly, running in O(n + k) time where k is the range of key values; it is efficient only when k is not much larger than n. Radix sort applies a stable counting sort digit by digit, sorting integers or fixed-length strings in O(d(n + b)) time, where d is the number of digits and b the base. Bucket sort distributes elements into buckets by value and sorts each bucket, performing well when the input is uniformly distributed.",
+   "When sets are involved, sorting is frequently a preprocessing step for other operations. If two sets are represented as sorted arrays, their union, intersection and difference can each be computed by a single linear merge-like pass in O(n + m) time, which is far cheaper than comparing every pair of elements. Sorting also enables binary search, deduplication in one pass, and efficient set-equality checks.",
+   "Optimizing a sort in practice means choosing the algorithm that matches the data and the constraints. For general in-memory data most standard libraries use a hybrid: introsort (quicksort that falls back to heapsort when recursion becomes too deep, with insertion sort for small ranges) in C++, and Timsort (a stable, adaptive merge sort that exploits existing runs) in Python and Java. These hybrids combine average-case speed with worst-case guarantees and stability where required.",
+   "Real-world optimization also considers factors that asymptotic analysis hides: cache locality, branch prediction, the cost of the comparison function, and whether the data fits in memory. When data exceeds RAM, external merge sort is used, which minimizes disk reads and writes by processing large sequential runs. Choosing keys wisely — for example, sorting integer surrogate keys instead of long strings — can reduce the comparison cost dramatically.",
+   "Best practice is therefore to start from the requirements rather than from a favorite algorithm. Ask whether stability is needed, whether memory is constrained, whether the data is nearly sorted or has a small key range, and how large the input can grow. Then either select the matching classic algorithm or, in most applications, trust the well-engineered library sort, reserving custom implementations for cases where profiling proves the standard sort to be the bottleneck.",
+   "Thus, sorting is the foundation on which fast set operations, searching and many other algorithms are built; understanding the complexity, stability and in-place properties of each method, together with the n log n lower bound and the ways to circumvent it, allows a developer to select and optimize the right sorting strategy for any concrete data-processing task."
+  ],
+  "questions": [
+   "Why does the physical ordering of elements matter when a mathematical set is stored in a computer?",
+   "Compare the time complexity, stability and memory use of merge sort, quicksort and heapsort.",
+   "What does the decision-tree lower bound state, and why can no comparison sort beat O(n log n)?",
+   "How do counting sort and radix sort achieve linear time, and under what conditions are they applicable?",
+   "How does representing sets as sorted arrays speed up union and intersection operations?"
+  ]
+ },
+ {
+  "code": "10.1.2",
+  "title": "Intersection and union of sets: algorithms and their applications",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Definitions of the basic set operations.",
+   "Representing sets: sorted arrays, hash tables and bitsets.",
+   "Algorithms for union, intersection and difference on each representation.",
+   "Complexity trade-offs between the representations.",
+   "Practical applications in databases, search and systems."
+  ],
+  "body": [
+   "The fundamental binary operations of set theory are union, intersection, difference and symmetric difference. The union of A and B contains every element that belongs to A or to B; the intersection contains elements that belong to both; the difference A minus B contains elements of A that are not in B; and the symmetric difference contains elements that belong to exactly one of the two sets. Every element in a set is distinct, so these operations must also preserve the no-duplicates property of the result.",
+   "How these operations are implemented depends entirely on how the sets are represented in memory. The three most common representations are sorted arrays, hash tables (hash sets) and bit vectors (bitsets). Each offers a different balance of speed, memory use and flexibility, and choosing correctly is the essence of applying set theory efficiently in software.",
+   "When both sets are stored as sorted arrays, union and intersection are computed by a merge procedure similar to the merge step of merge sort. Two indices scan the arrays simultaneously: for intersection, when the elements at both indices are equal, that element is emitted and both indices advance; when they differ, the index pointing to the smaller element advances. For union, the smaller element is emitted and its index advances, while equal elements are emitted once. Both algorithms run in O(n + m) time for arrays of sizes n and m, using a single pass and no hashing.",
+   "With hash-set representation, intersection is computed by iterating over the smaller set and testing membership of each element in the larger set's hash table, which gives expected O(min(n, m)) time. Union is computed by inserting all elements of both sets into a result hash set, giving expected O(n + m) time. Difference iterates over the first set and keeps only elements absent from the second. Hash sets do not require the data to be sorted, and membership tests are expected O(1), but the constant factors are higher than array scans and worst-case behavior degrades if the hash function distributes poorly.",
+   "A bitset represents a set drawn from a fixed universe of integers 0..N-1 as a sequence of N bits, where bit i is 1 if element i is present. On this representation, union is the bitwise OR of the two bit vectors, intersection is the bitwise AND, difference is A AND (NOT B), and symmetric difference is XOR. These operations process 64 elements per machine word, so a set operation over a universe of N elements costs only O(N / 64) word operations. Bitsets are extremely fast and compact when the universe is dense and bounded, which is why they are used for flags, attribute masks and search-engine posting-list filtering.",
+   "The choice among representations is a classic space-time trade-off. Sorted arrays are compact and cache-friendly and are ideal when the sets are static and must be scanned in order, but keeping them sorted after insertions is costly. Hash sets support fast dynamic insertion, deletion and membership testing at the price of extra memory and no inherent ordering. Bitsets are unbeatable for dense sets over a small universe but waste memory when the universe is large and the set is sparse.",
+   "A common optimization for intersection of very unequal sets is to always iterate over the smaller set and probe the larger one, because the cost is dominated by the number of probes. Search engines exploit this when intersecting posting lists: they process the shortest list first and skip through the longer lists using auxiliary skip pointers, which reduces the number of comparisons far below the sum of the list lengths.",
+   "In relational databases, set operations map directly onto SQL. UNION and UNION ALL correspond to set union (the former removing duplicates, the latter keeping them), INTERSECT to intersection, and EXCEPT (or MINUS) to difference. Internally the query optimizer often implements these by sorting both inputs and merging them, or by building a hash table on one input — exactly the sorted-array and hash-set algorithms described above. Understanding these algorithms explains why an index that keeps rows sorted can turn an expensive set operation into a cheap linear merge.",
+   "Set operations underpin many everyday features. A search engine answering the query 'red AND car' intersects the set of documents containing 'red' with the set containing 'car'; answering 'red OR car' unions them; and 'red NOT car' takes the difference. Access-control systems compute the intersection of the permissions a user holds with the permissions a resource requires. Recommendation systems measure similarity between two users by the size of the intersection of the items they liked relative to the union — the Jaccard index, defined as the size of the intersection divided by the size of the union.",
+   "The Jaccard index illustrates why efficient union and intersection matter at scale. Computing similarity between millions of pairs of sets directly is infeasible, so systems use approximation techniques such as MinHash, which estimates the Jaccard similarity from small fixed-size signatures instead of the full sets. This shows how the theoretical operations drive the design of large-scale data-processing algorithms.",
+   "Correctness details must not be overlooked. Because sets contain no duplicates, a union algorithm must emit an equal element only once, and an intersection algorithm on multisets (bags) must define how repeated elements are counted. When elements are complex objects, the comparison or hash function must be consistent — two elements considered equal must hash to the same value and compare as equal — otherwise the operations silently produce wrong results.",
+   "Best practice is to pick the representation from the workload: use bitsets for dense bounded universes and heavy AND/OR filtering, hash sets for dynamic sets and fast membership, and sorted arrays or database indexes for static ordered data that is intersected by merging. Always intersect from the smaller set, keep comparison and hash functions consistent, and prefer the streaming merge form when the inputs are already ordered, because it avoids extra memory and passes.",
+   "Thus, union and intersection are simple to define but admit several efficient implementations whose performance depends on the chosen representation; mastering the merge, hashing and bitwise techniques and the space-time trade-offs between them lets a developer implement fast set logic that powers search, databases, access control and similarity computation."
+  ],
+  "questions": [
+   "Define union, intersection, difference and symmetric difference for two sets.",
+   "How are union and intersection computed on two sorted arrays, and what is the resulting complexity?",
+   "How do bitwise operations implement set operations on bitsets, and when is this representation advantageous?",
+   "Why should an intersection algorithm iterate over the smaller set, and how do search engines use this idea?",
+   "What is the Jaccard index, and how do set operations support similarity computation in recommendation systems?"
+  ]
+ },
+ {
+  "code": "10.1.3",
+  "title": "Search algorithms in set theory: binary search",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The searching problem and linear search as a baseline.",
+   "The principle of binary search and its precondition.",
+   "Step-by-step behavior and correctness of the loop.",
+   "Complexity analysis and comparison with other methods.",
+   "Variants, pitfalls and practical applications."
+  ],
+  "body": [
+   "Searching is the task of determining whether a given element belongs to a collection and, if so, where it is located. In set theory this corresponds directly to the membership test — deciding whether an element is a member of a set. The efficiency of membership testing determines the efficiency of many higher-level operations such as intersection, deduplication and lookup by key, so the choice of search algorithm is fundamental.",
+   "The simplest method is linear search, which examines the elements one by one until it finds the target or reaches the end. Linear search requires no ordering and works on any sequence, but it performs O(n) comparisons in the average and worst cases. For small or unsorted collections this is acceptable, but for large data that is searched repeatedly it becomes the bottleneck.",
+   "Binary search dramatically reduces the number of comparisons by exploiting a crucial precondition: the collection must be sorted. The idea is to repeatedly halve the search interval. It compares the target with the middle element of the current interval; if they are equal the search succeeds; if the target is smaller the search continues in the left half; if it is larger the search continues in the right half. Each comparison discards half of the remaining candidates.",
+   "Concretely, binary search maintains two bounds, low and high, that delimit the interval still to be examined. In each step it computes mid as the index halfway between them, inspects the element there, and updates either low or high to exclude the half that cannot contain the target. The loop ends when the target is found or when low exceeds high, meaning the interval is empty and the element is absent.",
+   "A subtle but important implementation detail is computing the midpoint safely. Writing mid = (low + high) / 2 can overflow when low and high are large integers; the robust form is mid = low + (high - low) / 2, which cannot overflow. Off-by-one errors in updating the bounds — for example forgetting to write mid + 1 or mid - 1 — cause infinite loops or missed elements, so the update rules must be reasoned about carefully.",
+   "The complexity of binary search is O(log n) comparisons, because each step halves the interval and an interval of size n can be halved only about log2(n) times before it becomes empty. This is an enormous improvement: searching a sorted array of a million elements takes at most about twenty comparisons, whereas linear search may take a million. The space complexity is O(1) for the iterative version and O(log n) for the recursive version because of the call stack.",
+   "The gain from binary search is not free — the data must first be sorted, which costs O(n log n). Therefore binary search pays off when the collection is searched many times relative to the number of modifications, so that the one-time sorting cost is amortized over many fast lookups. If the data changes frequently, keeping an array sorted after each insertion is expensive, and a balanced search tree or a hash table may be a better choice.",
+   "It is instructive to compare binary search with hashing. A hash table offers expected O(1) membership testing regardless of order, which is faster on average, but it does not support ordered queries such as 'find the smallest element greater than x' or range scans, and its worst case can degrade. Binary search over a sorted array supports these ordered queries naturally and has predictable worst-case behavior, so the two techniques are complementary rather than interchangeable.",
+   "Binary search generalizes beyond exact membership. Lower-bound and upper-bound variants find the first position where an element could be inserted while keeping the array sorted; these are used to count occurrences, to find ranges of equal keys, and to implement insertion into a sorted structure. The same halving principle applies to any monotone predicate: 'binary search on the answer' finds the smallest value for which a condition becomes true, a technique widely used in optimization and competitive programming.",
+   "The precondition of sortedness cannot be relaxed. If the array is not fully sorted with respect to the comparison used, binary search may report an element as absent even when it is present, because it will discard the half that actually contains it. This is a common source of silent bugs, so before applying binary search one must guarantee that the data is ordered by exactly the key being searched.",
+   "In practice binary search appears throughout systems software. Standard libraries provide it directly (for example bsearch in C, Arrays.binarySearch in Java, and the bisect module in Python). Database indexes built on B-trees use binary search within each node to locate keys. Version-control tools use the same halving idea to find the commit that introduced a bug, and interpolation search refines binary search for uniformly distributed numeric keys by estimating the probable position instead of always taking the middle.",
+   "Best practice is to use a well-tested library implementation rather than hand-writing binary search, because the boundary conditions are notoriously error-prone; when a custom variant is unavoidable, its correctness should be argued in terms of a loop invariant stating that the target, if present, always lies within the current low-to-high interval. Combined with a proof that the interval strictly shrinks each iteration, this guarantees both correctness and termination.",
+   "Thus, binary search converts the linear membership test into a logarithmic one by repeatedly halving a sorted interval; understanding its precondition, its O(log n) complexity, its safe implementation and its relationship to hashing and to ordered queries equips a developer to choose it correctly and to reason confidently about its correctness."
+  ],
+  "questions": [
+   "What precondition must the data satisfy before binary search can be applied, and why?",
+   "Describe how the low, high and mid bounds are updated during a binary search.",
+   "Why is the complexity of binary search O(log n), and how does it compare with linear search?",
+   "Why is mid = low + (high - low) / 2 preferred over mid = (low + high) / 2?",
+   "When would you prefer a hash table over binary search, and when the reverse?"
+  ]
+ },
+ {
+  "code": "10.1.4",
+  "title": "Sorting algorithms in set theory and their application in databases",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in implementing and benchmarking sorting algorithms and in applying sorting to database-style operations such as ordering, deduplication and set intersection.",
+  "theory": [
+   "Sorting is a core preprocessing step for many database operations. Query engines rely on sorted data to implement ORDER BY, to remove duplicates for DISTINCT and UNION, to perform sort-merge joins, and to build indexes. Understanding how sorting algorithms behave on real data helps a developer predict and improve query performance.",
+   "Comparison-based sorts such as quicksort, merge sort and heapsort all achieve O(n log n) average time but differ in stability, memory use and worst-case behavior. Stability is essential in databases when rows are ordered by several columns in succession, because a stable sort on the secondary key preserves the order established by the primary key. When data exceeds available memory, database engines switch to external merge sort, which sorts large runs on disk and merges them with minimal input-output.",
+   "Once data is sorted, set operations become cheap linear merges: two sorted result sets can be intersected or united in a single pass, which is exactly how the INTERSECT, UNION and EXCEPT operators and sort-merge joins are implemented. This makes sorting not just a display convenience but a foundation for correct and efficient set logic in relational systems."
+  ],
+  "materials": [
+   "A computer with an installed IDE (for example Visual Studio Code, PyCharm or IntelliJ IDEA).",
+   "A programming language with a standard library sort (Python, Java, C# or C++).",
+   "A relational database or its embedded equivalent (SQLite, PostgreSQL or MySQL) with a SQL client.",
+   "Sample datasets of increasing size (for example CSV files of 1000, 100000 and 1000000 records) for benchmarking.",
+   "A stopwatch or a built-in timing facility for measuring execution time."
+  ],
+  "procedure": [
+   "Prepare test data: generate arrays of random integers of several sizes and export one dataset as a table into the database.",
+   "Implement insertion sort, merge sort and quicksort in the chosen language, verifying each on a small array against the library sort.",
+   "Measure and record the execution time of each implementation and of the library sort on every dataset size, and note which algorithm scales best.",
+   "Test each sort on already-sorted and reverse-sorted input to observe the worst-case behavior of quicksort and the adaptive behavior of insertion sort.",
+   "In the database, write queries using ORDER BY, SELECT DISTINCT and INTERSECT, and use EXPLAIN (or the query plan viewer) to see whether the engine performs a sort or uses an index.",
+   "Compare the timings of the same intersection computed by the query engine and by your own merge of two sorted arrays, and summarize the results in a table."
+  ],
+  "tasks": [
+   "Implement and benchmark quicksort with both a fixed first-element pivot and a randomized pivot, and demonstrate on a sorted input which one avoids O(n^2) behavior.",
+   "Write a program that reads two sorted arrays and computes their intersection and union in a single linear pass, then verify the result against the corresponding INTERSECT and UNION queries in the database.",
+   "Using EXPLAIN, compare the query plan and execution time of an ORDER BY query on a column with an index and on the same column without an index, and explain the difference."
+  ],
+  "conclusion": "As a result of the work, the student has formed practical skills in implementing, benchmarking and selecting sorting algorithms and in applying sorting to database ordering, deduplication and set operations.",
+  "questions": [
+   "Why is stability of a sorting algorithm important when ordering database rows by multiple columns?",
+   "How did the running time of your sorts change with input size, and did the measurements match the expected O(n log n) and O(n^2) behavior?",
+   "Why does quicksort with a fixed pivot degrade on sorted input, and how does a randomized pivot help?",
+   "How does an index on a column change the query plan of an ORDER BY query, and why?",
+   "How can two sorted result sets be intersected in a single linear pass, and where is this used in a database engine?"
+  ]
+ },
+ {
+  "code": "10.1.5",
+  "title": "Graphs: types, algorithms and applications",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The graph as a model of objects and relationships.",
+   "Types of graphs: directed, undirected, weighted and special forms.",
+   "Representations: adjacency matrix and adjacency list.",
+   "Core graph algorithms and their purposes.",
+   "Applications of graphs in real systems."
+  ],
+  "body": [
+   "A graph is a mathematical structure consisting of a set of vertices (also called nodes) and a set of edges, where each edge connects a pair of vertices. Graphs model any situation in which objects are related to one another: cities connected by roads, web pages connected by links, people connected by friendships, or tasks connected by dependencies. Because so many real problems are naturally described this way, graph theory and graph algorithms are among the most widely applied areas of computer science.",
+   "Graphs are classified first by the direction of their edges. In an undirected graph an edge represents a symmetric relationship — if A is connected to B then B is connected to A, as in a friendship network. In a directed graph (digraph) each edge has an orientation from a source vertex to a target vertex, as in the links of the web or the 'follows' relation on a social network, where the relationship need not be mutual.",
+   "Edges may also carry weights. In a weighted graph each edge has an associated numeric value representing distance, cost, capacity or time, such as the length of a road between two cities. In an unweighted graph all edges are equivalent. Many algorithms exist in two forms, one for weighted and one for unweighted graphs, because the presence of weights changes what 'shortest' or 'best' means.",
+   "Several special kinds of graph appear so often that they have their own names. A tree is a connected acyclic undirected graph with exactly n-1 edges for n vertices. A directed acyclic graph (DAG) is a digraph with no directed cycles and is used to model dependencies and scheduling. A complete graph has an edge between every pair of vertices. A bipartite graph has vertices split into two groups with edges only between the groups, which models matching problems. A graph is sparse when it has few edges relative to the maximum possible and dense when it has many.",
+   "The two standard ways to store a graph in memory are the adjacency matrix and the adjacency list. An adjacency matrix is an n-by-n table in which entry (i, j) records whether — or with what weight — an edge goes from vertex i to vertex j. It uses O(n^2) memory and answers 'is there an edge between i and j' in O(1) time, which suits dense graphs. An adjacency list stores, for each vertex, a list of its neighbors; it uses O(n + m) memory for m edges and is far more efficient for sparse graphs, which are the common case in practice.",
+   "The choice of representation affects the cost of every algorithm. Iterating over all neighbors of a vertex takes O(n) in a matrix regardless of how many neighbors exist, but only O(degree) in an adjacency list. Conversely, checking the existence of a specific edge is O(1) in a matrix but O(degree) in a list. Because most large real-world graphs are sparse, adjacency lists are the default choice, with matrices reserved for small or dense graphs and for algorithms that rely on matrix arithmetic.",
+   "The most fundamental graph algorithms are the two traversals: breadth-first search (BFS) and depth-first search (DFS). BFS explores the graph level by level using a queue and finds shortest paths in terms of the number of edges in an unweighted graph. DFS explores as deep as possible along each branch before backtracking, using a stack or recursion, and is the basis for cycle detection, topological sorting and finding connected components. Both run in O(n + m) time on an adjacency list.",
+   "Beyond traversal, several algorithm families solve classic graph problems. Shortest-path algorithms such as Dijkstra's algorithm and the Bellman-Ford algorithm find least-cost routes in weighted graphs. Minimum-spanning-tree algorithms such as Kruskal's and Prim's connect all vertices with the least total edge weight. Topological sorting orders the vertices of a DAG so that every edge points forward, which schedules dependent tasks. Maximum-flow algorithms compute the greatest throughput through a network of capacities.",
+   "Connectivity is a central concept. In an undirected graph, connected components are maximal groups of mutually reachable vertices; in a directed graph the analogous notion is strongly connected components, groups in which every vertex can reach every other. Detecting components answers questions such as 'are these two computers on the same network segment' or 'which pages of a site are unreachable from the home page'.",
+   "The applications of graphs are pervasive. Navigation systems model road networks as weighted graphs and run shortest-path algorithms to plan routes. Social networks model users and relationships to suggest friends and detect communities. Search engines model the web as a directed graph and rank pages by analyzing its link structure. Compilers use dependency graphs to order compilation and to allocate registers, and build systems use DAGs to decide what to rebuild.",
+   "Graphs also model less obvious problems. State machines, where states are vertices and transitions are edges, describe protocols and user interfaces. Project scheduling uses DAGs to compute the critical path. Recommendation engines and fraud-detection systems traverse graphs of interactions to find patterns. Recognizing that a problem is really a graph problem is often the key insight that makes it solvable with a known efficient algorithm.",
+   "Best practice when working with graphs is to first identify the vertices and edges precisely, decide whether the graph is directed and whether edges are weighted, choose the representation according to density, and then map the task onto a known algorithm rather than inventing a new one. Correctly stating the model usually reveals that the problem is a shortest-path, spanning-tree, traversal or flow problem with a well-understood, efficient solution.",
+   "Thus, a graph is a versatile model of objects and their relationships; by classifying a graph correctly, choosing an adjacency-matrix or adjacency-list representation to match its density, and applying the appropriate traversal or optimization algorithm, a developer can solve a vast range of practical problems from routing and scheduling to search and social analysis."
+  ],
+  "questions": [
+   "What is the difference between a directed and an undirected graph, and give a real example of each.",
+   "Compare the adjacency matrix and adjacency list representations in terms of memory and the cost of common operations.",
+   "What is a directed acyclic graph, and what kinds of problems does it model?",
+   "What are the purposes of BFS and DFS, and what is their running time on an adjacency list?",
+   "Give three real-world applications of graphs and state which graph algorithm each one relies on."
+  ]
+ },
+ {
+  "code": "10.1.6",
+  "title": "Trees: binary, AVL, B-trees and their applications",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The tree as a hierarchical structure and its terminology.",
+   "Binary search trees and their operations.",
+   "The balancing problem and AVL trees.",
+   "B-trees and their role in databases and file systems.",
+   "Comparison and selection of tree structures."
+  ],
+  "body": [
+   "A tree is a hierarchical data structure consisting of nodes connected by edges, with one distinguished node called the root and no cycles. Every node except the root has exactly one parent, and nodes may have any number of children. Nodes with no children are called leaves. The depth of a node is its distance from the root, and the height of the tree is the depth of its deepest leaf. Trees model hierarchy naturally — file systems, organization charts, parse trees of expressions and the document object model of a web page are all trees.",
+   "A binary tree is a tree in which each node has at most two children, conventionally called the left and right child. The most important binary tree in algorithms is the binary search tree (BST), which maintains an ordering invariant: for every node, all keys in its left subtree are smaller than the node's key and all keys in its right subtree are larger. This invariant makes it possible to search, insert and delete keys by following a single path from the root downward, comparing at each step and turning left or right.",
+   "The operations of a BST — search, insertion and deletion — all run in time proportional to the height of the tree. When the tree is balanced, its height is about log n and these operations cost O(log n). An in-order traversal of a BST, which visits the left subtree, then the node, then the right subtree, yields the keys in sorted order, so a BST also serves as an ordered collection supporting range queries and successor and predecessor lookups.",
+   "The weakness of a plain BST is that its shape depends on the order of insertion. If keys are inserted in sorted or nearly sorted order, the tree degenerates into a long chain resembling a linked list, and its height becomes O(n), destroying the logarithmic performance. This is why self-balancing search trees were invented: they perform extra work during insertion and deletion to keep the height logarithmic regardless of the input order.",
+   "The AVL tree, named after its inventors Adelson-Velsky and Landis, was the first self-balancing BST. It stores at each node a balance factor — the difference between the heights of its left and right subtrees — and requires this factor to stay within the range minus one to plus one. Whenever an insertion or deletion violates this condition, the tree restores balance by performing rotations, local restructurings that rearrange a few nodes without breaking the search-tree order.",
+   "There are four rotation cases in an AVL tree — left-left, right-right, left-right and right-left — each corresponding to the direction in which the imbalance occurred, and each fixed by one or two single rotations. Because the tree height is kept close to log n, AVL trees guarantee O(log n) search, insertion and deletion in the worst case. AVL trees are strictly balanced, which makes lookups very fast, at the cost of slightly more rotations during updates than more relaxed schemes such as red-black trees.",
+   "For data that lives on disk rather than in memory, binary trees are inefficient because each step from parent to child may cause a separate disk access, and disk accesses are thousands of times slower than memory accesses. The B-tree solves this by making each node hold many keys and have many children, so that the tree is very shallow — often only three or four levels deep even for millions of records — and a search touches only a few nodes and therefore only a few disk pages.",
+   "A B-tree of order m keeps its keys sorted within each node and maintains the invariant that all leaves are at the same depth, so the tree is perfectly height-balanced. Each internal node has between m/2 and m children (except the root), which keeps nodes at least half full and bounds the height at about log base m of n. Searching within a node uses binary search over its sorted keys, and moving between levels follows the child pointer between the two keys that bracket the target.",
+   "The B-plus tree, a widely used variant, stores all actual records only in the leaf nodes and links the leaves together in a sorted linked list, keeping internal nodes as pure indexes. This makes range scans extremely efficient, because once the starting leaf is found the scan simply follows leaf links. For this reason B-plus trees are the standard structure for relational-database indexes and for the on-disk indexes of file systems such as NTFS and many others.",
+   "Choosing among these structures depends on where the data lives and how it is accessed. For in-memory ordered data that changes frequently, a balanced BST such as an AVL or red-black tree gives O(log n) operations with ordered traversal. For on-disk data or very large datasets that must minimize block accesses, a B-tree or B-plus tree is the right choice. When ordering is not needed at all and only membership or key lookup matters, a hash table with expected O(1) access may outperform any tree.",
+   "It is worth contrasting trees with hash tables directly. Hash tables offer faster average lookup but provide no ordering, so they cannot answer range queries, find the minimum, or iterate in sorted order without extra work. Balanced trees are slightly slower per operation but keep data ordered, which is precisely why database indexes, which must support range scans and sorted output, are built on B-trees rather than hash tables.",
+   "Best practice is therefore to match the tree to the workload: use a self-balancing BST to avoid the degeneration of a plain BST whenever insertion order is not controlled, use a B-tree or B-plus tree whenever data resides on disk or must support efficient range queries at scale, and remember that the balancing machinery exists solely to guarantee the O(log n) height on which all these guarantees rest.",
+   "Thus, trees provide efficient ordered access to data by organizing it hierarchically; understanding how the search-tree invariant enables logarithmic operations, how AVL rotations keep an in-memory tree balanced, and how B-trees flatten the hierarchy to minimize disk accesses allows a developer to select the correct structure for in-memory collections, disk-based indexes and database systems alike."
+  ],
+  "questions": [
+   "State the ordering invariant of a binary search tree and explain how it enables O(log n) search when the tree is balanced.",
+   "Why can a plain BST degenerate to O(n) height, and how does an AVL tree prevent this?",
+   "What is a rotation, and what does the AVL balance factor control?",
+   "Why are B-trees preferred over binary trees for data stored on disk?",
+   "In what situations is a balanced tree preferable to a hash table, and why?"
+  ]
+ },
+ {
+  "code": "10.1.7",
+  "title": "Stack and queue: algorithms and applications",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The stack: LIFO principle and operations.",
+   "The queue: FIFO principle and operations.",
+   "Implementations with arrays and linked lists.",
+   "Variants: deque, circular and priority queues.",
+   "Applications of stacks and queues in software."
+  ],
+  "body": [
+   "The stack and the queue are two of the most fundamental linear data structures. Both store a sequence of elements and both restrict access to the ends of the sequence, but they differ in which element is removed next. This restriction is not a limitation but a feature: by controlling the order in which elements leave the structure, stacks and queues model many natural processes precisely and simply.",
+   "A stack follows the Last-In-First-Out (LIFO) principle: the most recently added element is the first to be removed, like a stack of plates where you take the top plate. Its two core operations are push, which adds an element to the top, and pop, which removes and returns the top element. A peek (or top) operation inspects the top element without removing it, and an isEmpty check tests whether any elements remain. All of these operations run in O(1) time.",
+   "A queue follows the First-In-First-Out (FIFO) principle: the element that has waited longest is removed first, like people standing in line. Its core operations are enqueue, which adds an element at the back, and dequeue, which removes and returns the element at the front. A front operation inspects the next element to leave, and isEmpty tests for emptiness. As with the stack, all these operations are O(1) when implemented correctly.",
+   "Both structures can be implemented with either an array or a linked list. A stack backed by a dynamic array pushes and pops at the end of the array, which is O(1) amortized, occasionally paying for a resize. A stack backed by a linked list pushes and pops at the head. Either way the operations are constant time; the array version is more cache-friendly and memory-compact, while the linked-list version never needs to resize and never wastes reserved capacity.",
+   "A naive array queue that removes from the front by shifting all remaining elements would cost O(n) per dequeue, which is unacceptable. The standard solution is the circular buffer: the queue keeps two indices, front and rear, that wrap around a fixed-size array using modular arithmetic, so both enqueue and dequeue are O(1) with no shifting. A linked-list queue keeps pointers to both the head and the tail, enqueuing at the tail and dequeuing at the head, again in O(1).",
+   "Several important variants extend these structures. A double-ended queue, or deque, allows insertion and removal at both ends and can therefore act as either a stack or a queue. A circular queue reuses a fixed buffer as described above and is common in fixed-size buffering. A priority queue removes elements not in arrival order but according to a priority key, and is usually implemented with a heap; it is a distinct topic in its own right because its operations cost O(log n) rather than O(1).",
+   "The stack is the mechanism behind function calls in every programming language. When a function is called, its return address, parameters and local variables are pushed onto the call stack as a stack frame; when the function returns, its frame is popped. This LIFO discipline is exactly what nested and recursive calls require, and a stack overflow error is literally the exhaustion of this stack, typically caused by unbounded recursion.",
+   "Stacks are equally central to expression evaluation and parsing. Converting an infix expression to postfix form and then evaluating it both use stacks to hold operators and operands. Compilers and calculators use a stack to match parentheses and brackets, pushing each opening symbol and popping when the matching closing symbol appears; a mismatch or a non-empty stack at the end signals a syntax error. The undo feature of editors is a stack of previous states, and the back button of a browser is a stack of visited pages.",
+   "Depth-first search of a graph or tree is naturally expressed with a stack, whether the explicit stack of an iterative implementation or the implicit call stack of a recursive one, because DFS must fully explore one branch before backtracking — exactly LIFO behavior. Backtracking algorithms that explore choices and undo them likewise rely on the stack discipline to remember and reverse decisions.",
+   "Queues model any system where items are served in the order they arrive. Operating systems use queues to schedule processes and to buffer input and output; printers hold pending jobs in a queue; network routers queue packets awaiting transmission. Producer-consumer designs use a shared queue so that fast producers and slow consumers can work at their own rates. Breadth-first search of a graph uses a queue to visit vertices level by level, which is what makes it find shortest paths in unweighted graphs.",
+   "Because queues frequently connect components running at different speeds or on different threads, thread-safe and bounded queues are a standard building block of concurrent systems. A bounded queue that blocks producers when full and consumers when empty provides natural flow control, preventing a fast producer from exhausting memory. Message-queue systems generalize this idea across machines, decoupling services so they can scale and fail independently.",
+   "Best practice is to choose the structure by the required access order: a stack when the most recent item must be handled first, as in undo, parsing and backtracking; a queue when the oldest item must be handled first, as in scheduling and buffering; and a deque or priority queue when the problem needs both ends or an ordering by priority. Selecting the array or linked-list implementation then depends on whether a fixed capacity is acceptable and on cache-performance considerations.",
+   "Thus, the stack and the queue are simple constant-time structures whose power comes from the disciplined order in which they release elements; mastering their LIFO and FIFO semantics, their array and linked-list implementations, and their roles in function calls, parsing, traversal, scheduling and buffering gives a developer indispensable tools for organizing the flow of data in almost every program."
+  ],
+  "questions": [
+   "Explain the LIFO and FIFO principles and name the core operations of a stack and of a queue.",
+   "Why does a naive array-based queue perform poorly, and how does a circular buffer solve the problem?",
+   "How does the call stack support function calls and recursion, and what causes a stack overflow?",
+   "Why is a stack the natural structure for depth-first search and a queue for breadth-first search?",
+   "What is a deque, and how can it behave as both a stack and a queue?"
+  ]
+ },
+ {
+  "code": "10.1.8",
+  "title": "Priority queues and heaps: implementation and use",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The priority queue as an abstract data type.",
+   "The binary heap and its structural and ordering properties.",
+   "Heap operations: insert, extract and heapify.",
+   "Building a heap and heapsort.",
+   "Applications and variants of priority queues."
+  ],
+  "body": [
+   "A priority queue is an abstract data type that stores elements each associated with a priority and always provides access to the element with the highest (or lowest) priority. Unlike an ordinary queue, which serves elements strictly in arrival order, a priority queue serves them in order of importance. Its core operations are insert, which adds an element with a given priority, and extract-max (or extract-min), which removes and returns the element of highest priority. A peek operation reads the top priority without removing it.",
+   "A priority queue could be implemented with a sorted array or a sorted linked list, keeping the highest-priority element at one end. Then extraction is O(1) but insertion is O(n) because the correct position must be found and elements shifted. An unsorted list reverses the trade-off: insertion is O(1) but extraction is O(n) because the maximum must be searched for. Neither is satisfactory when both operations are frequent, which is why the binary heap is the standard implementation.",
+   "A binary heap is a complete binary tree — every level is fully filled except possibly the last, which is filled from left to right — that satisfies the heap property. In a max-heap the heap property states that every parent is greater than or equal to its children, so the maximum sits at the root; in a min-heap every parent is less than or equal to its children, so the minimum sits at the root. Note that a heap is only partially ordered: there is no ordering between siblings, which is why a heap does not give a fully sorted sequence for free.",
+   "The completeness of the tree lets a heap be stored compactly in a plain array with no pointers. If the root is at index 0, then for a node at index i its left child is at 2i + 1, its right child at 2i + 2, and its parent at (i - 1) / 2. This implicit representation is memory-efficient and cache-friendly, and all navigation is simple index arithmetic, which is a major reason the binary heap is preferred in practice.",
+   "Insertion works by 'sift-up' (also called bubble-up): the new element is appended at the end of the array, preserving completeness, and then repeatedly swapped with its parent as long as it violates the heap property. Because the tree has height about log n and the element rises at most to the root, insertion costs O(log n). The element stops as soon as its parent has a higher or equal priority, so many insertions finish in far fewer than log n steps.",
+   "Extraction of the maximum works by 'sift-down' (bubble-down): the root, which holds the maximum, is returned; the last element of the array is moved to the root to keep the tree complete; and this element is then repeatedly swapped with its larger child until the heap property is restored. This also costs O(log n) because the element descends at most the height of the tree. Peeking at the maximum is simply reading the root, an O(1) operation.",
+   "Building a heap from an arbitrary array can be done naively by inserting the elements one by one, costing O(n log n). A better method, called heapify or build-heap, applies sift-down to each internal node starting from the last one and moving toward the root. A careful analysis shows that this bottom-up construction runs in O(n) time, because most nodes are near the bottom and sift down only a short distance. Building a heap in linear time is a useful and slightly surprising result.",
+   "The heap directly yields the heapsort algorithm. First build a max-heap from the array in O(n); then repeatedly extract the maximum and place it at the end of the array, shrinking the heap by one each time. After n extractions the array is sorted in ascending order. Heapsort runs in O(n log n) in the worst case, sorts in place with O(1) extra memory, but is not stable and has poorer cache behavior than quicksort, so it is chosen when a guaranteed worst case and in-place operation are both required.",
+   "Priority queues are the engine behind several classic algorithms. Dijkstra's shortest-path algorithm uses a min-priority queue to repeatedly select the unvisited vertex with the smallest tentative distance. Prim's minimum-spanning-tree algorithm uses one to select the cheapest edge crossing the frontier. Huffman coding builds an optimal prefix code by repeatedly extracting the two least-frequent symbols from a min-heap. In each case the priority queue provides the 'choose the best remaining option' step efficiently.",
+   "Priority queues also appear throughout systems and applications. Operating-system schedulers use them to run the highest-priority ready process. Event-driven simulations keep pending events in a priority queue ordered by their scheduled time, always processing the earliest next. Networking equipment uses priority queues for quality-of-service, sending urgent packets first. Algorithms that need the k largest or k smallest items from a stream maintain a small heap of size k, processing each item in O(log k).",
+   "Several variants extend the basic heap. A d-ary heap gives each node d children, which lowers the tree height and speeds insertion at the cost of slower extraction, and can be tuned to the ratio of inserts to extractions. The binary heap does not support efficient merging of two heaps or fast arbitrary deletion; advanced structures such as binomial heaps and Fibonacci heaps support these operations with better amortized bounds, and a Fibonacci heap in particular improves the theoretical running time of Dijkstra's algorithm, though its large constant factors limit its practical use.",
+   "Best practice is to reach for the standard library priority queue (such as heapq in Python, PriorityQueue or a heap in Java, or priority_queue in C++) whenever the task requires repeatedly retrieving the most important pending item, and to remember that a heap gives O(log n) insert and extract with O(1) peek and O(n) construction. When only the top k elements matter, keep a bounded heap of size k rather than sorting the whole input, and choose a min-heap or max-heap according to which extreme you need.",
+   "Thus, a priority queue delivers the highest-priority element on demand, and the binary heap implements it elegantly as a complete tree stored in an array with O(log n) insertion and extraction and O(n) construction; understanding sift-up, sift-down, heapify and their applications in sorting, shortest paths, scheduling and top-k selection makes the heap one of the most broadly useful structures in a programmer's toolkit."
+  ],
+  "questions": [
+   "How does a priority queue differ from an ordinary FIFO queue, and what are its core operations?",
+   "State the heap property and explain why a heap is only partially, not fully, ordered.",
+   "How are the parent and children of a node located when a heap is stored in an array?",
+   "Describe the sift-up and sift-down procedures and give the complexity of insertion and extraction.",
+   "Name three algorithms or applications that rely on a priority queue and state what the queue provides in each."
+  ]
+ },
+ {
+  "code": "10.1.9",
+  "title": "Graph algorithms: breadth-first search, depth-first search and others",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Traversal as the foundation of graph algorithms.",
+   "Breadth-first search: mechanism and properties.",
+   "Depth-first search: mechanism and properties.",
+   "Algorithms built on DFS and BFS.",
+   "Practical uses and complexity of graph traversal."
+  ],
+  "body": [
+   "Most graph algorithms are built upon a systematic traversal that visits every vertex and edge in a controlled order. The two fundamental traversals are breadth-first search (BFS) and depth-first search (DFS). They differ only in the order in which they explore vertices, yet from this difference arise solutions to a remarkable range of problems: shortest paths, connectivity, cycle detection, topological ordering and many more.",
+   "Because graphs can contain cycles, any traversal must remember which vertices it has already visited, or it would loop forever. Both BFS and DFS therefore maintain a set or array of visited vertices, marking each vertex the first time it is reached and never processing it again. This single precaution transforms a potentially infinite walk into a finite, efficient traversal that touches each vertex once and each edge a constant number of times.",
+   "Breadth-first search explores the graph in layers, starting from a source vertex and visiting all vertices at distance one, then all at distance two, and so on. It uses a queue: the source is enqueued and marked visited; then repeatedly the front vertex is dequeued and each of its unvisited neighbors is marked visited and enqueued. Because the queue processes vertices in the order they were discovered, BFS naturally expands outward in concentric rings from the source.",
+   "The key property of BFS is that in an unweighted graph it finds the shortest path, measured in number of edges, from the source to every other reachable vertex. The first time BFS reaches a vertex, it has done so by the fewest possible edges, because it exhausts all closer vertices before moving farther out. By recording each vertex's predecessor during the traversal, the actual shortest path can be reconstructed by walking back from the target to the source.",
+   "Depth-first search takes the opposite approach: from the current vertex it advances to an unvisited neighbor and immediately continues deeper from there, only backtracking when it reaches a vertex with no unvisited neighbors. DFS is naturally expressed with recursion, where the program's call stack remembers the path, or iteratively with an explicit stack. It plunges to the bottom of one branch before exploring alternatives, producing a very different visiting order from BFS.",
+   "DFS classifies the edges of a graph as it proceeds, which is the source of much of its power. In a directed graph, a 'back edge' — an edge pointing to a vertex currently on the recursion stack — indicates a cycle, so DFS detects cycles directly. DFS also computes discovery and finishing times for each vertex, and the order in which vertices finish underlies topological sorting and the computation of strongly connected components.",
+   "Both traversals run in O(n + m) time on a graph with n vertices and m edges when the graph is stored as an adjacency list, because each vertex is processed once and each edge is examined a constant number of times. The space requirement is O(n) for the visited markers plus, for BFS, the queue, and for DFS, the stack, whose size can reach O(n) in the worst case. On an adjacency matrix both traversals cost O(n^2), because finding the neighbors of each vertex requires scanning a whole row.",
+   "Many higher-level algorithms are thin layers over these traversals. Finding connected components in an undirected graph is done by repeatedly starting a BFS or DFS from an unvisited vertex; each traversal discovers exactly one component. Testing whether a graph is bipartite is done by a BFS or DFS that two-colors the vertices and checks that no edge joins two vertices of the same color. Detecting whether an undirected graph has a cycle is a DFS that looks for an edge back to an already-visited vertex that is not the immediate parent.",
+   "Topological sorting orders the vertices of a directed acyclic graph so that every edge points from an earlier to a later vertex, which schedules tasks respecting their dependencies. It can be produced by a DFS that outputs each vertex when it finishes and then reverses the list, or by Kahn's algorithm, which repeatedly removes vertices with no remaining incoming edges using a queue. Both run in O(n + m) and also detect the impossibility of ordering when the graph contains a cycle.",
+   "For weighted graphs the plain traversals are not enough, and specialized algorithms take over. Dijkstra's algorithm generalizes BFS using a priority queue keyed by accumulated distance to find shortest paths when edge weights are non-negative. The Bellman-Ford algorithm handles negative weights and detects negative cycles. The Floyd-Warshall algorithm computes shortest paths between all pairs of vertices. Prim's and Kruskal's algorithms build minimum spanning trees. Each of these is best understood as an extension of the traversal idea guided by edge weights.",
+   "The practical uses of graph traversal are everywhere. Web crawlers use BFS or DFS to discover pages by following links. Social networks use BFS to compute degrees of separation and to suggest connections. Maze and puzzle solvers use BFS for shortest solutions and DFS for exhaustive search with backtracking. Network tools use traversal to find reachable hosts and to detect loops, and garbage collectors traverse the graph of object references to find and reclaim unreachable memory.",
+   "Best practice is to select the traversal by the question being asked: use BFS when the shortest number of steps or a level-by-level exploration is needed, and DFS when the task involves exhaustive exploration, backtracking, cycle detection or ordering by dependencies. Always maintain a visited set to guarantee termination, prefer an adjacency list for efficiency on sparse graphs, and remember that on very deep graphs a recursive DFS may overflow the call stack, in which case an explicit stack should be used.",
+   "Thus, breadth-first and depth-first search are the twin foundations of graph algorithms: BFS explores in layers and finds shortest unweighted paths, while DFS dives deep and reveals cycles, orderings and components; understanding their O(n + m) traversal, their properties and the many algorithms built on top of them enables a developer to solve connectivity, pathfinding, scheduling and search problems across countless applications."
+  ],
+  "questions": [
+   "Why must every graph traversal maintain a set of visited vertices?",
+   "How does BFS use a queue, and why does it find shortest paths in an unweighted graph?",
+   "How does DFS use a stack or recursion, and what is a back edge used to detect?",
+   "What is the running time and space usage of BFS and DFS on an adjacency-list graph?",
+   "Name three algorithms built on top of DFS or BFS and state what each one computes."
+  ]
+ },
+ {
+  "code": "10.1.10",
+  "title": "Optimization and complexity of data structures",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Measuring algorithm cost: time and space complexity.",
+   "Asymptotic notation and orders of growth.",
+   "Best, average, worst and amortized analysis.",
+   "Complexity of common data-structure operations.",
+   "Choosing and optimizing structures for a task."
+  ],
+  "body": [
+   "Optimization begins with measurement, and in computer science the primary measure of an algorithm or data-structure operation is its complexity — how the resources it consumes grow as the size of the input grows. The two resources of interest are time complexity, the number of elementary operations performed, and space complexity, the amount of memory used. Analyzing complexity lets us compare approaches independently of any particular machine or programming language, and predict how they will behave when the input becomes large.",
+   "Complexity is expressed with asymptotic notation, which describes the rate of growth while ignoring constant factors and lower-order terms that become insignificant for large inputs. Big-O notation gives an upper bound: an algorithm is O(f(n)) if its cost grows no faster than f(n) beyond some input size. Big-Omega gives a lower bound and Big-Theta gives a tight bound that matches from both above and below. In everyday engineering Big-O is used most because it captures the worst that can happen.",
+   "The common orders of growth, from fastest to slowest, are constant O(1), logarithmic O(log n), linear O(n), linearithmic O(n log n), quadratic O(n^2), cubic O(n^3) and exponential O(2^n). The practical difference is enormous: for an input of a million elements, a logarithmic algorithm needs about twenty steps, a linear one a million, a linearithmic one about twenty million, and a quadratic one a trillion. Exponential algorithms become infeasible beyond very small inputs, which is why reducing an algorithm from exponential or quadratic to linearithmic is often the single most valuable optimization.",
+   "Constant factors and lower-order terms, though dropped from the notation, still matter in practice. An O(n) algorithm with a large constant may be slower than an O(n log n) algorithm for realistic input sizes, and two O(n) algorithms can differ greatly in real speed because of cache behavior, memory allocation or the cost of each operation. Asymptotic analysis tells us how algorithms scale; profiling on real data tells us which is actually faster at the sizes we care about. Good optimization uses both.",
+   "The cost of an algorithm often depends on the specific input, so we distinguish best-case, average-case and worst-case complexity. Quicksort, for example, is O(n log n) on average but O(n^2) in the worst case; a hash-table lookup is O(1) on average but O(n) in the worst case if many keys collide. The worst case matters for systems with strict guarantees, such as real-time or safety-critical software, while the average case guides everyday choices where occasional slow operations are acceptable.",
+   "Amortized analysis addresses operations whose cost varies from call to call but averages out over a sequence. A dynamic array's append is usually O(1), but occasionally it must double its capacity and copy every element, costing O(n) for that one call; averaged over many appends, however, the cost per append is O(1) amortized, because the expensive resizes happen rarely enough to be paid for by the cheap ones. Amortized analysis prevents us from unfairly rejecting a structure because of its rare expensive operations.",
+   "Every data structure embodies a trade-off, and knowing the complexity of its operations is the basis for choosing wisely. A dynamic array gives O(1) indexed access and amortized O(1) append but O(n) insertion in the middle. A linked list gives O(1) insertion and deletion at a known position but O(n) access by index. A hash table gives expected O(1) insertion, deletion and lookup but no ordering. A balanced search tree gives O(log n) for these operations while keeping data ordered.",
+   "The stack and queue offer O(1) for their restricted operations; the binary heap offers O(log n) insert and extract with O(1) peek; the B-tree offers O(log n) operations while minimizing disk accesses. There is no universally best structure — each is optimal for a particular access pattern. The art of optimization is to identify the operations that dominate a workload and choose the structure whose complexity for those operations is lowest, even if it is worse for operations the workload rarely performs.",
+   "Space complexity introduces its own trade-offs, and time and space can frequently be exchanged for one another. Caching and memoization store previously computed results to avoid recomputation, spending memory to save time. A hash index speeds lookups at the cost of the memory it occupies. Compression saves memory at the cost of the time to compress and decompress. Recognizing these space-time trade-offs lets an engineer tune a system toward whichever resource is scarcer in the given context.",
+   "Optimization should always be guided by evidence rather than intuition, because the intuitive bottleneck is frequently not the real one. The disciplined process is to make the program correct first, then measure it with a profiler to find where time and memory are actually spent, then improve the parts that dominate — often by choosing a better algorithm or data structure rather than by micro-tuning code. Donald Knuth's warning that premature optimization is the root of all evil captures this: effort spent optimizing code that is not the bottleneck is wasted.",
+   "A frequent and high-value optimization is simply replacing an inefficient data structure with an appropriate one. Turning a repeated linear search over a list into a hash-set lookup reduces an O(n^2) loop to O(n). Using a heap to maintain the top k elements avoids sorting the entire dataset. Adding a database index converts a full-table scan into a logarithmic lookup. These structural changes usually yield far larger gains than any amount of low-level tweaking.",
+   "Best practice, therefore, is to reason about the expected input sizes and the dominant operations before writing code, to know the complexity of the standard structures by heart, to prefer clear correct code and optimize only where measurement shows a real bottleneck, and to consider the whole trade-off space of time, space and simplicity rather than optimizing one dimension blindly. Scalability problems are almost always solved by better asymptotic complexity, not by faster constants.",
+   "Thus, complexity analysis with asymptotic notation, together with best-, average-, worst- and amortized-case reasoning, gives the vocabulary to compare data structures and algorithms by how they scale; combining this theoretical understanding with profiling and a clear view of space-time trade-offs allows a developer to choose and optimize structures so that programs remain efficient as their inputs grow."
+  ],
+  "questions": [
+   "What do time complexity and space complexity measure, and why are they expressed with asymptotic notation?",
+   "List the common orders of growth from fastest to slowest and explain why the difference matters for large inputs.",
+   "What is the difference between worst-case, average-case and amortized complexity? Give an example of each.",
+   "Compare the complexity of the main operations of a dynamic array, a linked list, a hash table and a balanced tree.",
+   "Why should optimization be guided by profiling, and why does choosing the right data structure usually beat low-level tuning?"
+  ]
+ },
+ {
+  "code": "10.1.11",
+  "title": "Breadth-first and depth-first search algorithms: principles and applications",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Search versus blind traversal: goal-directed exploration.",
+   "Principles of breadth-first search and their consequences.",
+   "Principles of depth-first search and their consequences.",
+   "Comparing the two: completeness, optimality and cost.",
+   "Applications and choosing between BFS and DFS."
+  ],
+  "body": [
+   "Breadth-first search and depth-first search are the two basic strategies for exploring a graph or a state space in order to find something — a specific vertex, a path, a solution to a puzzle, or a proof that no solution exists. Although they can traverse an entire graph, they are most often used as search procedures that stop as soon as a goal is reached. The order in which they consider vertices determines which of them is appropriate for a given problem.",
+   "Both searches begin at a start vertex and expand outward, and both must mark visited vertices to avoid revisiting them in a cyclic graph. They differ solely in the discipline used to decide which discovered-but-not-yet-explored vertex to expand next: BFS expands the one discovered earliest, using a queue, while DFS expands the one discovered most recently, using a stack. This one difference in data structure produces two profoundly different exploration patterns.",
+   "Breadth-first search expands the frontier uniformly in all directions, visiting all vertices one edge away from the start, then all two edges away, and so on. Because it never moves to a farther vertex before exhausting all nearer ones, the first time it reaches any vertex it has found a path with the minimum possible number of edges. This makes BFS the natural choice whenever the shortest path in an unweighted graph or the fewest-moves solution to a puzzle is required.",
+   "The cost of this guarantee is memory. BFS must store the entire current frontier in its queue, and in a wide graph the frontier can grow to hold a large fraction of all vertices, so its space requirement can be O(n). For very large or infinite state spaces this memory demand can be the limiting factor, sometimes making BFS impractical even though it would eventually find the shortest solution.",
+   "Depth-first search follows a single path as far as it can go, and only when it reaches a dead end does it backtrack to the most recent vertex that still has unexplored neighbors. Its memory requirement is proportional to the depth of the current path rather than to the breadth of the frontier, so on graphs that are deep but not too deep it uses far less memory than BFS. This makes DFS attractive when solutions are expected to lie deep and memory is limited.",
+   "DFS does not guarantee the shortest path: the first solution it finds may be reached by a long, winding route while a shorter one exists elsewhere. It is therefore used when any solution suffices, or when the task is to explore the whole space exhaustively — for example, to enumerate all configurations, detect cycles, or perform backtracking searches such as solving a maze, placing queens on a chessboard, or filling in a Sudoku grid, where DFS naturally tries a choice, recurses, and undoes the choice on failure.",
+   "The two searches are compared along several dimensions. Completeness asks whether the search is guaranteed to find a solution if one exists: BFS is complete on finite graphs and even on infinite graphs with finite branching, whereas a naive DFS can get lost forever going deeper in an infinite space unless a depth limit is imposed. Optimality asks whether the solution found is the shortest: BFS is optimal for unweighted edges, DFS is not. Both share the same O(n + m) time on an adjacency list.",
+   "When solutions may be deep but memory is scarce and the shortest solution is still wanted, a hybrid called iterative deepening depth-first search is used. It runs DFS repeatedly with an increasing depth limit — first depth one, then two, and so on — combining the low memory use of DFS with the shortest-path guarantee of BFS. Although it re-explores shallow levels many times, the repeated work is small because the number of vertices grows geometrically with depth, so its total cost stays proportional to that of a single BFS.",
+   "The applications of BFS follow from its shortest-path property. It computes degrees of separation in social networks, finds the fewest moves in sliding puzzles and Rubik's-cube-style problems, discovers the nearest resource on a grid, and broadcasts messages level by level in networks. Whenever the objective is 'the least number of steps', BFS is the first tool to consider, because it delivers that answer directly and provably.",
+   "The applications of DFS follow from its deep, exhaustive nature. It underlies topological sorting and cycle detection, the discovery of connected and strongly connected components, and the whole family of backtracking algorithms in constraint satisfaction and combinatorial search. Compilers, dependency resolvers and puzzle solvers all rely on DFS because they need to explore structure and order rather than to minimize distance.",
+   "Practical care is needed with recursion depth. Because DFS is usually written recursively, a very deep graph can exhaust the program's call stack and cause a crash; in such cases DFS should be rewritten with an explicit stack, or a depth limit should be applied. For grids and implicit graphs, neighbors are generated on the fly rather than stored, but the same queue-versus-stack logic and the same visited-marking discipline still apply.",
+   "Best practice is to choose the search by the shape of the problem and the resources available: prefer BFS when the shortest path or minimum number of steps matters and the frontier fits in memory; prefer DFS when any solution or a full exploration is needed, when solutions lie deep, or when memory is tight; and use iterative deepening when both a shortest solution and low memory use are required. In every case, mark visited vertices to ensure termination and pick an adjacency-list representation for efficiency.",
+   "Thus, breadth-first and depth-first search embody the two basic exploration strategies — expand the nearest frontier or dive along the deepest path — and their differences in completeness, optimality and memory use dictate which to apply; mastering these principles, the iterative-deepening compromise between them, and their many applications lets a developer search graphs and state spaces effectively for shortest paths, solutions and structural properties alike."
+  ],
+  "questions": [
+   "What single implementation difference distinguishes BFS from DFS, and what exploration pattern does each produce?",
+   "Why does BFS find the shortest path in an unweighted graph, and what is the cost of this guarantee?",
+   "In what situations is DFS preferable to BFS despite not finding the shortest path?",
+   "Define completeness and optimality of a search and state how BFS and DFS compare on each.",
+   "What problem does iterative deepening solve, and why is its repeated work not prohibitively expensive?"
+  ]
+ },
+ {
+  "code": "10.1.12",
+  "title": "Shortest paths in graphs: Dijkstra's and Floyd-Warshall algorithms",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To develop practical skills in implementing and applying Dijkstra's single-source and the Floyd-Warshall all-pairs shortest-path algorithms on weighted graphs and in choosing between them for a given task.",
+  "theory": [
+   "The shortest-path problem asks for the least-cost route between vertices of a weighted graph, where the cost of a path is the sum of its edge weights. Two classic algorithms solve different versions of this problem. Dijkstra's algorithm solves the single-source problem — shortest paths from one origin to all other vertices — and requires all edge weights to be non-negative. It works greedily, repeatedly selecting the unvisited vertex with the smallest tentative distance (efficiently obtained from a min-priority queue) and relaxing the edges leaving it.",
+   "The Floyd-Warshall algorithm solves the all-pairs problem — shortest paths between every pair of vertices — using dynamic programming. It considers each vertex k in turn as a possible intermediate point and updates the distance between every pair (i, j) to the smaller of the current distance and the distance through k. It handles negative edge weights (though not negative cycles) and is simple to implement as three nested loops over an adjacency matrix.",
+   "The two algorithms have different complexities and suit different situations. Dijkstra's algorithm runs in O((n + m) log n) with a binary-heap priority queue, making it efficient for sparse graphs and single-source queries. Floyd-Warshall runs in O(n^3) time and O(n^2) space regardless of the number of edges, which is acceptable only for small or moderate graphs but gives all pairs at once and tolerates negative weights. Choosing between them depends on whether one source or all pairs are needed, the graph's density and size, and whether negative weights occur."
+  ],
+  "materials": [
+   "A computer with an installed IDE (for example Visual Studio Code, PyCharm or IntelliJ IDEA).",
+   "A programming language with a priority-queue or heap in its standard library (Python, Java, C# or C++).",
+   "Sample weighted graphs described in text files as edge lists or adjacency matrices, including at least one graph with a negative edge and one with a negative cycle.",
+   "Graph paper or a diagramming tool for drawing the graphs and tracing the algorithms by hand.",
+   "A report form for recording distances, paths and timing measurements."
+  ],
+  "procedure": [
+   "Represent a small weighted graph both as an adjacency list and as an adjacency matrix, and draw it so results can be checked by hand.",
+   "Implement Dijkstra's algorithm using a min-priority queue, maintaining a distance array and a predecessor array to allow path reconstruction.",
+   "Run Dijkstra from a chosen source, print the shortest distance and the reconstructed path to every other vertex, and verify the results against your hand-drawn graph.",
+   "Implement the Floyd-Warshall algorithm with three nested loops over the distance matrix and print the resulting all-pairs distance table.",
+   "Test both algorithms on a graph containing a negative edge, observe that Dijkstra may give a wrong answer while Floyd-Warshall handles it, and add a check that detects a negative cycle.",
+   "Measure and compare the running time of both algorithms on graphs of increasing size and summarize which algorithm is preferable for each case."
+  ],
+  "tasks": [
+   "Implement Dijkstra's algorithm and use it to find and print the shortest route and its total cost between two named cities in a road-network graph read from a file.",
+   "Implement the Floyd-Warshall algorithm and produce the complete all-pairs shortest-distance matrix for the same graph, then verify that its single-source row matches Dijkstra's output.",
+   "Construct a small graph with a negative edge weight, demonstrate with output that Dijkstra's greedy choice can fail on it, and explain in the report why the non-negativity precondition is required."
+  ],
+  "conclusion": "As a result of the work, the student has formed practical skills in implementing Dijkstra's and Floyd-Warshall shortest-path algorithms, reconstructing paths, and selecting the appropriate algorithm according to the graph and the query.",
+  "questions": [
+   "Why does Dijkstra's algorithm require all edge weights to be non-negative, and what can go wrong otherwise?",
+   "How does a min-priority queue improve the efficiency of Dijkstra's algorithm?",
+   "How does the Floyd-Warshall algorithm use an intermediate vertex k to update pairwise distances?",
+   "Compare the time and space complexity of the two algorithms and state when each is preferable.",
+   "How can shortest paths be reconstructed, and how can a negative cycle be detected?"
+  ]
+ }
+]

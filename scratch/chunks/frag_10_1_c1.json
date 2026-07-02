@@ -1,0 +1,79 @@
+{
+ "lo_id": "10.1",
+ "chunk": 1,
+ "out_file": "umkd_gen/frag_10_1_c1.json",
+ "topics": [
+  {
+   "pos": 1,
+   "title_ru": "Алгоритмы сортировки в теории множеств: сравнение и оптимизация",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 2,
+   "title_ru": "Интерсекция и объединение множеств: алгоритмы и их применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 3,
+   "title_ru": "Алгоритмы поиска в теории множеств: бинарный поиск",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 4,
+   "title_ru": "Алгоритмы сортировки в теории множеств и их применение в базах данных",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  },
+  {
+   "pos": 5,
+   "title_ru": "Графы: типы, алгоритмы и применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 6,
+   "title_ru": "Деревья: бинарные, AVL, B-деревья и их применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 7,
+   "title_ru": "Стек и очередь: алгоритмы и применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 8,
+   "title_ru": "Приоритетные очереди и кучи: реализация и использование",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 9,
+   "title_ru": "Графовые алгоритмы: поиск в ширину, поиск в глубину и другие",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 10,
+   "title_ru": "Оптимизация и сложность структур данных",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 11,
+   "title_ru": "Алгоритмы поиска в ширину и в глубину: принципы и применение",
+   "type_en": "Study of new material",
+   "kind": "lecture"
+  },
+  {
+   "pos": 12,
+   "title_ru": "Кратчайшие пути в графах: алгоритмы Дейкстры и Флойда-Уоршалла",
+   "type_en": "Skills-improvement lesson",
+   "kind": "practical"
+  }
+ ]
+}

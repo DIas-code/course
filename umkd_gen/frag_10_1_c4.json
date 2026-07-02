@@ -1,0 +1,451 @@
+[
+ {
+  "code": "10.1.37",
+  "title": "Developing code for robotics and automation",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in writing control code for robotic and automated systems, including sensor reading, actuator control and a simple feedback loop.",
+  "theory": [
+   "Robotics and industrial automation are governed by software that reads the state of the environment through sensors, makes decisions according to an algorithm, and drives actuators such as motors, servos and relays. The typical structure of such a program is an endless control loop that repeatedly performs the 'sense – think – act' cycle. The period of this loop determines how quickly the system reacts to changes and must be short and stable, which is why robotics code is usually written close to the hardware and avoids unpredictable delays.",
+   "A key concept in automation is feedback control. An open-loop system issues a command without checking the result, whereas a closed-loop system measures the actual output and corrects the command to reduce the error between the desired and the real value. The most widely used feedback algorithm is the PID controller, which combines a proportional term (reaction to the current error), an integral term (accumulated past error) and a derivative term (predicted future error). Tuning the three coefficients lets the engineer balance speed of response against stability and overshoot.",
+   "Robotic code is frequently event- and state-driven. A finite-state machine describes the robot's behaviour as a set of states (for example, 'searching', 'moving', 'gripping', 'error') with well-defined transitions triggered by sensor events. This structure keeps the logic readable and safe, because for every state the programmer explicitly defines what the robot may and may not do, and provides a safe stop state that is entered on any fault."
+  ],
+  "materials": [
+   "A microcontroller board (Arduino/ESP32) or a robotics simulator such as Webots, CoppeliaSim or the Tinkercad Circuits simulator.",
+   "A development environment (Arduino IDE, PlatformIO or Python with a robotics library).",
+   "A set of digital and analogue sensors (button, distance/ultrasonic sensor, light sensor) and actuators (LED, DC motor or servo).",
+   "A breadboard, connecting wires and a stabilized power supply, or their virtual equivalents in the simulator."
+  ],
+  "procedure": [
+   "Study the pin map of the board and connect one input device (a distance sensor) and one output device (a servo or motor) either physically or in the simulator.",
+   "Write a control loop that reads the sensor value at a fixed interval and prints it to the serial monitor to verify that the readings are correct and stable.",
+   "Implement a simple threshold rule: when the measured distance falls below a set limit, stop the motor or move the servo to a safe position, and restore motion when the obstacle disappears.",
+   "Replace the on/off threshold rule with a proportional controller so that the actuator command grows smoothly as the error grows, and observe the difference in behaviour.",
+   "Describe the robot's behaviour as a finite-state machine with at least three states, including an explicit error/safe-stop state, and implement the transitions in code.",
+   "Test the program with different obstacle positions, record the reaction time and note how loop period and controller coefficients affect the result."
+  ],
+  "tasks": [
+   "Program an obstacle-avoiding routine in which the robot stops within a defined distance of an obstacle and reports the event over the serial port.",
+   "Implement a proportional (P) controller that keeps a measured value (distance or light level) close to a target set-point, and tune the coefficient for stable behaviour.",
+   "Design and code a three-state finite-state machine for a simple automated task and document the transition conditions in a diagram."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of writing a sense-think-act control loop, implementing feedback control and structuring robot behaviour as a finite-state machine.",
+  "questions": [
+   "What is the 'sense – think – act' cycle and why must the control loop have a short, stable period?",
+   "What is the difference between open-loop and closed-loop control?",
+   "What do the proportional, integral and derivative terms of a PID controller represent?",
+   "Why is a finite-state machine a convenient way to describe the behaviour of a robot?",
+   "Why must every automation program provide a safe-stop or error state?"
+  ]
+ },
+ {
+  "code": "10.1.38",
+  "title": "Using algorithms and data structures in game development",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The role of algorithms and data structures in the architecture of a game.",
+   "The game loop, entity representation and the component pattern.",
+   "Spatial data structures and collision detection.",
+   "Pathfinding and decision-making algorithms for game agents.",
+   "Performance, memory and the practical selection of a data structure."
+  ],
+  "body": [
+   "Game development is one of the most demanding areas of programming, because a game must update and render a complex, interactive world dozens of times per second while responding instantly to player input. Achieving this requires the careful selection of algorithms and data structures: the same task can be solved in many ways, but only some of them fit inside the time budget of a single frame, which at 60 frames per second is about 16 milliseconds.",
+   "At the heart of every game is the game loop. In each iteration the loop processes input, updates the state of the world (physics, artificial intelligence, animation, game rules) and then renders the current frame. Because the loop runs continuously, any inefficient algorithm executed inside it is multiplied by the frame rate, so the choice of data structures directly determines whether the game runs smoothly or stutters.",
+   "Game objects, often called entities, must be stored so that they can be iterated, searched and modified efficiently. A naive approach uses a deep class hierarchy, but modern engines favour the entity-component-system pattern, in which an entity is simply an identifier, its data is stored in components, and behaviour is expressed by systems that process arrays of components. Storing components in contiguous arrays improves cache locality and lets the processor work through many objects quickly.",
+   "Collision detection is a classic example where the right data structure is decisive. Checking every object against every other object requires a number of comparisons proportional to the square of the object count, which becomes impossibly slow for large worlds. Spatial partitioning structures solve this by dividing space so that only nearby objects are tested against each other.",
+   "A uniform grid divides the world into cells and stores in each cell the objects that overlap it; collisions are then checked only within a cell and its neighbours. This is simple and fast when objects are evenly distributed but wastes memory when they are clustered. A quadtree (in two dimensions) or an octree (in three dimensions) adaptively subdivides only the crowded regions, giving good performance across uneven distributions.",
+   "Bounding volumes further speed up collision tests. Before performing an expensive precise check, the engine compares cheap approximations such as axis-aligned bounding boxes or bounding spheres; only if these overlap is the exact test performed. This broad-phase / narrow-phase separation is a general optimisation principle: use a cheap test to reject the many impossible cases before spending time on the few possible ones.",
+   "Pathfinding is another area dominated by algorithms. The A* algorithm finds the shortest path on a graph of walkable nodes by combining the actual cost from the start with a heuristic estimate of the remaining distance to the goal. The heuristic guides the search toward the target, making A* far more efficient than an uninformed breadth-first search while still guaranteeing an optimal path when the heuristic never overestimates.",
+   "To run A* efficiently a priority queue is required, usually implemented as a binary heap, so that the most promising node can be extracted quickly. This illustrates how a high-level algorithm depends on an underlying data structure: without an efficient priority queue, A* would lose much of its advantage.",
+   "Decision-making for game agents relies on structures such as finite-state machines and behaviour trees. A finite-state machine describes an agent as a set of states with transitions, which is easy to build for simple enemies. Behaviour trees organise decisions as a tree of tasks, selectors and sequences, and scale better to complex, reusable behaviour, which is why they are widely used in commercial games.",
+   "Randomness and procedural generation use their own techniques. Pseudo-random number generators produce reproducible sequences from a seed, allowing a level to be regenerated identically for debugging or shared between players. Algorithms such as noise functions and space-filling generators create terrain, dungeons and textures without storing them explicitly, trading computation for memory.",
+   "Memory management matters as much as raw speed. Frequent allocation and freeing of objects such as bullets or particles fragments memory and triggers pauses; object pools solve this by pre-allocating a fixed set of reusable objects and recycling them. This keeps allocation predictable and avoids stalls caused by garbage collection or heap operations during play.",
+   "Choosing a data structure in games is always a trade-off between time, memory and simplicity. An array gives the fastest iteration and best cache behaviour but slow insertion in the middle; a hash map gives fast lookup by key but uses more memory and scatters data; a linked list allows cheap insertion but poor traversal. The professional developer selects the structure that matches the access pattern that dominates the hot path of the game.",
+   "Profiling must guide these decisions. Developers measure where frame time is actually spent rather than guessing, then optimise only the parts that exceed the budget. Premature optimisation of code that runs rarely wastes effort, whereas a small improvement in a routine called thousands of times per frame can transform the whole game's performance.",
+   "Thus, algorithms and data structures are not abstract theory in game development but the concrete foundation of playability: they decide whether collisions, pathfinding, agent behaviour and rendering fit within the strict time budget of every frame, and a skilled game programmer chooses and profiles them deliberately to build a responsive, efficient world."
+  ],
+  "questions": [
+   "What is the game loop and why does the efficiency of code inside it matter so much?",
+   "How do spatial partitioning structures such as grids and quadtrees reduce the cost of collision detection?",
+   "Why does the A* algorithm require a priority queue, and what role does its heuristic play?",
+   "What is the difference between a finite-state machine and a behaviour tree for controlling game agents?",
+   "How does an object pool improve performance compared with allocating and freeing objects on demand?"
+  ]
+ },
+ {
+  "code": "10.1.39",
+  "title": "Software code security: protection against attacks and vulnerabilities",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The concept of a vulnerability, a threat and an attack in software.",
+   "Injection attacks and the principle of separating code from data.",
+   "Input validation, output encoding and the least-privilege principle.",
+   "Authentication, secrets management and secure data storage.",
+   "Secure development practices throughout the software life cycle."
+  ],
+  "body": [
+   "Software code security is the discipline of writing programs that continue to behave correctly and protect data even when they are used maliciously. A vulnerability is a weakness in the code or its configuration; a threat is a potential harmful event; and an attack is the deliberate exploitation of a vulnerability. For a developer, security is not an optional feature added at the end but a property that must be built into the code from the first line, because a single overlooked flaw can compromise an entire system.",
+   "The central assumption of secure programming is that all external input is untrusted. Data arriving from users, files, networks or other programs may be crafted deliberately to break the program's logic. Therefore every boundary where data enters the system must be treated as a place where an attacker can act, and the program must defend itself accordingly rather than assuming that input will be well-formed.",
+   "Injection attacks are among the most dangerous and common vulnerabilities. They occur when untrusted data is mixed with commands so that the data is interpreted as part of the command. In SQL injection, for example, text typed by a user is concatenated directly into a database query, allowing the attacker to read or destroy data. The fundamental defence is to separate code from data by using parameterized queries or prepared statements, in which user values are passed as parameters that can never be executed as commands.",
+   "Cross-site scripting is the injection of malicious scripts into web pages viewed by other users. It arises when a program includes untrusted data in an HTML page without properly encoding it, so the browser executes attacker-supplied script. The defence is output encoding: every value inserted into a page is escaped according to the context (HTML, attribute, JavaScript or URL) so that it is displayed as text rather than executed as code.",
+   "Buffer overflows are a classic vulnerability in languages that allow direct memory access. When a program copies more data into a fixed-size buffer than it can hold, the excess overwrites adjacent memory, which can crash the program or let an attacker inject executable instructions. Defences include bounds checking, using safe library functions, and relying on memory-safe languages or compiler protections such as stack canaries and address-space layout randomization.",
+   "Input validation is a first line of defence that should follow the allow-list principle: instead of trying to list everything that is forbidden, the program defines exactly what is permitted — the expected type, length, format and range — and rejects everything else. Allow-listing is far more robust than deny-listing, because attackers constantly invent inputs that a deny-list did not anticipate.",
+   "The principle of least privilege requires that every component, process and user account be granted only the minimum rights needed for its task. If a web application connects to its database with an account that cannot drop tables, then even a successful injection causes limited damage. Least privilege contains the consequences of a breach and is a cornerstone of defence in depth, the practice of layering multiple independent safeguards.",
+   "Authentication verifies who a user is, while authorization decides what that user may do; the two must never be confused. Passwords must never be stored in plain text or with fast, reversible transformations. Instead they are protected with a slow, salted password-hashing function such as bcrypt, scrypt or Argon2, so that even if the database is stolen the original passwords cannot be recovered easily.",
+   "Secrets such as API keys, database passwords and cryptographic keys must never be hard-coded in source code or committed to version control, where they can be discovered by anyone with access to the repository. They should be stored in environment variables or a dedicated secrets manager, rotated regularly, and kept out of log files, which are a frequent and overlooked source of leaks.",
+   "Cryptography protects data in transit and at rest, but it must be used correctly. Developers should rely on well-reviewed standard libraries rather than inventing their own algorithms, use current strong algorithms, transmit sensitive data only over encrypted channels such as TLS, and manage keys carefully. Misusing a strong algorithm — for example, with a fixed key or a predictable initialization value — can be as insecure as using no encryption at all.",
+   "Error handling and logging have important security consequences. Detailed error messages shown to users can reveal internal structure, file paths or database schemas that help an attacker; therefore programs should show generic messages to users while recording full details in secure internal logs. Logs themselves must not contain passwords, tokens or personal data, and must be protected against tampering.",
+   "Dependencies are a major modern attack surface. Contemporary applications include large amounts of third-party code, any of which may contain known vulnerabilities. Developers must track their dependencies, keep them updated, and use automated tools that compare the versions in use against public vulnerability databases, because an unpatched library is one of the easiest ways for attackers to enter a system.",
+   "Security must be integrated across the whole software life cycle rather than tested only at the end. This includes threat modelling during design, secure coding standards during implementation, code review and static analysis, security testing and penetration testing before release, and prompt patching after deployment. Frameworks such as the OWASP Top Ten give developers a practical, prioritized list of the most critical web-application risks to guard against.",
+   "Thus, software code security rests on a small set of durable principles — treat all input as untrusted, separate code from data, validate with allow-lists, grant least privilege, store secrets and passwords safely, and defend in depth throughout the life cycle — and the disciplined, consistent application of these principles is what distinguishes robust professional software from code that merely appears to work."
+  ],
+  "questions": [
+   "Why must all external input be treated as untrusted, and what does this mean in practice?",
+   "How do parameterized queries prevent SQL injection, and why is separating code from data the key idea?",
+   "What is the difference between allow-list and deny-list input validation, and why is the allow-list preferred?",
+   "Why must passwords be stored with a slow salted hashing function rather than in plain text or with a fast hash?",
+   "What does the principle of least privilege mean and how does it limit the damage of a successful attack?"
+  ]
+ },
+ {
+  "code": "10.1.40",
+  "title": "Building a graphical interface: GUI design and the event-driven model",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The nature of a graphical user interface and the widget tree.",
+   "The event-driven programming model and the event loop.",
+   "Event handling, callbacks and event propagation.",
+   "Layout management and separation of interface from logic.",
+   "Principles of usability and responsive interface design."
+  ],
+  "body": [
+   "A graphical user interface, or GUI, lets a user interact with a program through visual elements such as windows, buttons, text fields, menus and lists, rather than through text commands. GUI programming differs fundamentally from the sequential console programs students first learn, because the program no longer dictates the order of actions; instead the user is in control, clicking and typing in an unpredictable order, and the program must be organised to respond to whatever the user does next.",
+   "The building blocks of a GUI are widgets, also called controls or components. Each widget is a self-contained object with its own appearance, state and behaviour — a button knows how to draw itself and how to react to a click. Widgets are arranged in a hierarchy called the widget tree, in which containers hold child widgets; a window contains panels, a panel contains buttons and labels, and this parent-child structure governs how the interface is laid out and how events travel through it.",
+   "The organising principle of GUI programming is the event-driven model. Instead of running from top to bottom and ending, a GUI program starts, builds its interface, and then enters an event loop that waits for things to happen. Every user action — a mouse click, a key press, a window resize — is packaged as an event and placed in an event queue. The event loop takes events one by one and dispatches each to the code responsible for handling it.",
+   "Because the event loop is the engine of the whole program, it must never be blocked. If an event handler performs a long operation such as reading a large file or making a network request directly on the loop, the interface freezes: it stops redrawing and stops responding to the user. The correct approach is to move long tasks to a background thread or an asynchronous operation and let them notify the interface when they finish, keeping the loop free to process new events.",
+   "Event handling is expressed through callbacks — functions registered to be called when a particular event occurs on a particular widget. When the user clicks a button, the framework invokes the callback attached to that button's click event. This inversion of control, in which the framework calls the developer's code rather than the other way around, is the defining characteristic of event-driven programming and is often summarised as the Hollywood principle: 'don't call us, we'll call you'.",
+   "Many frameworks implement event handling with the observer pattern, in which a widget acts as a subject that notifies registered observers when its state changes. This decouples the widget that produces the event from the code that responds to it: a button does not need to know what will happen when it is pressed, and several independent parts of the program can react to the same event. This loose coupling makes interfaces flexible and easier to extend.",
+   "Events often propagate through the widget tree rather than affecting only a single widget. In many toolkits an event first travels down from the root toward the target widget (the capture phase) and then bubbles back up toward the root (the bubbling phase), giving parent containers a chance to observe or intercept events aimed at their children. Understanding propagation is essential for building interfaces where, for example, a panel handles keyboard shortcuts on behalf of all the controls it contains.",
+   "Layout management determines how widgets are positioned and sized. Fixing widgets at absolute pixel coordinates is fragile, because it breaks when the window is resized, the font changes or the interface is translated into a longer language. Layout managers solve this by arranging widgets according to rules — in rows, columns, grids or flexible boxes — and recalculating positions automatically whenever the available space changes, which is the foundation of responsive design.",
+   "A well-designed application separates the interface from the underlying logic. Architectural patterns such as Model-View-Controller and Model-View-ViewModel divide the program into a model that holds data and rules, a view that displays the interface, and a controller or view-model that connects them. This separation lets the business logic be tested without a screen, lets the interface be redesigned without touching the logic, and prevents the tangled code that results when data handling and drawing are mixed together.",
+   "Modern interfaces increasingly use a declarative style, in which the developer describes what the interface should look like for a given state and the framework updates the screen to match, rather than issuing step-by-step commands to change individual widgets. Declarative frameworks reduce a common source of bugs — an interface whose visible state drifts out of step with the program's actual data — by regenerating the view from a single source of truth whenever the state changes.",
+   "Usability is a first-class concern of interface design. An interface should give immediate feedback for every action, remain consistent so that similar things look and behave alike, prevent errors before they happen, and offer clear ways to recover from mistakes. Elements should be grouped logically, important actions made visually prominent, and the number of steps to reach a goal kept small, because the value of a program is limited by how easily people can actually use it.",
+   "Accessibility extends usability to all users, including those who rely on assistive technology. Providing text labels for images, ensuring the interface can be operated entirely from the keyboard, maintaining sufficient colour contrast, and respecting the operating system's accessibility settings are professional responsibilities, and in many contexts legal requirements, that a developer must consider from the start rather than adding as an afterthought.",
+   "Testing graphical interfaces requires its own techniques, because behaviour depends on user actions and visual state. Developers use automated tools that simulate clicks and keystrokes, verify that the correct events fire and that the state updates as expected, and increasingly separate logic from presentation precisely so that most behaviour can be tested without driving the interface at all, leaving only the visual layer to manual or specialised testing.",
+   "Thus, building a graphical interface means mastering the event-driven model: an interface is a tree of widgets driven by an event loop that dispatches user actions to callbacks, and quality depends on keeping that loop responsive, separating interface from logic, laying out widgets flexibly, and designing for real usability and accessibility rather than merely arranging controls on a screen."
+  ],
+  "questions": [
+   "How does an event-driven GUI program differ in control flow from a sequential console program?",
+   "What is the event loop, and why must it never be blocked by a long-running operation?",
+   "What is a callback, and how does the observer pattern decouple a widget from the code that reacts to it?",
+   "Why are layout managers preferred over placing widgets at fixed pixel coordinates?",
+   "How does separating the interface from the logic (for example with MVC or MVVM) improve an application?"
+  ]
+ },
+ {
+  "code": "10.1.41",
+  "title": "Automating the build and deployment of applications",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in automating the build, testing and deployment of an application using a build script and a continuous-integration pipeline.",
+  "theory": [
+   "Building an application is the process of transforming source code and resources into a runnable artifact — compiling code, resolving dependencies, running tests and packaging the result. Performing these steps by hand is slow and error-prone, because a single forgotten step produces a broken or inconsistent build. Build automation tools such as Make, Maven, Gradle, npm scripts or MSBuild capture the entire process as a script so that the same reproducible result is produced every time with a single command.",
+   "Continuous integration (CI) is the practice of automatically building and testing the code every time a change is pushed to the shared repository. A CI server watches the repository, and on each change it checks out the code, installs dependencies, runs the build and executes the automated tests, reporting success or failure quickly. This catches integration problems early, while they are small, instead of allowing them to accumulate until release.",
+   "Continuous delivery and deployment extend this pipeline so that a build which passes all checks can be released automatically or at the click of a button. A deployment pipeline is usually described as a sequence of stages — build, test, package, deploy to a staging environment, and deploy to production — where each stage must succeed before the next begins. Packaging the application together with its environment, for example in a container image, makes deployment predictable because the same artifact runs identically on every machine."
+  ],
+  "materials": [
+   "A version-control repository (Git) hosted on a platform with CI support such as GitHub, GitLab or Bitbucket.",
+   "A small sample application in any language, together with a set of automated tests.",
+   "A build tool appropriate to the language (for example npm, Maven, Gradle or Make).",
+   "A CI configuration file (for example a GitHub Actions or GitLab CI YAML file) and, optionally, a container runtime such as Docker."
+  ],
+  "procedure": [
+   "Create a build script that compiles or assembles the application, installs its dependencies and runs its automated tests with a single command, and verify it works locally.",
+   "Initialise a Git repository for the project and push it to a hosting platform that provides continuous integration.",
+   "Add a CI configuration file that defines a pipeline which checks out the code, installs dependencies, builds the application and runs the tests on every push.",
+   "Trigger the pipeline by pushing a commit, observe the stages executing in the CI interface and confirm that a passing build is reported.",
+   "Introduce a deliberate failing test, push it, and confirm that the pipeline fails and clearly reports which stage and test failed; then fix it and confirm the pipeline turns green.",
+   "Add a packaging or deployment stage (for example building a container image or producing a release artifact) that runs only after the tests pass, and document the full pipeline in the report."
+  ],
+  "tasks": [
+   "Write a build script that performs dependency installation, build and test in one command and returns a non-zero exit code on any failure.",
+   "Configure a CI pipeline that runs automatically on every push and blocks the merge when tests fail.",
+   "Extend the pipeline with a packaging or deployment stage that executes only when all previous stages succeed, and describe the stage order."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of writing a reproducible build script and configuring a continuous-integration and deployment pipeline that automatically builds, tests and packages an application.",
+  "questions": [
+   "Why is manual building error-prone, and how does a build automation tool make builds reproducible?",
+   "What does continuous integration do on every push, and what problem does it prevent?",
+   "What is the difference between continuous integration, continuous delivery and continuous deployment?",
+   "Why should later pipeline stages run only after earlier stages succeed?",
+   "How does packaging an application in a container image make deployment more predictable?"
+  ]
+ },
+ {
+  "code": "10.1.42",
+  "title": "Version control and collaborative development: Git and version-control systems",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in using Git for tracking changes, branching, merging and collaborating on a shared project while resolving conflicts.",
+  "theory": [
+   "A version-control system records the history of changes to a set of files, allowing developers to see who changed what and when, to return to any earlier state, and to work together without overwriting each other's work. Git is a distributed version-control system, which means every developer has a complete copy of the repository and its full history locally, so work can continue offline and there is no single point of failure. Changes are saved as commits, each identified by a unique hash and forming a linked chain that represents the project's history.",
+   "Branching is the feature that makes Git central to collaboration. A branch is an independent line of development that lets a programmer work on a feature or fix in isolation without disturbing the stable main branch. When the work is finished it is merged back, combining the histories. Because branches are cheap and fast in Git, teams adopt workflows such as feature branches and pull requests, in which each change is developed separately, reviewed and only then integrated.",
+   "When two branches modify the same lines differently, Git cannot decide automatically which version is correct and reports a merge conflict. Resolving a conflict means editing the affected files to produce the intended combined result and then committing it. A remote repository, hosted on a service such as GitHub or GitLab, acts as the shared meeting point that team members push their commits to and pull others' commits from, keeping everyone synchronised."
+  ],
+  "materials": [
+   "Git installed locally and a text editor or IDE with Git integration.",
+   "An account on a hosting platform such as GitHub, GitLab or Bitbucket.",
+   "A small sample project consisting of several text or source files.",
+   "A partner or a second local clone to simulate collaborative work."
+  ],
+  "procedure": [
+   "Initialise a repository, configure your name and email, make several commits with meaningful messages, and inspect the history with the log.",
+   "Create a feature branch, make changes on it, and compare it with the main branch to see the differences.",
+   "Merge the feature branch back into the main branch and observe how the histories are combined.",
+   "Connect the repository to a remote on a hosting platform, then push your commits and pull changes from the remote.",
+   "Deliberately create a merge conflict by editing the same lines on two branches, then resolve it manually and commit the resolution.",
+   "Open a pull (or merge) request on the hosting platform, review the proposed changes, and document the collaborative workflow in the report."
+  ],
+  "tasks": [
+   "Build a repository with a clear history of at least five well-described commits and demonstrate returning to an earlier commit.",
+   "Create, work on and merge a feature branch, and show the branch structure in the history.",
+   "Reproduce and resolve a merge conflict, explaining in the report how the conflict arose and how it was resolved."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of tracking changes with Git, using branches and merges, collaborating through a remote repository and resolving merge conflicts.",
+  "questions": [
+   "What does it mean that Git is a distributed version-control system, and what advantages does this give?",
+   "What is a commit, and why are meaningful commit messages important?",
+   "Why is branching central to collaborative development, and what is a feature-branch workflow?",
+   "Why do merge conflicts occur, and how are they resolved?",
+   "What role does a remote repository play in a team, and what do push and pull do?"
+  ]
+ },
+ {
+  "code": "10.1.43",
+  "title": "Developing code for cloud computing and microservices",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in designing and implementing a small microservice with a REST API and communicating between services over the network.",
+  "theory": [
+   "Cloud computing provides computing resources — servers, storage, databases and networking — on demand over the internet, so that applications can scale up or down without owning physical hardware. Code written for the cloud should be stateless where possible, meaning that each request carries all the information needed to process it and no session data is kept in the instance's memory. Statelessness allows the platform to run many identical copies of a service behind a load balancer and to add or remove copies freely as demand changes.",
+   "The microservices architecture structures an application as a collection of small, independent services, each responsible for one business capability and each deployable on its own. This contrasts with a monolith, in which all functionality is built and deployed as a single unit. Microservices communicate over the network, most commonly through lightweight HTTP REST APIs that exchange JSON, or through asynchronous messaging. The benefit is independent development, scaling and deployment; the cost is the added complexity of distributed systems.",
+   "Because services call each other over an unreliable network, developers must design for failure. A service may be slow or temporarily unavailable, so callers use timeouts, retries and patterns such as the circuit breaker, which stops sending requests to a failing service to let it recover. Each service typically owns its own data and configuration is supplied from the environment rather than hard-coded, so that the same image can run in development, testing and production without change."
+  ],
+  "materials": [
+   "A programming language and a lightweight web framework (for example Flask/FastAPI, Express, or Spring Boot).",
+   "A tool for testing HTTP requests such as curl, Postman or an HTTP client library.",
+   "A container runtime such as Docker (optional) for packaging the service.",
+   "A local machine or a free cloud/sandbox environment to run two services simultaneously."
+  ],
+  "procedure": [
+   "Design a small service with a clear responsibility and define its REST API: the endpoints, HTTP methods, request and response formats in JSON.",
+   "Implement the service so that it handles requests statelessly and returns appropriate HTTP status codes for success and error cases.",
+   "Test each endpoint with an HTTP client, verifying correct responses for valid input and sensible errors for invalid input.",
+   "Implement a second service that calls the first over HTTP, and add a timeout and a fallback so it degrades gracefully when the first service is unavailable.",
+   "Move configuration such as the target service address into environment variables instead of hard-coding it, and confirm the service still works.",
+   "Package one service in a container (or document how it would be deployed and scaled in the cloud) and describe the overall architecture in the report."
+  ],
+  "tasks": [
+   "Implement a stateless microservice with at least two REST endpoints that return correct data and appropriate status codes.",
+   "Implement inter-service communication in which one service calls another over HTTP with a timeout and a graceful fallback on failure.",
+   "Externalise the service configuration into environment variables and explain in the report why cloud services should be stateless and configurable."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of building a stateless microservice with a REST API, enabling resilient communication between services and preparing code for deployment in a cloud environment.",
+  "questions": [
+   "Why should cloud services be stateless, and how does this enable horizontal scaling?",
+   "What is the difference between a monolithic architecture and a microservices architecture?",
+   "How do microservices typically communicate, and what does a REST API exchange?",
+   "Why must inter-service calls use timeouts and patterns such as the circuit breaker?",
+   "Why is configuration supplied through the environment rather than hard-coded in the service?"
+  ]
+ },
+ {
+  "code": "10.1.44",
+  "title": "Integrating and using open APIs and libraries",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What an API and a library are, and why code is reused.",
+   "Web APIs, REST and the structure of an HTTP request and response.",
+   "Authentication, keys, rate limits and reading documentation.",
+   "Package managers, dependencies and versioning.",
+   "Risks of external code: security, licensing and maintenance."
+  ],
+  "body": [
+   "An application programming interface, or API, is a defined contract that lets one piece of software use the functionality of another without knowing how it is implemented internally. A library is a collection of ready-made code — functions, classes and routines — that a program can call to perform common tasks. Together, APIs and libraries embody one of the most important principles of professional development: do not reinvent what already exists, but build on reliable, tested components so that effort is spent on the unique value of the application.",
+   "Libraries are used by importing them into a project and calling the functions they expose through their public interface. The developer needs to understand only what each function does, what arguments it expects and what it returns — its contract — not how it works inside. This abstraction is what makes large software possible: an entire subsystem such as image processing or encryption can be used through a few well-documented calls.",
+   "Web APIs extend this idea across the network, allowing a program to use a service running on another machine, often operated by another organisation. Instead of calling a local function, the program sends a request over the internet and receives a response. This is how applications obtain maps, weather data, payment processing, authentication and countless other capabilities without building them, turning external services into building blocks of the application.",
+   "The dominant style of web API is REST, which is built on the standard methods of the HTTP protocol. Resources are identified by URLs, and operations on them are expressed with methods such as GET to read data, POST to create it, PUT or PATCH to update it, and DELETE to remove it. This uniform convention makes REST APIs predictable: once a developer understands the pattern, they can work with many different services in the same way.",
+   "An HTTP request has several parts that the developer must construct correctly: the method, the URL with any query parameters, headers that carry metadata such as the content type and authentication, and often a body containing data, usually formatted as JSON. The response contains a status code that indicates the outcome — codes in the 200 range mean success, 400 range mean the client made an error, and 500 range mean the server failed — together with headers and a body carrying the requested data.",
+   "JSON, the JavaScript Object Notation, is the most common format for exchanging data with web APIs because it is human-readable and maps naturally onto the objects and arrays of most programming languages. A program serialises its data into JSON to send it and parses the JSON it receives back into native data structures. Understanding this conversion is essential, because most of the work of using an API is preparing requests and interpreting responses.",
+   "Most useful APIs require authentication so that the provider can identify the caller, enforce permissions and bill or limit usage. A common mechanism is the API key, a secret token sent with each request; more sophisticated services use protocols such as OAuth, which lets a user grant an application limited access to their data without sharing their password. These credentials are secrets and must be protected exactly like passwords, never embedded in client-side code or committed to a repository.",
+   "APIs impose rate limits that cap how many requests a client may make in a given period, protecting the service from overload and abuse. A well-behaved client respects these limits, checks the relevant response headers, and reacts correctly to a 'too many requests' status by waiting and retrying after a delay. Ignoring rate limits leads to blocked access and is a common mistake of inexperienced developers.",
+   "Reading documentation is a core professional skill when integrating external code. Good API documentation describes every endpoint, the required parameters, the response format, the error codes and the authentication method, and usually provides examples. The developer must be able to read this reference accurately, because most integration errors come not from difficult programming but from misunderstanding what the API expects, and experimenting with the API using a client such as curl or Postman before writing code saves considerable time.",
+   "In modern development, libraries are managed by package managers such as npm, pip, Maven or NuGet, which download the required libraries and their transitive dependencies from a central repository and record them in a manifest file. This automation makes it easy to add powerful functionality, but it also means that a project may depend, indirectly, on hundreds of packages written by strangers, which is a fact the developer must take seriously.",
+   "Versioning governs how dependencies evolve. Semantic versioning expresses each release as major, minor and patch numbers, where a change in the major number signals incompatible changes, the minor number signals new backward-compatible features, and the patch number signals bug fixes. Pinning or constraining versions and using a lock file ensures that a project builds the same way over time and is not silently broken by an updated dependency.",
+   "Using external code carries real risks that must be managed. A dependency may contain security vulnerabilities, may be abandoned by its authors, or may carry a software licence that restricts how the resulting program can be used or distributed. Professional developers therefore evaluate a library before adopting it — checking its activity, popularity, licence and security history — and keep an inventory of dependencies so they can update or replace them when problems appear.",
+   "Robust integration also requires defensive programming, because external services and libraries can fail in ways the developer does not control. Network calls must handle timeouts, unexpected responses and outages; the program should validate the data it receives rather than trusting it blindly, and should degrade gracefully when a dependency is unavailable, so that the failure of one external component does not bring down the whole application.",
+   "Thus, integrating open APIs and libraries lets developers build powerful applications quickly by reusing tested components, but doing it well demands more than calling functions: it requires understanding the HTTP request-response cycle and data formats, handling authentication and rate limits, managing dependencies and versions carefully, and treating external code as a responsibility to be secured, maintained and defended against, not merely a convenience."
+  ],
+  "questions": [
+   "What is the difference between a library and a web API, and what principle of development do both serve?",
+   "How does a REST API use HTTP methods, and what do the main groups of status codes mean?",
+   "Why must API keys and other credentials be protected, and where must they never be placed?",
+   "What are rate limits, and how should a well-behaved client respond when it reaches one?",
+   "What risks does using external libraries introduce, and how does semantic versioning help manage dependencies?"
+  ]
+ },
+ {
+  "code": "10.1.45",
+  "title": "Managing software development projects: methodologies and tools",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in planning and tracking a software development project using an agile methodology and a task-management board.",
+  "theory": [
+   "Software project management is the discipline of planning, organising and controlling the work needed to deliver software on time and to the required quality. Development methodologies provide a framework for this work. The traditional waterfall model proceeds through fixed sequential phases — requirements, design, implementation, testing and maintenance — and works best when requirements are stable and well understood, but it reacts poorly to change discovered late in the project.",
+   "Agile methodologies were developed to handle the reality that requirements evolve as a product is built. Agile delivers software in short iterations, gathering feedback frequently and adjusting the plan continuously. Scrum, the most widely used agile framework, organises work into fixed-length iterations called sprints, maintains a prioritized list of work called the product backlog, and defines roles such as the product owner, the scrum master and the development team, together with regular events such as planning, the daily stand-up and the retrospective.",
+   "Work is described in terms the team can plan and track. A user story states a requirement from the user's point of view — as a certain user, I want a certain capability, so that I gain a certain benefit — and each story is given an estimate of effort and a definition of done. Progress is made visible with tools such as a Kanban board, which shows tasks moving through columns like 'to do', 'in progress' and 'done', so that the whole team can see the state of the work and spot bottlenecks at a glance."
+  ],
+  "materials": [
+   "A project-management or issue-tracking tool (for example Trello, Jira, GitHub Projects or GitLab boards).",
+   "A short description of a sample software project to plan.",
+   "A template for user stories and for a sprint plan.",
+   "A means of recording estimates and tracking progress (a board or a simple spreadsheet)."
+  ],
+  "procedure": [
+   "Take the sample project and break its goals into a product backlog of user stories written from the user's perspective.",
+   "Assign each user story a priority and a rough effort estimate, and define what 'done' means for it.",
+   "Select a set of high-priority stories that fit into one short sprint and record them as the sprint plan.",
+   "Create a task board with columns such as 'to do', 'in progress' and 'done', and place the sprint's tasks in the first column.",
+   "Simulate the progress of the sprint by moving tasks across the board and updating their status, noting any blockers.",
+   "Hold a short retrospective in the report, listing what went well, what did not and what would be improved in the next sprint."
+  ],
+  "tasks": [
+   "Produce a prioritized product backlog of at least six user stories, each with an estimate and a definition of done.",
+   "Plan one sprint by selecting a realistic set of stories and organising them on a task board.",
+   "Write a brief retrospective identifying improvements for the next iteration and explain how the board made progress visible."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of planning a software project with an agile methodology, writing user stories and tracking progress on a task board.",
+  "questions": [
+   "What is the difference between the waterfall model and agile methodologies, and when is each appropriate?",
+   "What are the main elements of Scrum — sprints, the product backlog and the key roles and events?",
+   "What is a user story, and why is it written from the user's point of view?",
+   "How does a Kanban board make the state of the work visible and help detect bottlenecks?",
+   "What is the purpose of a sprint retrospective?"
+  ]
+ },
+ {
+  "code": "10.1.46",
+  "title": "Developing code for embedded systems and IoT devices",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What embedded systems and IoT devices are, and their constraints.",
+   "Programming close to the hardware: registers, interrupts and timing.",
+   "Resource limits, power efficiency and real-time behaviour.",
+   "Connectivity, IoT protocols and communication with the cloud.",
+   "Security, updates and reliability of connected devices."
+  ],
+  "body": [
+   "An embedded system is a computer built into a larger device to perform a dedicated function — the controller in a washing machine, a car's engine management unit, or a smart thermostat. Unlike a general-purpose computer, an embedded system runs a fixed set of tasks under tight constraints on processing power, memory and energy. The Internet of Things, or IoT, extends this idea by connecting such devices to networks so that they can send data and receive commands, turning ordinary objects into sources of information and points of control.",
+   "Programming embedded systems means working much closer to the hardware than in desktop or web development. The developer often manipulates the microcontroller's peripherals directly by reading and writing special registers that control pins, timers and communication interfaces. There may be no operating system at all — a so-called bare-metal program — or only a small real-time operating system, so the programmer is responsible for details that a normal application would delegate to a large software stack.",
+   "The defining characteristic of embedded development is scarcity of resources. A microcontroller may have only a few kilobytes of RAM and a slow processor, so code must be compact and efficient in both memory and computation. Developers avoid heavy abstractions, minimise dynamic memory allocation because fragmentation and unpredictable timing are dangerous, and choose data structures and algorithms with small, fixed footprints. Every byte and every processor cycle can matter.",
+   "Interrupts are central to embedded programming. Rather than repeatedly polling a sensor or button to check whether something has happened, the processor is configured to respond to a hardware event immediately by suspending the current work and running a short interrupt service routine. Interrupts make a system responsive and power-efficient, but they must be written with great care: they should be short, must safely share data with the main program, and can introduce subtle timing bugs if mishandled.",
+   "Many embedded systems are real-time systems, meaning that they must respond to events not merely correctly but within a guaranteed time. A hard real-time system, such as an airbag controller, fails completely if a deadline is missed, whereas a soft real-time system tolerates occasional lateness. Meeting deadlines requires deterministic, predictable code, which is another reason embedded developers avoid operations whose timing cannot be bounded.",
+   "Power efficiency is often a primary design goal, especially for battery-powered and remote IoT devices that must run for months or years. Microcontrollers provide low-power sleep modes, and well-written firmware keeps the processor asleep as much as possible, waking only on an interrupt to do a small amount of work before sleeping again. Managing power in software — reducing clock speed, switching off unused peripherals and batching communication — can extend battery life dramatically.",
+   "Connectivity is what distinguishes an IoT device from a plain embedded system. Depending on range, bandwidth and power budget, devices communicate over technologies such as Wi-Fi, Bluetooth Low Energy, Zigbee, or long-range low-power networks like LoRaWAN and cellular narrowband. The choice is a trade-off: higher bandwidth generally costs more energy, so the developer selects the technology that matches the amount of data the device sends and how it is powered.",
+   "Above the physical link, IoT devices use lightweight application protocols suited to constrained networks. MQTT is a popular publish-subscribe protocol in which devices publish messages to topics on a broker and subscribe to topics they care about, decoupling senders from receivers and working well over unreliable connections. CoAP offers a compact, HTTP-like model for very small devices. These protocols are designed to minimise overhead where every byte transmitted costs energy and bandwidth.",
+   "A typical IoT architecture connects many devices to a backend in the cloud, sometimes through an intermediate gateway that aggregates local devices and bridges them to the internet. The cloud stores and analyses the incoming data, presents it to users and sends commands back to the devices. Increasingly, some processing is done at the edge — on or near the device itself — to reduce latency, save bandwidth and keep working when the connection is lost, rather than sending all raw data to the cloud.",
+   "Security is a critical and frequently neglected aspect of connected devices. Because IoT devices are numerous, physically accessible and often left unattended, they are attractive targets, and compromised devices have been used to build large attack networks. Firmware must authenticate the device and the server to each other, encrypt communication, avoid default or hard-coded passwords, and protect stored secrets, all within the limited resources available — a genuine engineering challenge.",
+   "The ability to update firmware safely after deployment is essential, because vulnerabilities and bugs will be discovered over the device's long life. Over-the-air updates let firmware be delivered remotely, but they must be done carefully: the update must be authenticated to prevent malicious code from being installed, and the process must be robust against interruption, typically by keeping a known-good image so that a failed update cannot leave the device permanently broken.",
+   "Reliability is paramount because embedded devices often run unattended for years in the field, where a crash may be expensive or dangerous to fix. Firmware uses techniques such as the watchdog timer, a hardware mechanism that resets the device if the software stops responding to it, ensuring recovery from a hang. Defensive design that anticipates sensor failures, communication loss and power interruptions is what makes a device trustworthy over its whole lifetime.",
+   "Testing and debugging embedded code demands specialised methods, because there is often no screen or console. Developers use hardware debuggers connected through interfaces such as JTAG or SWD to inspect and step through code on the real chip, use serial output to trace behaviour, and rely heavily on simulators and emulators to test logic before deploying to hardware, since reprogramming and observing a physical device is slower and more difficult than debugging ordinary software.",
+   "Thus, developing code for embedded systems and IoT devices combines low-level, resource-conscious programming with the demands of networked, real-time operation: the engineer must respect strict limits on memory, power and timing, use interrupts and appropriate communication protocols, and treat security, safe updates and reliability as first-class concerns, because these devices operate unattended in the physical world where failure has real consequences."
+  ],
+  "questions": [
+   "How does an embedded system differ from a general-purpose computer, and what turns it into an IoT device?",
+   "Why do embedded developers avoid heavy abstractions and dynamic memory allocation?",
+   "What are interrupts, and why are they preferred over polling for responsiveness and power efficiency?",
+   "Why is a lightweight protocol such as MQTT well suited to IoT devices, and how does its publish-subscribe model work?",
+   "Why are secure over-the-air updates and watchdog timers important for connected devices in the field?"
+  ]
+ },
+ {
+  "code": "10.1.47",
+  "title": "Working with large volumes of data: big data and data analysis",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "What big data is and the characteristics that define it.",
+   "Why traditional processing fails and the idea of distributed computing.",
+   "The MapReduce model and modern processing frameworks.",
+   "Storage: distributed file systems, NoSQL and data lakes.",
+   "Batch versus stream processing and the stages of data analysis."
+  ],
+  "body": [
+   "Big data refers to datasets so large, fast-moving or varied that they cannot be processed effectively with traditional tools on a single machine. The scale of data has grown enormously because of the internet, sensors, mobile devices and social media, and organisations now derive great value from analysing it — understanding customers, detecting fraud, predicting demand and training machine-learning models. Handling this data requires a different set of techniques and architectures from those used for ordinary applications.",
+   "Big data is commonly described by several characteristics that begin with the letter V. Volume is the sheer quantity of data, often measured in terabytes and petabytes. Velocity is the speed at which data arrives and must be processed, sometimes in real time. Variety is the range of data forms, from structured tables to unstructured text, images and logs. Two further Vs are often added: veracity, the uncertainty and quality of the data, and value, the useful insight that analysis is meant to extract.",
+   "Traditional data processing breaks down at big-data scale for two reasons. First, the data may not fit on a single machine's storage or memory. Second, even if it did, processing it sequentially on one processor would take far too long. The response to both problems is distributed computing: spreading the data and the computation across a cluster of many commodity machines that work in parallel, so that adding more machines increases capacity — an approach called horizontal scaling.",
+   "Distributing computation across many machines introduces its own difficulties that the frameworks must hide from the programmer. Machines fail, networks are slow and unreliable, and the work must be divided and its partial results combined correctly. A good big-data framework provides fault tolerance by re-running failed pieces of work automatically and manages the coordination of the cluster, letting the developer focus on the logic of the analysis rather than the mechanics of distribution.",
+   "The MapReduce model was a foundational idea for large-scale processing. It expresses a computation as two functions: a map function that is applied in parallel to each piece of the input to produce intermediate key-value pairs, and a reduce function that aggregates all the values sharing a key to produce the result. By moving the computation to where the data is stored and processing chunks in parallel across the cluster, MapReduce made it practical to analyse enormous datasets on ordinary hardware.",
+   "Modern frameworks have built on and largely superseded plain MapReduce. Apache Spark performs much of its processing in memory and offers a richer set of operations, making it far faster for many workloads and convenient for iterative algorithms such as those used in machine learning. Such frameworks provide high-level interfaces — including SQL-like queries and data-frame operations — so that analysts can express complex distributed computations without writing low-level parallel code.",
+   "Storing big data requires systems designed for scale. A distributed file system such as the Hadoop Distributed File System splits large files into blocks spread across many machines and keeps multiple copies of each block, providing both capacity and resilience against machine failure. This lets the cluster store files far larger than any single disk and read them in parallel, which is essential for feeding data-hungry processing jobs.",
+   "Relational databases, though powerful, do not always scale well to huge volumes and flexible data, so a family of NoSQL databases emerged. These include key-value stores, document databases, wide-column stores and graph databases, each optimised for a particular access pattern and often trading some consistency guarantees for the ability to scale horizontally and handle high throughput. Choosing the right store depends on how the data is shaped and how it will be queried.",
+   "Organisations increasingly store raw data in a data lake — a large repository that holds data in its original form, structured and unstructured, until it is needed. This contrasts with a traditional data warehouse, which stores cleaned, structured data organised for querying. The two are complementary: the lake preserves everything cheaply for future, unforeseen uses, while the warehouse serves fast, reliable analysis of well-defined business questions.",
+   "Processing can be organised as batch or stream. Batch processing collects data over a period and processes it all at once, which is efficient for large historical analyses where immediate results are not required. Stream processing handles data continuously as it arrives, enabling real-time reactions such as detecting fraud or monitoring sensors within seconds. Many modern systems combine both approaches to serve applications that need both up-to-the-moment and deep historical insight.",
+   "Regardless of scale, data analysis follows a recognisable sequence of stages. Data is first collected and ingested from its sources, then cleaned and transformed to fix errors, remove duplicates and put it into a consistent form — a stage that typically consumes most of the effort. It is then explored and analysed to find patterns, and finally the results are communicated, often through visualisation, because insight has value only when it is understood and acted upon by decision-makers.",
+   "Working with large volumes of data also brings serious responsibilities regarding privacy, quality and ethics. Data often concerns real people and is subject to laws that govern how it may be collected, stored and used, so it must be protected and anonymised where appropriate. Conclusions drawn from data can be misleading if the data is biased, incomplete or of poor quality, so the analyst must judge the trustworthiness of the data, not merely process it.",
+   "Thus, working with big data means moving from single-machine, sequential processing to distributed, parallel systems that scale horizontally: it combines models such as MapReduce and frameworks such as Spark with distributed storage, NoSQL databases and data lakes, applies batch or stream processing as the problem demands, and follows a disciplined analysis pipeline while respecting the quality, privacy and ethics that give the extracted insight its real value."
+  ],
+  "questions": [
+   "What are the characteristic Vs of big data, and what does each describe?",
+   "Why does traditional single-machine processing fail at big-data scale, and what is horizontal scaling?",
+   "How does the MapReduce model divide a computation, and why is Spark often faster?",
+   "What is the difference between a data lake and a data warehouse, and how do they complement each other?",
+   "What is the difference between batch and stream processing, and when is each appropriate?"
+  ]
+ },
+ {
+  "code": "10.1.48",
+  "title": "Creating code for machine vision and pattern recognition",
+  "type_en": "Comprehensive assessment of knowledge",
+  "kind": "practical",
+  "objective": "To assess the student's ability to build a machine-vision program that loads, processes and analyses images to detect and recognise objects or patterns.",
+  "theory": [
+   "Machine vision is the field concerned with enabling computers to extract information from images and video. A digital image is represented as a grid of pixels, where each pixel holds one intensity value in a grayscale image or several values (typically red, green and blue) in a colour image. Understanding this numerical representation is the foundation of all image processing, because every operation — from brightening an image to recognising a face — is ultimately arithmetic performed on these pixel values.",
+   "Classical image processing prepares images for analysis through a pipeline of operations. Converting to grayscale reduces data when colour is unimportant; filtering, such as a blur, removes noise; thresholding separates objects from the background by turning the image into black and white; and edge detection highlights boundaries where intensity changes sharply. These steps transform raw pixels into features — such as edges, corners, contours and regions — that carry meaningful information about the content of the image.",
+   "Pattern recognition then interprets these features to classify or identify what the image contains. Traditional methods match extracted features against known templates or feed measured features into a classifier. Modern approaches use machine learning, and especially convolutional neural networks, which learn directly from large sets of labelled images which features matter for a task such as recognising handwritten digits or detecting objects, achieving accuracy far beyond hand-crafted rules. Libraries such as OpenCV provide ready-made functions for the whole pipeline, from loading images to running detectors."
+  ],
+  "materials": [
+   "A programming environment with an image-processing library (for example Python with OpenCV, and optionally NumPy).",
+   "A set of sample images containing the objects or patterns to be detected.",
+   "A pre-trained detector or classifier (for example a face/object cascade or a simple neural-network model), where required.",
+   "A display or file output to visualise the processing results."
+  ],
+  "procedure": [
+   "Load an image into the program and display its basic properties — dimensions, number of channels and pixel value range — to confirm it is read correctly.",
+   "Convert the image to grayscale and apply a smoothing filter to reduce noise, comparing the result with the original.",
+   "Apply thresholding or edge detection to separate the objects of interest from the background and display the intermediate result.",
+   "Detect features or objects in the processed image — for example finding contours, or running a pre-trained detector — and mark the detected regions on the image.",
+   "Report a result such as the number of objects found or the class recognised, and verify it against what is actually in the image.",
+   "Test the program on several different images, note where it succeeds and fails, and describe the causes of any errors in the report."
+  ],
+  "tasks": [
+   "Write a program that loads an image, converts it to grayscale, reduces noise and applies edge detection or thresholding, saving each intermediate stage.",
+   "Detect and count objects in an image (for example by finding and filtering contours) and annotate the detected objects on the output image.",
+   "Apply a pre-trained detector or classifier to recognise a specific object or pattern, report its result, and evaluate the accuracy on several test images."
+  ],
+  "conclusion": "As a result of the work, the student has demonstrated the ability to build a complete machine-vision pipeline that loads, pre-processes and analyses images to detect and recognise objects or patterns.",
+  "questions": [
+   "How is a digital image represented numerically, and how do grayscale and colour images differ?",
+   "What is the purpose of pre-processing steps such as grayscale conversion, filtering and thresholding?",
+   "What is edge detection, and why are features such as edges and contours useful for analysis?",
+   "How does pattern recognition classify the content of an image, and what advantage do convolutional neural networks offer?",
+   "What factors — such as lighting, noise or scale — can cause a machine-vision program to fail, and how can their effects be reduced?"
+  ]
+ }
+]

@@ -1,0 +1,530 @@
+[
+ {
+  "code": "10.3.1",
+  "title": "Basic concepts of object technology: classes, objects, memory management, typing",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Object technology as a way of modelling a problem domain in code.",
+   "Classes and objects: the relationship between a type and its instances.",
+   "How objects are laid out in memory: stack, heap and references.",
+   "Static and dynamic typing; strong and weak typing.",
+   "Comparison of the object model in Java, C#, Python and C++."
+  ],
+  "body": [
+   "Object technology is an approach to software construction in which a program is organised as a collection of interacting objects rather than as a sequence of procedures operating on shared data. Each object combines the data that describes its state with the operations that act on that data. For a software developer this approach is important because it lets the structure of the program follow the structure of the problem domain: a bank account, a customer or a network packet becomes a distinct object with its own responsibilities.",
+   "The central concept of object technology is the class. A class is a description, or template, that specifies what data an object will hold and what operations it will support. The class itself is not a value that exists at run time in the ordinary sense; it is a blueprint. From one class the program can create many concrete objects, just as many houses can be built from one architectural drawing.",
+   "An object is a concrete instance of a class that occupies memory and holds actual values. If the class Account defines the fields owner and balance, then two objects of that class may hold the values ('Anna', 1500) and ('Boris', 200) respectively. Each object has its own copy of the instance fields, so changing the balance of one account does not affect the other. This independence of instances is a defining property of object technology.",
+   "The state of an object is the set of current values of its fields; the behaviour of an object is the set of methods that can be invoked on it; and the identity of an object is the property that distinguishes it from every other object even when their states are equal. Two accounts may both have a balance of 200, yet they remain two different objects with distinct identities. Most languages express identity through the memory address or reference of the object.",
+   "Memory management is closely tied to how objects are stored. In many languages objects live in a region of memory called the heap, which is used for data whose lifetime is not tied to a single function call. Local variables and function bookkeeping, by contrast, live on the stack, which grows and shrinks automatically as functions are called and return. Understanding this distinction is essential for reasoning about the lifetime of objects.",
+   "In Java, C# and Python, a variable of an object type does not hold the object itself but a reference (a pointer) to an object located on the heap. When we write Account a = new Account(); the variable a stores a reference, and the actual object is allocated on the heap. Assigning b = a copies the reference, so a and b then refer to the same object; a change made through one is visible through the other.",
+   "C++ offers a wider choice: an object may be created on the stack, as in Account a;, in which case it is destroyed automatically when it goes out of scope, or on the heap, as in Account* p = new Account();, in which case the programmer is responsible for releasing it with delete. This flexibility gives C++ great control over performance but also makes memory errors, such as leaks and dangling pointers, possible.",
+   "Memory that is no longer reachable must eventually be reclaimed. Languages such as Java, C# and Python use automatic garbage collection: a run-time component periodically finds objects that can no longer be reached from the program and frees their memory. C++ traditionally relies on manual management or on smart pointers such as std::unique_ptr and std::shared_ptr, which release memory deterministically when they go out of scope.",
+   "Typing describes the rules by which a language associates types with variables, expressions and values, and how it checks that operations are applied to compatible values. A type such as int, String or Account defines the set of legal values and the operations allowed on them. The type system is one of the main tools that catch programming errors before or during execution.",
+   "A language is statically typed when the type of every variable is known at compile time and checked by the compiler, as in Java, C# and C++. It is dynamically typed when the type is associated with the value at run time and checked as the program executes, as in Python. Static typing detects many mistakes early and enables better tooling; dynamic typing offers flexibility and shorter code at the cost of later error detection.",
+   "Typing is also described as strong or weak. In a strongly typed language the system does not silently reinterpret a value of one type as an unrelated type; an attempt to add a number to an object, for example, is rejected or requires an explicit conversion. Java, C# and Python are considered strongly typed, while a language that performs many implicit, error-prone conversions is called weakly typed. Strong typing improves reliability, which is why it matters for debugging at the module level.",
+   "Python illustrates the interaction of these ideas clearly: it is dynamically and strongly typed. A name in Python is merely a label bound to an object, and the same name can be rebound to objects of different types during execution, yet the interpreter still refuses meaningless operations such as '3' + 5 and raises a TypeError. Everything in Python, including integers and functions, is an object with a class.",
+   "The choice of object model affects debugging directly. Because reference-based languages share objects through references, an unexpected modification made in one part of the program can appear in another; tracing which reference aliases which object is a common debugging task. In C++, many bugs stem from the manual life cycle of heap objects, so knowing whether an object lives on the stack or the heap is the first question to ask.",
+   "For practical work, the technician should be able to answer three questions about any object in a program: what class defines it, where and how it is allocated in memory, and how its type is checked by the language. These questions connect the abstract idea of a class to the concrete behaviour observed while running and debugging a module.",
+   "Thus, object technology rests on a small set of tightly linked concepts: the class as a template, the object as an instance with state, behaviour and identity, the storage of objects in stack or heap memory with automatic or manual reclamation, and the typing rules that keep operations meaningful. A firm grasp of these fundamentals is the foundation for everything else in object-oriented programming and for reliable debugging."
+  ],
+  "questions": [
+   "What is the difference between a class and an object, and why can many objects be created from one class?",
+   "What are the state, behaviour and identity of an object?",
+   "How are objects stored in memory in Java, C# and Python compared with C++?",
+   "What is the difference between static and dynamic typing, and between strong and weak typing?",
+   "Why does the choice of memory model and typing affect the debugging of a program?"
+  ]
+ },
+ {
+  "code": "10.3.2",
+  "title": "Mechanisms of inheritance and polymorphism",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Inheritance as a mechanism for reusing and extending classes.",
+   "Base and derived classes; the 'is-a' relationship.",
+   "Overriding methods and the role of virtual dispatch.",
+   "Polymorphism: static (compile-time) and dynamic (run-time).",
+   "How the mechanisms are realised in Java, C#, Python and C++."
+  ],
+  "body": [
+   "Inheritance is the mechanism by which one class, called the derived or child class, acquires the fields and methods of another class, called the base or parent class. The derived class can add new members and can change the behaviour of inherited ones. Inheritance expresses an 'is-a' relationship: if SavingsAccount inherits from Account, then a savings account is a kind of account, and everything true of an account is also true of a savings account.",
+   "The practical value of inheritance is reuse and extension without modification. Common data and behaviour are written once in the base class, and specialised classes reuse them. This reduces duplication and localises changes: correcting a method in the base class corrects it for every derived class. However, inheritance also creates a tight coupling between parent and child, so it must be used where a genuine 'is-a' relationship exists.",
+   "In memory, an object of a derived class contains the fields inherited from the base class followed by the fields added by the derived class. Conceptually, a derived object 'contains' a base part. This layout is what allows a reference of the base type to point to a derived object: the base part is present and can be accessed through the base-type reference, a property known as subtype substitutability.",
+   "Method overriding is the act of providing, in a derived class, a new implementation of a method that is already declared in the base class, keeping the same name and parameter list. Overriding must be distinguished from overloading, which is the definition of several methods with the same name but different parameter lists in the same scope. Overriding replaces behaviour along the inheritance chain; overloading merely offers several variants of an operation.",
+   "Polymorphism, from the Greek for 'many forms', is the ability of a single interface or name to work with values of different types. In object-oriented programming its most important form is subtype polymorphism: code written in terms of a base type operates correctly on objects of any derived type. A method that accepts an Account can be given a SavingsAccount or a CheckingAccount without change.",
+   "Polymorphism comes in two broad kinds. Static, or compile-time, polymorphism is resolved by the compiler and includes method overloading and, in C++, templates and generics. Dynamic, or run-time, polymorphism is resolved while the program runs and is realised through virtual method dispatch. Dynamic polymorphism is what makes inheritance hierarchies flexible and extensible.",
+   "The core mechanism of dynamic polymorphism is the virtual method. When a method is virtual, the actual method executed is chosen at run time according to the real class of the object, not the declared type of the reference. If a variable of type Account refers to a SavingsAccount and we call a.computeInterest(), the version defined in SavingsAccount runs, because the call is dispatched dynamically.",
+   "Virtual dispatch is usually implemented through a virtual method table, often abbreviated vtable. Each class with virtual methods has a table of pointers to its method implementations, and each object holds a hidden pointer to the table of its class. A virtual call is performed by following the object's table pointer and jumping to the correct entry, which is why the object's real class, not the reference type, determines the behaviour.",
+   "The languages differ in their defaults. In Java, instance methods are virtual by default, and the keyword final prevents overriding. In C#, a method must be marked virtual in the base class and override in the derived class, which makes the intention explicit. In C++, a method is dynamically dispatched only if it is declared with the keyword virtual; otherwise the call is bound statically to the reference type.",
+   "Python takes a different route. Because it is dynamically typed, method calls are always resolved at run time by looking up the attribute on the object's class and its ancestors following the method resolution order. There is no need to mark methods as virtual: overriding a method in a subclass automatically changes the behaviour of instances of that subclass. This makes Python polymorphism especially flexible.",
+   "Abstract classes and interfaces extend these mechanisms. An abstract method declares a signature without an implementation and forces derived classes to supply one; a class with an abstract method cannot be instantiated. An interface, in Java and C#, is a pure contract of method signatures that many unrelated classes can implement, giving polymorphism without a shared implementation. C++ expresses the same idea through classes containing pure virtual functions.",
+   "A closely related idea in dynamically typed languages is duck typing: if an object provides the methods that a piece of code needs, it can be used there regardless of its declared class. The name comes from the saying 'if it walks like a duck and quacks like a duck, it is a duck'. Duck typing gives Python polymorphism without explicit inheritance, but it shifts type errors to run time.",
+   "For debugging, these mechanisms have direct consequences. When a program behaves unexpectedly, one must ask which concrete class an object actually has and, therefore, which overridden method is really executing. A frequent source of confusion is a call that the developer expects to reach the base version but which is dispatched dynamically to a derived override, or the reverse situation in C++ where a missing virtual keyword prevents the intended override from being called.",
+   "Correct use of inheritance and polymorphism follows the substitution principle: a derived object must be usable everywhere a base object is expected without breaking the program's expectations. Violating this principle, for example by making an override that contradicts the base method's contract, produces subtle defects that surface only at run time and are hard to locate.",
+   "Thus, inheritance builds hierarchies of related classes that share and extend behaviour, while polymorphism, realised chiefly through virtual method dispatch, lets one piece of code operate uniformly on many types. Together they are the mechanisms that give object-oriented programs their flexibility, and understanding how each language resolves method calls is essential for predicting and debugging program behaviour."
+  ],
+  "questions": [
+   "What relationship does inheritance express, and how is a derived object laid out in memory?",
+   "What is the difference between overriding and overloading a method?",
+   "What is the difference between static and dynamic polymorphism?",
+   "How is dynamic dispatch of virtual methods implemented, and how do Java, C# and C++ differ in declaring virtual methods?",
+   "What is duck typing, and how does it provide polymorphism in Python?"
+  ]
+ },
+ {
+  "code": "10.3.3",
+  "title": "Principles of object-oriented programming",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The four principles of OOP: abstraction, encapsulation, inheritance, polymorphism.",
+   "Abstraction as the modelling of essential features.",
+   "Encapsulation and the hiding of internal state.",
+   "How the principles reinforce each other.",
+   "The benefits of the principles for maintainability and debugging."
+  ],
+  "body": [
+   "Object-oriented programming is built on a small number of fundamental principles that guide how programs are designed. The four principles usually named are abstraction, encapsulation, inheritance and polymorphism. They are not independent tricks but a coherent set of ideas: each supports the others, and together they aim at software that is understandable, reusable and easy to change.",
+   "Abstraction is the principle of representing in a program only the features of a real-world entity that are essential for the task at hand, while ignoring the irrelevant details. When modelling a customer for a billing system we keep the name, address and account number, but we ignore hair colour or favourite food. Abstraction lets the developer manage complexity by working with simplified, purposeful models.",
+   "In code, abstraction is expressed by defining a class in terms of what it does rather than how it does it. The public methods of a class form its abstract interface: they describe the operations a client may perform. A well-chosen abstraction hides a great deal of internal machinery behind a small, meaningful set of operations, so that the rest of the program depends only on what the class promises, not on how it is built.",
+   "Encapsulation is the principle of bundling data and the operations on that data into a single unit, the class, and of restricting direct access to the internal data from outside. The internal fields are kept private, and controlled access is provided through public methods, often called getters and setters or, more generally, the class interface. Encapsulation protects the object's invariants: rules that its state must always satisfy.",
+   "The value of encapsulation becomes clear in maintenance. If the balance of an account can be changed only through a deposit or withdraw method, those methods can check that the balance never becomes invalid, and the internal representation can later be changed without affecting client code. Encapsulation therefore separates the stable interface from the changeable implementation, which is a key to reliable modules.",
+   "Inheritance, the third principle, allows a new class to be defined as a specialised version of an existing class, inheriting its members and adding or overriding behaviour. As a design principle, inheritance captures the shared structure of a family of related concepts in one place and expresses their differences in the derived classes, supporting both reuse and orderly extension of a system.",
+   "Polymorphism, the fourth principle, allows objects of different classes to be treated through a common interface, with each object responding to the same operation in its own way. A drawing program can hold a collection of shapes and call draw() on each; a circle draws itself as a circle and a square as a square. New shapes can be added without changing the code that iterates over the collection.",
+   "These principles reinforce one another. Abstraction decides what a class should expose; encapsulation enforces that decision by hiding everything else; inheritance lets abstractions be organised into hierarchies; and polymorphism lets code depend on an abstraction while working with many concrete implementations. A design that uses one principle well usually needs the others to be effective.",
+   "A useful design guideline that follows from these principles is 'program to an interface, not to an implementation'. Client code should depend on the abstract operations of a type rather than on a specific concrete class. This reduces coupling: parts of the system can be replaced or extended as long as they honour the agreed interface, which is exactly what polymorphism and encapsulation make possible.",
+   "Another guideline is to prefer composition over inheritance where an 'is-a' relationship does not truly hold. Composition means building a class by including objects of other classes as fields and delegating work to them, expressing a 'has-a' relationship. Overusing inheritance creates rigid hierarchies, whereas composition keeps designs flexible; the mature developer chooses between them deliberately.",
+   "The principles also underlie the widely taught SOLID guidelines, of which the first, the single-responsibility principle, states that a class should have only one reason to change. A class that mixes several responsibilities is hard to understand and to encapsulate cleanly, and it tends to break in many places when requirements change. Well-focused classes are the practical outcome of applying abstraction and encapsulation together.",
+   "Applying the principles improves testability and debugging. When each class has a clear abstraction and encapsulated state, it can be tested in isolation, and a defect can usually be traced to the single class responsible for the affected behaviour. When responsibilities leak across classes and internal state is exposed, a bug in one place can corrupt state elsewhere, and locating the fault becomes far more difficult.",
+   "It is equally important to recognise misuse of the principles. Encapsulation is defeated by public fields that let any code alter state without checks; abstraction is defeated by 'leaky' interfaces that force clients to know internal details; and inheritance is misused when a subclass does not truly satisfy the base class's contract. Recognising these anti-patterns is part of writing and reviewing sound object-oriented code.",
+   "The principles are language-independent, but each language emphasises them differently. Java and C# provide explicit access modifiers and interfaces to support encapsulation and abstraction; C++ adds fine-grained control and multiple inheritance; Python relies on convention, marking non-public members with a leading underscore rather than enforcing privacy strictly. The principles remain the same even where the enforcement mechanisms differ.",
+   "Thus, the principles of object-oriented programming form an integrated system: abstraction chooses the essential model, encapsulation protects it, inheritance organises related abstractions, and polymorphism lets a program work uniformly with many of them. Mastering these principles, and knowing how they can be violated, is what allows a developer to design modules that are robust, maintainable and straightforward to debug."
+  ],
+  "questions": [
+   "What are the four principles of object-oriented programming, and how does each contribute to managing complexity?",
+   "How does encapsulation protect the invariants of an object, and why does it ease maintenance?",
+   "What does the guideline 'program to an interface, not to an implementation' mean in practice?",
+   "When should composition be preferred over inheritance?",
+   "How do the OOP principles improve the testability and debugging of a program?"
+  ]
+ },
+ {
+  "code": "10.3.4",
+  "title": "Introduction to object-oriented programming (OOP)",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in defining a simple class, creating objects from it and working with their state and behaviour in an object-oriented language.",
+  "theory": [
+   "Object-oriented programming organises a program around objects, each of which combines data (fields) with the operations on that data (methods). A class is the template that describes the fields and methods, and an object is a concrete instance created from that template. The transition from procedural thinking, in which data and functions are separate, to object thinking, in which they are joined, is the main goal of the first practical exposure to OOP.",
+   "A minimal class contains at least some fields to hold state and some methods to read or change that state. For example, a class Rectangle may hold the fields width and height and provide a method area() that returns their product. Creating an object of this class, setting its fields and calling its methods demonstrates the whole cycle of object use in miniature.",
+   "The syntax differs across languages but the ideas are the same. In Java and C# a class is introduced with the keyword class and objects are created with new; in Python a class is introduced with class and an object is created by calling the class name like a function; in C++ a class may be created on the stack or the heap. In every case the object carries its own copy of the instance fields, and a method invoked on the object operates on that object's data."
+  ],
+  "materials": [
+   "A computer with an installed development environment (for example IntelliJ IDEA, Visual Studio, PyCharm or an online compiler).",
+   "A compiler or interpreter for at least one language among Java, C#, Python and C++.",
+   "A text editor or IDE with syntax highlighting.",
+   "The lesson worksheet with the class specifications to implement."
+  ],
+  "procedure": [
+   "Study the specification of a simple class Rectangle with fields width and height and a method area(); identify which members hold state and which describe behaviour.",
+   "Create a new project or source file and declare the class Rectangle following the syntax of the chosen language.",
+   "Add a method area() that returns the product of the fields, and, where the language requires it, add access to the fields.",
+   "In the main program, create at least two Rectangle objects with different dimensions and store them in variables.",
+   "Call the area() method on each object, print the results, and observe that each object keeps its own independent state.",
+   "Change the fields of one object and print the area again to confirm that the other object is unaffected."
+  ],
+  "tasks": [
+   "Implement a class Student with fields name and grade and a method that prints a short description of the student, then create three student objects and display them.",
+   "Implement a class Circle with a field radius and methods area() and circumference(), create two circles and print both values for each.",
+   "Extend the Rectangle class with a method isSquare() that returns whether width equals height, and demonstrate it on at least three rectangles."
+  ],
+  "conclusion": "As a result of the work, the student has formed the basic skills of declaring a class, creating objects from it, and reading, modifying and using their state and behaviour.",
+  "questions": [
+   "What is the difference between a class and an object in the code you wrote?",
+   "How is an object created in the language you used, and how is a method called on it?",
+   "Why does each object keep its own independent copy of the instance fields?",
+   "What are fields and methods, and how do they relate to the state and behaviour of an object?",
+   "How would you add a new field or method to an existing class without breaking the objects already created?"
+  ]
+ },
+ {
+  "code": "10.3.5",
+  "title": "Basic principles of OOP: encapsulation, inheritance, polymorphism",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in applying encapsulation, inheritance and polymorphism together in a small class hierarchy.",
+  "theory": [
+   "Encapsulation is realised in code by making fields private and providing controlled access through public methods. This lets a class validate every change to its state; for example, a setter for a balance can refuse a negative value. Access modifiers such as private, protected and public in Java, C# and C++, and the underscore convention in Python, are the tools used to control visibility.",
+   "Inheritance is expressed by declaring a class as a specialisation of another. The derived class reuses the fields and methods of the base class and may add its own or override inherited ones. A base class Shape with a method area() can be extended by Circle and Rectangle, each supplying its own version of area(), so that shared code lives in the base class and specific behaviour lives in the derived classes.",
+   "Polymorphism lets code hold a reference of the base type, such as Shape, that at run time refers to an object of a derived type, and call the overridden method to obtain type-specific behaviour. Iterating over a collection of shapes and calling area() on each, obtaining the correct value for every concrete type, demonstrates dynamic polymorphism in action."
+  ],
+  "materials": [
+   "A computer with an installed development environment.",
+   "A compiler or interpreter for the chosen object-oriented language.",
+   "The worksheet describing the Shape hierarchy to implement.",
+   "A UML-style class diagram sheet for sketching the hierarchy before coding."
+  ],
+  "procedure": [
+   "Design, on paper, a base class Shape with an area() method and two derived classes Circle and Rectangle; mark which fields must be private.",
+   "Implement the base class Shape, keeping its fields private and exposing behaviour through methods (declare area() as virtual or abstract as the language requires).",
+   "Implement Circle and Rectangle so that they inherit from Shape and override area() with the correct formula for each shape.",
+   "Provide encapsulated access to the fields (constructors and, where needed, getters) and enforce at least one validity rule, such as a non-negative dimension.",
+   "Create a collection (array or list) of Shape references containing several circles and rectangles.",
+   "Iterate over the collection, call area() on each element through the base-type reference, and confirm that the correct overridden method runs for each object."
+  ],
+  "tasks": [
+   "Add a third derived class Triangle to the hierarchy with its own area() implementation and include it in the polymorphic collection.",
+   "Add encapsulated validation so that any attempt to create a shape with a non-positive dimension is rejected, and demonstrate the rejection.",
+   "Add a method describe() to the base class that prints the shape's type and area, override it where useful, and call it polymorphically over the collection."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of combining encapsulation, inheritance and polymorphism in a single working class hierarchy.",
+  "questions": [
+   "How did you enforce encapsulation in your classes, and what invariant did you protect?",
+   "Which members did you place in the base class and which in the derived classes, and why?",
+   "How does the program choose which area() method to execute when iterating over the collection?",
+   "What would happen if the area() method in the base class were not virtual or abstract in your language?",
+   "How do the three principles work together in the hierarchy you built?"
+  ]
+ },
+ {
+  "code": "10.3.6",
+  "title": "Classes as the basic building blocks of OOP",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The class as the unit of design and reuse in OOP.",
+   "The structure of a class: interface and implementation.",
+   "Class members and the meaning of the type a class defines.",
+   "Relationships between classes: association, composition, inheritance.",
+   "The class as a unit of responsibility and of debugging."
+  ],
+  "body": [
+   "In object-oriented programming the class is the fundamental building block from which programs are assembled. A large system is not written as one continuous body of code; it is decomposed into classes, each responsible for a well-defined part of the problem. Designing good classes is therefore the central activity of object-oriented design, and the quality of the classes largely determines the quality of the whole system.",
+   "A class defines a new data type. Once the class Account is written, Account becomes a type that can be used to declare variables, parameters and return values, exactly like the built-in types int or String. This is a powerful idea: the language becomes extensible, and the vocabulary of the program grows to match the vocabulary of the problem domain.",
+   "Every class has two faces: its interface and its implementation. The interface is the set of public members through which other code interacts with the class, describing what the class can do. The implementation is the private data and the method bodies that describe how it does it. Keeping the interface small and stable while allowing the implementation to change freely is a core skill of class design.",
+   "The members of a class fall into two broad groups. Fields, also called attributes or data members, store the state of each object. Methods, also called operations or member functions, define behaviour. In addition, most languages allow static members, which belong to the class as a whole rather than to any single object, and constructors, which initialise new objects. Together these members completely describe the type.",
+   "It is important to distinguish instance members from static members. An instance field exists separately in every object, so each account has its own balance. A static field exists once for the whole class and is shared by all objects, which makes it suitable for data such as a shared counter of created objects or a constant used by all instances. Confusing the two is a common source of defects.",
+   "Classes rarely stand alone; they are connected by relationships. Association is a general link in which one class uses another, for instance an Order that refers to a Customer. Composition is a stronger 'has-a' relationship in which one object owns another as part of itself, such as a Car that contains an Engine. Inheritance is the 'is-a' relationship. Recognising which relationship applies is essential to good design.",
+   "Composition and inheritance are often alternatives, and choosing between them is a recurring design decision. Composition builds a class from parts and delegates work to them, keeping the parts replaceable; inheritance derives a class from a more general one and reuses its behaviour directly. As a rule, composition is preferred unless a genuine 'is-a' relationship justifies inheritance, because composition produces looser coupling.",
+   "A well-designed class exhibits high cohesion and low coupling. High cohesion means that all the members of the class work together toward a single, clear purpose. Low coupling means that the class depends on as few other classes as possible, and only through their interfaces. Cohesive, loosely coupled classes are easier to understand, test, reuse and modify without breaking the rest of the system.",
+   "The single-responsibility principle sharpens this idea: a class should have one, and only one, reason to change. A class that both stores account data and formats reports and talks to a database has three reasons to change and will be fragile. Splitting such a class into focused classes, each with one responsibility, is a routine and valuable design improvement.",
+   "Classes are also the unit of reuse. A well-crafted class such as a date, a matrix or a network connection can be reused across many programs, either directly or by packaging it in a library. Standard libraries in Java, C#, Python and C++ are, at bottom, large collections of carefully designed classes that developers reuse instead of rewriting common functionality.",
+   "During analysis and design, classes are often identified from the nouns of the problem statement and their behaviour from the verbs. A specification that mentions customers placing orders for products suggests the classes Customer, Order and Product, with methods such as place, cancel and total. This noun-verb technique is a practical starting point, later refined by considering responsibilities and relationships.",
+   "Classes are frequently visualised with the Unified Modelling Language. A UML class diagram shows each class as a box with three sections, for the name, the fields and the methods, and draws lines between classes to represent association, composition and inheritance. Such diagrams help a team agree on the structure of a system before and during coding and serve as documentation afterwards.",
+   "From the debugging point of view, the class boundary is the natural unit at which to isolate faults. When a value is wrong, the developer asks which class is responsible for producing it and inspects that class's methods and invariants. Clear class boundaries mean that a defect is usually confined to one class, whereas tangled, poorly encapsulated classes let errors propagate across the whole program.",
+   "The class is therefore both a technical construct and an organisational one. Technically it defines a type with fields, methods and a life cycle; organisationally it assigns a piece of the problem to a named, testable unit that a developer can own. This double nature is what makes the class the natural building block of large software.",
+   "Thus, a class is the basic building block of object-oriented programming: it defines a new type, separates a stable interface from a changeable implementation, groups related state and behaviour, and connects to other classes through well-understood relationships. Designing cohesive, loosely coupled, single-responsibility classes is the key to building systems that are reliable and easy to maintain and debug."
+  ],
+  "questions": [
+   "In what sense does a class define a new data type, and why is that useful?",
+   "What is the difference between the interface and the implementation of a class?",
+   "How do instance members differ from static members, and when is each appropriate?",
+   "What are association, composition and inheritance, and how do you decide between composition and inheritance?",
+   "What do high cohesion and low coupling mean, and why do they make classes easier to debug?"
+  ]
+ },
+ {
+  "code": "10.3.7",
+  "title": "Describing classes: fields, methods, constructors and destructors",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Fields: instance and static, and access modifiers.",
+   "Methods: signatures, parameters, return values and the current-object reference.",
+   "Constructors and object initialisation.",
+   "Destructors, finalizers and deterministic cleanup.",
+   "Differences among Java, C#, Python and C++."
+  ],
+  "body": [
+   "A class description declares the members that make up the class: its fields, its methods, its constructors and, in some languages, its destructor. Together these declarations specify completely what an object of the class will contain and what can be done with it. Learning to read and write such descriptions accurately is a basic skill, because most debugging begins by reading the class definition.",
+   "Fields are the variables that hold the state of an object. Each field has a name, a type and, usually, an access modifier. An instance field is stored separately in every object, whereas a static field is stored once and shared by all objects of the class. Fields may also be declared constant, using final in Java, readonly or const in C#, and const in C++, to prevent their value from changing after initialisation.",
+   "Access modifiers control the visibility of members. A private member is accessible only inside its own class, a protected member is also accessible in derived classes, and a public member is accessible everywhere. Sound design keeps fields private and exposes behaviour through public methods. Python has no true enforcement; a single leading underscore signals 'internal use', and a double underscore triggers name mangling to reduce accidental access.",
+   "Methods define the behaviour of a class. A method has a signature consisting of its name and the number and types of its parameters, together with a return type. Methods receive an implicit reference to the object on which they are invoked, called this in Java, C# and C++ and written explicitly as the first parameter, conventionally self, in Python. Through this reference a method reads and updates the fields of the current object.",
+   "Methods can be overloaded: several methods in the same class may share a name if their parameter lists differ, and the compiler selects the right one from the arguments. Java, C# and C++ support overloading directly; Python does not, and the same effect is achieved with default and variable arguments. Static methods belong to the class rather than to an object and cannot access instance fields, since there is no current object.",
+   "A constructor is a special method that runs when an object is created; its purpose is to bring the new object into a valid initial state. A constructor usually assigns the fields, may validate its arguments, and may acquire resources such as files or connections. In Java, C# and C++ a constructor has the same name as the class and no return type; in Python the initialiser is the method __init__.",
+   "A class may provide several constructors with different parameter lists, again through overloading, so that objects can be created in several convenient ways. A constructor that takes no arguments is called the default constructor. Many languages allow one constructor to call another, and provide a special default constructor automatically if the programmer writes none, though writing one explicitly is clearer and safer.",
+   "Initialisation is more than assigning fields: it establishes the class invariants that every method will later assume. For example, an Account constructor may require that the initial balance be non-negative and throw an exception otherwise. Ensuring that an object cannot exist in an invalid state from the moment of creation is one of the most effective ways to prevent later defects.",
+   "A destructor is a special method that runs when an object's lifetime ends, giving it a chance to release the resources it holds. In C++ the destructor is written ~ClassName() and is called deterministically: for a stack object when it goes out of scope, and for a heap object when delete is applied. Destructors make C++ resource management precise but require careful discipline.",
+   "In garbage-collected languages the situation differs. Java provides no destructor; the finalize method existed historically but is deprecated and unreliable because the timing of collection is not guaranteed. C# offers a finalizer with a ~ClassName() syntax, but it too runs at an unpredictable time. Consequently these languages do not rely on destructors for freeing ordinary memory, which the garbage collector reclaims automatically.",
+   "For deterministic release of non-memory resources such as files, sockets and locks, modern languages provide explicit patterns instead of destructors. C# offers the IDisposable interface with a Dispose method used through a using block; Java offers the AutoCloseable interface used through try-with-resources; Python offers context managers with the with statement and the __enter__ and __exit__ methods. These constructs guarantee cleanup at a well-defined point.",
+   "The C++ community formalises resource handling as RAII, Resource Acquisition Is Initialisation: a resource is acquired in a constructor and released in the destructor, so that the object's lifetime governs the resource's lifetime. Combined with smart pointers, RAII makes leaks and double frees far less likely and is one of the reasons C++ can manage memory safely without a garbage collector.",
+   "Reading a class description well is a diagnostic skill. Before running a debugger, a developer inspects the fields to understand what state exists, the constructors to see how that state is initialised, the methods to see how it changes, and any destructor or cleanup method to see how resources are released. Many defects, such as an uninitialised field or a resource that is never closed, are visible in the class description itself.",
+   "The member declarations of a class also communicate intent to other developers. A private field says 'do not touch this directly'; a constructor that validates arguments says 'objects of this class are always valid'; a Dispose or close method says 'this object owns a resource you must release'. A clear, consistent class description is therefore both a specification and a form of documentation.",
+   "Thus, describing a class means declaring its fields to hold state, its methods to define behaviour, its constructors to guarantee a valid initial state, and, where the language uses them, its destructor or cleanup mechanism to release resources. Because memory reclamation is automatic in Java, C# and Python but manual in C++, deterministic cleanup relies on destructors and RAII in C++ and on disposal patterns in the managed languages, and understanding these differences is essential for writing correct, leak-free modules."
+  ],
+  "questions": [
+   "What is the difference between an instance field and a static field, and how do access modifiers control member visibility?",
+   "What information does a method signature contain, and what is the role of the this or self reference?",
+   "What is the purpose of a constructor, and what does it mean to establish a class invariant during initialisation?",
+   "How does resource cleanup differ between C++ destructors and the disposal patterns of Java, C# and Python?",
+   "What is RAII, and why is it central to memory and resource management in C++?"
+  ]
+ },
+ {
+  "code": "10.3.8",
+  "title": "Creating objects from classes",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The steps of object creation: allocation, initialisation, reference binding.",
+   "The role of the new operator and of constructors.",
+   "Object creation on the stack versus the heap.",
+   "References, aliasing and null.",
+   "Common object-creation patterns and pitfalls."
+  ],
+  "body": [
+   "Creating an object is the act of turning a class, which is only a description, into a concrete instance that exists in memory and holds real values. This is one of the most frequent operations in an object-oriented program, and understanding exactly what happens during creation is essential both for writing correct code and for diagnosing errors that occur at the moment an object comes into being.",
+   "Object creation generally proceeds in three logical steps. First, memory is allocated to hold the object's fields. Second, a constructor runs to initialise those fields and establish the object's invariants. Third, a reference to the newly created object is returned and bound to a variable. Although the syntax hides these steps, keeping them in mind clarifies what can go wrong at each stage.",
+   "In Java and C# the operator new performs the first two steps: it allocates the object on the heap and invokes the chosen constructor, then yields a reference. The statement Account a = new Account('Anna', 100); allocates the object, runs the constructor with the given arguments, and stores the resulting reference in a. The variable a does not contain the object; it contains a reference to it.",
+   "Python uses a lighter syntax without a keyword: writing a = Account('Anna', 100) calls the class as if it were a function. Internally the interpreter allocates the object through the special method __new__ and then initialises it through __init__. As in Java and C#, the name a is bound to the object rather than containing it, which is why assigning another name to it creates an alias, not a copy.",
+   "C++ offers two distinct ways to create objects, and the choice matters greatly. Writing Account a('Anna', 100); creates the object on the stack; it is initialised immediately and destroyed automatically when it leaves scope. Writing Account* p = new Account('Anna', 100); creates the object on the heap and returns a pointer; the programmer must later call delete p to release it, or use a smart pointer to do so automatically.",
+   "The distinction between stack and heap creation governs an object's lifetime. A stack object lives only as long as the block in which it is declared, and its destructor runs automatically at the end of that block. A heap object lives until it is explicitly freed or, in garbage-collected languages, until it becomes unreachable and is collected. Choosing the wrong storage leads to bugs such as returning a reference to a destroyed stack object.",
+   "Because object variables in Java, C# and Python hold references, assignment and parameter passing copy the reference, not the object. After Account b = a; the names a and b refer to the same object, and a change made through b is visible through a. This behaviour, called aliasing, is powerful but is a frequent source of surprise; when an independent copy is needed, the object must be cloned explicitly.",
+   "A reference that points to no object has a special null value, written null in Java and C#, nullptr for pointers in C++, and None in Python. Calling a method through a null reference is a classic error, producing a NullPointerException in Java, a NullReferenceException in C#, an AttributeError in Python, or undefined behaviour in C++. Guarding against null references is a routine part of defensive programming.",
+   "Constructor selection is part of creation. When a class offers several overloaded constructors, the arguments supplied at the creation site determine which constructor runs. Supplying the wrong number or types of arguments is caught at compile time in the statically typed languages and at run time in Python. A constructor may also throw an exception, in which case the object is not created and the reference is never bound.",
+   "Several patterns refine how objects are created. A factory method is a static method that creates and returns an object, hiding the exact class chosen and often returning a cached or specialised instance. The singleton pattern ensures that only one object of a class ever exists. The builder pattern constructs a complex object step by step. These patterns give more control than a bare constructor call and are widely used in real systems.",
+   "Object creation has a cost, and creating too many short-lived objects can hurt performance. In performance-sensitive code, developers reuse objects, pool them, or prefer value types such as C# structs that avoid heap allocation. In ordinary code, however, clarity is more important than micro-optimisation, and the garbage collector handles the churn of temporary objects efficiently.",
+   "Creation of one object may trigger creation of others. When an object is created, its constructor may itself create the objects it owns, and if the class inherits from another, the base-class constructor runs before the derived one to initialise the inherited part. Understanding this cascade is important, because a fault in a base constructor prevents any derived object from being created correctly.",
+   "For debugging, the moment of creation deserves special attention. If an object behaves incorrectly, the first questions are whether it was created at all, whether the correct constructor ran, and whether its fields were initialised to sensible values. Breakpoints placed in constructors, and inspection of newly created objects, quickly reveal problems such as null fields, wrong argument order or a constructor exception that leaves the reference unbound.",
+   "The way a language creates objects also affects equality. After creation, two distinct objects may hold equal field values yet remain different objects with different references. Comparing them with the reference-identity operator, such as == on references in Java, reports that they differ, whereas a properly written equals or __eq__ method compares their contents. Confusing identity with equality is a frequent creation-related bug.",
+   "Thus, creating an object means allocating memory, running a constructor to initialise it and binding a reference to the result. The new operator does this in Java and C#, a plain call does it in Python, and C++ distinguishes stack from heap creation with different lifetimes. Because object variables usually hold references, developers must reason about aliasing, null and the difference between identity and equality, all of which are central to writing and debugging object-oriented code."
+  ],
+  "questions": [
+   "What three logical steps take place when an object is created?",
+   "How does object creation with new in Java and C# differ from creation on the stack and heap in C++?",
+   "Why do assignment and parameter passing of object variables produce aliasing rather than copies in Java, C# and Python?",
+   "What is a null reference, and what errors result from using one?",
+   "Why must a developer distinguish object identity from object equality after creation?"
+  ]
+ },
+ {
+  "code": "10.3.9",
+  "title": "Instantiation and initialisation of objects",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in instantiating objects through constructors and initialising their state correctly and safely.",
+  "theory": [
+   "Instantiation is the act of creating an object from a class, while initialisation is the act of giving the new object a valid initial state. In most languages both happen together through a constructor: instantiation allocates the object and the constructor initialises its fields. Writing constructors that leave no field undefined, and that reject invalid arguments, is the key skill of this lesson.",
+   "A class may provide several constructors with different parameter lists, so that objects can be created in different ways, for instance a Point created from two coordinates or from none, defaulting to the origin. In Python the same flexibility is achieved with default and keyword arguments in __init__. Constructor chaining, where one constructor delegates to another, avoids duplicating initialisation logic.",
+   "Good initialisation establishes the class invariants immediately. If a constructor validates its arguments and throws an exception on bad input, then every object that exists is guaranteed to be valid, and later methods need not repeat the checks. Failing to initialise a field, or trusting unvalidated input, is a common cause of defects that surface far from the point of creation."
+  ],
+  "materials": [
+   "A computer with an installed development environment.",
+   "A compiler or interpreter for the chosen language (Java, C#, Python or C++).",
+   "The worksheet specifying the classes and their invariants.",
+   "A debugger for inspecting the state of newly created objects."
+  ],
+  "procedure": [
+   "Implement a class Point with fields x and y and a constructor that initialises both, then create several points and print their coordinates.",
+   "Add a second (overloaded or default-argument) constructor that creates a point at the origin, and demonstrate creating a point both ways.",
+   "Add validation to a class Account so that its constructor rejects a negative initial balance by throwing an exception, and show both a successful and a rejected creation.",
+   "Use constructor chaining (or delegation) so that the shared initialisation logic is written only once.",
+   "Use the debugger to set a breakpoint in a constructor and inspect the field values of an object immediately after it is created.",
+   "Create two objects with equal field values and confirm, by comparison, that they are distinct instances with independent state."
+  ],
+  "tasks": [
+   "Implement a class Time with fields hours and minutes whose constructor validates the ranges 0-23 and 0-59 and throws an exception otherwise; demonstrate valid and invalid creation.",
+   "Implement a class Rectangle with two constructors, one taking width and height and one taking a single side to make a square, using constructor chaining.",
+   "Write a small program that creates a list of ten objects in a loop, each initialised from loop data, and prints the state of every object to confirm correct initialisation."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of instantiating objects through constructors and initialising their state correctly, safely and without duplication.",
+  "questions": [
+   "What is the difference between instantiation and initialisation?",
+   "How did you provide more than one way to create an object, and how did constructor chaining help?",
+   "Why should a constructor validate its arguments, and what happens when validation fails?",
+   "How did you confirm that two objects with equal values are still distinct instances?",
+   "What problems can arise if a field is left uninitialised by the constructor?"
+  ]
+ },
+ {
+  "code": "10.3.10",
+  "title": "Operations with objects: reading and modifying fields, calling methods",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Accessing object members through the dot operator.",
+   "Reading and modifying fields directly and through accessors.",
+   "Calling instance and static methods; argument passing.",
+   "Method chaining and the current-object reference.",
+   "Object comparison, copying and printing."
+  ],
+  "body": [
+   "Once an object exists, a program operates on it by reading and modifying its fields and by calling its methods. These operations are the everyday actions of object-oriented code, and doing them correctly, while respecting encapsulation, is what turns a set of classes into working behaviour. This lesson examines how member access works and what pitfalls accompany it.",
+   "The primary tool for accessing a member is the dot operator: the expression object.member selects a field or method of the object. In Java, C# and Python the dot is used for every access; in C++ the dot is used for objects and references, while the arrow operator, written ->, is used for access through a pointer, so p->balance is equivalent to (*p).balance.",
+   "Reading a field returns its current value. Where the field is public this is a direct read, but well-encapsulated classes keep fields private and provide a getter method, such as getBalance() in Java and C#, a property in C# and Python, or a plain method in C++. Reading through an accessor lets the class compute or validate the value and preserves the freedom to change the internal representation later.",
+   "Modifying a field changes the object's state. Direct assignment such as account.balance = -50; is dangerous because it can violate an invariant; encapsulated classes instead offer methods such as deposit and withdraw that check the change before applying it. In Python a leading underscore signals that a field is internal, and properties can intercept assignments to enforce rules even when the syntax looks like a direct field write.",
+   "Calling a method invokes a piece of behaviour on the object. The call account.deposit(100) runs the deposit method with the current object as its implicit receiver, so inside the method the reference this or self denotes account. Instance methods can read and modify the object's fields; static methods, called on the class itself as in Math.max(a, b), operate without any receiver object.",
+   "Arguments are passed to methods according to the language's rules. Java and Python pass all arguments by value, but for object types the value passed is a reference, so the method can modify the object the reference points to, though it cannot make the caller's variable point elsewhere. C# passes by value by default but supports ref and out for by-reference passing, and C++ supports passing by value, by reference and by pointer explicitly.",
+   "This distinction explains a common surprise: a method that receives an object can change that object's fields, and the change is visible to the caller, because both share the same object. But reassigning the parameter inside the method to a new object does not affect the caller's variable. Understanding what is shared and what is copied is essential to predicting the effect of a method call.",
+   "Some classes support method chaining, in which each method returns the current object so that several calls can be written in sequence, as in builder.setName('Anna').setAge(20).build(). This fluent style is achieved by having methods return this. It is convenient but can complicate debugging, because several operations occur in one statement and a single breakpoint covers them all.",
+   "Comparing objects requires care. The identity comparison, == on references in Java or the is operator in Python, tests whether two references point to the same object. Content comparison requires a properly written method: equals and hashCode in Java, Equals and GetHashCode in C#, __eq__ and __hash__ in Python, or an overloaded == in C++. Using identity comparison where content comparison is intended is a frequent and confusing bug.",
+   "Copying objects also demands attention. A shallow copy duplicates the top-level object but shares the objects its fields refer to, so modifying a shared sub-object affects both copies. A deep copy duplicates the whole object graph. Languages provide tools such as clone in Java, the copy and deepcopy functions in Python, and copy constructors in C++; choosing the right kind of copy prevents unintended aliasing.",
+   "Printing or converting an object to text is another common operation. By default many languages print an unhelpful reference or address, so classes override a text-conversion method: toString in Java, ToString in C#, __str__ and __repr__ in Python, or an overloaded stream operator in C++. A good textual representation greatly assists logging and debugging by making an object's state visible at a glance.",
+   "Calling a method on a null or None reference is one of the most common run-time faults, because there is no object on which to operate. Defensive code checks for null before dereferencing, uses language features such as C#'s null-conditional operator ?. or Java's Optional, and documents which methods may return null. Anticipating null receivers eliminates a large class of crashes.",
+   "The order and context of operations matter for correctness. Reading a field, acting on its value, and writing it back is not atomic, so in concurrent programs two threads operating on the same object can interfere. Even in single-threaded code, calling a method that changes state and then relying on an earlier read of that state produces stale-value bugs. Reasoning about the sequence of operations on an object is part of careful programming.",
+   "When debugging, developers watch the operations on an object closely: which method changed a field, what value an accessor returned, and whether a call was dispatched to the expected method. Modern debuggers let one set a watch on a field, break when it changes, and inspect the receiver and arguments of each call, making the flow of operations on an object observable and the source of a wrong value traceable.",
+   "Thus, operating on an object means selecting its members with the dot or arrow operator, reading and modifying its fields, preferably through encapsulated accessors, and calling its methods with correctly passed arguments. Because object variables hold references, developers must distinguish identity from equality, shallow from deep copies, and shared from independent state, and must guard against null receivers, all of which are central to writing and debugging correct object-oriented code."
+  ],
+  "questions": [
+   "How does member access with the dot operator differ from access through a pointer with the arrow operator in C++?",
+   "Why is it better to read and modify state through accessor methods than through public fields?",
+   "What is the difference between passing an object and reassigning a parameter inside a method, in terms of the effect on the caller?",
+   "How do identity comparison and content comparison differ, and how do you implement content comparison?",
+   "What is the difference between a shallow copy and a deep copy, and why does it matter?"
+  ]
+ },
+ {
+  "code": "10.3.11",
+  "title": "Inheritance and its role in OOP",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "Inheritance as reuse, specialisation and classification.",
+   "Single and multiple inheritance; interfaces and mixins.",
+   "Constructor chaining and access to inherited members.",
+   "The Liskov substitution principle and correct subtyping.",
+   "Costs of inheritance and the composition alternative."
+  ],
+  "body": [
+   "Inheritance is the mechanism by which a class is defined in terms of an existing class, automatically acquiring its fields and methods and then adding to or refining them. Its role in object-oriented programming is threefold: it enables code reuse, it expresses specialisation of a general concept, and it organises related types into a classification hierarchy. These roles make inheritance one of the pillars of the paradigm, but also one of the most easily misused.",
+   "The relationship inheritance expresses is 'is-a'. If Manager inherits from Employee, then a manager is an employee, and any code that works with an employee will accept a manager. This subtype relationship is the foundation of polymorphism: because a derived object is also, in every respect, an instance of the base type, a base-type reference may point to it and base-type code may operate on it.",
+   "As a reuse mechanism, inheritance places common data and behaviour in a base class so that derived classes need not repeat them. A base class Employee can hold name and salary and define a method describe(); the classes Manager and Engineer inherit these and add only their differences. Correcting or improving the shared code in the base class benefits every derived class at once, which is a genuine engineering advantage.",
+   "As a classification mechanism, inheritance builds a taxonomy of concepts from general to specific. A hierarchy with Shape at the top and Circle, Rectangle and Triangle below it mirrors how people naturally categorise the domain. Such hierarchies make a system easier to understand, because a reader can grasp the general concept once and then focus on how each specialised class differs from it.",
+   "Most mainstream languages support single inheritance, in which a class has exactly one direct base class, giving a clear tree-shaped hierarchy. Some languages, notably C++ and Python, support multiple inheritance, in which a class may have several base classes. Multiple inheritance is powerful but introduces complications, most famously the 'diamond problem', where a class inherits the same base through two paths.",
+   "To gain the benefits of multiple inheritance while avoiding its pitfalls, Java and C# forbid multiple inheritance of classes but allow a class to implement many interfaces. An interface declares method signatures without state, so a class can combine several contracts without ambiguity about inherited data. Python resolves multiple inheritance with a defined method resolution order, and mixin classes are a common, disciplined use of it.",
+   "When a derived object is created, the base part must be initialised before the derived part, so the base-class constructor runs first. Languages provide a way for the derived constructor to invoke a chosen base constructor: super(...) in Java and Python, base(...) in C#, and an initialiser list in C++. Forgetting to pass required arguments to the base constructor is a frequent compile-time or run-time error.",
+   "Access to inherited members follows the access modifiers. Public and protected members of the base class are available in the derived class, while private members are not directly accessible even though they still exist in the object and are used by inherited methods. The protected modifier exists precisely to expose members to derived classes while hiding them from unrelated code, and it should be used sparingly to avoid over-coupling the hierarchy.",
+   "A derived class may override inherited methods to specialise behaviour, and it may call the base version explicitly, using super in Java and Python or base in C#, to extend rather than replace it. A common pattern is for an overridden method to call the base method and then add its own work, so that the base behaviour is preserved and augmented rather than discarded.",
+   "Correct inheritance obeys the Liskov substitution principle: an object of a derived class must be usable wherever an object of the base class is expected, without altering the correctness of the program. An override must honour the base method's contract, neither strengthening its preconditions nor weakening its postconditions. When a subclass breaks this rule, code written against the base type fails unexpectedly, and such defects are hard to locate.",
+   "A classic illustration of misused inheritance is deriving Square from Rectangle. A rectangle allows width and height to be set independently, but a square must keep them equal, so a Square that inherits Rectangle's setters violates the base contract and breaks code that assumes independent sides. This example shows that an intuitive 'is-a' phrase is not always a valid basis for inheritance.",
+   "Inheritance carries costs. It couples the derived class tightly to the base class: a change to the base can silently break every derivative, a problem known as the fragile base class. Deep hierarchies become hard to understand, and behaviour spread across many levels is hard to trace. For these reasons experienced designers use inheritance deliberately and keep hierarchies shallow.",
+   "Where reuse is needed but a true 'is-a' relationship is absent, composition is the better tool. Instead of inheriting from a class, the new class holds an instance of it as a field and delegates work to it, expressing a 'has-a' relationship. Composition couples classes only through the used class's interface, so it is more flexible and is often summarised in the guideline 'favour composition over inheritance'.",
+   "For debugging, an inheritance hierarchy raises specific questions. When a method behaves unexpectedly, one must determine the object's actual class, which override is executing, and whether a base method is being called as intended. Bugs frequently arise from an override that forgets to call the base method, from an unexpected dynamic dispatch, or from a subtype that silently violates the base contract; recognising these patterns speeds up diagnosis.",
+   "Thus, inheritance plays a central role in object-oriented programming by enabling reuse, expressing specialisation and organising types into hierarchies that support polymorphism. Its correct use demands genuine 'is-a' relationships, proper constructor chaining, respect for access rules and, above all, adherence to the substitution principle; where these conditions do not hold, composition is the safer choice for building maintainable, debuggable systems."
+  ],
+  "questions": [
+   "What three roles does inheritance play in object-oriented programming?",
+   "How do Java and C# provide the benefits of multiple inheritance while avoiding its problems?",
+   "Why must the base-class constructor run before the derived-class constructor, and how is it invoked?",
+   "What does the Liskov substitution principle require, and why is the Square-from-Rectangle example a violation of it?",
+   "What are the costs of inheritance, and when should composition be preferred?"
+  ]
+ },
+ {
+  "code": "10.3.12",
+  "title": "Polymorphism: virtual methods and interfaces",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in achieving run-time polymorphism through virtual method overriding and through interfaces.",
+  "theory": [
+   "Run-time polymorphism lets a single piece of code operate on objects of many classes through a common base type or interface, with each object responding in its own way. It is realised by overriding a virtual method in derived classes and calling it through a base-type reference; the language dispatches the call to the version belonging to the object's actual class.",
+   "An interface (or a pure abstract class in C++) declares operations without implementation, forming a contract that unrelated classes can fulfil. Programming against an interface, such as a Drawable with a draw() method, lets code work uniformly with any class that implements it, and lets new implementations be added without changing the client code. This is the essence of the 'program to an interface' guideline.",
+   "The languages differ in mechanics: Java methods are virtual by default and interfaces use the interface keyword; C# requires virtual and override and also uses interfaces; C++ requires the virtual keyword and expresses interfaces as classes with pure virtual functions; Python resolves all calls dynamically and can define contracts with abstract base classes. The same polymorphic design can be expressed in each."
+  ],
+  "materials": [
+   "A computer with an installed development environment.",
+   "A compiler or interpreter for the chosen object-oriented language.",
+   "The worksheet describing the interface and the classes to implement.",
+   "A debugger for observing which overridden method is dispatched."
+  ],
+  "procedure": [
+   "Define an interface or abstract base type Drawable (or Shape) declaring a method draw() (or area()).",
+   "Implement two or more classes that fulfil the contract, each providing its own version of the declared method.",
+   "Create a collection of references of the interface or base type holding a mix of these objects.",
+   "Iterate over the collection and call the polymorphic method on each element, observing that the correct implementation runs for each object.",
+   "Use the debugger to step into the polymorphic call and confirm which class's method is actually executed.",
+   "Add one more implementing class without modifying the iterating code, and verify that it participates in the polymorphic loop automatically."
+  ],
+  "tasks": [
+   "Define an interface PaymentMethod with a method pay(amount) and implement it in classes CardPayment, CashPayment and WalletPayment, then process a list of payments polymorphically.",
+   "Build a Shape hierarchy with a virtual area() and write a function that returns the total area of a mixed collection of shapes using only the base type.",
+   "Demonstrate the difference between a virtual and a non-virtual call (in C#, C++, or by comparison in your language) and explain in the report which method each call dispatches to."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of designing and implementing run-time polymorphism through virtual method overriding and through interfaces.",
+  "questions": [
+   "How does the program decide which implementation of the polymorphic method to run at run time?",
+   "What is the difference between an interface and a base class with a virtual method?",
+   "Why can you add a new implementing class without changing the code that iterates over the collection?",
+   "In your language, what determines whether a method call is dispatched dynamically or bound statically?",
+   "How does programming against an interface reduce coupling in a program?"
+  ]
+ },
+ {
+  "code": "10.3.13",
+  "title": "Memory management in object-oriented languages",
+  "type_en": "Skills-improvement lesson",
+  "kind": "practical",
+  "objective": "To form practical skills in observing and reasoning about how objects are allocated, referenced and released in object-oriented languages.",
+  "theory": [
+   "Objects usually live on the heap, while local variables and references live on the stack. In Java, C# and Python a variable holds a reference to a heap object, and an object remains alive as long as it is reachable through some chain of references; when it becomes unreachable it is eligible for automatic reclamation. In C++ the programmer decides between stack and heap allocation and, for heap objects, is responsible for release.",
+   "Reference sharing has practical consequences: assigning one object variable to another copies the reference, so both names refer to one object, and a change through either is seen through both. A memory leak occurs when memory is no longer needed but cannot be reclaimed, in C++ because delete was not called, and in managed languages because a reference is unintentionally retained, for example in a static list or a cache.",
+   "Tools help make memory behaviour visible. C++ developers use Valgrind or AddressSanitizer to detect leaks and invalid accesses; Java and C# developers use profilers and heap dumps to find retained objects; Python offers the sys.getrefcount function and the gc module. Observing allocation and release turns abstract memory rules into concrete, measurable behaviour."
+  ],
+  "materials": [
+   "A computer with a development environment for the chosen language.",
+   "A memory-analysis tool appropriate to the language (Valgrind or AddressSanitizer for C++, a JVM or .NET profiler, or Python's gc and sys modules).",
+   "The worksheet with the allocation experiments to perform.",
+   "A report form for recording observations."
+  ],
+  "procedure": [
+   "Write a program that creates many objects in a loop and observe, through a profiler or memory tool, how memory usage grows.",
+   "Demonstrate reference sharing: assign one object variable to another, modify the object through one name, and confirm the change through the other.",
+   "In C++, create a heap object with new, then release it with delete; deliberately omit the delete and use a memory tool to detect the resulting leak, then fix it.",
+   "In a managed language, retain objects in a static collection to simulate a leak, observe the growing heap, then remove the references and observe reclamation.",
+   "In Python, use sys.getrefcount (or the gc module) to inspect how many references point to an object as names are bound and unbound.",
+   "Record in the report, for each experiment, when memory was allocated, when it became unreachable, and when it was released."
+  ],
+  "tasks": [
+   "In C++, implement a class that owns a heap resource and show, with a memory tool, that it leaks when delete is omitted and does not leak when a smart pointer (std::unique_ptr) is used.",
+   "In Java or C#, create a scenario where objects are unintentionally kept alive by a static collection, demonstrate the growing memory, and fix the leak by clearing the references.",
+   "In Python, build a small cycle of two objects that reference each other, show that reference counting alone does not free them, and demonstrate that gc.collect() reclaims the cycle."
+  ],
+  "conclusion": "As a result of the work, the student has formed the skills of observing object allocation and release, recognising memory leaks, and reasoning about object reachability in different languages.",
+  "questions": [
+   "What determines whether an object is stored on the stack or the heap in the languages you used?",
+   "Why does assigning one object variable to another let a change be seen through both names?",
+   "What is a memory leak, and how does its cause differ between C++ and managed languages such as Java and C#?",
+   "How did you detect a leak in your experiments, and how did you fix it?",
+   "Why does reference counting alone fail to reclaim a cycle of objects in Python?"
+  ]
+ },
+ {
+  "code": "10.3.14",
+  "title": "Garbage collection and memory management in modern languages (Java, C#, Python)",
+  "type_en": "Study of new material",
+  "kind": "lecture",
+  "outline": [
+   "The goal of automatic memory management and object reachability.",
+   "Reference counting and its handling of cycles.",
+   "Tracing garbage collection: mark-and-sweep and generational collection.",
+   "The collectors of Java, C# and Python.",
+   "Consequences for performance, pauses and program design."
+  ],
+  "body": [
+   "Automatic memory management, commonly called garbage collection, relieves the programmer of the duty to free objects manually. Instead of matching every allocation with an explicit release, the developer simply creates objects, and a run-time component reclaims those that are no longer needed. This eliminates whole classes of errors, such as double frees and dangling pointers, that plague manually managed languages, and it is a defining feature of Java, C# and Python.",
+   "The central concept of garbage collection is reachability. An object is reachable if it can be accessed by following references starting from a set of roots, such as local variables on the stack, static fields and CPU registers. An object that cannot be reached by any such chain can never be used again by the program, so its memory may safely be reclaimed. The garbage collector's job is to distinguish reachable from unreachable objects.",
+   "One family of techniques is reference counting. Each object keeps a count of how many references point to it; the count rises when a new reference is created and falls when one is removed, and when it reaches zero the object is freed immediately. Reference counting is simple and reclaims memory promptly, but it has a serious weakness: it cannot reclaim cycles, groups of objects that reference each other yet are unreachable from the roots.",
+   "The other main family is tracing garbage collection. A tracing collector periodically starts from the roots and follows every reference, marking all reachable objects; the objects that remain unmarked are unreachable and their memory is reclaimed. This basic algorithm is called mark-and-sweep. Because it works from actual reachability, tracing correctly reclaims cyclic structures that defeat reference counting.",
+   "A refinement of mark-and-sweep is the mark-compact collector, which not only reclaims dead objects but also moves the surviving objects together to remove the gaps between them. Compaction reduces fragmentation and makes future allocation fast, because new objects can be placed at the end of a contiguous region. Moving objects, however, requires the collector to update every reference to them.",
+   "Modern collectors exploit the generational hypothesis: most objects die young. Memory is divided into generations, and newly created objects are placed in a young generation that is collected frequently and cheaply, while objects that survive several collections are promoted to an old generation that is collected rarely. Because the young generation contains mostly dead objects, collecting it is fast and highly effective.",
+   "Java's virtual machine offers several collectors chosen to balance throughput and pause time. The generational G1 collector is the default in current versions; low-pause collectors such as ZGC and Shenandoah aim to keep pauses very short even on large heaps. All of them are tracing, generational or region-based collectors, and their behaviour can be tuned through command-line options for different workloads.",
+   "The .NET platform used by C# has a generational, tracing, compacting garbage collector with three generations, numbered 0, 1 and 2, plus a large-object heap for big allocations. It offers workstation and server modes and background collection to reduce pauses. As in Java, ordinary objects are reclaimed automatically, and the finalizer and the IDisposable pattern handle any non-memory resources deterministically.",
+   "Python's main implementation, CPython, combines the two families. Its primary mechanism is reference counting, which frees most objects the instant their last reference disappears, giving very predictable timing. To handle the cycles that reference counting cannot collect, CPython adds a supplementary generational tracing collector, exposed through the gc module, which periodically finds and frees unreachable cyclic groups.",
+   "Automatic management does not make memory leaks impossible; it changes their nature. In a garbage-collected language a leak occurs when objects remain reachable although they are no longer needed, for example when they are held in a static collection, a cache or an event-listener list that is never cleared. Such 'logical' leaks steadily consume memory and must be found by examining which references keep the objects alive.",
+   "Garbage collection has performance costs. Collection consumes processor time, and many collectors must pause the application while they work, the so-called stop-the-world pauses. For interactive and real-time systems these pauses can be a problem, which is why low-latency collectors and careful tuning matter. Developers reduce collection pressure by avoiding needless allocation, reusing objects and preferring value types where a language provides them.",
+   "The finalisation of objects deserves caution. Because the timing of collection is unpredictable, a finalizer may run long after an object becomes unreachable, or not at all before the program ends. Relying on finalizers to release scarce resources such as file handles or database connections is therefore unsafe; those resources should be freed explicitly through try-with-resources in Java, using or IDisposable in C#, and the with statement in Python.",
+   "For debugging and tuning, developers use tools that expose the state of the heap. Heap dumps and profilers reveal how many objects of each class exist and which references retain them, making logical leaks visible. Garbage-collection logs show how often collections run and how long they pause, guiding the choice and tuning of a collector. Understanding these tools turns memory problems from mysteries into measurable engineering issues.",
+   "The choice of memory model influences program design. Because allocation is cheap and reclamation automatic, developers in these languages create objects freely and favour clear, immutable designs. At the same time they remain aware of reachability, so they release references they no longer need, unregister listeners and clear caches, cooperating with the collector rather than fighting it.",
+   "Thus, modern languages manage memory automatically by determining which objects are still reachable and reclaiming the rest, using reference counting, tracing mark-and-sweep and generational compaction in various combinations. Java, C# and Python each apply these techniques differently, yet all free the programmer from manual deallocation while still requiring attention to reachability, to deterministic release of non-memory resources, and to the performance impact of collection when building reliable modules."
+  ],
+  "questions": [
+   "What does it mean for an object to be reachable, and why is reachability the basis of garbage collection?",
+   "How does reference counting work, and why can it not reclaim cycles of objects?",
+   "What is mark-and-sweep collection, and how does generational collection improve on it?",
+   "How do the memory-management mechanisms of Java, C# and Python differ?",
+   "Why can memory leaks still occur in a garbage-collected language, and why should finalizers not be used to release scarce resources?"
+  ]
+ }
+]

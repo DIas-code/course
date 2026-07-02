@@ -15,6 +15,7 @@ page numbers (10 pt) in the footer.
 """
 
 import os
+import sys
 import json
 
 from docx import Document
@@ -24,7 +25,8 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT_PATH = os.path.join(HERE, '..', 'УМКД_ПМ01_Готовый.docx')
+DEFAULT_OUT = 'УМКД_ПМ01_Готовый.docx'
+DEFAULT_LO_FILES = ['1_1', '1_2', '1_3', '1_4', '1_5', '1_6', '1_7']
 
 FONT = 'Times New Roman'
 SZ_TITLE = 14
@@ -517,9 +519,13 @@ def load_json(name):
 
 
 def main():
-    m = load_json('module.json')
+    module_file = sys.argv[1] if len(sys.argv) > 1 else 'module.json'
+    m = load_json(module_file)
+    lo_files = m.get('lo_files', DEFAULT_LO_FILES)
+    out_name = m.get('out_name', DEFAULT_OUT)
+    out_path = os.path.join(HERE, '..', out_name)
     los = []
-    for lo_id in ['1_1', '1_2', '1_3', '1_4', '1_5', '1_6', '1_7']:
+    for lo_id in lo_files:
         lo = load_json(f'lo_{lo_id}.json')
         # assign positions within LO
         for i, les in enumerate(lo['lessons'], 1):
@@ -549,9 +555,9 @@ def main():
     build_exam(doc, m, n)
 
     add_page_numbers(doc)
-    doc.save(OUT_PATH)
+    doc.save(out_path)
     total = sum(len(lo['lessons']) for lo in los)
-    print(f'Saved: {os.path.abspath(OUT_PATH)}')
+    print(f'Saved: {os.path.abspath(out_path)}')
     print(f'LOs: {len(los)}, total lessons: {total}')
     for lo in los:
         lec = sum(1 for l in lo["lessons"] if l["kind"] == "lecture")

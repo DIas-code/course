@@ -1,0 +1,123 @@
+{
+  "out_name": "УМКД_ПМ10_Готовый.docx",
+  "lo_files": ["10_1", "10_2", "10_3"],
+  "college": "«APEC PETROTECHNIC HIGHER COLLEGE» LLP",
+  "approved_block": [
+    "«APPROVED»",
+    "Deputy director",
+    "for academic work",
+    "___________ A.E. Shakenova",
+    "«____» ____________ 2025"
+  ],
+  "module_title": "Module: PM 10 «Development of software program code»",
+  "specialty": "Specialty: 06130100 – «Software (by types)»",
+  "qualification": "Qualification: 4S06130105 – «Information Systems Technician»",
+  "place_year": "Atyrau, 2025",
+  "module_code": "PM 10",
+  "module_name": "Development of software program code",
+  "instructor": "K.D. Rakhym",
+  "exam_weight": "40%",
+  "approval_sheet": [
+    "Reviewed and approved at a meeting of the Subject-Cycle Methodological Commission «Software».",
+    "Protocol № ____ of «____» ____________ 2025.",
+    "Chair of the SCMC: ______________ A.E. Beket",
+    "",
+    "Reviewed and approved at a meeting of the Methodological Council.",
+    "Protocol № ____ of «____» ____________ 2025.",
+    "",
+    "Agreed: Methodologist ______________ A.K. Akhpanbetova",
+    "",
+    "Developers: ______________ K.D. Rakhym",
+    "______________ A.A. Daulbay",
+    "______________ G. Aibaruly"
+  ],
+  "introduction": [
+    "The educational-methodological complex (EMC) of the module PM 10 «Development of software program code» is intended for students of the specialty 06130100 – «Software (by types)», qualification 4S06130105 – «Information Systems Technician». It is developed in accordance with the working curriculum of the module and the methodical recommendations of the Technical and Professional Education Institute (TIPO) of 2025.",
+    "The module is aimed at forming the knowledge, skills and practical abilities needed to develop, implement and debug the program code of software. In the course of the module students master the methods of formalizing and algorithmizing tasks, the design of efficient algorithms and data structures, the development of software solutions in accordance with technical requirements, as well as the principles of object-oriented programming, testing and debugging.",
+    "The main goal of the module is to form the professional competencies that a future information systems technician needs in order to design algorithms, develop program code according to specifications, and debug software at the level of program modules.",
+    "The objectives of the module are: to master methods of formalization and algorithmization of computational tasks; to study data structures and algorithms for their processing together with the analysis of their complexity; to learn to develop program code according to ready specifications of software requirements; to master the principles of object-oriented programming, design patterns and software architecture; and to form the skills of testing, debugging, profiling and optimizing program modules with modern tools and development environments.",
+    "Upon completion of the module the student must know the principles of structured and object-oriented programming; methods of formalization and algorithmization of tasks; the main data structures and algorithms for processing them; the fundamentals of complexity analysis and code optimization; the requirements for the quality, security and reliability of program code; and the basic approaches to testing and debugging software modules.",
+    "The student must be able to formalize tasks and design algorithms for their solution; design and implement data structures; develop program code in accordance with ready requirement specifications; apply the principles of object-oriented programming, frameworks, libraries and version-control systems; detect and eliminate errors in program code at the module level; and carry out testing, profiling and optimization of software solutions.",
+    "The total volume of the module is 336 academic hours (12.5 credits). The module is built around three learning outcomes (LO). Each learning outcome of this EMC contains an academic calendar, a glossary, lecture materials, practical (skills-improvement) materials, a list of software and multimedia support, and a list of literature. The closing sections contain self-study topics and exam questions for the whole module.",
+    "Prerequisites of the module: PM 08 «Installation and support of software and hardware» and PM 09 «Installation and maintenance of a local computing network and the server equipment of an organization». Post-requisites: pre-diploma practice and diploma design."
+  ],
+  "software": [
+    "– Multimedia projector and interactive (smart) board; digital podium; white marker board.",
+    "– PowerPoint presentations for every topic of the module.",
+    "– Personal computers with Internet access and access to local networks; telecommunication equipment.",
+    "– Object-oriented programming systems and integrated development environments (IDEs): Visual Studio, Visual Studio Code, IntelliJ IDEA, PyCharm, Eclipse.",
+    "– Programming languages and platforms: Python, Java, C#/.NET, C++, JavaScript/TypeScript, Kotlin.",
+    "– Version-control and collaboration tools: Git, GitHub/GitLab.",
+    "– Testing, debugging and profiling tools: pytest/JUnit, GDB, the built-in IDE debuggers, cProfile, Valgrind.",
+    "– Database and ORM tools: PostgreSQL/MySQL/SQLite, SQLAlchemy, Entity Framework, Hibernate.",
+    "– Build and deployment automation tools: Make, Maven/Gradle, Docker, CI/CD pipelines.",
+    "– Learning Management System (LMS) for hosting materials and assignments; video lectures on programming and debugging."
+  ],
+  "literature": {
+    "core": [
+      "1. Jon Duckett. HTML and CSS: Design and Build Websites. Wiley, 2011. ISBN: 978-1118008188.",
+      "2. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein. Introduction to Algorithms (3rd Edition). MIT Press. ISBN: 978-0262033848.",
+      "3. Robert C. Martin. Clean Code: A Handbook of Agile Software Craftsmanship. ISBN: 978-0132350884.",
+      "4. Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. ISBN: 978-0201633610.",
+      "5. Steve McConnell. Code Complete: A Practical Handbook of Software Construction (2nd Edition). ISBN: 978-0735619678."
+    ],
+    "extra": [
+      "1. Bruce Eckel. Thinking in Java (4th Edition). ISBN: 978-0131872486.",
+      "2. Mark Lutz. Learning Python (5th Edition). O'Reilly. ISBN: 978-1449355739.",
+      "3. Aditya Bhargava. Grokking Algorithms. Manning. ISBN: 978-1617292231.",
+      "4. Documentation MDN Web Docs (developer.mozilla.org)."
+    ],
+    "web": [
+      "1. https://developer.mozilla.org — MDN Web Docs: web-development reference.",
+      "2. https://www.freecodecamp.org — freeCodeCamp: a modern online platform for learning programming.",
+      "3. https://docs.python.org — the official Python documentation.",
+      "4. https://git-scm.com/doc — the official Git documentation.",
+      "5. https://refactoring.guru — design patterns and refactoring techniques."
+    ]
+  },
+  "self_study_intro": "Independent (self-study) work is an obligatory part of the module. It is aimed at deepening the theoretical knowledge obtained in lectures, developing practical programming skills, and forming the ability to work independently with technical documentation and information sources. The following topics are recommended for independent study and for the preparation of reports, presentations and abstracts.",
+  "self_study": [
+    "Comparative analysis of sorting algorithms and their asymptotic complexity.",
+    "Graph representations and classic graph algorithms: BFS, DFS, Dijkstra, Prim and Kruskal.",
+    "Trees and balanced search trees: binary search trees, AVL trees and B-trees.",
+    "Dynamic programming: principles, typical problems and implementation.",
+    "Software development methodologies: comparison of the Waterfall and Agile approaches.",
+    "Architectural patterns MVC, MVVM and MVP and their application areas.",
+    "Requirement analysis and the design of software architecture from specifications.",
+    "Ensuring the security of program code: protection against typical vulnerabilities.",
+    "Version-control systems and the Git collaborative workflow.",
+    "The SOLID principles, Clean Code and Domain-Driven Design.",
+    "Memory management and garbage collection in Java, C# and Python.",
+    "Strong and weak, static and dynamic typing in programming languages.",
+    "Debugging techniques: breakpoints, step execution and variable inspection.",
+    "Unit testing and automated testing of program modules.",
+    "Debugging of multithreaded, asynchronous and distributed applications."
+  ],
+  "exam_intro": "The intermediate certification of the module is conducted in the form of an examination. The exam checks the student's mastery of the learning outcomes of the module — both theoretical knowledge and practical skills in algorithmization, development of program code according to specifications, and debugging of software at the level of program modules. Below is the list of questions for preparation for the examination.",
+  "exam_questions": [
+    "Sorting algorithms in set theory: comparison, optimization and complexity.",
+    "Set operations (intersection and union) and search algorithms; binary search.",
+    "Graphs: types, representations and classic algorithms (BFS and DFS).",
+    "Trees: binary, AVL and B-trees and their application.",
+    "Stacks, queues, priority queues and heaps: implementation and use.",
+    "Shortest-path algorithms: Dijkstra and Floyd–Warshall.",
+    "Minimum spanning trees: the Prim and Kruskal algorithms.",
+    "Network-flow analysis: the Ford–Fulkerson and Edmonds–Karp algorithms.",
+    "Algorithm complexity analysis: Big-O notation and its application.",
+    "Formalization of tasks and methods of algorithm development: iteration and recursion.",
+    "Dynamic programming and its application.",
+    "Software development methodologies: the Waterfall and Agile approaches.",
+    "Code optimization: identifying and eliminating bottlenecks.",
+    "Architectural patterns: MVC, MVVM and others.",
+    "The process of developing program code from requirement specifications.",
+    "Analysis of requirements and the design of software architecture.",
+    "Development of the user interface, business logic and database according to requirements.",
+    "Exception handling, data security and performance optimization of code.",
+    "Integration with external systems and APIs; documentation of program code.",
+    "Basic concepts of object technology: classes, objects, memory management and typing.",
+    "The principles of OOP: encapsulation, inheritance and polymorphism.",
+    "Abstract classes and interfaces; virtual methods and dynamic polymorphism.",
+    "Fundamentals of debugging: breakpoints, step execution and variable inspection.",
+    "Testing and debugging at the level of functions and modules; unit tests and log analysis."
+  ]
+}
